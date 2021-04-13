@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import java.util.Comparator;
-import java.util.Objects;
 
 @Entity
 @Table(name = "CITY")

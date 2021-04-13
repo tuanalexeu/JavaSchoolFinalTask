@@ -2,7 +2,6 @@ package com.alekseytyan.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import java.util.Objects;
 
 @Entity
 @Table(name = "MAP")
