@@ -20,7 +20,7 @@ public class RoutePoint {
     private City city;
 
     @OneToMany
-    @JoinColumn(name = "LOAD", referencedColumnName = "ID")
+    @JoinColumn(name = "LOAD_LOGIWEB")
     private List<Load> load;
 
     @Column(name = "TYPE")

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ORDER")
+@Table(name = "ORDER_LOGIWEB")
 public class Order implements Comparable<Order> {
 
     @Id
@@ -17,16 +17,16 @@ public class Order implements Comparable<Order> {
     @Column(name = "IS_FINISHED")
     private boolean isFinished;
 
-    @JoinColumn(name = "ROUTE_POINT", referencedColumnName = "ID")
+    @JoinColumn(name = "ROUTE_POINT")
     @ManyToMany
     private List<RoutePoint> routePoints;
 
     @OneToOne
-    @JoinColumn(name = "TRUCK", referencedColumnName = "ID")
-    private Truck truck;
+    @JoinColumn(name = "LORRY")
+    private Lorry lorry;
 
     @OneToMany
-    @JoinColumn(name = "DRIVERS", referencedColumnName = "ID")
+    @JoinColumn(name = "DRIVERS")
     private List<Driver> drivers;
 
     public int getId() {
@@ -53,12 +53,12 @@ public class Order implements Comparable<Order> {
         this.routePoints = routePoint;
     }
 
-    public Truck getTruck() {
-        return truck;
+    public Lorry getTruck() {
+        return lorry;
     }
 
-    public void setTruck(Truck truck) {
-        this.truck = truck;
+    public void setTruck(Lorry lorry) {
+        this.lorry = lorry;
     }
 
     public List<Driver> getDrivers() {
@@ -77,13 +77,13 @@ public class Order implements Comparable<Order> {
         return id == order.id
                 && isFinished == order.isFinished
                 && routePoints.equals(order.routePoints)
-                && truck.equals(order.truck)
+                && lorry.equals(order.lorry)
                 && drivers.equals(order.drivers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isFinished, routePoints, truck, drivers);
+        return Objects.hash(id, isFinished, routePoints, lorry, drivers);
     }
 
     @Override

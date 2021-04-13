@@ -7,11 +7,11 @@ import java.util.Comparator;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TRUCK")
-public class Truck implements Comparable<Truck> {
+@Table(name = "LORRY")
+public class Lorry implements Comparable<Lorry> {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", length = 7)
     @Pattern(regexp="[a-zA-Z]{2}\\d{5}")
     @Size(min = 7, max = 7)
     private String reg_num;
@@ -73,13 +73,13 @@ public class Truck implements Comparable<Truck> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Truck)) return false;
-        Truck truck = (Truck) o;
-        return shift_time == truck.shift_time
-                && capacity == truck.capacity
-                && isBroken == truck.isBroken
-                && reg_num.equals(truck.reg_num)
-                && city.equals(truck.city);
+        if (!(o instanceof Lorry)) return false;
+        Lorry lorry = (Lorry) o;
+        return shift_time == lorry.shift_time
+                && capacity == lorry.capacity
+                && isBroken == lorry.isBroken
+                && reg_num.equals(lorry.reg_num)
+                && city.equals(lorry.city);
     }
 
     @Override
@@ -88,9 +88,9 @@ public class Truck implements Comparable<Truck> {
     }
 
     @Override
-    public int compareTo(Truck o) {
+    public int compareTo(Lorry o) {
         return Comparator
-                .comparing(Truck::getReg_num)
+                .comparing(Lorry::getReg_num)
                 .compare(this, o);
     }
 }

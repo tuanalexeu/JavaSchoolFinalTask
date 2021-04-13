@@ -14,11 +14,11 @@ public class Map {
     private int id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "FROM", referencedColumnName = "NAME")
+    @JoinColumn(name = "FROM_CITY")
     private City from;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "TO", referencedColumnName = "NAME")
+    @JoinColumn(name = "TO_CITY")
     private City to;
 
     @Column(name = "DISTANCE")

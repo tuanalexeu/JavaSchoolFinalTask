@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 @Entity
-@Table(name = "LOAD")
+@Table(name = "LOAD_LOGIWEB")
 public class Load implements Comparable<Load> {
 
     @Id

@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 @Entity
-@Table(name = "driver")
+@Table(name = "DRIVER")
 public class Driver implements Comparable<Driver> {
 
     @Id
@@ -32,12 +32,12 @@ public class Driver implements Comparable<Driver> {
     private DriverState state;
 
     @ManyToOne
-    @JoinColumn(name = "CITY", referencedColumnName = "NAME")
+    @JoinColumn(name = "CITY")
     private City city;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "TRUCK", referencedColumnName = "ID")
-    private Truck truck;
+    @JoinColumn(name = "LORRY")
+    private Lorry lorry;
 
     public int getID() {
         return ID;
@@ -87,12 +87,12 @@ public class Driver implements Comparable<Driver> {
         this.city = city;
     }
 
-    public Truck getTruck() {
-        return truck;
+    public Lorry getTruck() {
+        return lorry;
     }
 
-    public void setTruck(Truck truck) {
-        this.truck = truck;
+    public void setTruck(Lorry lorry) {
+        this.lorry = lorry;
     }
 
     @Override
@@ -113,11 +113,11 @@ public class Driver implements Comparable<Driver> {
                 && lastName.equals(driver.lastName)
                 && state == driver.state
                 && city.equals(driver.city)
-                && truck.equals(driver.truck);
+                && lorry.equals(driver.lorry);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, firstName, lastName, hours_worked, state, city, truck);
+        return Objects.hash(ID, firstName, lastName, hours_worked, state, city, lorry);
     }
 }

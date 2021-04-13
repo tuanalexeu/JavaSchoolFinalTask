@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -12,7 +13,8 @@ import java.util.Objects;
 public class City implements Comparable<City> {
 
     @Id
-    @Column(name = "NAME")
+    @Column(name = "NAME", length = 30)
+    @Size(min = 2, max = 30)
     private String name;
 
     public String getName() {
