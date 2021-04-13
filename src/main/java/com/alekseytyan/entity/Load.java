@@ -1,7 +1,5 @@
 package com.alekseytyan.entity;
 
-import com.alekseytyan.entity.state.LoadStatus;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.util.Comparator;
@@ -10,6 +8,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "LOAD_LOGIWEB")
 public class Load implements Comparable<Load> {
+
+    public enum LoadStatus {
+        PREPARED, SENT, DELIVERED
+    }
 
     @Id
     @Column(name = "ID")

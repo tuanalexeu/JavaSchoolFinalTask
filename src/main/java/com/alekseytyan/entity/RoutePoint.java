@@ -1,7 +1,5 @@
 package com.alekseytyan.entity;
 
-import com.alekseytyan.entity.state.RouteType;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -9,6 +7,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "ROUTE_POINT")
 public class RoutePoint {
+
+    public enum RouteType {
+        LOAD, UNLOAD
+    }
 
     @Id
     @Column(name = "ID")

@@ -1,8 +1,5 @@
 package com.alekseytyan.entity;
 
-
-import com.alekseytyan.entity.state.DriverState;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.util.Comparator;
@@ -11,6 +8,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "DRIVER")
 public class Driver implements Comparable<Driver> {
+
+    public enum DriverState {
+        VACATION, IN_SHIFT, DRIVING
+    }
 
     @Id
     @Column(name = "ID")
