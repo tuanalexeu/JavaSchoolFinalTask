@@ -1,6 +1,6 @@
 package com.alekseytyan.dao;
 
-import com.alekseytyan.entity.Order;
+import com.alekseytyan.entity.Load;
 
-public class OrderDao extends AbstractJpaDao<Order> {
+public class OrderDao extends AbstractJpaDao<Load> {
 }

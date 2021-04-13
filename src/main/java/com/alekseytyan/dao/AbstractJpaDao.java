@@ -2,15 +2,14 @@ package com.alekseytyan.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.io.Serializable;
 import java.util.List;
 
-public abstract class AbstractJpaDao<T extends Serializable> implements Serializable {
+public abstract class AbstractJpaDao<T> {
 
    private Class<T> clazz;
 
    @PersistenceContext
-   EntityManager entityManager;
+   protected EntityManager entityManager;
 
    public void setClazz(Class<T> clazzToSet) {
       this.clazz = clazzToSet;
@@ -28,11 +27,11 @@ public abstract class AbstractJpaDao<T extends Serializable> implements Serializ
    }
 
    public void save(T entity){
-      entityManager.persist( entity );
+      entityManager.persist(entity);
    }
 
    public void update(T entity){
-      entityManager.merge( entity );
+      entityManager.merge(entity);
    }
 
    public void delete(T entity) {
