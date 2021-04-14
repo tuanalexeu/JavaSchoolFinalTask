@@ -15,7 +15,9 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("com.alekseytyan")
 @Import(value = {
-        DataSourceConfig.class
+        DataSourceConfig.class,
+        DataMappingConfig.class,
+        WebConfig.class
 })
 public class AppConfig {
     public static void main(String[] args) {
