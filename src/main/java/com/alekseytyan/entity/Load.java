@@ -1,10 +1,15 @@
 package com.alekseytyan.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "LOAD_LOGIWEB")
+@Getter @Setter @NoArgsConstructor
 public class Load {
 
     public enum LoadStatus {
