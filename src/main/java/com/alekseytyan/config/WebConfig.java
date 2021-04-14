@@ -13,12 +13,19 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = { "com.alekseytyan.controller" })
 public class WebConfig implements WebMvcConfigurer {
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
+    }
+
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
 
         bean.setViewClass(JstlView.class);
-        bean.setPrefix("/WEB-INF/jsp/");
+        bean.setPrefix("/WEB-INF/view/");
         bean.setSuffix(".jsp");
 
         return bean;
