@@ -1,5 +1,6 @@
 package com.alekseytyan.entity;
 
+import com.alekseytyan.entity.enums.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +12,6 @@ import javax.validation.constraints.Pattern;
 @Table(name = "USER_LOGIWEB")
 @Getter @Setter @NoArgsConstructor
 public class User {
-
-    public enum UserRole {
-        EMPLOYEE, DRIVER
-    }
 
     @Id
     @Column(name = "EMAIL", length = 60)

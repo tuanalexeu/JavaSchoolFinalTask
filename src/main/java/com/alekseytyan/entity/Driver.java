@@ -1,5 +1,6 @@
 package com.alekseytyan.entity;
 
+import com.alekseytyan.entity.enums.DriverState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,10 +13,6 @@ import javax.validation.constraints.Size;
 @Table(name = "DRIVER")
 @Getter @Setter @NoArgsConstructor
 public class Driver {
-
-    public enum DriverState {
-        VACATION, DUTY, DRIVING
-    }
 
     @Id
     @Column(name = "ID")

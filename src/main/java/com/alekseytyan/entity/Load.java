@@ -1,5 +1,6 @@
 package com.alekseytyan.entity;
 
+import com.alekseytyan.entity.enums.LoadStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +12,6 @@ import javax.validation.constraints.Min;
 @Table(name = "LOAD_LOGIWEB")
 @Getter @Setter @NoArgsConstructor
 public class Load {
-
-    public enum LoadStatus {
-        PREPARED, SENT, DELIVERED
-    }
 
     @Id
     @Column(name = "ID")

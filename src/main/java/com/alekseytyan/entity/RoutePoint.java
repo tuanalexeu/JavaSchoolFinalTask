@@ -1,5 +1,6 @@
 package com.alekseytyan.entity;
 
+import com.alekseytyan.entity.enums.RouteType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,10 +11,6 @@ import javax.persistence.*;
 @Table(name = "ROUTE_POINT")
 @Getter @Setter @NoArgsConstructor
 public class RoutePoint {
-
-    public enum RouteType {
-        LOAD, UNLOAD
-    }
 
     @Id
     @Column(name = "ID")
