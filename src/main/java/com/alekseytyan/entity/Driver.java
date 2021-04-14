@@ -20,7 +20,7 @@ public class Driver {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private int id;
 
     @Column(name = "FIRST_NAME")
     @Size(min = 1, max = 48)

@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.util.Objects;
 
 @Entity
 @Table(name = "USER_LOGIWEB")
@@ -14,7 +13,7 @@ import java.util.Objects;
 public class User {
 
     public enum UserRole {
-        EMPLOYEE, DRIVER;
+        EMPLOYEE, DRIVER
     }
 
     @Id

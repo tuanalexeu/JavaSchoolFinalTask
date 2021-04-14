@@ -19,11 +19,11 @@ public class Map {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "FROM_CITY")
-    private City from;
+    private City cityFrom;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "TO_CITY")
-    private City to;
+    private City cityTo;
 
     @Column(name = "DISTANCE")
     @Min(0)

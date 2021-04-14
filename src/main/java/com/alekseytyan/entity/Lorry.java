@@ -17,10 +17,10 @@ public class Lorry {
     @Column(name = "ID", length = 7)
     @Pattern(regexp="[a-zA-Z]{2}\\d{5}")
     @Size(min = 7, max = 7)
-    private String reg_num;
+    private String regNum;
 
     @Column(name = "SHIFT_TIME")
-    private int shift_time;
+    private int shiftTime;
 
     @Column(name = "CAPACITY")
     private int capacity;
