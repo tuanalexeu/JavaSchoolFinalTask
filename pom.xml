@@ -8,6 +8,7 @@
     <artifactId>JavaSchoolFinalTask</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>JavaSchoolFinalTask</name>
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -28,6 +29,13 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
@@ -65,6 +73,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.23</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency> <!-- Hibernate -->
@@ -91,6 +100,37 @@
             <version>1.18.10</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper.extensions</groupId>
+            <artifactId>modelmapper-spring</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>3.0.11.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring5</artifactId>
+            <version>3.0.11.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
 
     </dependencies>
 
