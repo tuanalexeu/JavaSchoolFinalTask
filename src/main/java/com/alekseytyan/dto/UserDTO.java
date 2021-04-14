@@ -1,6 +1,5 @@
 package com.alekseytyan.dto;
 
-import com.alekseytyan.entity.Driver;
 import com.alekseytyan.entity.User;
 import lombok.Data;
 
@@ -15,5 +14,5 @@ public class UserDTO {
 
     private User.UserRole role;
 
-    private Driver driver;
+    private DriverDTO driver;
 }

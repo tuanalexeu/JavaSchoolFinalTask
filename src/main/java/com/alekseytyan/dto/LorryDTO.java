@@ -1,7 +1,5 @@
 package com.alekseytyan.dto;
 
-import com.alekseytyan.entity.City;
-import com.alekseytyan.entity.Order;
 import lombok.Data;
 
 
@@ -16,7 +14,7 @@ public class LorryDTO {
 
     private boolean isBroken;
 
-    private City city;
+    private CityDTO city;
 
-    private Order order;
+    private OrderDTO order;
 }

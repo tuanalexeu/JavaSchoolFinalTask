@@ -1,8 +1,5 @@
 package com.alekseytyan.dto;
 
-import com.alekseytyan.entity.Driver;
-import com.alekseytyan.entity.Lorry;
-import com.alekseytyan.entity.RoutePoint;
 import lombok.Data;
 
 import java.util.List;
@@ -15,9 +12,9 @@ public class OrderDTO {
 
     private boolean isFinished;
 
-    private List<RoutePoint> routePoints;
+    private List<RoutePointDTO> routePoints;
 
-    private Lorry lorry;
+    private LorryDTO lorry;
 
-    private Set<Driver> drivers;
+    private Set<DriverDTO> drivers;
 }

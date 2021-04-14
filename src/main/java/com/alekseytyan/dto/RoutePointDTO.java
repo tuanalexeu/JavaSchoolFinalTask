@@ -1,8 +1,5 @@
 package com.alekseytyan.dto;
 
-import com.alekseytyan.entity.City;
-import com.alekseytyan.entity.Load;
-import com.alekseytyan.entity.Order;
 import com.alekseytyan.entity.RoutePoint;
 import lombok.Data;
 
@@ -11,11 +8,11 @@ public class RoutePointDTO {
 
     private int id;
 
-    private City city;
+    private CityDTO city;
 
     private RoutePoint.RouteType type;
 
-    private Load load;
+    private LoadDTO load;
 
-    private Order order;
+    private OrderDTO order;
 }

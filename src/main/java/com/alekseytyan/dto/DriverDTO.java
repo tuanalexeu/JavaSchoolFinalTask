@@ -12,15 +12,15 @@ public class DriverDTO {
 
     private String lastName;
 
-    private int hours_worked;
+    private int hoursWorked;
 
     private Driver.DriverState state;
 
-    private City city;
+    private CityDTO city;
 
-    private Lorry lorry;
+    private LorryDTO lorry;
 
-    private Order order;
+    private OrderDTO order;
 
-    private User user;
+    private UserDTO user;
 }
