@@ -61,24 +61,24 @@
             <version>5.3.5</version>
         </dependency>
 
-<!--        &lt;!&ndash; Persistence Management &ndash;&gt;-->
-<!--        <dependency> &lt;!&ndash; Apache BasicDataSource &ndash;&gt;-->
-<!--            <groupId>commons-dbcp</groupId>-->
-<!--            <artifactId>commons-dbcp</artifactId>-->
-<!--            <version>1.4</version>-->
-<!--        </dependency>-->
+        <!-- Persistence Management -->
+        <dependency> <!-- Apache BasicDataSource -->
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
 
         <dependency> <!-- MySQL database driver -->
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.39</version>
+            <version>8.0.23</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency> <!-- Hibernate -->
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.1.1.Final</version>
+            <version>5.4.30.Final</version>
         </dependency>
 
         <dependency>
@@ -87,11 +87,11 @@
             <version>6.1.7.Final</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>javax.validation</groupId>-->
-<!--            <artifactId>validation-api</artifactId>-->
-<!--            <version>2.0.1.Final</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -128,7 +128,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.1.1.Final</version>
+            <version>5.4.30.Final</version>
         </dependency>
 
         <dependency>
@@ -140,6 +140,11 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+            </plugin>
         </plugins>
     </build>
 </project>
