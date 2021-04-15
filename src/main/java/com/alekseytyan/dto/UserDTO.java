@@ -1,6 +1,6 @@
 package com.alekseytyan.dto;
 
-import com.alekseytyan.entity.User;
+import com.alekseytyan.entity.enums.UserRole;
 import lombok.Data;
 
 @Data
@@ -12,7 +12,7 @@ public class UserDTO {
 
     private String password;
 
-    private User.UserRole role;
+    private UserRole role;
 
     private DriverDTO driver;
 }

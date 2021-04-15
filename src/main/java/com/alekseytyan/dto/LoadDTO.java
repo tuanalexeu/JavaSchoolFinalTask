@@ -1,6 +1,6 @@
 package com.alekseytyan.dto;
 
-import com.alekseytyan.entity.Load;
+import com.alekseytyan.entity.enums.LoadStatus;
 import lombok.Data;
 
 @Data
@@ -13,5 +13,5 @@ public class LoadDTO {
 
     private OrderDTO order;
 
-    private Load.LoadStatus status;
+    private LoadStatus status;
 }

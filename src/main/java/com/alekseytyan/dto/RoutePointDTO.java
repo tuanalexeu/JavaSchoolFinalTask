@@ -1,6 +1,6 @@
 package com.alekseytyan.dto;
 
-import com.alekseytyan.entity.RoutePoint;
+import com.alekseytyan.entity.enums.RouteType;
 import lombok.Data;
 
 @Data
@@ -10,7 +10,7 @@ public class RoutePointDTO {
 
     private CityDTO city;
 
-    private RoutePoint.RouteType type;
+    private RouteType type;
 
     private LoadDTO load;
 

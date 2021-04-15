@@ -1,6 +1,6 @@
 package com.alekseytyan.dto;
 
-import com.alekseytyan.entity.*;
+import com.alekseytyan.entity.enums.DriverState;
 import lombok.Data;
 
 @Data
@@ -14,7 +14,7 @@ public class DriverDTO {
 
     private int hoursWorked;
 
-    private Driver.DriverState state;
+    private DriverState state;
 
     private CityDTO city;
 
