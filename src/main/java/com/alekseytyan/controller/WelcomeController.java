@@ -5,11 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ExampleController {
+public class WelcomeController {
 
-    @RequestMapping(value = "/greeting")
+    @RequestMapping(value = "/")
     public String greeting(Model model) {
-        model.addAttribute("greeting", "Hello World!");
         return "greeting";
     }
 
