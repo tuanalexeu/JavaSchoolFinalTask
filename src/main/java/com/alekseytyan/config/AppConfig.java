@@ -9,9 +9,6 @@ import org.springframework.context.annotation.Import;
 
 import javax.sql.DataSource;
 
-/**
- * Something.
- */
 @Configuration
 @ComponentScan("com.alekseytyan")
 @Import(value = {
