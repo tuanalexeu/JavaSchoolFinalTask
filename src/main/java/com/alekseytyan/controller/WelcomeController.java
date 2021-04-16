@@ -9,7 +9,7 @@ public class WelcomeController {
 
     @RequestMapping(value = "/")
     public String greeting(Model model) {
-        return "greeting";
+        return "index";
     }
 
 }
