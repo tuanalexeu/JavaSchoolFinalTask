@@ -1,45 +1,52 @@
-package com.alekseytyan.dao;
+package com.alekseytyan.dao.implementation;
+
+import com.alekseytyan.dao.api.AbstractDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public abstract class AbstractJpaDao<T> {
+public abstract class AbstractDaoImpl<E> implements AbstractDao<E> {
 
-   private Class<T> clazz;
+   private Class<E> clazz;
 
    @PersistenceContext
    protected EntityManager entityManager;
 
-   public void setClazz(Class<T> clazzToSet) {
+   public void setClazz(Class<E> clazzToSet) {
       this.clazz = clazzToSet;
    }
 
-   public T findOne(Long id) {
+   @Override
+   public E findById(Long id) {
       return entityManager.find(clazz, id);
    }
 
-   @SuppressWarnings("unchecked")
-   public List<T> findAll() {
+   @Override
+   public List<E> findAll() {
       return entityManager
               .createQuery("from " + clazz.getName())
               .getResultList();
    }
 
-   public void save(T entity){
+   @Override
+   public void save(E entity){
       entityManager.persist(entity);
    }
 
-   public void update(T entity){
+   @Override
+   public void update(E entity){
       entityManager.merge(entity);
    }
 
-   public void delete(T entity) {
+   @Override
+   public void delete(E entity) {
       entityManager.remove(entity);
    }
 
+   @Override
    public void deleteById(Long entityId){
-      T entity = findOne(entityId);
+      E entity = findById(entityId);
       delete(entity);
    }
 }
