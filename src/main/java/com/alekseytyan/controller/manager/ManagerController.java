@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller(value = "manager")
 public class ManagerController {
 
-    @RequestMapping(value = "/orders")
-    public String getOrders() {
-        return "list/orders";
-    }
+//    @RequestMapping(value = "/orders")
+//    public String getOrders() {
+//        return "list/orders";
+//    }
 
     @RequestMapping(value = "/lorries")
     public String getLorries() {
