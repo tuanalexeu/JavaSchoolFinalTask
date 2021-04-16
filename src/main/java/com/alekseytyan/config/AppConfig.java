@@ -18,8 +18,4 @@ import javax.sql.DataSource;
         WebSecurityConfig.class
 })
 public class AppConfig {
-    public static void main(String[] args) {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        ctx.getBean(DataSource.class);
-    }
 }
