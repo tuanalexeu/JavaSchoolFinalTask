@@ -13,6 +13,6 @@ public class DriverController {
 
     @RequestMapping(value = "/orders")
     public String getDutyOrders() {
-        return "info/driverOrders";
+        return "driver/driverOrders";
     }
 }
