@@ -1,4 +1,4 @@
-package com.alekseytyan.controller.driver;
+package com.alekseytyan.controller.role;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,11 +8,11 @@ public class DriverController {
 
     @RequestMapping(value = "/info")
     public String getInfo() {
-        return "info/driverInfo";
+        return "role/driver/driverInfo";
     }
 
-    @RequestMapping(value = "/orders")
+    @RequestMapping(value = "/driver-orders")
     public String getDutyOrders() {
-        return "driver/driverOrders";
+        return "role/driver/driverOrders";
     }
 }
