@@ -29,7 +29,7 @@ public class DataSourceConfig {
         this.env = env;
     }
 
-    @Bean("dataSource")
+    @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl(env.getRequiredProperty("spring.datasource.url"));
@@ -45,10 +45,14 @@ public class DataSourceConfig {
         em.setDataSource(dataSource());
         em.setPackagesToScan("com.alekseytyan.entity");
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
+        em.setJpaVendorAdapter(vendorAdapter());
         em.setJpaProperties(additionalProperties());
         return em;
+    }
+
+    @Bean
+    public JpaVendorAdapter vendorAdapter() {
+        return new HibernateJpaVendorAdapter();
     }
 
     @Bean
