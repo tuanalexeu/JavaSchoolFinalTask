@@ -3,7 +3,8 @@ package com.alekseytyan.controller.role;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller(value = "/admin")
+@Controller
+@RequestMapping(value = "/admin")
 public class AdminController {
 
     @RequestMapping(value = "/users")

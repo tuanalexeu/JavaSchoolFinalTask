@@ -31,4 +31,9 @@ public class AuthController {
     public String logOut() {
         return "auth/logOut";
     }
+
+    @RequestMapping(value = "/profile")
+    public String profile() {
+        return "auth/profile";
+    }
 }

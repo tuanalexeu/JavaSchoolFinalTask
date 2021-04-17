@@ -3,7 +3,8 @@ package com.alekseytyan.controller.role;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller(value = "/driver")
+@Controller
+@RequestMapping(value = "/driver")
 public class DriverController {
 
     @RequestMapping(value = "/info")
