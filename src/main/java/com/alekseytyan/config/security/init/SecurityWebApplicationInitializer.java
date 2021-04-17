@@ -1,4 +1,4 @@
-package com.alekseytyan.config.security;
+package com.alekseytyan.config.security.init;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

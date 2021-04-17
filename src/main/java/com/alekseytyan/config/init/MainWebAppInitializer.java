@@ -1,5 +1,6 @@
-package com.alekseytyan.config;
+package com.alekseytyan.config.init;
 
+import com.alekseytyan.config.WebConfig;
 import com.alekseytyan.config.security.WebSecurityConfig;
 import lombok.var;
 import org.springframework.web.WebApplicationInitializer;
