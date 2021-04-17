@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class LoadDaoImpl extends AbstractDaoImpl<Load> implements LoadDao {
+    public LoadDaoImpl() {
+        super(Load.class);
+    }
 }

@@ -8,13 +8,13 @@ import java.util.List;
 
 public abstract class AbstractDaoImpl<E> implements AbstractDao<E> {
 
-   private Class<E> clazz;
+   private final Class<E> clazz;
 
    @PersistenceContext
    protected EntityManager entityManager;
 
-   public void setClazz(Class<E> clazzToSet) {
-      this.clazz = clazzToSet;
+   public AbstractDaoImpl(Class<E> clazz) {
+      this.clazz = clazz;
    }
 
    @Override
@@ -22,6 +22,7 @@ public abstract class AbstractDaoImpl<E> implements AbstractDao<E> {
       return entityManager.find(clazz, id);
    }
 
+   @SuppressWarnings("unchecked")
    @Override
    public List<E> findAll() {
       return entityManager

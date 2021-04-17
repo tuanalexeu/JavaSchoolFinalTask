@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class DriverDaoImpl extends AbstractDaoImpl<Driver> implements DriverDao {
+    public DriverDaoImpl() {
+        super(Driver.class);
+    }
 }

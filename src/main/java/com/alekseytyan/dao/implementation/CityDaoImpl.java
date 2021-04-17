@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CityDaoImpl extends AbstractDaoImpl<City> implements CityDao {
+    public CityDaoImpl() {
+        super(City.class);
+    }
 }
