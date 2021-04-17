@@ -1,5 +1,5 @@
 package com.alekseytyan.entity.enums;
 
 public enum UserRole {
-    EMPLOYEE, DRIVER
+    ROLE_EMPLOYEE, ROLE_DRIVER, ROLE_ADMIN
 }

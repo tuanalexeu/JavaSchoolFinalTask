@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class WelcomeController {
-
-    @RequestMapping(value = "/")
-    public String greeting(Model model) {
-        return "index";
+    @RequestMapping(value = {"/", "/welcome"})
+    public String welcomePage(Model model) {
+        model.addAttribute("name", "Aleksey T.");
+        return "welcome/index";
     }
-
 }

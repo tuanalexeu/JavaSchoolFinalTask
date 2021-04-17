@@ -30,4 +30,7 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Driver driver;
+
+    @Column(name = "ENABLED", columnDefinition = "boolean default true")
+    private boolean enabled;
 }
