@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-Example hello message
+<h2>${name}<h2/>
 </body>
 </html>
