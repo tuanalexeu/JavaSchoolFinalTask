@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomePageController {
 
-    @RequestMapping(path = "/homepage")
+    @RequestMapping(value = "/homePage")
     public String homePage() {
-        // TODO find out which role a user is in and redirect to a corresponding page
-        return null;
+        // TODO return page according to user role
+        return "welcome/index";
     }
 }
