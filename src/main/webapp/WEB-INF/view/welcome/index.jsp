@@ -22,7 +22,20 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" id="top-navbar" style="background: #FF67AD;">
-                    <div class="container"><button class="btn btn-primary" type="button" style="background: #dc58b8;border-color: #ced8e6;">Log in</button></div>
+                    <div class="container">
+                        <ul class="navbar-nav ml-auto flex-nowrap">
+                            <li class="nav-item" style="padding: 5px">
+                                <form action="/login">
+                                    <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Sign in</button>
+                                </form>
+                            </li>
+                            <li class="nav-item" style="padding: 5px">
+                                <form action="/register">
+                                    <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Sign up</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
                 <div class="container" style="height: 800px;">
                     <div class="row">

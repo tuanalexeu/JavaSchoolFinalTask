@@ -20,7 +20,19 @@
   background-clip: border-box;
   max-width: 800px;
   margin: auto;
-  border: 1px solid #fff;
+  border: 1px solid #e3e6f0;
   border-radius: .35rem;
+}
+
+#yes-no-form {
+}
+
+#my-row {
+  max-height: 200px;
+}
+
+#yes-button {
+  margin: inherit;
+  max-height: 40px;
 }
 
