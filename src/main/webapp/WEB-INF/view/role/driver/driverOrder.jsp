@@ -27,7 +27,7 @@
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
                 <li class="nav-item"><a class="nav-link active" href="/driver/info"><i class="fas fa-window-maximize"></i><span>My info</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="/driver/orders"><i class="fas fa-table"></i><span>My orders</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="/driver/driver-order"><i class="fas fa-table"></i><span>My orders</span></a></li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>

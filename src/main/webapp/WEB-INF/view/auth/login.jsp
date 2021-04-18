@@ -21,9 +21,13 @@
                 <div class="text-center">
                     <h4 class="mb-4" style="color: rgb(255,255,255);">Welcome Back!</h4>
                 </div>
-                <form class="user" action="login" method="post">
-                    <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div>
-                    <div class="form-group"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password"></div>
+                <form class="user" method="post">
+                    <div class="form-group">
+                        <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="username">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password">
+                    </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox small">
                             <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1" style="color: rgb(255,255,255);">Remember Me</label></div>

@@ -5,8 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ErrorController {
-    @RequestMapping(path = "/notFound")
+
+    @RequestMapping(value = "/notFound")
     public String notFound() {
         return "error/404";
+    }
+
+    @RequestMapping(value = "/forbidden")
+    public String forbidden() {
+        return "error/403";
     }
 }
