@@ -1,6 +1,6 @@
 package com.alekseytyan.config.init;
 
-import com.alekseytyan.config.WebConfig;
+import com.alekseytyan.config.AppConfig;
 import com.alekseytyan.config.security.WebSecurityConfig;
 import lombok.var;
 import org.springframework.web.WebApplicationInitializer;
@@ -17,7 +17,7 @@ public class MainWebAppInitializer implements WebApplicationInitializer {
     public void onStartup(final ServletContext sc) throws ServletException {
 
         var ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(WebConfig.class);
+        ctx.register(AppConfig.class);
         ctx.setServletContext(sc);
 
         var servlet = sc.addServlet("dispatcher", new DispatcherServlet(ctx));
