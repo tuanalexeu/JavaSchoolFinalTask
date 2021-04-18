@@ -12,11 +12,6 @@ public class AuthController {
         return "auth/login";
     }
 
-    @RequestMapping(value = "/performLogin")
-    public String performLogin() {
-        return "auth/performLogin";
-    }
-
     @RequestMapping(value = "/register")
     public String register() {
         return "auth/register";
@@ -27,8 +22,13 @@ public class AuthController {
         return "auth/forgot_password";
     }
 
-    @RequestMapping(value = "/preformLogOut")
+    @RequestMapping(value = "/logout")
     public String logOut() {
+        return "auth/logout";
+    }
+
+    @RequestMapping(value = "/performLogOut")
+    public String performLogout() {
         return "auth/logout";
     }
 

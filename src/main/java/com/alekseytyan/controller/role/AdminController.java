@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/admin")
 public class AdminController {
 
     private final UserService userService;
@@ -20,7 +19,7 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/users")
+    @RequestMapping(value = "/admin")
     public String getUsers(Model model) {
 
         List<User> users = userService.findAll();
