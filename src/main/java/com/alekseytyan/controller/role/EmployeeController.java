@@ -29,7 +29,7 @@ public class EmployeeController {
     }
 
 
-    @RequestMapping(path = "/employee-orders")
+    @RequestMapping(path = "/orders")
     public String getOrders(Model model) {
 
         List<Order> orders = orderService.findAll();

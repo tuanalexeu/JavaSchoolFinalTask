@@ -43,27 +43,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/driver/**").hasRole("DRIVER")
-//                .antMatchers("/employee/**").hasRole("EMPLOYEE")
-//                .antMatchers("/login*", "/register*", "/forgotPassword*", "/", "/welcome").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/driver/**").hasRole("DRIVER")
+                .antMatchers("/employee/**").hasRole("EMPLOYEE")
+                .antMatchers("/login*", "/register*", "/forgotPassword*", "/", "/welcome").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
 //                .loginProcessingUrl("/performLogin")
-//                .defaultSuccessUrl("/homepage", true)
-//                .failureUrl("/login?error=true")
-//                .failureHandler(authenticationFailureHandler())
-//                .and()
-//                .logout()
-//                .logoutUrl("/performLogOut")
-//                .logoutSuccessUrl("/index")
-//                .deleteCookies("JSESSIONID")
-//                .logoutSuccessHandler(logoutSuccessHandler());
+                .defaultSuccessUrl("/homePage", true)
+                .failureUrl("/login?error=true")
+                .failureHandler(authenticationFailureHandler())
+                .and()
+                .logout()
+                .logoutUrl("/performLogOut")
+                .logoutSuccessUrl("/index")
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessHandler(logoutSuccessHandler());
 
 //        http.httpBasic().disable();
     }
