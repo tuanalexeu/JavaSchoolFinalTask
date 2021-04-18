@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="<c:url value="assets/css/untitled.css"/>">
 </head>
 
-<body class="bg-gradient-primary" style="background: rgb(255,255,255);border-color: rgb(255,103,173);">
-    <div class="container" style="background: rgb(255,255,255);">
-        <div class="card shadow-lg o-hidden border-0 my-5">
-            <div class="card-body p-0"></div>
+<body class="bg-gradient-primary" style="background: #f8f9fc;border-color: rgb(255,103,173);">
+    <div class="container" style="background: #f8f9fc; border-radius: 20px">
+        <div class="card shadow-lg o-hidden border-0 my-5" style="border-radius: 20px">
+            <div class="card-body p-0" style="border-radius: 20px"></div>
             <div class="p-5" style="border-color: rgb(255,255,255);margin: initial;background: rgb(255,103,173);border-radius: 20px;">
                 <div class="text-center">
                     <h4 class="mb-4" style="color: rgb(255,255,255);">Create an Account!</h4>

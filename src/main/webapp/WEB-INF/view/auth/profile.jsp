@@ -35,8 +35,19 @@
 <%--        </nav>--%>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ffffff;">
-                    <div class="container-fluid"><a href="#">Link</a><a href="#">Link</a></div>
+                <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ff67ad;">
+                    <ul class="navbar-nav ml-auto flex-nowrap">
+                        <li class="nav-item" style="padding: 5px">
+                            <form action="/profile">
+                                <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Profile</button>
+                            </form>
+                        </li>
+                        <li class="nav-item" style="padding: 5px">
+                            <form action="/logout">
+                                <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Log out</button>
+                            </form>
+                        </li>
+                    </ul>
                 </nav>
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Profile</h3>

@@ -31,7 +31,7 @@ public class DriverController {
         return "role/driver/driverInfo";
     }
 
-    @RequestMapping(value = "/driver-order/{id}")
+    @RequestMapping(value = "/order/{id}")
     public String getDutyOrders(@PathVariable Long id, Model model) {
 
         Driver driver = driverService.findById(id);

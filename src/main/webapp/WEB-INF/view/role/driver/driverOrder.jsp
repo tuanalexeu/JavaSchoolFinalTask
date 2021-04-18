@@ -27,7 +27,7 @@
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
                 <li class="nav-item"><a class="nav-link active" href="/driver/info"><i class="fas fa-window-maximize"></i><span>My info</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="/driver/driver-order"><i class="fas fa-table"></i><span>My orders</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="/driver/order"><i class="fas fa-table"></i><span>My orders</span></a></li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
@@ -35,7 +35,18 @@
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content">
             <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ffffff;">
-                <div class="container-fluid"><a href="#">Link</a><a href="#">Link</a></div>
+                <ul class="navbar-nav ml-auto flex-nowrap">
+                    <li class="nav-item" style="padding: 5px">
+                        <form action="/profile">
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
+                        </form>
+                    </li>
+                    <li class="nav-item" style="padding: 5px">
+                        <form action="/logout">
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
+                        </form>
+                    </li>
+                </ul>
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Team</h3>
