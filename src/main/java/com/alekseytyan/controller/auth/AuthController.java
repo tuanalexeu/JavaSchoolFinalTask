@@ -29,7 +29,7 @@ public class AuthController {
 
     @RequestMapping(value = "/preformLogOut")
     public String logOut() {
-        return "auth/logOut";
+        return "auth/logout";
     }
 
     @RequestMapping(value = "/profile")
