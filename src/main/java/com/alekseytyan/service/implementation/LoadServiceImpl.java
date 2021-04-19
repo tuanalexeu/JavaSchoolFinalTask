@@ -13,11 +13,7 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO>
 
     @Autowired
     public LoadServiceImpl(LoadDao dao, ModelMapper mapper) {
-        super(dao, mapper);
+        super(dao, mapper, LoadDTO.class);
     }
 
-    @Override
-    public LoadDTO convertToDTO(Load entity) {
-        return getMapper().map(entity, LoadDTO.class);
-    }
 }
