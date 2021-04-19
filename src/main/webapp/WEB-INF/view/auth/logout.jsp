@@ -30,7 +30,7 @@
                         <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Yes</button></div>
                     </form>
 
-                    <form action="/homepage">
+                    <form action="/homePage">
                         <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">No</button></div>
                     </form>
                 </div>

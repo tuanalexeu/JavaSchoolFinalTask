@@ -11,7 +11,7 @@ public class ErrorController {
         return "error/404";
     }
 
-    @RequestMapping(value = "/forbidden")
+    @RequestMapping(value = "/accessDenied")
     public String forbidden() {
         return "error/403";
     }

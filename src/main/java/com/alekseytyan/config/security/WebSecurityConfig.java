@@ -49,13 +49,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/driver/**").hasRole("DRIVER")
                 .antMatchers("/employee/**").hasRole("EMPLOYEE")
+
                 .antMatchers("/login*", "/register*", "/forgotPassword*", "/", "/welcome").permitAll()
+
+                .and().authorizeRequests()
+                .antMatchers("/profile*").hasAnyRole("ADMIN", "DRIVER", "EMPLOYEE")
+
                 .anyRequest().authenticated()
+
                 .and()
                 .formLogin()
                 .loginPage("/login")
 //                .loginProcessingUrl("/performLogin")
-                .defaultSuccessUrl("/homePage", true)
+                .defaultSuccessUrl("/homePage/", true)
                 .failureUrl("/login?error=true")
                 .failureHandler(authenticationFailureHandler())
                 .and()
@@ -63,7 +69,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/performLogOut")
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(logoutSuccessHandler());
+                .logoutSuccessHandler(logoutSuccessHandler())
+
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
 
 //        http.httpBasic().disable();
     }

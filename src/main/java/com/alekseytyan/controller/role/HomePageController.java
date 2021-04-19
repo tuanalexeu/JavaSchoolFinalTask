@@ -13,12 +13,8 @@ import java.io.IOException;
 public class HomePageController {
 
     @RequestMapping(value = "/homePage")
-    public String homePage(HttpServletResponse response) throws IOException {
-
-        // TODO get current user role as a string and do redirect
-
+    public String homePage() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             return "role/admin/users";
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_EMPLOYEE"))) {
@@ -26,7 +22,6 @@ public class HomePageController {
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DRIVER"))) {
             return "role/driver/driverOrder";
         }
-
         throw new NoSuchRoleException("Unknown role");
     }
 }
