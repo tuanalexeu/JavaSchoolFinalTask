@@ -10,14 +10,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, OrderDTO> implements OrderService {
-
     @Autowired
     public OrderServiceImpl(OrderDao dao, ModelMapper mapper) {
-        super(dao, mapper);
-    }
-
-    @Override
-    public OrderDTO convertToDTO(Order entity) {
-        return getMapper().map(entity, OrderDTO.class);
+        super(dao, mapper, OrderDTO.class);
     }
 }

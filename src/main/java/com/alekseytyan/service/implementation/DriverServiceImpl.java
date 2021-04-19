@@ -1,6 +1,5 @@
 package com.alekseytyan.service.implementation;
 
-import com.alekseytyan.dao.api.AbstractDao;
 import com.alekseytyan.dao.api.DriverDao;
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.entity.Driver;
@@ -14,11 +13,6 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
 
     @Autowired
     public DriverServiceImpl(DriverDao dao, ModelMapper mapper) {
-        super(dao, mapper);
-    }
-
-    @Override
-    public DriverDTO convertToDTO(Driver entity) {
-        return getMapper().map(entity, DriverDTO.class);
+        super(dao, mapper, DriverDTO.class);
     }
 }

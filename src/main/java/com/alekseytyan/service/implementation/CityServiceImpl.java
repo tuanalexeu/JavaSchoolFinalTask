@@ -13,11 +13,6 @@ public class CityServiceImpl extends AbstractServiceImpl<City, CityDao, CityDTO>
 
     @Autowired
     public CityServiceImpl(CityDao dao, ModelMapper mapper) {
-        super(dao, mapper);
-    }
-
-    @Override
-    public CityDTO convertToDTO(City entity) {
-        return getMapper().map(entity, CityDTO.class);
+        super(dao, mapper, CityDTO.class);
     }
 }
