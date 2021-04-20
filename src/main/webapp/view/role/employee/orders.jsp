@@ -50,10 +50,10 @@
                 </ul>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Team</h3>
+                <h3 class="text-dark mb-4">Orders</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
-                        <p class="text-primary m-0 font-weight-bold">Employee Info</p>
+                        <p class="text-primary m-0 font-weight-bold">Orders list</p>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -73,40 +73,51 @@
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Order ID</th>
+                                    <th>Status</th>
+                                    <th>Lorry</th>
+                                    <th>Route points</th>
+                                    <th>Drivers</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>33</td>
-                                    <td>2008/11/28</td>
-                                    <td>$162,700</td>
-                                </tr>
-                                <tr>
-                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                                    <td>Chief Executive Officer(CEO)</td>
-                                    <td>London</td>
-                                    <td>47</td>
-                                    <td>2009/10/09<br></td>
-                                    <td>$1,200,000</td>
-                                </tr>
+                                <a href="#drivers-modal" data-toggle="modal" data-target="#drivers-modal" style="color: #DC58B8">Route</a>
+                                <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" style="color: rgb(133, 135, 150);">Drivers</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                            </div>
+                                            <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
+                                                <ul>
+                                                    <li>Item 1</li>
+                                                    <li>Item 2</li>
+                                                    <li>Item 3</li>
+                                                    <li>Item 4</li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <c:forEach items="${orders}" var="order">
+                                    <tr>
+                                        <td>${order.id}</td>
+                                        <td>${order.finished ? "Finished" : "In process"}</td>
+                                        <td>${order.lorry.regNum}</td>
+
+                                        <td>${order.id}</td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td><strong>Name</strong></td>
-                                    <td><strong>Position</strong></td>
-                                    <td><strong>Office</strong></td>
-                                    <td><strong>Age</strong></td>
-                                    <td><strong>Start date</strong></td>
-                                    <td><strong>Salary</strong></td>
+                                    <th><strong>Order ID</strong></th>
+                                    <th><strong>Status</strong></th>
+                                    <th><strong>Lorry</strong></th>
+                                    <th><strong>Route points</strong></th>
+                                    <th><strong>Drivers</strong></th>
                                 </tr>
                                 </tfoot>
                             </table>

@@ -41,7 +41,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h1>Logiweb website</h1>
-                            <p>${example}</p>
                             <p>Welcome to our page.<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br></p>
                         </div>
                         <div class="col-md-6"><img src="assets/img/dogs/image1.jpeg" style="width: 300px;"></div>

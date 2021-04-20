@@ -9,7 +9,7 @@ import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class EmployeeController {
     }
 
 
-    @RequestMapping(path = "/orders")
+    @GetMapping(path = "/orders")
     public String getOrders(Model model) {
 
         List<Order> orders = orderService.findAll();
@@ -39,7 +39,7 @@ public class EmployeeController {
         return "role/employee/orders";
     }
 
-    @RequestMapping(path = "/lorries")
+    @GetMapping(path = "/lorries")
     public String getLorries(Model model) {
 
         List<Lorry> lorries = lorryService.findAll();
@@ -48,40 +48,13 @@ public class EmployeeController {
         return "role/employee/lorries";
     }
 
-    @RequestMapping(path = "/drivers")
+    @GetMapping(path = "/drivers")
     public String getDrivers(Model model) {
 
         List<Driver> drivers = driverService.findAll();
         model.addAttribute("drivers", drivers);
 
         return "role/employee/drivers";
-    }
-
-    @RequestMapping(value = "/newOrder")
-    public String newOrder() {
-        return "role/employee/newOrder";
-    }
-
-    @RequestMapping(value = "/editLorry/{id}")
-    public String editLorry(@PathVariable Long id, Model model) {
-        model.addAttribute("lorry", lorryService.findById(id));
-        return "role/employee/editLorry";
-    }
-
-    @RequestMapping(value = "/newLorry")
-    public String newLorry() {
-        return "role/employee/newLorry";
-    }
-
-    @RequestMapping(value = "/editDriver/{id}")
-    public String editDriver(@PathVariable Long id, Model model) {
-        model.addAttribute("driver", driverService.findById(id));
-        return "role/employee/editDriver";
-    }
-
-    @RequestMapping(value = "/newDriver")
-    public String newDriver() {
-        return "role/employee/newDriver";
     }
 
 }

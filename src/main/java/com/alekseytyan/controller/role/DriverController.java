@@ -1,6 +1,7 @@
 package com.alekseytyan.controller.role;
 
 import com.alekseytyan.dto.DriverDTO;
+import com.alekseytyan.entity.Driver;
 import com.alekseytyan.service.api.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,12 +36,13 @@ public class DriverController {
     @GetMapping(value = "/info")
     public String getInfo(Model model) {
         Long orderId = getDriver().getOrder().getId();
-        List<DriverDTO> coDrivers = driverService.convertToDTO(driverService.findCoDrivers(orderId));
+        List<Driver> drivers = driverService.findCoDrivers(orderId);
+        List<DriverDTO> coDrivers = drivers != null ? driverService.convertToDTO(drivers) : new ArrayList<>();
         model.addAttribute("coDrivers", coDrivers);
         return "role/driver/driverInfo";
     }
 
-    @RequestMapping(value = "/order")
+    @GetMapping(value = "/order")
     public String getDutyOrders() {
         return "role/driver/driverOrder";
     }
