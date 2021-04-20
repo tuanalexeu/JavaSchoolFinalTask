@@ -6,14 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Table - Logiweb</title>
-    <link rel="stylesheet" href="<c:url value ="assets/bootstrap/css/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value ="assets/fonts/fontawesome-all.min.css"/>">
-    <link rel="stylesheet" href="<c:url value ="assets/fonts/font-awesome.min.css"/>">
-    <link rel="stylesheet" href="<c:url value ="assets/fonts/fontawesome5-overrides.min.css"/>">
-    <link rel="stylesheet" href="<c:url value ="assets/css/untitled-1-acc.css"/>">
-    <link rel="stylesheet" href="<c:url value ="assets/css/untitled-2-acc.css"/>">
-    <link rel="stylesheet" href="<c:url value ="assets/css/untitled-3-acc.css"/>">
-    <link rel="stylesheet" href="<c:url value ="assets/css/untitled-acc.css"/>">
+    <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
+    <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
+    <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome5-overrides.min.css"/>">
+    <link rel="stylesheet" href="<c:url value ="/assets/css/untitled-1-acc.css"/>">
+    <link rel="stylesheet" href="<c:url value ="/assets/css/untitled-2-acc.css"/>">
+    <link rel="stylesheet" href="<c:url value ="/assets/css/untitled-3-acc.css"/>">
+    <link rel="stylesheet" href="<c:url value ="/assets/css/untitled-acc.css"/>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 </head>
 
@@ -26,7 +26,8 @@
         </a>
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item"><a class="nav-link active" href="/admin"><i class="fas fa-table"></i><span>Users</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="/driver/info"><i class="fas fa-window-maximize"></i><span>My info</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="/driver/order"><i class="fas fa-table"></i><span>My orders</span></a></li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
@@ -103,6 +104,62 @@
                                     <td>66</td>
                                     <td>2009/01/12<br></td>
                                     <td>$86,000</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar4.jpeg">Bradley Greer</td>
+                                    <td>Software Engineer</td>
+                                    <td>London</td>
+                                    <td>41</td>
+                                    <td>2012/10/13<br></td>
+                                    <td>$132,000</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar5.jpeg">Brenden Wagner</td>
+                                    <td>Software Engineer</td>
+                                    <td>San Francisco</td>
+                                    <td>28</td>
+                                    <td>2011/06/07<br></td>
+                                    <td>$206,850</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Brielle Williamson</td>
+                                    <td>Integration Specialist</td>
+                                    <td>New York</td>
+                                    <td>61</td>
+                                    <td>2012/12/02<br></td>
+                                    <td>$372,000</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Bruno Nash<br></td>
+                                    <td>Software Engineer</td>
+                                    <td>London</td>
+                                    <td>38</td>
+                                    <td>2011/05/03<br></td>
+                                    <td>$163,500</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar3.jpeg">Caesar Vance</td>
+                                    <td>Pre-Sales Support</td>
+                                    <td>New York</td>
+                                    <td>21</td>
+                                    <td>2011/12/12<br></td>
+                                    <td>$106,450</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar4.jpeg">Cara Stevens</td>
+                                    <td>Sales Assistant</td>
+                                    <td>New York</td>
+                                    <td>46</td>
+                                    <td>2011/12/06<br></td>
+                                    <td>$145,600</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar5.jpeg">Cedric Kelly</td>
+                                    <td>Senior JavaScript Developer</td>
+                                    <td>Edinburgh</td>
+                                    <td>22</td>
+                                    <td>2012/03/29<br></td>
+                                    <td>$433,060</td>
                                 </tr>
                                 </tbody>
                                 <tfoot>

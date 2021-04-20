@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Register - Logiweb</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="<c:url value="assets/bootstrap/css/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="assets/fonts/fontawesome-all.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="assets/fonts/font-awesome.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="assets/fonts/fontawesome5-overrides.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="assets/css/untitled-1.css"/>">
-    <link rel="stylesheet" href="<c:url value="assets/css/untitled.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/bootstrap/css/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/fonts/fontawesome-all.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/fonts/font-awesome.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/fonts/fontawesome5-overrides.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/untitled-1.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/untitled.css"/>">
 </head>
 
 <body class="bg-gradient-primary" style="background: #f8f9fc;border-color: rgb(255,103,173);">
@@ -36,8 +36,8 @@
                     <hr>
                     <hr>
                 </form>
-                <div class="text-center"><a class="small" href="forgot_password.jsp" style="border-color: rgb(255,255,255);color: rgb(255,255,255);">Forgot Password?</a></div>
-                <div class="text-center"><a class="small" href="login.jsp" style="color: rgb(255,255,255);">Already have an account? Login!</a></div>
+                <div class="text-center"><a class="small" href="Desktop/JavaSchoolFinalTask/src/main/webapp/view/auth/forgot_password.jsp" style="border-color: rgb(255,255,255);color: rgb(255,255,255);">Forgot Password?</a></div>
+                <div class="text-center"><a class="small" href="Desktop/JavaSchoolFinalTask/src/main/webapp/view/auth/login.jsp" style="color: rgb(255,255,255);">Already have an account? Login!</a></div>
             </div>
         </div>
     </div>
