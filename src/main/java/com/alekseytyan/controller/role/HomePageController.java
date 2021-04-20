@@ -24,4 +24,9 @@ public class HomePageController {
         }
         throw new NoSuchRoleException("Unknown role");
     }
+
+    @RequestMapping(value = "/profile")
+    public String profile() {
+        return "auth/profile";
+    }
 }
