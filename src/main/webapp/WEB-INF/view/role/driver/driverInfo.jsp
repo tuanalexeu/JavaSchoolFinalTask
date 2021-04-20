@@ -26,7 +26,6 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-
                     <li class="nav-item"><a class="nav-link active" href="/driver/info"><i class="fas fa-window-maximize"></i><span>My info</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/driver/order"><i class="fas fa-table"></i><span>My orders</span></a></li>
                 </ul>
@@ -50,7 +49,59 @@
                     </ul>
                 </nav>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-1">Blank Page</h3>
+                    <h3 class="text-dark mb-1">My info</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>${driver.firstName + " " + driver.lastName}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>${driver.id}</td>
+                                </tr>
+                                <tr>
+                                    <td>Lorry reg.number</td>
+                                    <td>${driver.lorry.regNum}</td>
+                                </tr>
+                                <tr>
+                                    <td>Order ID</td>
+                                    <td>${driver.order.id}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="text-dark">Co-drivers IDs:</h3>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-dark">Route points list:</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <c:forEach items="${coDrivers}" var="driver">
+                                    <li>${driver.id + " " + driver.firstName + " " + driver.lastName}</li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <c:forEach items="${driver.order.routePoints}" var="point">
+                                    <li>${point.city}</li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <footer class="bg-white sticky-footer" style="background: #043880;">

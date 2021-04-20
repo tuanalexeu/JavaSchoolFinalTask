@@ -45,11 +45,11 @@
             </nav>
             <div class="container-fluid">
                 <div class="text-center mt-5">
-                    <div class="error mx-auto" data-text="403">
-                        <p class="m-0">403</p>
+                    <div class="error mx-auto" data-text="500">
+                        <p class="m-0">500</p>
                     </div>
-                    <p class="text-dark mb-5 lead">Access denied</p>
-                    <p class="text-black-50 mb-0">It looks like you want to see something you're not supposed to see...</p><a href="/">← Back to Dashboard</a>
+                    <p class="text-dark mb-5 lead">Server error</p>
+                    <p class="text-black-50 mb-0">It looks like we should punish our developers...</p><a href="/">← Back to Dashboard</a>
                 </div>
             </div>
         </div>
