@@ -28,9 +28,9 @@
                 <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div><button class="btn btn-primary btn-block text-white btn-user" id="loginbutton" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Reset Password</button>
             </form>
             <div class="text-center">
-                <hr><a class="small" href="register.jsp" style="color: rgb(244,247,255);">Create an Account!</a>
+                <hr><a class="small" href="/register" style="color: rgb(244,247,255);">Create an Account!</a>
             </div>
-            <div class="text-center"><a class="small" href="login.jsp" style="color: rgb(255,255,255);">Already have an account?</a></div>
+            <div class="text-center"><a class="small" href="/login" style="color: rgb(255,255,255);">Already have an account?</a></div>
         </div>
     </div>
 </div>

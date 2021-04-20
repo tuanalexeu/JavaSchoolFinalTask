@@ -18,11 +18,12 @@ public class HomePageController {
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             return "role/admin/users";
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_EMPLOYEE"))) {
-            return "role/employee/orders";
+            return "role/driver/driverOrder";
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DRIVER"))) {
             return "role/driver/driverOrder";
+        } else {
+            return "redirect:/welcome";
         }
-        throw new NoSuchRoleException("Unknown role");
     }
 
     @RequestMapping(value = "/profile")

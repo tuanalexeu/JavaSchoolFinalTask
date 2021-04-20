@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/driver/**").hasRole("DRIVER")
                 .antMatchers("/employee/**").hasRole("EMPLOYEE")
 
-                .antMatchers("/login*", "/register*", "/forgotPassword*", "/", "/welcome").permitAll()
+                .antMatchers("/login*", "/register*", "/forgotPassword*", "/*", "/homePage*", "/welcome*", "/assets/**").permitAll()
 
                 .antMatchers("/profile*").hasAnyRole("ADMIN", "DRIVER", "EMPLOYEE")
 
@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
 //                .loginProcessingUrl("/performLogin")
-                .defaultSuccessUrl("/homePage/", true)
+                .defaultSuccessUrl("/homePage", true)
                 .failureUrl("/login?error=true")
 //                .failureHandler(authenticationFailureHandler())
                 .and()

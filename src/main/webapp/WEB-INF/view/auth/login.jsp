@@ -37,8 +37,8 @@
                 <hr>
                 <hr>
             </form>
-            <div class="text-center"><a class="small" href="forgot_password.jsp" style="color: rgb(255,255,255);">Forgot Password?</a></div>
-            <div class="text-center" style="color: rgb(255,255,255);"><a class="small" href="register.jsp" style="color: rgb(255,255,255);">Create an Account!</a></div>
+            <div class="text-center"><a class="small" href="/forgotPassword" style="color: rgb(255,255,255);">Forgot Password?</a></div>
+            <div class="text-center" style="color: rgb(255,255,255);"><a class="small" href="/register" style="color: rgb(255,255,255);">Create an Account!</a></div>
         </div>
     </div>
 </div>
