@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public abstract class AbstractServiceImpl<E, D extends AbstractDao<E>, DTO> implements AbstractService<E, DTO> {
@@ -61,7 +62,13 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E>, DTO> impl
         dao.deleteById(entityId);
     }
 
+    @Override
     public DTO convertToDTO(E entity) {
         return getMapper().map(entity, dtoClass);
+    }
+
+    @Override
+    public List<DTO> convertToDTO(List<E> entities) {
+        return entities.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 }

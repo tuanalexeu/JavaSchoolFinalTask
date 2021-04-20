@@ -1,5 +1,6 @@
 package com.alekseytyan.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,12 +11,13 @@ import javax.validation.constraints.Min;
 @Entity
 @Table(name = "MAP")
 @Getter @Setter @NoArgsConstructor
+@EqualsAndHashCode
 public class Map {
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "FROM_CITY")

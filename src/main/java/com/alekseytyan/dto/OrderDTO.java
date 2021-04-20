@@ -8,7 +8,7 @@ import java.util.Set;
 @Data
 public class OrderDTO {
 
-    private int id;
+    private Long id;
 
     private boolean isFinished;
 
@@ -16,5 +16,5 @@ public class OrderDTO {
 
     private LorryDTO lorry;
 
-    private Set<DriverDTO> drivers;
+    private List<DriverDTO> drivers;
 }

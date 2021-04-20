@@ -1,6 +1,7 @@
 package com.alekseytyan.entity;
 
 import com.alekseytyan.entity.enums.RouteType;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,12 +11,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ROUTE_POINT")
 @Getter @Setter @NoArgsConstructor
+@EqualsAndHashCode
 public class RoutePoint {
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "CITY")

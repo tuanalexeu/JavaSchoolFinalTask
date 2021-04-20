@@ -1,14 +1,15 @@
 package com.alekseytyan.controller.role;
 
 import com.alekseytyan.dto.DriverDTO;
-import com.alekseytyan.entity.Driver;
-import com.alekseytyan.entity.Order;
 import com.alekseytyan.service.api.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/driver")
@@ -21,23 +22,25 @@ public class DriverController {
         this.driverService = driverService;
     }
 
-    @RequestMapping(value = "/info/{id}")
-    public String getInfo(@PathVariable Long id, Model model) {
+    @ModelAttribute("driver")
+    public DriverDTO getDriver() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DRIVER"))) {
+            return driverService.convertToDTO(driverService.findDriverByUser(auth.getName()));
+        }
+        throw new RuntimeException("NoSuchDriverException");
+    }
 
-        Driver driver = driverService.findById(id);
-        DriverDTO dto = driverService.convertToDTO(driver);
-        model.addAttribute("driver", dto);
-
+    @GetMapping(value = "/info")
+    public String getInfo(Model model) {
+        Long orderId = getDriver().getOrder().getId();
+        List<DriverDTO> coDrivers = driverService.convertToDTO(driverService.findCoDrivers(orderId));
+        model.addAttribute("coDrivers", coDrivers);
         return "role/driver/driverInfo";
     }
 
-    @RequestMapping(value = "/order/{id}")
-    public String getDutyOrders(@PathVariable Long id, Model model) {
-
-        Driver driver = driverService.findById(id);
-        Order order = driver.getOrder();
-        model.addAttribute("order", order);
-
+    @RequestMapping(value = "/order")
+    public String getDutyOrders() {
         return "role/driver/driverOrder";
     }
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class DriverDTO {
 
-    private int id;
+    private Long id;
 
     private String firstName;
 

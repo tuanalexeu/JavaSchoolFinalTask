@@ -5,7 +5,8 @@ import lombok.Data;
 
 @Data
 public class LoadDTO {
-    private int id;
+
+    private Long id;
 
     private String name;
 

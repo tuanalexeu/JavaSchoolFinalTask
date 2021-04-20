@@ -1,6 +1,7 @@
 package com.alekseytyan.entity;
 
 import com.alekseytyan.entity.enums.UserRole;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Pattern;
 @Entity
 @Table(name = "USER_LOGIWEB")
 @Getter @Setter @NoArgsConstructor
+@EqualsAndHashCode
 public class User {
 
     @Id

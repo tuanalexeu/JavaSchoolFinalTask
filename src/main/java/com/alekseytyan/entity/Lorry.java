@@ -1,5 +1,6 @@
 package com.alekseytyan.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "LORRY")
 @Getter @Setter @NoArgsConstructor
+@EqualsAndHashCode
 public class Lorry {
 
     @Id

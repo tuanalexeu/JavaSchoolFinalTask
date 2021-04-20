@@ -16,4 +16,6 @@ public interface AbstractService<E, DTO> {
     void deleteById(Long entityId);
 
     DTO convertToDTO(E entity);
+
+    List<DTO> convertToDTO(List<E> entities);
 }
