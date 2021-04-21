@@ -50,10 +50,10 @@
                 </ul>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Team</h3>
+                <h3 class="text-dark mb-4">Trucks</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
-                        <p class="text-primary m-0 font-weight-bold">Employee Info</p>
+                        <p class="text-primary m-0 font-weight-bold">Trucks list</p>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -66,47 +66,54 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newTruck-modal">New truck</button>
+                                <div class="modal fade" role="dialog" tabindex="-1" id="newTruck-modal" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Add new truck</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>There'll be truck adding logic soon...</p>
+                                            </div>
+                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="background: rgb(255,255,255);border-color: rgb(220,88,184);color: rgb(220,88,184);">Close</button><button class="btn btn-primary" type="button" style="border-color: rgb(220,88,184);background: rgb(255,255,255);color: rgb(220,88,184);">Save</button></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Truck registration number</th>
+                                    <th>Shift time</th>
+                                    <th>Capacity</th>
+                                    <th>State</th>
+                                    <th>City</th>
+                                    <th>Order</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>33</td>
-                                    <td>2008/11/28</td>
-                                    <td>$162,700</td>
-                                </tr>
-                                <tr>
-                                    <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                                    <td>Chief Executive Officer(CEO)</td>
-                                    <td>London</td>
-                                    <td>47</td>
-                                    <td>2009/10/09<br></td>
-                                    <td>$1,200,000</td>
-                                </tr>
+                                <c:forEach items="${lorries}" var="truck">
+                                    <tr>
+                                        <td>${truck.regNum}</td>
+                                        <td>${truck.shiftTime}</td>
+                                        <td>${truck.capacity}</td>
+                                        <td>${truck.broken ? "Servicable" : "Broken"}</td>
+                                        <td>${truck.city}</td>
+                                        <td>${truck.order.id}</td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td><strong>Name</strong></td>
-                                    <td><strong>Position</strong></td>
-                                    <td><strong>Office</strong></td>
-                                    <td><strong>Age</strong></td>
-                                    <td><strong>Start date</strong></td>
-                                    <td><strong>Salary</strong></td>
+                                    <th><strong>Truck ID</strong></th>
+                                    <th><strong>Shift time</strong></th>
+                                    <th><strong>Capacity</strong></th>
+                                    <th><strong>State</strong></th>
+                                    <th><strong>City</strong></th>
+                                    <th><strong>Order</strong></th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -138,10 +145,10 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="<c:out value="/assets/js/jquery.min.js"/>"></script>
+<script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
+<script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-<script src="assets/js/theme.js"></script>
 </body>
 
 </html>

@@ -12,11 +12,11 @@ public class HomePageController {
     public String homePage() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            return "role/admin/users";
+            return "redirect:/admin";
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_EMPLOYEE"))) {
-            return "role/employee/orders";
+            return "redirect:/employee/orders";
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DRIVER"))) {
-            return "role/driver/driverOrder";
+            return "redirect:/driver/order";
         } else {
             return "redirect:/welcome";
         }

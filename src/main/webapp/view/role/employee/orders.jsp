@@ -66,7 +66,20 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newOrder-modal">New order</button>
+                                <div class="modal fade" role="dialog" tabindex="-1" id="newOrder-modal" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Add new order</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>There'll be order adding logic soon...</p>
+                                            </div>
+                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="background: rgb(255,255,255);border-color: rgb(220,88,184);color: rgb(220,88,184);">Close</button><button class="btn btn-primary" type="button" style="border-color: rgb(220,88,184);background: rgb(255,255,255);color: rgb(220,88,184);">Save</button></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -81,33 +94,53 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <a href="#drivers-modal" data-toggle="modal" data-target="#drivers-modal" style="color: #DC58B8">Route</a>
-                                <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" style="color: rgb(133, 135, 150);">Drivers</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                                            </div>
-                                            <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
-                                                <ul>
-                                                    <li>Item 1</li>
-                                                    <li>Item 2</li>
-                                                    <li>Item 3</li>
-                                                    <li>Item 4</li>
-                                                </ul>
-                                            </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <c:forEach items="${orders}" var="order">
                                     <tr>
                                         <td>${order.id}</td>
                                         <td>${order.finished ? "Finished" : "In process"}</td>
                                         <td>${order.lorry.regNum}</td>
+                                        <td><a href="#route-modal" data-toggle="modal" data-target="#route-modal" style="color: #DC58B8">Route</a>
+                                            <div class="modal fade" role="dialog" tabindex="-1" id="route-modal">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" style="color: rgb(133, 135, 150);">Drivers</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                                        </div>
+                                                        <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
+                                                            <ul>
+                                                                <c:forEach items="${order.routePoints}" var="point">
+                                                                    <li>${point.city}</li>
+                                                                </c:forEach>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
+                                                    </div>
+                                                </div>
+                                            </div></td>
+                                        <td>${order.lorry}</td>
+                                        <td><a href="#drivers-modal" data-toggle="modal" data-target="#drivers-modal" style="color: #DC58B8">Drivers</a>
+                                            <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" style="color: rgb(133, 135, 150);">Drivers</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                                        </div>
+                                                        <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
+                                                            <ul>
+                                                                <ul>
+                                                                    <c:forEach items="${order.drivers}" var="driver">
+                                                                        <li>${driver.firstName + " " + driver.lastName}</li>
+                                                                    </c:forEach>
+                                                                </ul>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
+                                                    </div>
+                                                </div>
+                                            </div></td>
 
-                                        <td>${order.id}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -149,10 +182,10 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="<c:out value="/assets/js/jquery.min.js"/>"></script>
+<script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
+<script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-<script src="assets/js/theme.js"></script>
 </body>
 
 </html>
