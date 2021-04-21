@@ -1,6 +1,7 @@
 package com.alekseytyan.dto;
 
 import lombok.Data;
+import lombok.ToString;
 
 
 @Data
@@ -16,5 +17,6 @@ public class LorryDTO {
 
     private CityDTO city;
 
+    @ToString.Exclude
     private OrderDTO order;
 }

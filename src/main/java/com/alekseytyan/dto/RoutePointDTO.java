@@ -2,6 +2,7 @@ package com.alekseytyan.dto;
 
 import com.alekseytyan.entity.enums.RouteType;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class RoutePointDTO {
@@ -14,5 +15,6 @@ public class RoutePointDTO {
 
     private LoadDTO load;
 
+    @ToString.Exclude
     private OrderDTO order;
 }

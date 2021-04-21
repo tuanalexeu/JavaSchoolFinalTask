@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -28,15 +29,12 @@ public class Driver {
     private Long id;
 
     @Column(name = "FIRST_NAME", nullable = false)
-    @Size(min = 1, max = 48)
     private String firstName;
 
     @Column(name = "LAST_NAME", nullable = false)
-    @Size(min = 1, max = 48)
     private String lastName;
 
     @Column(name = "HOURS_WORKED", nullable = false)
-    @Min(0)
     private int hours_worked;
 
     @Column(name = "STATE", nullable = false)
@@ -55,7 +53,7 @@ public class Driver {
     @JoinColumn(name="ORDER_ID")
     private Order order;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_EMAIL")
     private User user;
 }

@@ -1,6 +1,7 @@
 package com.alekseytyan.dto;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 import java.util.Set;
@@ -12,9 +13,12 @@ public class OrderDTO {
 
     private boolean isFinished;
 
+    @ToString.Exclude
     private List<RoutePointDTO> routePoints;
 
+    @ToString.Exclude
     private LorryDTO lorry;
 
+    @ToString.Exclude
     private List<DriverDTO> drivers;
 }
