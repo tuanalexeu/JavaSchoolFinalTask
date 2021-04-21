@@ -3,6 +3,8 @@ package com.alekseytyan.controller.role;
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.entity.Driver;
 import com.alekseytyan.service.api.DriverService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +19,8 @@ import java.util.List;
 @RequestMapping(value = "/driver")
 public class DriverController {
 
+    private static final Logger logger = LogManager.getLogger(DriverController.class);
+
     private final DriverService driverService;
 
     @Autowired
@@ -28,7 +32,15 @@ public class DriverController {
     public DriverDTO getDriver() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DRIVER"))) {
-            return driverService.convertToDTO(driverService.findDriverByUser(auth.getName()));
+
+            logger.info("DTO Driver: in process");
+
+            Driver driver = driverService.findDriverByUser(auth.getName());
+            DriverDTO driverDTO = driverService.convertToDTO(driver);
+
+            logger.info("DTO Driver: Successful" + driverDTO.toString());
+
+            return driverDTO;
         }
         throw new RuntimeException("NoSuchDriverException");
     }
