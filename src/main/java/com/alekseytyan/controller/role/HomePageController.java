@@ -16,7 +16,7 @@ public class HomePageController {
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_EMPLOYEE"))) {
             return "redirect:/employee/orders";
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DRIVER"))) {
-            return "redirect:/driver/order";
+            return "redirect:/driver/info";
         } else {
             return "redirect:/welcome";
         }
