@@ -101,21 +101,21 @@
                                         <td>${truck.shiftTime}</td>
                                         <td>${truck.capacity}</td>
                                         <td>${truck.broken ? "Servicable" : "Broken"}</td>
-                                        <td>${truck.city}</td>
+                                        <td>${truck.city.name}</td>
                                         <td>${truck.order.id}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th><strong>Truck ID</strong></th>
-                                    <th><strong>Shift time</strong></th>
-                                    <th><strong>Capacity</strong></th>
-                                    <th><strong>State</strong></th>
-                                    <th><strong>City</strong></th>
-                                    <th><strong>Order</strong></th>
-                                </tr>
-                                </tfoot>
+<%--                                <tfoot>--%>
+<%--                                <tr>--%>
+<%--                                    <th><strong>Truck ID</strong></th>--%>
+<%--                                    <th><strong>Shift time</strong></th>--%>
+<%--                                    <th><strong>Capacity</strong></th>--%>
+<%--                                    <th><strong>State</strong></th>--%>
+<%--                                    <th><strong>City</strong></th>--%>
+<%--                                    <th><strong>Order</strong></th>--%>
+<%--                                </tr>--%>
+<%--                                </tfoot>--%>
                             </table>
                         </div>
                         <div class="row">

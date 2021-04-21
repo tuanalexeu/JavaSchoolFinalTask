@@ -32,24 +32,17 @@ public class DriverController {
     public DriverDTO getDriver() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DRIVER"))) {
-
-            logger.info("DTO Driver: in process");
-
             Driver driver = driverService.findDriverByUser(auth.getName());
-            DriverDTO driverDTO = driverService.convertToDTO(driver);
-
-            logger.info("DTO Driver: Successful" + driverDTO.toString());
-
-            return driverDTO;
+            return driverService.convertToDTO(driver);
         }
         throw new RuntimeException("NoSuchDriverException");
     }
 
     @GetMapping(value = "/info")
     public String getInfo(Model model) {
-        Long orderId = getDriver().getOrder().getId();
+        Long orderId = ((DriverDTO) model.getAttribute("driver")).getOrder().getId();
         List<Driver> drivers = driverService.findCoDrivers(orderId);
-        List<DriverDTO> coDrivers = drivers != null ? driverService.convertToDTO(drivers) : new ArrayList<>();
+        List<DriverDTO> coDrivers = !drivers.isEmpty() ? driverService.convertToDTO(drivers) : new ArrayList<>();
         model.addAttribute("coDrivers", coDrivers);
         return "role/driver/driverInfo";
     }

@@ -110,7 +110,7 @@
                                                         <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                             <ul>
                                                                 <c:forEach items="${order.routePoints}" var="point">
-                                                                    <li>${point.city}</li>
+                                                                    <li>${point.city.name}</li>
                                                                 </c:forEach>
                                                             </ul>
                                                         </div>
@@ -118,7 +118,6 @@
                                                     </div>
                                                 </div>
                                             </div></td>
-                                        <td>${order.lorry}</td>
                                         <td><a href="#drivers-modal" data-toggle="modal" data-target="#drivers-modal" style="color: #DC58B8">Drivers</a>
                                             <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal">
                                                 <div class="modal-dialog" role="document">
@@ -131,7 +130,7 @@
                                                             <ul>
                                                                 <ul>
                                                                     <c:forEach items="${order.drivers}" var="driver">
-                                                                        <li>${driver.firstName + " " + driver.lastName}</li>
+                                                                        <li>${driver.firstName} ${driver.lastName}</li>
                                                                     </c:forEach>
                                                                 </ul>
                                                             </ul>
@@ -144,15 +143,15 @@
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th><strong>Order ID</strong></th>
-                                    <th><strong>Status</strong></th>
-                                    <th><strong>Lorry</strong></th>
-                                    <th><strong>Route points</strong></th>
-                                    <th><strong>Drivers</strong></th>
-                                </tr>
-                                </tfoot>
+<%--                                <tfoot>--%>
+<%--                                <tr>--%>
+<%--                                    <th><strong>Order ID</strong></th>--%>
+<%--                                    <th><strong>Status</strong></th>--%>
+<%--                                    <th><strong>Lorry</strong></th>--%>
+<%--                                    <th><strong>Route points</strong></th>--%>
+<%--                                    <th><strong>Drivers</strong></th>--%>
+<%--                                </tr>--%>
+<%--                                </tfoot>--%>
                             </table>
                         </div>
                         <div class="row">

@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "LORRY")
 @Getter @Setter @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "order")
 public class Lorry {
 
     @Id

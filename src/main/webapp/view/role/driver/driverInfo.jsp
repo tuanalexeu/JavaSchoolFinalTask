@@ -55,7 +55,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>${driver.firstName + " " + driver.lastName}</th>
+                                    <th>${driver.firstName} ${driver.lastName}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -90,14 +90,14 @@
                         <div class="col-md-6">
                             <ul>
                                 <c:forEach items="${coDrivers}" var="driver">
-                                    <li>${driver.id + " " + driver.firstName + " " + driver.lastName}</li>
+                                    <li>${driver.id} ${driver.firstName} ${driver.lastName}</li>
                                 </c:forEach>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul>
                                 <c:forEach items="${driver.order.routePoints}" var="point">
-                                    <li>${point.city}</li>
+                                    <li>${point.city.name}</li>
                                 </c:forEach>
                             </ul>
                         </div>

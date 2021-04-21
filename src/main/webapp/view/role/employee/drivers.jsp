@@ -100,28 +100,28 @@
                                 <c:forEach items="${drivers}" var="driver">
                                     <tr>
                                         <td>${driver.id}</td>
-                                        <td>${driver.firstName + " " + driver.lastName}</td>
+                                        <td>${driver.firstName} ${driver.lastName}</td>
                                         <td>${driver.hours_worked}</td>
                                         <td>${driver.state}</td>
-                                        <td>${driver.city}</td>
-                                        <td>${driver.lorry}</td>
+                                        <td>${driver.city.name}</td>
+                                        <td>${driver.lorry.regNum}</td>
                                         <td>${driver.order.id}</td>
                                         <td>${driver.user.username}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th><strong>Driver ID</strong></th>
-                                    <th><strong>Name</strong></th>
-                                    <th><strong>Hours worked</strong></th>
-                                    <th><strong>State</strong></th>
-                                    <th><strong>City</strong></th>
-                                    <th><strong>Lorry</strong></th>
-                                    <th><strong>Order id</strong></th>
-                                    <th><strong>User</strong></th>
-                                </tr>
-                                </tfoot>
+<%--                                <tfoot>--%>
+<%--                                <tr>--%>
+<%--                                    <th><strong>Driver ID</strong></th>--%>
+<%--                                    <th><strong>Name</strong></th>--%>
+<%--                                    <th><strong>Hours worked</strong></th>--%>
+<%--                                    <th><strong>State</strong></th>--%>
+<%--                                    <th><strong>City</strong></th>--%>
+<%--                                    <th><strong>Lorry</strong></th>--%>
+<%--                                    <th><strong>Order id</strong></th>--%>
+<%--                                    <th><strong>User</strong></th>--%>
+<%--                                </tr>--%>
+<%--                                </tfoot>--%>
                             </table>
                         </div>
                         <div class="row">
