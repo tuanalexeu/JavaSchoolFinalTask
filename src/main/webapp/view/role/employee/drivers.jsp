@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 
@@ -71,12 +72,159 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Add new order</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                                <h4 class="modal-title">New driver</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <div class="modal-body">
-                                                <p>There'll be driver adding logic soon...</p>
-                                            </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="background: rgb(255,255,255);border-color: rgb(220,88,184);color: rgb(220,88,184);">Close</button><button class="btn btn-primary" type="button" style="border-color: rgb(220,88,184);background: rgb(255,255,255);color: rgb(220,88,184);">Save</button></div>
+<%--                                            <form:form action="/employee/add-driver" method="post" modelAttribute="newDriver">--%>
+<%--                                                <div class="modal-body">--%>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">First name</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <form:input id="firstName" path="firstName" cssErrorClass="errorBox"/>--%>
+<%--&lt;%&ndash;                                                                <input type="text" style="margin: 10px;border-color: rgb(255,103,173);border-bottom-color: rgb(255,103,173);color: rgb(255,103,173);"/>&ndash;%&gt;--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">Last name</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <form:input id="lastName" path="lastName" cssErrorClass="errorBox"/>--%>
+<%--&lt;%&ndash;                                                                <input type="text" style="margin: 10px;border-color: rgb(255,103,173);color: rgb(255,103,173);" />&ndash;%&gt;--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">Hours worked</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <form:input id="hoursWorked" path="hours_worked" cssErrorClass="errorBox"/>--%>
+<%--                                                            &lt;%&ndash;                                                                <input type="text" style="margin: 10px;border-color: rgb(255,103,173);color: rgb(255,103,173);" />&ndash;%&gt;--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">Status</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <div class="dropdown">--%>
+<%--                                                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="margin: 10px;background: rgb(255,255,255);color: rgb(255,103,173);border-color: rgb(255,103,173);">Choose</button>--%>
+<%--                                                                    <div class="dropdown-menu">--%>
+<%--                                                                        <form:select id="status" path="state" cssErrorClass="errorBox">--%>
+<%--                                                                            <form:option value="DUTY">Duty</form:option>--%>
+<%--                                                                            <form:option value="DRIVING">Driving</form:option>--%>
+<%--                                                                            <form:option value="RESTING">Resting</form:option>--%>
+<%--                                                                            <form:option value="UNLOADING">Unloading</form:option>--%>
+<%--                                                                        </form:select>--%>
+<%--&lt;%&ndash;                                                                        <a class="dropdown-item" href="#">Duty</a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                                        <a class="dropdown-item" href="#">Driving</a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                                        <a class="dropdown-item" href="#">Resting</a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                                        <a class="dropdown-item" href="#">Unloading</a>&ndash;%&gt;--%>
+<%--                                                                    </div>--%>
+<%--                                                                </div>--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">City</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="margin: 10px;border-color: rgb(255,103,173);background: rgb(255,255,255);color: rgb(255,103,173);">Choose</button>--%>
+<%--                                                                    <div class="dropdown-menu">--%>
+<%--                                                                        <form:select  path="city">--%>
+<%--                                                                            <c:forEach items="${cities}" var="city">--%>
+<%--                                                                                <form:option value="${city.name}">${city.name}</form:option>--%>
+<%--                                                                            </c:forEach>--%>
+<%--                                                                        </form:select>--%>
+<%--&lt;%&ndash;                                                                        <c:forEach items="${cities}" var="city">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                                            <a class="dropdown-item" href="#">${city.name}</a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                                        </c:forEach>&ndash;%&gt;--%>
+<%--                                                                    </div>--%>
+<%--                                                                </div>--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">Truck</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="margin: 10px;color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Choose</button>--%>
+<%--                                                                    <div class="dropdown-menu">--%>
+<%--                                                                        <form:select  path="lorry">--%>
+<%--                                                                            <c:forEach items="${lorries}" var="lorry">--%>
+<%--                                                                                <form:option value="${lorry.regNum}}">${lorry.regNum}</form:option>--%>
+<%--                                                                            </c:forEach>--%>
+<%--                                                                        </form:select>--%>
+<%--&lt;%&ndash;                                                                        <c:forEach items="${lorries}" var="lorry">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                                            <a class="dropdown-item" href="#">${lorry.regNum}</a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                                        </c:forEach>&ndash;%&gt;--%>
+<%--                                                                    </div>--%>
+<%--                                                                </div>--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">Order</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <div class="dropdown">--%>
+<%--                                                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="margin: 10px;border-color: rgb(255,103,173);background: rgb(255,255,255);color: rgb(255,103,173);">Dropdown </button>--%>
+<%--                                                                    <div class="dropdown-menu">--%>
+<%--                                                                        <form:select  path="order">--%>
+<%--                                                                            <c:forEach items="${orders}" var="order">--%>
+<%--                                                                                <form:option value="${order.id}}">${order.id}</form:option>--%>
+<%--                                                                            </c:forEach>--%>
+<%--                                                                        </form:select>--%>
+<%--&lt;%&ndash;                                                                        <c:forEach items="${orders}" var="order">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                                            <a class="dropdown-item" href="#">${order.id}</a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                                        </c:forEach>&ndash;%&gt;--%>
+<%--                                                                    </div>--%>
+<%--                                                                </div>--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">Email</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--&lt;%&ndash;                                                                <input type="text" style="margin: 10px;color: rgb(255,103,173);border-color: rgb(255,103,173);border-top-color: rgb(255,103,173);border-right-color: rgb(255,103,173);border-bottom-color: rgb(255,103,173);border-left-color: rgb(255,103,173);"/>&ndash;%&gt;--%>
+<%--                                                                <form:input id="email" path="user.email" cssErrorClass="errorBox"/>--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">Password</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                    &lt;%&ndash;                                                                <input type="text" style="margin: 10px;color: rgb(255,103,173);border-color: rgb(255,103,173);border-top-color: rgb(255,103,173);border-right-color: rgb(255,103,173);border-bottom-color: rgb(255,103,173);border-left-color: rgb(255,103,173);"/>&ndash;%&gt;--%>
+<%--                                                                <form:input id="password" path="user.password" cssErrorClass="errorBox"/>--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="modal-footer">--%>
+<%--                                                    <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>--%>
+<%--                                                    <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>--%>
+<%--                                                </div>--%>
+<%--                                            </form:form>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -106,22 +254,10 @@
                                         <td>${driver.city.name}</td>
                                         <td>${driver.lorry.regNum}</td>
                                         <td>${driver.order.id}</td>
-                                        <td>${driver.user.username}</td>
+                                        <td>${driver.user.email}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-<%--                                <tfoot>--%>
-<%--                                <tr>--%>
-<%--                                    <th><strong>Driver ID</strong></th>--%>
-<%--                                    <th><strong>Name</strong></th>--%>
-<%--                                    <th><strong>Hours worked</strong></th>--%>
-<%--                                    <th><strong>State</strong></th>--%>
-<%--                                    <th><strong>City</strong></th>--%>
-<%--                                    <th><strong>Lorry</strong></th>--%>
-<%--                                    <th><strong>Order id</strong></th>--%>
-<%--                                    <th><strong>User</strong></th>--%>
-<%--                                </tr>--%>
-<%--                                </tfoot>--%>
                             </table>
                         </div>
                         <div class="row">
