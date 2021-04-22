@@ -73,20 +73,36 @@
                                 <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
                                     <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${driver.state} </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">DUTY</a>
-                                        <a class="dropdown-item" href="#">DRIVING</a>
-                                        <a class="dropdown-item" href="#">RESTING</a>
-                                        <a class="dropdown-item" href="#">UNLOADING</a>
+                                        <a class="dropdown-item">
+                                            <form action="/driver/info" method="post">
+<%--                                                <input type="submit" value="DUTY" name="Duty">--%>
+                                                <button type="submit" value="DUTY" name="status">Duty</button>
+                                            </form>
+                                        </a>
+                                        <a class="dropdown-item">
+                                            <form action="/driver/info" method="post">
+                                                <button type="submit" value="DRIVING" name="status">Driving</button>
+                                            </form>
+                                        </a>
+                                        <a class="dropdown-item">
+                                            <form action="/driver/info" method="post">
+                                                <button type="submit" value="RESTING" name="status">Resting</button>
+                                            </form>
+                                        </a>
+                                        <a class="dropdown-item">
+                                            <form action="/driver/info" method="post">
+                                                <button type="submit" value="UNLOADING" name="status">Unloading</button>
+                                            </form>
+                                        </a>
+<%--                                            <a class="dropdown-item">DRIVING</a>--%>
+<%--                                            <a class="dropdown-item">RESTING</a>--%>
+<%--                                            <a class="dropdown-item">UNLOADING</a>--%>
                                     </div>
                                 </div>
                             </td>
                         <tr>
                             <td>ID</td>
                             <td>${driver.id}</td>
-                        </tr>
-                        <tr>
-                            <td>My status</td>
-                            <td>${driver.state}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -118,7 +134,7 @@
                                                     </c:forEach>
                                                 </ul>
                                             </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
+                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">Ok</button></div>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +158,7 @@
                                                     </c:forEach>
                                                 </ul>
                                             </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
+                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">Ok</button></div>
                                         </div>
                                     </div>
                                 </div>
@@ -229,7 +245,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">Save</button></div>
+                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">Ok</button></div>
                                         </div>
                                     </div>
                                 </div>
