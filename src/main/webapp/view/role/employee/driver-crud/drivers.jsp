@@ -159,6 +159,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <form:hidden id="user_activasion" path="user.enabled" value="true" cssErrorClass="errorBox"/>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
