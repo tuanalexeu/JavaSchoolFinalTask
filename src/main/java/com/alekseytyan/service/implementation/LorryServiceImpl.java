@@ -13,7 +13,7 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
 
     @Autowired
     public LorryServiceImpl(LorryDao dao, ModelMapper mapper) {
-        super(dao, mapper, LorryDTO.class);
+        super(dao, mapper, LorryDTO.class, Lorry.class);
     }
 
 }

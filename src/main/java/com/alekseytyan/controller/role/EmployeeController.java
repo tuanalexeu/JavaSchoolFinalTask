@@ -1,5 +1,9 @@
 package com.alekseytyan.controller.role;
 
+import com.alekseytyan.dto.CityDTO;
+import com.alekseytyan.dto.DriverDTO;
+import com.alekseytyan.dto.LorryDTO;
+import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.*;
 import com.alekseytyan.entity.enums.UserRole;
 import com.alekseytyan.service.api.CityService;
@@ -45,7 +49,7 @@ public class EmployeeController {
     @GetMapping(path = "/orders")
     public String getOrders(Model model) {
 
-        List<Order> orders = orderService.findAll();
+        List<OrderDTO> orders = orderService.findAll();
         model.addAttribute("orders", orders);
 
         model.addAttribute("newOrder", new Order());
@@ -56,45 +60,36 @@ public class EmployeeController {
     @GetMapping(path = "/lorries")
     public String getLorries(Model model) {
 
-        List<Lorry> lorries = lorryService.findAll();
-        List<Order> orders = orderService.findAll();
-        List<City> cities = cityService.findAll();
+        List<LorryDTO> lorries = lorryService.findAll();
+        List<String> cities = cityService.findAllNames();
 
         model.addAttribute("lorries", lorries);
-        model.addAttribute("orders", orders);
         model.addAttribute("cities", cities);
 
         model.addAttribute("newLorry", new Lorry());
 
-        return "role/employee/lorry-crud/lorries";
+        return "role/employee/lorry/lorries";
     }
 
     @GetMapping(path = "/drivers")
     public String getDrivers(Model model) {
 
-
-        List<Driver> drivers = driverService.findAll();
-        List<City> cities = cityService.findAll();
-        List<Lorry> lorries = lorryService.findAll();
-        List<Order> orders = orderService.findAll();
+        List<DriverDTO> drivers = driverService.findAll();
+        List<String> cities = cityService.findAllNames();
 
         model.addAttribute("newDriver", new Driver());
 
         model.addAttribute("drivers", drivers);
         model.addAttribute("cities", cities);
-        model.addAttribute("lorries", lorries);
-        model.addAttribute("orders", orders);
 
-        return "role/employee/driver-crud/drivers";
+        return "role/employee/driver/drivers";
     }
 
     @PostMapping(value = "/add-driver")
-    public String addDriver(@ModelAttribute Driver driver) {
+    public String addDriver(@ModelAttribute DriverDTO driver) {
 
         logger.info("User password before encryption: " + driver.getUser().getPassword());
 
-        driver.getUser().setPassword(passwordEncoder.encode(driver.getUser().getPassword()));
-        driver.getUser().setRole(UserRole.ROLE_DRIVER);
         driverService.save(driver);
 
         logger.info("User password after encryption: " + driver.getUser().getPassword());
@@ -107,13 +102,13 @@ public class EmployeeController {
     public String editDriver(@PathVariable Long id, Model model) {
 
         model.addAttribute("editDriver", driverService.findById(id));
-        model.addAttribute("cities", cityService.findAll());
+        model.addAttribute("cities", cityService.findAllNames());
 
-        return "role/employee/driver-crud/edit-driver";
+        return "role/employee/driver/edit-driver";
     }
 
     @PostMapping(value = "/edit-driver")
-    public String editDriver(@ModelAttribute Driver driver) {
+    public String editDriver(@ModelAttribute DriverDTO driver) {
 
         driverService.update(driver);
 
@@ -130,7 +125,7 @@ public class EmployeeController {
 
 
     @PostMapping(value = "/add-lorry")
-    public String addLorry(@ModelAttribute Lorry lorry) {
+    public String addLorry(@ModelAttribute LorryDTO lorry) {
 
         lorryService.save(lorry);
 
@@ -141,13 +136,13 @@ public class EmployeeController {
     public String editLorry(@PathVariable String id, Model model) {
 
         model.addAttribute("editLorry", lorryService.findById(id));
-        model.addAttribute("cities", cityService.findAll());
+        model.addAttribute("cities", cityService.findAllNames());
 
-        return "role/employee/lorry-crud/edit-lorry";
+        return "role/employee/lorry/edit-lorry";
     }
 
     @PostMapping(value = "/edit-lorry")
-    public String editLorry(@ModelAttribute Lorry lorry) {
+    public String editLorry(@ModelAttribute LorryDTO lorry) {
 
         lorryService.update(lorry);
 

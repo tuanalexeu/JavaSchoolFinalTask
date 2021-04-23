@@ -25,35 +25,36 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E, ID>, DTO, 
 
 
     private final Class<DTO> dtoClass;
+    private final Class<E> entityClass;
 
     @Override
     @Transactional(readOnly = true)
-    public E findById(ID id) {
-        return dao.findById(id);
+    public DTO findById(ID id) {
+        return convertToDTO(dao.findById(id));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<E> findAll() {
-        return dao.findAll();
+    public List<DTO> findAll() {
+        return convertToDTO(dao.findAll());
     }
 
     @Override
     @Transactional
-    public void save(E entity) {
-        dao.save(entity);
+    public void save(DTO dto) {
+        dao.save(convertToEntity(dto));
     }
 
     @Override
     @Transactional
-    public void update(E entity) {
-        dao.update(entity);
+    public void update(DTO dto) {
+        dao.update(convertToEntity(dto));
     }
 
     @Override
     @Transactional
-    public void delete(E entity) {
-        dao.delete(entity);
+    public void delete(DTO dto) {
+        dao.delete(convertToEntity(dto));
     }
 
     @Override
@@ -70,5 +71,15 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E, ID>, DTO, 
     @Override
     public List<DTO> convertToDTO(List<E> entities) {
         return entities.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public E convertToEntity(DTO dto) {
+        return getMapper().map(dto, entityClass);
+    }
+
+    @Override
+    public List<E> convertToEntity(List<DTO> entities) {
+        return entities.stream().map(this::convertToEntity).collect(Collectors.toList());
     }
 }

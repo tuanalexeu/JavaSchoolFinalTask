@@ -1,5 +1,6 @@
 package com.alekseytyan.controller.role;
 
+import com.alekseytyan.dto.UserDTO;
 import com.alekseytyan.entity.User;
 import com.alekseytyan.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class AdminController {
     @GetMapping(value = "/admin")
     public String getUsers(Model model) {
 
-        List<User> users = userService.findAll();
+        List<UserDTO> users = userService.findAll();
         model.addAttribute("users", users);
 
         return "role/admin/users";

@@ -12,6 +12,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO, String> implements UserService {
     @Autowired
     public UserServiceImpl(UserDao dao, ModelMapper mapper) {
-        super(dao, mapper, UserDTO.class);
+        super(dao, mapper, UserDTO.class, User.class);
     }
 }

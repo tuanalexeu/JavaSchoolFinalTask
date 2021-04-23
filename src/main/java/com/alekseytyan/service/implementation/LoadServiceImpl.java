@@ -13,7 +13,7 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
 
     @Autowired
     public LoadServiceImpl(LoadDao dao, ModelMapper mapper) {
-        super(dao, mapper, LoadDTO.class);
+        super(dao, mapper, LoadDTO.class, Load.class);
     }
 
 }
