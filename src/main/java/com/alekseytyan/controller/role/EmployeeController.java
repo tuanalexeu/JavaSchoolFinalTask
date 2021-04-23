@@ -128,12 +128,22 @@ public class EmployeeController {
         return "redirect:/employee/drivers";
     }
 
+
     @PostMapping(value = "/add-lorry")
     public String addLorry(@ModelAttribute Lorry lorry) {
 
         lorryService.save(lorry);
 
         return "redirect:/employee/lorries";
+    }
+
+    @GetMapping(value = "/edit-lorry/{id}")
+    public String editLorry(@PathVariable String id, Model model) {
+
+        model.addAttribute("editLorry", lorryService.findById(id));
+        model.addAttribute("cities", cityService.findAll());
+
+        return "role/employee/lorry-crud/edit-lorry";
     }
 
     @PostMapping(value = "/edit-lorry")
@@ -144,10 +154,10 @@ public class EmployeeController {
         return "redirect:/employee/lorries";
     }
 
-    @PostMapping(value = "/delete-lorry")
-    public String deleteLorry(@ModelAttribute Lorry lorry) {
+    @GetMapping(value = "/delete-lorry/{id}")
+    public String deleteLorry(@PathVariable String id) {
 
-        lorryService.delete(lorry);
+        lorryService.deleteById(id);
 
         return "redirect:/employee/lorries";
     }

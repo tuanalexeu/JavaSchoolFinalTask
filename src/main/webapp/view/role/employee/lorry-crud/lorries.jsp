@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 
@@ -74,76 +75,75 @@
                                                 <h4 class="modal-title">New truck</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h3 style="margin: 10px;">Reg number</h3>
+                                                <form:form action="/employee/add-lorry" method="post" modelAttribute="newLorry">
+                                                    <div class="modal-body">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h3 style="margin: 10px;">Reg number</h3>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <form:input id="regNum" path="regNum" cssErrorClass="errorBox"/>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6"><input type="text" style="margin: 10px;border-color: rgb(255,103,173);border-bottom-color: rgb(255,103,173);color: rgb(255,103,173);" /></div>
-                                                    </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h3 style="margin: 10px;">Shift time</h3>
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h3 style="margin: 10px;">Shift time</h3>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <form:input id="shiftTime" path="shiftTime" cssErrorClass="errorBox"/>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6"><input type="text" style="margin: 10px;border-color: rgb(255,103,173);color: rgb(255,103,173);" /></div>
-                                                    </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h3 style="margin: 10px;">Capacity</h3>
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h3 style="margin: 10px;">Capacity</h3>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <form:input id="capactiy" path="capacity" cssErrorClass="errorBox"/>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6"><input type="text" style="margin: 10px;border-color: rgb(255,103,173);color: rgb(255,103,173);" /></div>
-                                                    </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h3 style="margin: 10px;">City</h3>
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h3 style="margin: 10px;">Status</h3>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="dropdown">
+                                                                        <form:select id="status" path="broken" cssErrorClass="errorBox">
+                                                                            <form:option value="true">Broken</form:option>
+                                                                            <form:option value="false">Serviceable</form:option>
+                                                                        </form:select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="margin: 10px;border-color: rgb(255,103,173);background: rgb(255,255,255);color: rgb(255,103,173);">Choose</button>
-                                                                <div class="dropdown-menu">
-                                                                    <c:forEach items="${cities}" var="city">
-                                                                        <a class="dropdown-item" href="#">${city.name}</a>
-                                                                    </c:forEach>
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h3 style="margin: 10px;">City</h3>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="dropdown">
+                                                                        <form:select  path="city.name">
+                                                                            <c:forEach items="${cities}" var="city">
+                                                                                <form:option value="${city.name}">${city.name}</form:option>
+                                                                            </c:forEach>
+                                                                        </form:select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h3 style="margin: 10px;">Order</h3>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="margin: 10px;border-color: rgb(255,103,173);background: rgb(255,255,255);color: rgb(255,103,173);">Dropdown </button>
-                                                                <div class="dropdown-menu">
-                                                                    <c:forEach items="${orders}" var="order">
-                                                                        <a class="dropdown-item" href="#">${order.id}</a>
-                                                                    </c:forEach>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
+                                                        <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
                                                     </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h3 style="margin: 10px;">Email</h3>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <input type="text" style="margin: 10px;color: rgb(255,103,173);border-color: rgb(255,103,173);border-top-color: rgb(255,103,173);border-right-color: rgb(255,103,173);border-bottom-color: rgb(255,103,173);border-left-color: rgb(255,103,173);"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
-                                                <button class="btn btn-primary" type="button" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                                                </form:form>
                                             </div>
                                         </div>
                                     </div>
@@ -165,25 +165,19 @@
                                 <tbody>
                                 <c:forEach items="${lorries}" var="truck">
                                     <tr>
-                                        <td>${truck.regNum}</td>
+                                        <td>
+                                            <form action="/employee/edit-lorry/${truck.regNum}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${truck.regNum}</button>
+                                            </form>
+                                        </td>
                                         <td>${truck.shiftTime}</td>
                                         <td>${truck.capacity}</td>
-                                        <td>${truck.broken ? "Servicable" : "Broken"}</td>
+                                        <td>${truck.broken ? "Broken" : "Servicable"}</td>
                                         <td>${truck.city.name}</td>
                                         <td>${truck.order.id}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-<%--                                <tfoot>--%>
-<%--                                <tr>--%>
-<%--                                    <th><strong>Truck ID</strong></th>--%>
-<%--                                    <th><strong>Shift time</strong></th>--%>
-<%--                                    <th><strong>Capacity</strong></th>--%>
-<%--                                    <th><strong>State</strong></th>--%>
-<%--                                    <th><strong>City</strong></th>--%>
-<%--                                    <th><strong>Order</strong></th>--%>
-<%--                                </tr>--%>
-<%--                                </tfoot>--%>
                             </table>
                         </div>
                         <div class="row">
