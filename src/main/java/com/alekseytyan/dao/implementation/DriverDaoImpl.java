@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class DriverDaoImpl extends AbstractDaoImpl<Driver> implements DriverDao {
+public class DriverDaoImpl extends AbstractDaoImpl<Driver, Long> implements DriverDao {
 
     public DriverDaoImpl() {
         super(Driver.class);

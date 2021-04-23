@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public abstract class AbstractServiceImpl<E, D extends AbstractDao<E>, DTO> implements AbstractService<E, DTO> {
+public abstract class AbstractServiceImpl<E, D extends AbstractDao<E, ID>, DTO, ID> implements AbstractService<E, DTO, ID> {
 
     @Getter(value = AccessLevel.PROTECTED)
     @Setter(value = AccessLevel.PROTECTED)
@@ -28,7 +28,7 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E>, DTO> impl
 
     @Override
     @Transactional(readOnly = true)
-    public E findById(Long id) {
+    public E findById(ID id) {
         return dao.findById(id);
     }
 
@@ -58,7 +58,7 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E>, DTO> impl
 
     @Override
     @Transactional
-    public void deleteById(Long entityId) {
+    public void deleteById(ID entityId) {
         dao.deleteById(entityId);
     }
 

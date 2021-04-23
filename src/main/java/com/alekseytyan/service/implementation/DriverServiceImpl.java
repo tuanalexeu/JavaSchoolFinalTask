@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, DriverDTO> implements DriverService {
+public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, DriverDTO, Long> implements DriverService {
 
     @Autowired
     public DriverServiceImpl(DriverDao dao, ModelMapper mapper) {

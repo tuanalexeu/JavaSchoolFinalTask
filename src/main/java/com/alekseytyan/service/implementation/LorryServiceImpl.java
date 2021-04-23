@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, LorryDTO> implements LorryService {
+public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, LorryDTO, String> implements LorryService {
 
     @Autowired
     public LorryServiceImpl(LorryDao dao, ModelMapper mapper) {

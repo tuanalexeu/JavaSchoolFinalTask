@@ -2,9 +2,9 @@ package com.alekseytyan.dao.api;
 
 import java.util.List;
 
-public interface AbstractDao<E> {
+public interface AbstractDao<E, ID> {
 
-    E findById(Long id);
+    E findById(ID id);
 
     List<E> findAll();
 
@@ -14,6 +14,6 @@ public interface AbstractDao<E> {
 
     void delete(E entity);
 
-    void deleteById(Long entityId);
+    void deleteById(ID entityId);
 
 }

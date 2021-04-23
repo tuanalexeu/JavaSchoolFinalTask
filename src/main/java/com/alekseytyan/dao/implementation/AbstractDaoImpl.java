@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public abstract class AbstractDaoImpl<E> implements AbstractDao<E> {
+public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
 
    private final Class<E> clazz;
 
@@ -18,7 +18,7 @@ public abstract class AbstractDaoImpl<E> implements AbstractDao<E> {
    }
 
    @Override
-   public E findById(Long id) {
+   public E findById(ID id) {
       return entityManager.find(clazz, id);
    }
 
@@ -46,7 +46,7 @@ public abstract class AbstractDaoImpl<E> implements AbstractDao<E> {
    }
 
    @Override
-   public void deleteById(Long entityId){
+   public void deleteById(ID entityId){
       E entity = findById(entityId);
       delete(entity);
    }

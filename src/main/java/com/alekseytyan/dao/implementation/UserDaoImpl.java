@@ -5,7 +5,7 @@ import com.alekseytyan.entity.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
+public class UserDaoImpl extends AbstractDaoImpl<User, String> implements UserDao {
     public UserDaoImpl() {
         super(User.class);
     }

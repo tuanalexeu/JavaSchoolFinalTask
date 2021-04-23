@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CityServiceImpl extends AbstractServiceImpl<City, CityDao, CityDTO> implements CityService {
+public class CityServiceImpl extends AbstractServiceImpl<City, CityDao, CityDTO, String> implements CityService {
 
     @Autowired
     public CityServiceImpl(CityDao dao, ModelMapper mapper) {

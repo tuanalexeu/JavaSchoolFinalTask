@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, OrderDTO> implements OrderService {
+public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, OrderDTO, Long> implements OrderService {
     @Autowired
     public OrderServiceImpl(OrderDao dao, ModelMapper mapper) {
         super(dao, mapper, OrderDTO.class);
