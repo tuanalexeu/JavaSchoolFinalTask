@@ -52,26 +52,36 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Edit driver</h3>
-                <form:form action="/employee/edit-lorry" method="post" modelAttribute="editLorry" id="editLorryForm">
-                    <form:hidden path="regNum" value="${editLorry.regNum}"/>
+                <form:form action="/employee/edit-driver" method="post" modelAttribute="editDriver" id="editDriverForm">
+                    <form:hidden path="id" value="${editDriver.id}"/>
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 style="margin: 10px;">Shift time</h3>
+                                    <h3 style="margin: 10px;">First name</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="shiftTime" path="shiftTime" cssErrorClass="errorBox"/>
+                                    <form:input id="firstName" path="firstName" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 style="margin: 10px;">Capacity</h3>
+                                    <h3 style="margin: 10px;">Last name</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="capacity" path="capacity" cssErrorClass="errorBox"/>
+                                    <form:input id="lastName" path="lastName" cssErrorClass="errorBox"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 style="margin: 10px;">Hours worked</h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <form:input id="hoursWorked" path="hoursWorked" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
@@ -82,9 +92,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="dropdown">
-                                        <form:select  path="broken">
-                                            <form:option value="true">Broken</form:option>
-                                            <form:option value="false">Serviceable</form:option>
+                                        <form:select id="status" path="state" cssErrorClass="errorBox">
+                                            <form:option value="DUTY">Duty</form:option>
+                                            <form:option value="DRIVING">Driving</form:option>
+                                            <form:option value="RESTING">Resting</form:option>
+                                            <form:option value="UNLOADING">Unloading</form:option>
                                         </form:select>
                                     </div>
                                 </div>
@@ -99,24 +111,34 @@
                                     <div class="dropdown">
                                         <form:select  path="city.name">
                                             <c:forEach items="${cities}" var="city">
-                                                <form:option value="${city.name}">${city.name}</form:option>
+                                                <form:option value="${city}">${city}</form:option>
                                             </c:forEach>
                                         </form:select>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <form:hidden id="email" path="user.email" value="${editDriver.user.email}" cssErrorClass="errorBox"/>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 style="margin: 10px;">Password</h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <form:password id="password" path="user.password" cssErrorClass="errorBox"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form:form>
-
                 <div class="modal-footer">
-                    <form action="/employee/lorries">
+                    <form action="/employee/drivers">
                         <button class="btn btn-light" href="/employee/drivers" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Back</button>
                     </form>
-                    <form action="/employee/delete-lorry/${editLorry.regNum}">
+                    <form action="/employee/delete-driver/${editDriver.id}">
                         <button class="btn btn-light" type="submit" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Delete</button>
                     </form>
-                    <button form="editLorryForm" class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                    <button form="editDriverForm" class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
                 </div>
             </div>
         </div>

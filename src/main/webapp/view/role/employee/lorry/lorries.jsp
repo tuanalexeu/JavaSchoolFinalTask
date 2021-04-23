@@ -131,7 +131,7 @@
                                                                     <div class="dropdown">
                                                                         <form:select  path="city.name">
                                                                             <c:forEach items="${cities}" var="city">
-                                                                                <form:option value="${city.name}">${city.name}</form:option>
+                                                                                <form:option value="${city}">${city}</form:option>
                                                                             </c:forEach>
                                                                         </form:select>
                                                                     </div>
