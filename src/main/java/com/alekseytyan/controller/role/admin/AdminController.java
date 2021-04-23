@@ -1,4 +1,4 @@
-package com.alekseytyan.controller.role;
+package com.alekseytyan.controller.role.admin;
 
 import com.alekseytyan.dto.UserDTO;
 import com.alekseytyan.entity.User;

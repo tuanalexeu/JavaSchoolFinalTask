@@ -1,4 +1,4 @@
-package com.alekseytyan.controller.role;
+package com.alekseytyan.controller.role.driver;
 
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.entity.enums.DriverState;
