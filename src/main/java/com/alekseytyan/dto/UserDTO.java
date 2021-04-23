@@ -15,4 +15,6 @@ public class UserDTO {
     private UserRole role;
 
     private DriverDTO driver;
+
+    private boolean enabled;
 }
