@@ -27,7 +27,7 @@ public class Lorry {
     @Column(name = "CAPACITY")
     private int capacity;
 
-    @Column(name = "IS_BROKEN")
+    @Column(name = "IS_BROKEN", columnDefinition = "boolean default false")
     private boolean isBroken;
 
     @ManyToOne

@@ -20,10 +20,10 @@ public class User {
     @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")
     private String email;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(name = "ROLE")
+    @Column(name = "ROLE", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
