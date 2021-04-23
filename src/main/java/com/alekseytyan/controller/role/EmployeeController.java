@@ -1,9 +1,7 @@
 package com.alekseytyan.controller.role;
 
-import com.alekseytyan.entity.City;
-import com.alekseytyan.entity.Driver;
-import com.alekseytyan.entity.Lorry;
-import com.alekseytyan.entity.Order;
+import com.alekseytyan.entity.*;
+import com.alekseytyan.entity.enums.UserRole;
 import com.alekseytyan.service.api.CityService;
 import com.alekseytyan.service.api.DriverService;
 import com.alekseytyan.service.api.LorryService;
@@ -11,12 +9,10 @@ import com.alekseytyan.service.api.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,22 +20,26 @@ import java.util.List;
 @RequestMapping(value = "/employee")
 public class EmployeeController {
 
-    private static Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+    private final static Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     private final OrderService orderService;
     private final LorryService lorryService;
     private final DriverService driverService;
     private final CityService cityService;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
     public EmployeeController(OrderService orderService,
                               LorryService lorryService,
                               DriverService driverService,
-                              CityService cityService) {
+                              CityService cityService,
+                              PasswordEncoder passwordEncoder) {
         this.orderService = orderService;
         this.lorryService = lorryService;
         this.driverService = driverService;
         this.cityService = cityService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping(path = "/orders")
@@ -50,7 +50,7 @@ public class EmployeeController {
 
         model.addAttribute("newOrder", new Order());
 
-        return "role/employee/orders";
+        return "role/employee/order/orders";
     }
 
     @GetMapping(path = "/lorries")
@@ -66,11 +66,12 @@ public class EmployeeController {
 
         model.addAttribute("newLorry", new Lorry());
 
-        return "role/employee/lorries";
+        return "role/employee/lorry-crud/lorries";
     }
 
     @GetMapping(path = "/drivers")
     public String getDrivers(Model model) {
+
 
         List<Driver> drivers = driverService.findAll();
         List<City> cities = cityService.findAll();
@@ -79,24 +80,76 @@ public class EmployeeController {
 
         model.addAttribute("newDriver", new Driver());
 
-
         model.addAttribute("drivers", drivers);
         model.addAttribute("cities", cities);
         model.addAttribute("lorries", lorries);
         model.addAttribute("orders", orders);
 
-        return "role/employee/drivers";
+        return "role/employee/driver-crud/drivers";
     }
 
     @PostMapping(value = "/add-driver")
-    public String addDriver(@ModelAttribute Driver newDriver) {
+    public String addDriver(@ModelAttribute Driver driver) {
 
-        logger.info("Add driver: In process");
+        logger.info("User password before encryption: " + driver.getUser().getPassword());
 
-        newDriver.setUser(newDriver.getUser());
-        driverService.save(newDriver);
+        driver.getUser().setPassword(passwordEncoder.encode(driver.getUser().getPassword()));
+        driver.getUser().setRole(UserRole.ROLE_DRIVER);
+        driverService.save(driver);
+
+        logger.info("User password after encryption: " + driver.getUser().getPassword());
+
 
         return "redirect:/employee/drivers";
+    }
+
+    @GetMapping(value = "/edit-driver/{id}")
+    public String editDriver(@PathVariable Long id, Model model) {
+
+        model.addAttribute("editDriver", driverService.findById(id));
+        model.addAttribute("cities", cityService.findAll());
+
+        return "role/employee/driver-crud/edit-driver";
+    }
+
+    @PostMapping(value = "/edit-driver")
+    public String editDriver(@ModelAttribute Driver driver) {
+
+        driverService.update(driver);
+
+        return "redirect:/employee/drivers";
+    }
+
+    @GetMapping(value = "/delete-driver/{id}")
+    public String deleteDriver(@PathVariable Long id) {
+
+        driverService.deleteById(id);
+
+        return "redirect:/employee/drivers";
+    }
+
+    @PostMapping(value = "/add-lorry")
+    public String addLorry(@ModelAttribute Lorry lorry) {
+
+        lorryService.save(lorry);
+
+        return "redirect:/employee/lorries";
+    }
+
+    @PostMapping(value = "/edit-lorry")
+    public String editLorry(@ModelAttribute Lorry lorry) {
+
+        lorryService.update(lorry);
+
+        return "redirect:/employee/lorries";
+    }
+
+    @PostMapping(value = "/delete-lorry")
+    public String deleteLorry(@ModelAttribute Lorry lorry) {
+
+        lorryService.delete(lorry);
+
+        return "redirect:/employee/lorries";
     }
 
 }

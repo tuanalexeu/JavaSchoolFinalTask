@@ -43,7 +43,7 @@ public class DriverController {
 
         // Find driver's id
         Driver driver = (Driver) model.getAttribute("driverEntity");
-        Long orderId = driver.getOrder().getId();
+        Long orderId = driver.getId();
 
         // Check if this is POST request with status parameter
         if(status != null) {
