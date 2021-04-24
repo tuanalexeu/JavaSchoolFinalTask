@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import sun.security.util.Password;
 
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     }
 
     @Override
-    public void save(DriverDTO driverDTO) {
+    public DriverDTO save(DriverDTO driverDTO) {
 
         // Encrypt password in service method.
         // Protected from changing on frontend side
@@ -52,11 +51,11 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
         driverDTO.getUser().setEnabled(true);
 
         // call super method to save DTO with prepared properties
-        super.save(driverDTO);
+        return super.save(driverDTO);
     }
 
     @Override
-    public void update(DriverDTO driverDTO) {
+    public DriverDTO update(DriverDTO driverDTO) {
 
         // Encrypt password in service method.
         // Protected from changing on frontend side
@@ -68,6 +67,6 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
         // Set account activation (Required by Spring Security)
         driverDTO.getUser().setEnabled(true);
 
-        super.update(driverDTO);
+        return super.update(driverDTO);
     }
 }

@@ -41,26 +41,26 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E, ID>, DTO, 
 
     @Override
     @Transactional
-    public void save(DTO dto) {
-        dao.save(convertToEntity(dto));
+    public DTO save(DTO dto) {
+        return convertToDTO(dao.save(convertToEntity(dto)));
     }
 
     @Override
     @Transactional
-    public void update(DTO dto) {
-        dao.update(convertToEntity(dto));
+    public DTO update(DTO dto) {
+        return convertToDTO(dao.update(convertToEntity(dto)));
     }
 
     @Override
     @Transactional
-    public void delete(DTO dto) {
-        dao.delete(convertToEntity(dto));
+    public DTO delete(DTO dto) {
+        return convertToDTO(dao.delete(convertToEntity(dto)));
     }
 
     @Override
     @Transactional
-    public void deleteById(ID entityId) {
-        dao.deleteById(entityId);
+    public DTO deleteById(ID entityId) {
+        return convertToDTO(dao.deleteById(entityId));
     }
 
     @Override

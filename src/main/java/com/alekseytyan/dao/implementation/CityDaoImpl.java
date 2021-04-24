@@ -13,7 +13,10 @@ public class CityDaoImpl extends AbstractDaoImpl<City, String> implements CityDa
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<String> findAllNames() {
-        return entityManager.createNamedQuery("City.findAllNames").getResultList();
+        return entityManager
+                .createNamedQuery("City.findAllNames")
+                .getResultList();
     }
 }

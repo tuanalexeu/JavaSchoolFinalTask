@@ -8,12 +8,12 @@ public interface AbstractDao<E, ID> {
 
     List<E> findAll();
 
-    void save(E entity);
+    E save(E entity);
 
-    void update(E entity);
+    E update(E entity);
 
-    void delete(E entity);
+    E delete(E entity);
 
-    void deleteById(ID entityId);
+    E deleteById(ID entityId);
 
 }

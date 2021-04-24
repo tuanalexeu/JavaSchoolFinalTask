@@ -7,13 +7,13 @@ public interface AbstractService<E, DTO, ID> {
 
     List<DTO> findAll();
 
-    void save(DTO dto);
+    DTO save(DTO dto);
 
-    void update(DTO dto);
+    DTO update(DTO dto);
 
-    void delete(DTO dto);
+    DTO delete(DTO dto);
 
-    void deleteById(ID entityId);
+    DTO deleteById(ID entityId);
 
     DTO convertToDTO(E entity);
 

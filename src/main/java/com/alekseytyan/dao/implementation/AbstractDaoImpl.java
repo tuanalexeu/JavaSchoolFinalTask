@@ -31,23 +31,28 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
    }
 
    @Override
-   public void save(E entity){
+   public E save(E entity) {
       entityManager.persist(entity);
+      entityManager.flush();
+      return entity;
    }
 
    @Override
-   public void update(E entity){
+   public E update(E entity){
       entityManager.merge(entity);
+      return entity;
    }
 
    @Override
-   public void delete(E entity) {
+   public E delete(E entity) {
       entityManager.remove(entity);
+      return entity;
    }
 
    @Override
-   public void deleteById(ID entityId){
+   public E deleteById(ID entityId){
       E entity = findById(entityId);
       delete(entity);
+      return entity;
    }
 }
