@@ -9,6 +9,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
@@ -41,5 +42,6 @@ public class Order {
             joinColumns = @JoinColumn(name="ORDER_ID"),
             inverseJoinColumns = @JoinColumn(name="DRIVER_ID")
     )
+    @Size(max = 2)
     private List<Driver> drivers;
 }

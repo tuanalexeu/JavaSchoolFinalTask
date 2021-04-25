@@ -2,6 +2,7 @@ package com.alekseytyan.controller.role.employee.order;
 
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.dto.RoutePointDTO;
+import com.alekseytyan.service.api.DriverService;
 import com.alekseytyan.service.api.LorryService;
 import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,11 @@ import org.springframework.web.bind.annotation.*;
 public class OrderCrudController {
 
     private final OrderService orderService;
-    private final LorryService lorryService;
 
 
     @Autowired
-    public OrderCrudController(OrderService orderService,
-                               LorryService lorryService) {
+    public OrderCrudController(OrderService orderService) {
         this.orderService = orderService;
-        this.lorryService = lorryService;
     }
 
     @GetMapping(value = "/add-order")
@@ -30,25 +28,23 @@ public class OrderCrudController {
         OrderDTO orderDTO = orderService.save(new OrderDTO());
 
         model.addAttribute("newRoutePoint", new RoutePointDTO());
-        model.addAttribute("routePoints", orderDTO);
-        model.addAttribute("suitableLorries", lorryService.findSuitableLorries(-1L));
+        model.addAttribute("order", orderDTO);
 
         return "role/employee/order/edit-order";
     }
 
     @GetMapping(value = "/edit-order/{id}")
-    public String editOrder(Model model, @PathVariable(required = false) Long id) {
+    public String editOrder(Model model, @PathVariable Long id) {
 
         OrderDTO orderDTO = orderService.findById(id);
 
         model.addAttribute("newRoutePoint", new RoutePointDTO());
-        model.addAttribute("routePoints", orderDTO.getRoutePoints());
-        model.addAttribute("suitableLorries", lorryService.findSuitableLorries(orderService.calculateWeight(id)));
+        model.addAttribute("order", orderDTO);
 
         return "role/employee/order/edit-order";
     }
 
-    @PostMapping(value = "/edit-order")
+    @PostMapping(value = "/save-order")
     public String editOrder(@ModelAttribute OrderDTO orderDTO) {
 
         orderService.update(orderDTO);

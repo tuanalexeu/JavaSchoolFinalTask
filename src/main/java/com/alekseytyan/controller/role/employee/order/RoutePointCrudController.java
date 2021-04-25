@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(value = "/employee/routePoint")
+@RequestMapping(value = "/employee")
 public class RoutePointCrudController {
 
     private final RoutePointService routePointService;
@@ -34,7 +34,7 @@ public class RoutePointCrudController {
         return "role/employee/order/edit-routePoint";
     }
 
-    @PostMapping(value = "/edit-routePoint")
+    @PostMapping(value = "/save-routePoint")
     public String editRoutePoint(@ModelAttribute RoutePointDTO routePointDTO) {
 
         routePointService.update(routePointDTO);
