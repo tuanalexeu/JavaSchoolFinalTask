@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -29,6 +30,7 @@ public class Lorry {
     private int shiftTime;
 
     @Column(name = "CAPACITY")
+    @Min(0)
     private int capacity;
 
     @Column(name = "IS_BROKEN", columnDefinition = "boolean default false")

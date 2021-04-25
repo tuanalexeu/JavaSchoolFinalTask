@@ -12,4 +12,12 @@ public interface OrderService extends AbstractService<Order, OrderDTO, Long> {
      * @return - true, if each load has both points
      */
     LoadChecker checkRoutePoints(Long orderId);
+
+
+    /**
+     * Method calculates final weight of order regarding LOADING & UNLOADING points all the way through
+     * @param orderId - order id we need to calculate the weight of
+     * @return - number in kilograms
+     */
+    Long calculateWeight(Long orderId);
 }

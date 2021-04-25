@@ -32,4 +32,14 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
 
         return new LoadChecker("TODO", new ArrayList<>());
     }
+
+    @Override
+    public Long calculateWeight(Long orderId) {
+
+        Order order = getDao().findById(orderId);
+
+        // TODO calculate final weight of the order
+
+        return 0L;
+    }
 }

@@ -1,4 +1,4 @@
-package com.alekseytyan.controller.role.employee;
+package com.alekseytyan.controller.role.employee.driver;
 
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.service.api.CityService;

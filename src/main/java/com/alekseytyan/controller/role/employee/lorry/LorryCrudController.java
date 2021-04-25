@@ -1,4 +1,4 @@
-package com.alekseytyan.controller.role.employee;
+package com.alekseytyan.controller.role.employee.lorry;
 
 import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.service.api.CityService;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller()
+@Controller
 @RequestMapping(value = "/employee")
 public class LorryCrudController {
 
