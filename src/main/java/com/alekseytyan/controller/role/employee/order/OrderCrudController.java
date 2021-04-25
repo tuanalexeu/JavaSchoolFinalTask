@@ -1,23 +1,35 @@
 package com.alekseytyan.controller.role.employee.order;
 
+import com.alekseytyan.dto.CityDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.dto.RoutePointDTO;
+import com.alekseytyan.service.api.CityService;
 import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/employee")
 public class OrderCrudController {
 
     private final OrderService orderService;
+    private final CityService cityService;
 
 
     @Autowired
-    public OrderCrudController(OrderService orderService) {
+    public OrderCrudController(OrderService orderService,
+                               CityService cityService) {
         this.orderService = orderService;
+        this.cityService = cityService;
+    }
+
+    @ModelAttribute("cityNames")
+    public List<String> cityNames() {
+        return cityService.findAllNames();
     }
 
     @GetMapping(value = "/add-order")

@@ -13,7 +13,7 @@ import java.util.List;
  * Controller is responsible for finding available lorries and drivers for the current order
  */
 @RestController
-@RequestMapping("/list-rest")
+@RequestMapping("list-rest")
 public class AjaxHandlingController {
 
     private final LorryService lorryService;
@@ -31,7 +31,7 @@ public class AjaxHandlingController {
         return lorryService.findSuitableLorries(weight);
     }
 
-    @PostMapping(value = "/driver/{city}/{hours}")
+    @PostMapping(value = "/driver/{city}/{hours}", produces = "application/json")
     public List<DriverDTO> findSuitableDrivers(@PathVariable String city, @PathVariable Long hours) {
         return driverService.findSuitableDrivers(city, hours);
     }
