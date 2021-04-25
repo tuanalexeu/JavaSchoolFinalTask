@@ -14,21 +14,11 @@ public class CustomFilter implements Filter {
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomFilter.class);
 
     @Override
-    public void init(FilterConfig config) throws ServletException {
-        // initialize something
-    }
-
-    @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         LOGGER.info("Request Info : " + req);
         chain.doFilter(request, response);
-    }
-
-    @Override
-    public void destroy() {
-        // cleanup code, if necessary
     }
 }

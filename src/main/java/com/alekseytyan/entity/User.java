@@ -17,7 +17,7 @@ public class User {
 
     @Id
     @Column(name = "EMAIL", length = 60)
-    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")
+    @Pattern(regexp = "^([a-zA-Z0-9_\\-.]+)@([a-zA-Z0-9_\\-.]+)\\.([a-zA-Z]{2,5})$")
     private String email;
 
     @Column(name = "PASSWORD", nullable = false)

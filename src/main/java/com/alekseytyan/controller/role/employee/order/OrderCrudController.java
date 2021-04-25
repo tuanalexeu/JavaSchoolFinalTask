@@ -2,8 +2,6 @@ package com.alekseytyan.controller.role.employee.order;
 
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.dto.RoutePointDTO;
-import com.alekseytyan.service.api.DriverService;
-import com.alekseytyan.service.api.LorryService;
 import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

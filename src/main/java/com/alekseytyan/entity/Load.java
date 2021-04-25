@@ -13,10 +13,6 @@ import javax.validation.constraints.Min;
 @Table(name = "LOAD_LOGIWEB")
 @Getter @Setter @NoArgsConstructor
 @EqualsAndHashCode
-@NamedQueries({
-        @NamedQuery(name = "Load.findByOrderId",
-                query = "select l from Load l where l.order.id = :id")
-})
 public class Load {
 
     @Id

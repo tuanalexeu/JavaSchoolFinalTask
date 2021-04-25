@@ -22,11 +22,10 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
       return entityManager.find(clazz, id);
    }
 
-   @SuppressWarnings("unchecked")
    @Override
    public List<E> findAll() {
       return entityManager
-              .createQuery("from " + clazz.getName())
+              .createQuery("from " + clazz.getName(), clazz)
               .getResultList();
    }
 

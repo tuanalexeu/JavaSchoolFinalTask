@@ -48,23 +48,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/driver/**").hasRole("DRIVER")
                 .antMatchers("/employee/**").hasRole("EMPLOYEE")
-
                 .antMatchers("/login*", "/register*", "/forgotPassword*", "/*", "/homePage*", "/welcome*", "/assets/**").permitAll()
-
-                .antMatchers("/profile*").hasAnyRole("ADMIN", "DRIVER", "EMPLOYEE")
-
+                .antMatchers("/profile*").hasAnyRole("DRIVER", "EMPLOYEE")
                 .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
                 .loginPage("/login")
-//                .loginProcessingUrl("/performLogin")
                 .defaultSuccessUrl("/homePage", true)
                 .failureUrl("/login?error=true")
-//                .failureHandler(authenticationFailureHandler())
                 .and()
                 .logout()
                 .logoutUrl("/performLogOut")
@@ -73,8 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(logoutSuccessHandler())
 
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
-
-//        http.httpBasic().disable();
     }
 
     @Bean

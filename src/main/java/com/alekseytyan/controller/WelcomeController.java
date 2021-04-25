@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class WelcomeController {
 
     @GetMapping(value = {"/", "/welcome"})
-    public String welcomePage(Model model) {
-
-        model.addAttribute("example", "example message");
+    public String welcomePage() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth != null

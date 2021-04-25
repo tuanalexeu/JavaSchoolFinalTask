@@ -5,5 +5,4 @@ import com.alekseytyan.entity.Load;
 import java.util.List;
 
 public interface LoadDao extends AbstractDao<Load, Long> {
-    List<Load> findByOrderId(Long orderId);
 }
