@@ -21,11 +21,17 @@ public class DriverDaoImpl extends AbstractDaoImpl<Driver, Long> implements Driv
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Driver> findCoDrivers(Long orderId) {
         return entityManager
-                .createNamedQuery("Driver.findCoDrivers")
+                .createNamedQuery("Driver.findCoDrivers", Driver.class)
                 .setParameter("id", orderId)
+                .getResultList();
+    }
+
+    @Override
+    public List<Driver> findSuitableDrivers() {
+        return entityManager.
+                createQuery("Driver.findSuitableDrivers", Driver.class)
                 .getResultList();
     }
 }

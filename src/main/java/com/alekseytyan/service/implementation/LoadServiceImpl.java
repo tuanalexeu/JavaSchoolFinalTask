@@ -7,6 +7,7 @@ import com.alekseytyan.service.api.LoadService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,7 +20,14 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<LoadDTO> findByOrderId(Long orderId) {
         return convertToDTO(getDao().findByOrderId(orderId));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long findOrderId(Long loadId) {
+        return getDao().findById(loadId).getOrder().getId();
     }
 }

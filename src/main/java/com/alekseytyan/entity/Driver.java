@@ -9,7 +9,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "DRIVER")
@@ -17,7 +16,9 @@ import javax.validation.constraints.Size;
         @NamedQuery(name = "Driver.findByUser",
                 query = "SELECT d FROM Driver d where d.user.email = :email"),
         @NamedQuery(name = "Driver.findCoDrivers",
-                query = "SELECT d FROM Driver d where d.order.id = :id")
+                query = "SELECT d FROM Driver d where d.order.id = :id"),
+        @NamedQuery(name = "Driver.findSuitableDrivers",
+                query = "SELECT d FROM Driver d where d.id > 1")
 })
 @Getter @Setter @NoArgsConstructor
 @EqualsAndHashCode
@@ -35,6 +36,7 @@ public class Driver {
     private String lastName;
 
     @Column(name = "HOURS_WORKED", nullable = false)
+    @Min(0) @Max(176)
     private int hours_worked;
 
     @Column(name = "STATE", nullable = false)

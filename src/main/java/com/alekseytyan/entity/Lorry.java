@@ -13,6 +13,10 @@ import javax.validation.constraints.Size;
 @Table(name = "LORRY")
 @Getter @Setter @NoArgsConstructor
 @EqualsAndHashCode(exclude = "order")
+@NamedQueries({
+        @NamedQuery(name = "Lorry.findSuitableLorries",
+                    query = "SELECT l from Lorry l where l.capacity <= :weight AND l.isBroken = FALSE AND l.order IS NULL")
+})
 public class Lorry {
 
     @Id

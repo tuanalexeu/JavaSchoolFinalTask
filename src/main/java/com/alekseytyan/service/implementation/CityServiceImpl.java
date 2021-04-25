@@ -7,6 +7,7 @@ import com.alekseytyan.service.api.CityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class CityServiceImpl extends AbstractServiceImpl<City, CityDao, CityDTO,
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<String> findAllNames() {
         return getDao().findAllNames();
     }

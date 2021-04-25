@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,13 +29,21 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     }
 
     @Override
+    @Transactional(readOnly = true)
     public DriverDTO findDriverByUser(String email) {
         return convertToDTO(getDao().findDriverByUser(email));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<DriverDTO> findCoDrivers(Long orderId) {
         return convertToDTO(getDao().findCoDrivers(orderId));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<DriverDTO> findSuitableDrivers() {
+        return convertToDTO(getDao().findSuitableDrivers());
     }
 
     @Override

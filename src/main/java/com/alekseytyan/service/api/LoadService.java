@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface LoadService extends AbstractService<Load, LoadDTO, Long> {
     List<LoadDTO> findByOrderId(Long orderId);
+    Long findOrderId(Long loadId);
 }
