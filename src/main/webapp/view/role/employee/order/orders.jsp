@@ -66,20 +66,9 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newOrder-modal">New order</button>
-                                <div class="modal fade" role="dialog" tabindex="-1" id="newOrder-modal" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Add new order</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>There'll be order adding logic soon...</p>
-                                            </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="background: rgb(255,255,255);border-color: rgb(220,88,184);color: rgb(220,88,184);">Close</button><button class="btn btn-primary" type="button" style="border-color: rgb(220,88,184);background: rgb(255,255,255);color: rgb(220,88,184);">Save</button></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <form action="/employee/edit-order">
+                                    <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">New order</button>
+                                </form>
                             </div>
                         </div>
                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -96,10 +85,15 @@
                                 <tbody>
                                 <c:forEach items="${orders}" var="order">
                                     <tr>
-                                        <td>${order.id}</td>
+                                        <td>
+                                            <form action="/employee/edit-order/${order.id}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${order.id}</button>
+                                            </form>
+                                        </td>
                                         <td>${order.finished ? "Finished" : "In process"}</td>
                                         <td>${order.lorry.regNum}</td>
-                                        <td><a href="#route-modal" data-toggle="modal" data-target="#route-modal" style="color: #DC58B8">Route</a>
+                                        <td>
+                                            <a href="#route-modal" data-toggle="modal" data-target="#route-modal" style="color: #DC58B8">Route</a>
                                             <div class="modal fade" role="dialog" tabindex="-1" id="route-modal">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -117,8 +111,10 @@
                                                         <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
                                                     </div>
                                                 </div>
-                                            </div></td>
-                                        <td><a href="#drivers-modal" data-toggle="modal" data-target="#drivers-modal" style="color: #DC58B8">Drivers</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#drivers-modal" data-toggle="modal" data-target="#drivers-modal" style="color: #DC58B8">Drivers</a>
                                             <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -138,20 +134,12 @@
                                                         <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
                                                     </div>
                                                 </div>
-                                            </div></td>
+                                            </div>
+                                        </td>
 
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-<%--                                <tfoot>--%>
-<%--                                <tr>--%>
-<%--                                    <th><strong>Order ID</strong></th>--%>
-<%--                                    <th><strong>Status</strong></th>--%>
-<%--                                    <th><strong>Lorry</strong></th>--%>
-<%--                                    <th><strong>Route points</strong></th>--%>
-<%--                                    <th><strong>Drivers</strong></th>--%>
-<%--                                </tr>--%>
-<%--                                </tfoot>--%>
                             </table>
                         </div>
                         <div class="row">
