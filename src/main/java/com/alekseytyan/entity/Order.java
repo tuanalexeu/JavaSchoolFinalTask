@@ -25,7 +25,7 @@ public class Order {
     @Column(name = "IS_FINISHED")
     private boolean isFinished;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ROUTE_POINT")
     @Fetch(FetchMode.SUBSELECT)
     private List<RoutePoint> routePoints;

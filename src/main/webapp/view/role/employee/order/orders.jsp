@@ -66,7 +66,7 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <form action="/employee/edit-order">
+                                <form action="/employee/add-order">
                                     <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">New order</button>
                                 </form>
                             </div>
