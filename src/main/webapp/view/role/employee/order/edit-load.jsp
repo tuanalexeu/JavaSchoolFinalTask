@@ -52,7 +52,7 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Edit routePoint</h3>
-                <form:form id="editRoutePointForm" action="/employee/edit-load" method="post" modelAttribute="editLoad">
+                <form:form id="editLoadForm" action="/employee/save-load" method="post" modelAttribute="editLoad">
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
@@ -115,10 +115,10 @@
                     <form action="/employee/edit-order/${editLoad.order.id}">
                         <button class="btn btn-light" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Back</button>
                     </form>
-                    <form action="/employee/delete-routePoint/${editLoad.id}">
+                    <form action="/employee/delete-load/${editLoad.id}">
                         <button class="btn btn-light" type="submit" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Delete</button>
                     </form>
-                    <button form="editRoutePointForm" class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                    <button form="editLoadForm" class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
                 </div>
             </div>
         </div>
