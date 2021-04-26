@@ -58,7 +58,7 @@ public class LoadCrudController {
 
         loadService.update(loadDTO);
 
-        return "redirect:/employee/edit-order" + loadDTO.getOrder().getId();
+        return "redirect:/employee/edit-order/" + loadDTO.getOrder().getId();
     }
 
     @GetMapping(value = "/delete-load/{id}")

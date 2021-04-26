@@ -175,13 +175,6 @@
                                                         </div>
                                                         <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                             <ul>
-                                                                <li>
-                                                                    <form action="/employee/edit-routePoint/${load.id}">
-                                                                        <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${load.city.name}</button>
-                                                                    </form>
-                                                                </li>
-                                                            </ul>
-                                                            <ul>
                                                                 <li>${load.name}</li>
                                                                 <li>${load.weight}</li>
                                                                 <li>${load.status}</li>
