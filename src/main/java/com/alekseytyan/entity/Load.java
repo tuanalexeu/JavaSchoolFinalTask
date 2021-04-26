@@ -20,16 +20,24 @@ public class Load {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "CITY_LOAD")
+    private City cityLoad;
+
+    @ManyToOne
+    @JoinColumn(name = "CITY_UNLOAD")
+    private City cityUnload;
+
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID", nullable = false)
+    private Order order;
+
     @Column(name = "NAME")
     private String name;
 
     @Column(name = "WEIGHT")
     @Min(0)
     private int weight;
-
-    @ManyToOne
-    @JoinColumn(name = "ORDER_ID")
-    private Order order;
 
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)
