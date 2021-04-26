@@ -8,7 +8,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -25,21 +24,14 @@ public class Order {
     @Column(name = "IS_FINISHED")
     private boolean isFinished;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ROUTE_POINT")
-    @Fetch(FetchMode.SUBSELECT)
-    private List<RoutePoint> routePoints;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Load> loads;
 
     @OneToOne
     @JoinColumn(name = "LORRY")
     private Lorry lorry;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "ORDER_DRIVER",
-            joinColumns = @JoinColumn(name="ORDER_ID"),
-            inverseJoinColumns = @JoinColumn(name="DRIVER_ID")
-    )
-    @Size(max = 2)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.MERGE)
     private List<Driver> drivers;
 }

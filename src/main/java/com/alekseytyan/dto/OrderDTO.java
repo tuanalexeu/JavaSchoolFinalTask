@@ -13,7 +13,7 @@ public class OrderDTO {
     private boolean isFinished;
 
     @ToString.Exclude
-    private List<RoutePointDTO> routePoints;
+    private List<LoadDTO> loads;
 
     @ToString.Exclude
     private LorryDTO lorry;
