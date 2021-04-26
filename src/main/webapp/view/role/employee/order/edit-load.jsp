@@ -52,16 +52,32 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Edit routePoint</h3>
-                <form:form id="editRoutePointForm" action="/employee/edit-routePoint" method="post" modelAttribute="editRoutePoint">
+                <form:form id="editRoutePointForm" action="/employee/edit-load" method="post" modelAttribute="editLoad">
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 style="margin: 10px;">City</h3>
+                                    <h3 style="margin: 10px;">City (Loading)</h3>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="dropdown">
-                                        <form:select  path="city.name">
+                                        <form:select  path="cityLoad.name">
+                                            <c:forEach items="${cityNames}" var="city">
+                                                <form:option value="${city}">${city}</form:option>
+                                            </c:forEach>
+                                        </form:select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 style="margin: 10px;">City (Unloading)</h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="dropdown">
+                                        <form:select  path="cityUnload.name">
                                             <c:forEach items="${cityNames}" var="city">
                                                 <form:option value="${city}">${city}</form:option>
                                             </c:forEach>
@@ -76,7 +92,7 @@
                                     <h3 style="margin: 10px;">Load description</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="loadDescription" path="load.name" cssErrorClass="errorBox"/>
+                                    <form:input id="loadDescription" path="name" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
@@ -86,34 +102,20 @@
                                     <h3 style="margin: 10px;">Load weight</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="weight" path="load.weight" cssErrorClass="errorBox"/>
-                                    <form:hidden path="load.status" value="PREPARED" cssErrorClass="errorBox"/>
-                                    <form:hidden path="load.order.id" value="${order.id}" cssErrorClass="errorBox"/>
+                                    <form:input id="weight" path="weight" cssErrorClass="errorBox"/>
+                                    <form:hidden path="status" value="${editLoad.status}" cssErrorClass="errorBox"/>
                                     <form:hidden path="order.id" value="${order.id}" cssErrorClass="errorBox"/>
-                                    <form:hidden id="load" path="load.id" value="${editRoutePoint.load.id}" cssErrorClass="errorBox"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h3 style="margin: 10px;">Type</h3>
-                                </div>
-                                <div class="col-md-6">
-                                    <form:select id="type" path="type" cssErrorClass="errorBox">
-                                        <form:option value="LOAD">LOAD</form:option>
-                                        <form:option value="UNLOAD">UNLOAD</form:option>
-                                    </form:select>
+                                    <form:hidden id="id" path="id" value="${editLoad.id}" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form:form>
                 <div class="modal-footer">
-                    <form action="/employee/edit-order/${editRoutePoint.order.id}">
+                    <form action="/employee/edit-order/${editLoad.order.id}">
                         <button class="btn btn-light" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Back</button>
                     </form>
-                    <form action="/employee/delete-routePoint/${editRoutePoint.id}">
+                    <form action="/employee/delete-routePoint/${editLoad.id}">
                         <button class="btn btn-light" type="submit" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Delete</button>
                     </form>
                     <button form="editRoutePointForm" class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>

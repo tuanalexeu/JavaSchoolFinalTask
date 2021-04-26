@@ -102,11 +102,12 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                                         </div>
                                                         <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
-                                                            <ul>
-                                                                <c:forEach items="${order.routePoints}" var="point">
-                                                                    <li>${point.city.name}</li>
-                                                                </c:forEach>
-                                                            </ul>
+                                                            There will be route points soon...
+<%--                                                            <ul>--%>
+<%--                                                                <c:forEach items="${order.loads}" var="load">--%>
+<%--                                                                    <li>${load.city.name}</li>--%>
+<%--                                                                </c:forEach>--%>
+<%--                                                            </ul>--%>
                                                         </div>
                                                         <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
                                                     </div>
@@ -124,11 +125,9 @@
                                                         </div>
                                                         <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                             <ul>
-                                                                <ul>
-                                                                    <c:forEach items="${order.drivers}" var="driver">
-                                                                        <li>${driver.firstName} ${driver.lastName}</li>
-                                                                    </c:forEach>
-                                                                </ul>
+                                                                <c:forEach items="${order.drivers}" var="driver">
+                                                                    <li>${driver.firstName} ${driver.lastName}</li>
+                                                                </c:forEach>
                                                             </ul>
                                                         </div>
                                                         <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>

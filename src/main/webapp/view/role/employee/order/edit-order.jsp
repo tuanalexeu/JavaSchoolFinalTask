@@ -77,16 +77,32 @@
                                                 <h4 class="modal-title">New point</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <form:form action="/employee/add-routePoint" method="post" modelAttribute="newRoutePoint">
+                                            <form:form action="/employee/add-load" method="post" modelAttribute="newLoad">
                                                 <div class="modal-body">
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <h3 style="margin: 10px;">City</h3>
+                                                                <h3 style="margin: 10px;">City (Loading)</h3>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="dropdown">
-                                                                    <form:select  path="city.name">
+                                                                    <form:select  path="cityLoad.name">
+                                                                        <c:forEach items="${cityNames}" var="name">
+                                                                            <form:option value="${name}">${name}</form:option>
+                                                                        </c:forEach>
+                                                                    </form:select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h3 style="margin: 10px;">City (Unloading)</h3>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="dropdown">
+                                                                    <form:select  path="cityUnload.name">
                                                                         <c:forEach items="${cityNames}" var="name">
                                                                             <form:option value="${name}">${name}</form:option>
                                                                         </c:forEach>
@@ -101,7 +117,7 @@
                                                                 <h3 style="margin: 10px;">Load description</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="loadDescription" path="load.name" cssErrorClass="errorBox"/>
+                                                                <form:input id="loadDescription" path="name" cssErrorClass="errorBox"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -111,23 +127,9 @@
                                                                 <h3 style="margin: 10px;">Load weight</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="weight" path="load.weight" cssErrorClass="errorBox"/>
-                                                                <form:hidden id="status" path="load.status" value="PREPARED" cssErrorClass="errorBox"/>
-<%--                                                                <form:hidden id="order_id" path="load.order.id" value="${order.id}" cssErrorClass="errorBox"/>--%>
+                                                                <form:input id="weight" path="weight" cssErrorClass="errorBox"/>
+                                                                <form:hidden id="status" path="status" value="PREPARED" cssErrorClass="errorBox"/>
                                                                 <form:hidden path="order.id" value="${order.id}" cssErrorClass="errorBox"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <h3 style="margin: 10px;">Type</h3>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <form:select id="type" path="type" cssErrorClass="errorBox">
-                                                                    <form:option value="LOAD">LOAD</form:option>
-                                                                    <form:option value="UNLOAD">UNLOAD</form:option>
-                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -146,21 +148,22 @@
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Route point id</th>
-                                    <th>City</th>
-                                    <th>Load</th>
-                                    <th>Type</th>
+                                    <th>Load id</th>
+                                    <th>City (Loading)</th>
+                                    <th>City (Unloading)</th>
+                                    <th>Load info</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${order.routePoints}" var="point">
+                                <c:forEach items="${order.loads}" var="load">
                                     <tr>
-                                        <td>${point.id}</td>
                                         <td>
-                                            <form action="/employee/edit-routePoint/${point.id}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editPoint" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${point.city}</button>
+                                            <form action="/employee/edit-load/${load.id}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editPoint" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${load.id}</button>
                                             </form>
                                         </td>
+                                        <td>${load.cityLoad.name}</td>
+                                        <td>${load.cityUnload.name}</td>
                                         <td>
                                             <a href="#load-modal" data-toggle="modal" data-target="#load-modal" style="color: #DC58B8">Info</a>
                                             <div class="modal fade" role="dialog" tabindex="-1" id="load-modal">
@@ -173,45 +176,18 @@
                                                         <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                             <ul>
                                                                 <li>
-                                                                    <form action="/employee/edit-routePoint/${point.id}">
-                                                                        <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${point.city.name}</button>
+                                                                    <form action="/employee/edit-routePoint/${load.id}">
+                                                                        <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${load.city.name}</button>
                                                                     </form>
                                                                 </li>
                                                             </ul>
                                                             <ul>
-                                                                <li>${point.load.name}</li>
-                                                                <li>${point.load.weight}</li>
-                                                                <li>${point.load.status}</li>
-                                                            </ul>
-                                                            <ul>
-                                                                <li>${point.type}</li>
+                                                                <li>${load.name}</li>
+                                                                <li>${load.weight}</li>
+                                                                <li>${load.status}</li>
                                                             </ul>
                                                         </div>
                                                         <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>${point.order.lorry}</td>
-                                        <td>
-                                            <a href="#drivers-modal" data-toggle="modal" data-target="#drivers-modal" style="color: #DC58B8">View</a>
-                                            <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title" style="color: rgb(133, 135, 150);">Drivers</h4>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                                                        </div>
-                                                        <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
-                                                            <ul>
-                                                                <c:forEach items="${point.order.drivers}" var="driver">
-                                                                    <li>[${driver.id}] ${driver.firstName} + ${driver.lastName}</li>
-                                                                </c:forEach>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
