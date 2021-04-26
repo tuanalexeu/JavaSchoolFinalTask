@@ -9,15 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO> implements UserService {
-
+public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO, String> implements UserService {
     @Autowired
     public UserServiceImpl(UserDao dao, ModelMapper mapper) {
-        super(dao, mapper);
-    }
-
-    @Override
-    public UserDTO convertToDTO(User entity) {
-        return getMapper().map(entity, UserDTO.class);
+        super(dao, mapper, UserDTO.class, User.class);
     }
 }

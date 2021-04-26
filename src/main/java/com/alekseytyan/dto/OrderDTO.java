@@ -1,20 +1,23 @@
 package com.alekseytyan.dto;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 public class OrderDTO {
 
-    private int id;
+    private Long id;
 
     private boolean isFinished;
 
+    @ToString.Exclude
     private List<RoutePointDTO> routePoints;
 
+    @ToString.Exclude
     private LorryDTO lorry;
 
-    private Set<DriverDTO> drivers;
+    @ToString.Exclude
+    private List<DriverDTO> drivers;
 }

@@ -7,17 +7,21 @@ import com.alekseytyan.service.api.CityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
-public class CityServiceImpl extends AbstractServiceImpl<City, CityDao, CityDTO> implements CityService {
+public class CityServiceImpl extends AbstractServiceImpl<City, CityDao, CityDTO, String> implements CityService {
 
     @Autowired
     public CityServiceImpl(CityDao dao, ModelMapper mapper) {
-        super(dao, mapper);
+        super(dao, mapper, CityDTO.class, City.class);
     }
 
     @Override
-    public CityDTO convertToDTO(City entity) {
-        return getMapper().map(entity, CityDTO.class);
+    @Transactional(readOnly = true)
+    public List<String> findAllNames() {
+        return getDao().findAllNames();
     }
 }

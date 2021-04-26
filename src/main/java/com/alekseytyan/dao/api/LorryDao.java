@@ -2,5 +2,8 @@ package com.alekseytyan.dao.api;
 
 import com.alekseytyan.entity.Lorry;
 
-public interface LorryDao extends AbstractDao<Lorry> {
+import java.util.List;
+
+public interface LorryDao extends AbstractDao<Lorry, String> {
+    List<Lorry> findSuitableLorries(Long weight);
 }

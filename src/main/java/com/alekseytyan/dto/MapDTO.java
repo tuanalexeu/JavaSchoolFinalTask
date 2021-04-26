@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class MapDTO {
 
-    private int id;
+    private Long id;
 
     private CityDTO cityFrom;
 

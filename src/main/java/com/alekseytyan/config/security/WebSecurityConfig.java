@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -22,6 +23,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Import(value = { DataSourceConfig.class })
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -43,29 +45,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/driver/**").hasRole("DRIVER")
-//                .antMatchers("/employee/**").hasRole("EMPLOYEE")
-//                .antMatchers("/login*", "/register*", "/forgotPassword*", "/", "/welcome").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/performLogin")
-//                .defaultSuccessUrl("/homepage", true)
-//                .failureUrl("/login?error=true")
-//                .failureHandler(authenticationFailureHandler())
-//                .and()
-//                .logout()
-//                .logoutUrl("/performLogOut")
-//                .logoutSuccessUrl("/index")
-//                .deleteCookies("JSESSIONID")
-//                .logoutSuccessHandler(logoutSuccessHandler());
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/driver/**").hasRole("DRIVER")
+                .antMatchers("/employee/**").hasRole("EMPLOYEE")
+                .antMatchers("/login*", "/register*", "/forgotPassword*", "/*", "/homePage*", "/welcome*", "/assets/**").permitAll()
+                .antMatchers("/profile*").hasAnyRole("DRIVER", "EMPLOYEE")
+                .anyRequest().authenticated()
 
-//        http.httpBasic().disable();
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/homePage", true)
+                .failureUrl("/login?error=true")
+                .and()
+                .logout()
+                .logoutUrl("/performLogOut")
+                .logoutSuccessUrl("/")
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessHandler(logoutSuccessHandler())
+
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 
     @Bean

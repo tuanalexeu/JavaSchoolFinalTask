@@ -2,11 +2,12 @@ package com.alekseytyan.dto;
 
 import com.alekseytyan.entity.enums.DriverState;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class DriverDTO {
 
-    private int id;
+    private Long id;
 
     private String firstName;
 
@@ -20,7 +21,9 @@ public class DriverDTO {
 
     private LorryDTO lorry;
 
+    @ToString.Exclude
     private OrderDTO order;
 
+    @ToString.Exclude
     private UserDTO user;
 }

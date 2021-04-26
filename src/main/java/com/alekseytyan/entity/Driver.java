@@ -1,37 +1,45 @@
 package com.alekseytyan.entity;
 
 import com.alekseytyan.entity.enums.DriverState;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "DRIVER")
+@NamedQueries({
+        @NamedQuery(name = "Driver.findByUser",
+                query = "SELECT d FROM Driver d where d.user.email = :email"),
+        @NamedQuery(name = "Driver.findCoDrivers",
+                query = "SELECT d FROM Driver d where d.order.id = :id"),
+        @NamedQuery(name = "Driver.findSuitableDrivers",
+                query = "SELECT d FROM Driver d where d.hours_worked <= d.hours_worked + :hours AND d.city.name = :cityName AND d.order IS NULL")
+})
 @Getter @Setter @NoArgsConstructor
+@EqualsAndHashCode
 public class Driver {
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name = "FIRST_NAME")
-    @Size(min = 1, max = 48)
+    @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
-    @Column(name = "LAST_NAME")
-    @Size(min = 1, max = 48)
+    @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @Column(name = "HOURS_WORKED")
-    @Min(0)
+    @Column(name = "HOURS_WORKED", nullable = false)
+    @Min(0) @Max(176)
     private int hours_worked;
 
-    @Column(name = "STATE")
+    @Column(name = "STATE", nullable = false)
     @Enumerated(EnumType.STRING)
     private DriverState state;
 
@@ -39,7 +47,7 @@ public class Driver {
     @JoinColumn(name = "CITY")
     private City city;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "LORRY")
     private Lorry lorry;
 
@@ -47,7 +55,7 @@ public class Driver {
     @JoinColumn(name="ORDER_ID")
     private Order order;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_EMAIL")
     private User user;
 }

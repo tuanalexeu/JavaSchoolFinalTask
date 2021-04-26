@@ -10,11 +10,10 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 public class MainWebAppInitializer implements WebApplicationInitializer {
     @Override
-    public void onStartup(final ServletContext sc) throws ServletException {
+    public void onStartup(final ServletContext sc) {
 
         var ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(AppConfig.class);

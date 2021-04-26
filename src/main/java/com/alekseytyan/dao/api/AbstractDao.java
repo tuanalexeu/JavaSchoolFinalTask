@@ -2,18 +2,18 @@ package com.alekseytyan.dao.api;
 
 import java.util.List;
 
-public interface AbstractDao<E> {
+public interface AbstractDao<E, ID> {
 
-    E findById(Long id);
+    E findById(ID id);
 
     List<E> findAll();
 
-    void save(E entity);
+    E save(E entity);
 
-    void update(E entity);
+    E update(E entity);
 
-    void delete(E entity);
+    E delete(E entity);
 
-    void deleteById(Long entityId);
+    E deleteById(ID entityId);
 
 }

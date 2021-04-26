@@ -2,18 +2,24 @@ package com.alekseytyan.service.api;
 
 import java.util.List;
 
-public interface AbstractService<E, DTO> {
-    E findById(Long id);
+public interface AbstractService<E, DTO, ID> {
+    DTO findById(ID id);
 
-    List<E> findAll();
+    List<DTO> findAll();
 
-    void save(E entity);
+    DTO save(DTO dto);
 
-    void update(E entity);
+    DTO update(DTO dto);
 
-    void delete(E entity);
+    DTO delete(DTO dto);
 
-    void deleteById(Long entityId);
+    DTO deleteById(ID entityId);
 
     DTO convertToDTO(E entity);
+
+    List<DTO> convertToDTO(List<E> entities);
+
+    E convertToEntity(DTO dto);
+
+    List<E> convertToEntity(List<DTO> dtoList);
 }
