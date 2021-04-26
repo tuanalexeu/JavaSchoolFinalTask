@@ -1,8 +1,7 @@
 package com.alekseytyan.controller.role.employee.order;
 
-import com.alekseytyan.dto.CityDTO;
 import com.alekseytyan.dto.OrderDTO;
-import com.alekseytyan.dto.RoutePointDTO;
+import com.alekseytyan.dto.LoadDTO;
 import com.alekseytyan.service.api.CityService;
 import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +34,8 @@ public class OrderCrudController {
     @GetMapping(value = "/add-order")
     public String addOrder(Model model) {
 
-        OrderDTO orderDTO = orderService.save(new OrderDTO());
-
-        model.addAttribute("newRoutePoint", new RoutePointDTO());
-        model.addAttribute("order", orderDTO);
+        model.addAttribute("newLoad", new LoadDTO());
+        model.addAttribute("order", orderService.save(new OrderDTO()));
 
         return "role/employee/order/edit-order";
     }
@@ -48,7 +45,7 @@ public class OrderCrudController {
 
         OrderDTO orderDTO = orderService.findById(id);
 
-        model.addAttribute("newRoutePoint", new RoutePointDTO());
+        model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderDTO);
 
         return "role/employee/order/edit-order";

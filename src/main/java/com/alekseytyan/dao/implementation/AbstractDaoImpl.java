@@ -38,13 +38,12 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
 
    @Override
    public E update(E entity){
-      entityManager.merge(entity);
-      return entity;
+      return entityManager.merge(entity);
    }
 
    @Override
    public E delete(E entity) {
-      entityManager.remove(entity);
+      entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
       return entity;
    }
 

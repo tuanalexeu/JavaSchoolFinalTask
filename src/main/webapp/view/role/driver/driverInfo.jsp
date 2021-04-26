@@ -153,8 +153,8 @@
                                             </div>
                                             <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                 <ul>
-                                                    <c:forEach items="${driver.order.routePoints}" var="point">
-                                                        <li>${point.city.name}</li>
+                                                    <c:forEach items="${driver.order.loads}" var="load">
+                                                        <li>${load.city.name}</li>
                                                     </c:forEach>
                                                 </ul>
                                             </div>
@@ -183,11 +183,11 @@
                                                                 <h4>Prepared</h4>
                                                             </div>
                                                             <ul class="task-list" id="prepared">
-                                                                <c:forEach items="${driver.order.routePoints}" var="point">
-                                                                    <c:if test="${point.load.status eq 'PREPARED'}">
+                                                                <c:forEach items="${driver.order.loads}" var="load">
+                                                                    <c:if test="${load.load.status eq 'PREPARED'}">
                                                                         <li class="task">
-                                                                            <p>${point.load.name}</p>
-                                                                            <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${point.load.status}</button>
+                                                                            <p>${load.load.name}</p>
+                                                                            <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.load.status}</button>
                                                                                 <div class="dropdown-menu">
                                                                                     <a class="dropdown-item" href="#">PREPARED</a>
                                                                                     <a class="dropdown-item" href="#">SENT</a>
@@ -205,11 +205,11 @@
                                                                 <h4>Sent</h4>
                                                             </div>
                                                             <ul class="task-list" id="sent">
-                                                                <c:forEach items="${driver.order.routePoints}" var="point">
-                                                                    <c:if test="${point.load.status eq 'SENT'}">
+                                                                <c:forEach items="${driver.order.loads}" var="load">
+                                                                    <c:if test="${load.load.status eq 'SENT'}">
                                                                         <li class="task">
-                                                                            <p>${point.load.name}</p>
-                                                                            <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${point.load.status}</button>
+                                                                            <p>${load.load.name}</p>
+                                                                            <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.load.status}</button>
                                                                                 <div class="dropdown-menu">
                                                                                     <a class="dropdown-item" href="#">PREPARED</a>
                                                                                     <a class="dropdown-item" href="#">SENT</a>
@@ -226,11 +226,11 @@
                                                                 <h4>Delivered</h4>
                                                             </div>
                                                             <ul class="task-list" id="delivered">
-                                                                <c:forEach items="${driver.order.routePoints}" var="point">
-                                                                    <c:if test="${point.load.status eq 'DELIVERED'}">
+                                                                <c:forEach items="${driver.order.loads}" var="load">
+                                                                    <c:if test="${load.load.status eq 'DELIVERED'}">
                                                                         <li class="task">
-                                                                            <p>${point.load.name}</p>
-                                                                            <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${point.load.status}</button>
+                                                                            <p>${load.load.name}</p>
+                                                                            <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.load.status}</button>
                                                                                 <div class="dropdown-menu">
                                                                                     <a class="dropdown-item" href="#">PREPARED</a>
                                                                                     <a class="dropdown-item" href="#">SENT</a>

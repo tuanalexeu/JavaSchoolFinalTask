@@ -1,8 +1,5 @@
 package com.alekseytyan.controller.role.employee;
 
-import com.alekseytyan.dto.DriverDTO;
-import com.alekseytyan.dto.LorryDTO;
-import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.*;
 import com.alekseytyan.service.api.CityService;
 import com.alekseytyan.service.api.DriverService;
@@ -35,12 +32,15 @@ public class EmployeeController {
         this.cityService = cityService;
     }
 
+    @ModelAttribute("cities")
+    public List<String> cityNames() {
+        return cityService.findAllNames();
+    }
+
     @GetMapping(path = "/orders")
     public String showOrders(Model model) {
 
-        List<OrderDTO> orders = orderService.findAll();
-        model.addAttribute("orders", orders);
-
+        model.addAttribute("orders", orderService.findAll());
         model.addAttribute("newOrder", new Order());
 
         return "role/employee/order/orders";
@@ -49,12 +49,7 @@ public class EmployeeController {
     @GetMapping(path = "/lorries")
     public String showLorries(Model model) {
 
-        List<LorryDTO> lorries = lorryService.findAll();
-        List<String> cities = cityService.findAllNames();
-
-        model.addAttribute("lorries", lorries);
-        model.addAttribute("cities", cities);
-
+        model.addAttribute("lorries", lorryService.findAll());
         model.addAttribute("newLorry", new Lorry());
 
         return "role/employee/lorry/lorries";
@@ -63,13 +58,8 @@ public class EmployeeController {
     @GetMapping(path = "/drivers")
     public String showDrivers(Model model) {
 
-        List<DriverDTO> drivers = driverService.findAll();
-        List<String> cities = cityService.findAllNames();
-
+        model.addAttribute("drivers", driverService.findAll());
         model.addAttribute("newDriver", new Driver());
-
-        model.addAttribute("drivers", drivers);
-        model.addAttribute("cities", cities);
 
         return "role/employee/driver/drivers";
     }
