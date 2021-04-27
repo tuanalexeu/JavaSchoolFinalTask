@@ -31,7 +31,7 @@ public class AjaxHandlingController {
         return lorryService.findSuitableLorries(weight);
     }
 
-    @PostMapping(value = "/driver/{city}/{hours}", produces = "application/json")
+    @GetMapping(value = "/driver/{city}/{hours}", produces = "application/json")
     public List<DriverDTO> findSuitableDrivers(@PathVariable String city, @PathVariable Long hours) {
         return driverService.findSuitableDrivers(city, hours);
     }
