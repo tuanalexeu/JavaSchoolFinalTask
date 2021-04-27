@@ -3,19 +3,16 @@ package com.alekseytyan.service.implementation;
 import com.alekseytyan.dao.api.OrderDao;
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.dto.OrderDTO;
+import com.alekseytyan.entity.City;
 import com.alekseytyan.entity.Order;
-import com.alekseytyan.entity.Load;
-import com.alekseytyan.service.api.DriverService;
 import com.alekseytyan.service.api.OrderService;
-import com.alekseytyan.util.LoadChecker;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Service
 public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, OrderDTO, Long> implements OrderService {
@@ -26,24 +23,23 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public LoadChecker checkRoutePoints(Long orderId) {
-
-        List<Load> loadList = getDao().findById(orderId).getLoads();
-
-        // TODO iterate collection and find LOADING & UNLOADING points
-
-        return new LoadChecker("TODO", new ArrayList<>());
-    }
-
-    @Override
-    public Long calculateWeight(Long orderId) {
+    public int calculateWeight(Long orderId) {
 
         Order order = getDao().findById(orderId);
 
         // TODO calculate final weight of the order
 
-        return 0L;
+        return 0;
+    }
+
+    @Override
+    public int calculateRouteTime(Long orderId) {
+
+        Order order = getDao().findById(orderId);
+
+        // TODO calculate final time
+
+        return 0;
     }
 
     @Override

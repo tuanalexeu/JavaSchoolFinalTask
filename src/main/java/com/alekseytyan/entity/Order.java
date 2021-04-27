@@ -10,6 +10,10 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Class represents Order entity which contain list of loads, responsible drivers and used lorry
+ */
+
 @Entity
 @Table(name = "ORDER_LOGIWEB")
 @Getter @Setter @NoArgsConstructor
@@ -34,4 +38,7 @@ public class Order {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.MERGE)
     private List<Driver> drivers;
+
+    @Column(name = "VERIFIED", columnDefinition = "boolean default false")
+    private boolean verified;
 }
