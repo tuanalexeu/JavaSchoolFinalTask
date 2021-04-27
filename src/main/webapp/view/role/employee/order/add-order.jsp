@@ -85,11 +85,11 @@
                                                                 <h3 style="margin: 10px;">City (Loading)</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                    <form:select  path="cityLoad.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
-                                                                        <c:forEach items="${cityNames}" var="name">
-                                                                            <form:option value="${name}">${name}</form:option>
-                                                                        </c:forEach>
-                                                                    </form:select>
+                                                                <form:select  path="cityLoad.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                    <c:forEach items="${cityNames}" var="name">
+                                                                        <form:option value="${name}">${name}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -99,11 +99,11 @@
                                                                 <h3 style="margin: 10px;">City (Unloading)</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                    <form:select  path="cityUnload.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
-                                                                        <c:forEach items="${cityNames}" var="name">
-                                                                            <form:option value="${name}">${name}</form:option>
-                                                                        </c:forEach>
-                                                                    </form:select>
+                                                                <form:select  path="cityUnload.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                    <c:forEach items="${cityNames}" var="name">
+                                                                        <form:option value="${name}">${name}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -205,7 +205,7 @@
                                                 <input:hidden path="lorry.shiftTime" value="${lorry.shiftTime}"/>
                                                 <input:hidden path="lorry.city.name" value="${lorry.city.name}"/>
                                                 <input:hidden path="lorry.broken" value="${lorry.broken}"/>
-                                                <input:hidden path="lorry.order.id" value="${lorry.order.id}"/>
+                                                <input:hidden path="lorry.order" value="${lorry.order}"/>
                                             </c:forEach>
                                         </form:select>
                                     </div>
@@ -233,7 +233,7 @@
                                                         <input:hidden path="drivers[0].state" value="${driver.state}"/>
                                                         <input:hidden path="drivers[0].city.name" value="${driver.city.name}"/>
                                                         <input:hidden path="drivers[0].lorry" value="${driver.lorry}"/>
-                                                        <input:hidden path="drivers[0].order.id" value="${order.id}"/>
+                                                        <input:hidden path="drivers[0].order" value="${order.id}"/>
                                                         <input:hidden path="drivers[0].user.email" value="${driver.user.email}"/>
                                                         <input:hidden path="drivers[0].user.password" value="${driver.user.password}"/>
                                                         <input:hidden path="drivers[0].user.enabled" value="${driver.user.enabled}"/>
@@ -256,7 +256,7 @@
                                                         <input:hidden path="drivers[1].state" value="${driver.state}"/>
                                                         <input:hidden path="drivers[1].city.name" value="${driver.city.name}"/>
                                                         <input:hidden path="drivers[1].lorry" value="${driver.lorry}"/>
-                                                        <input:hidden path="drivers[1].order.id" value="${order.id}"/>
+                                                        <input:hidden path="drivers[1].order" value="${order.id}"/>
                                                         <input:hidden path="drivers[1].user.email" value="${driver.user.email}"/>
                                                         <input:hidden path="drivers[1].user.password" value="${driver.user.password}"/>
                                                         <input:hidden path="drivers[1].user.enabled" value="${driver.user.enabled}"/>
