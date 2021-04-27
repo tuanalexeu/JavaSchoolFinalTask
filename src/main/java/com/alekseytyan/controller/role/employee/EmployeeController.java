@@ -41,7 +41,6 @@ public class EmployeeController {
     public String showOrders(Model model) {
 
         model.addAttribute("orders", orderService.findAll());
-        model.addAttribute("newOrder", new Order());
 
         return "role/employee/order/orders";
     }

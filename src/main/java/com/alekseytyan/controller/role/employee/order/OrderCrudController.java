@@ -1,8 +1,12 @@
 package com.alekseytyan.controller.role.employee.order;
 
+import com.alekseytyan.dto.DriverDTO;
+import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.dto.LoadDTO;
 import com.alekseytyan.service.api.CityService;
+import com.alekseytyan.service.api.DriverService;
+import com.alekseytyan.service.api.LorryService;
 import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,17 +22,34 @@ public class OrderCrudController {
     private final OrderService orderService;
     private final CityService cityService;
 
+    private final DriverService driverService;
+    private final LorryService lorryService;
+
 
     @Autowired
     public OrderCrudController(OrderService orderService,
-                               CityService cityService) {
+                               CityService cityService,
+                               LorryService lorryService,
+                               DriverService driverService) {
         this.orderService = orderService;
         this.cityService = cityService;
+        this.driverService = driverService;
+        this.lorryService = lorryService;
     }
 
     @ModelAttribute("cityNames")
     public List<String> cityNames() {
         return cityService.findAllNames();
+    }
+
+    @ModelAttribute("suitableDrivers")
+    public List<DriverDTO> suitableDrivers() {
+        return driverService.findAll(); // TODO fix
+    }
+
+    @ModelAttribute("suitableLorries")
+    public List<LorryDTO> suitableLorries() {
+        return lorryService.findAll(); // TODO fix
     }
 
     @GetMapping(value = "/add-order")
@@ -37,16 +58,14 @@ public class OrderCrudController {
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderService.save(new OrderDTO()));
 
-        return "role/employee/order/edit-order";
+        return "role/employee/order/add-order";
     }
 
     @GetMapping(value = "/edit-order/{id}")
     public String editOrder(Model model, @PathVariable Long id) {
 
-        OrderDTO orderDTO = orderService.findById(id);
-
         model.addAttribute("newLoad", new LoadDTO());
-        model.addAttribute("order", orderDTO);
+        model.addAttribute("order", orderService.findById(id));
 
         return "role/employee/order/edit-order";
     }
@@ -66,4 +85,15 @@ public class OrderCrudController {
 
         return "redirect:/employee/orders";
     }
+
+    @PostMapping(value = "/verify-order")
+    public String verifyOrder(@ModelAttribute OrderDTO orderDTO) {
+
+        // TODO verify order, if at least one of the conditions isn't met
+        //  (the route is impossible, not each load has both loading & unloading points, no truck or drivers have been chosen)
+        //  the order must not be seen by user
+
+        return "redirect:/employee/orders";
+    }
+
 }
