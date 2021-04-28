@@ -84,8 +84,10 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     @Transactional
     public DriverDTO delete(DriverDTO driverDTO) {
 
-        // Set order as null in dependencies
-        driverDTO.getOrder().getDrivers().remove(driverDTO);
+        if(driverDTO.getOrder() != null) {
+            // Set order as null in dependencies
+            driverDTO.getOrder().getDrivers().remove(driverDTO);
+        }
 
         DriverDTO refreshedDriverDTO = update(driverDTO);
 

@@ -11,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping(value = "/driver")
 public class DriverController {
@@ -48,9 +46,6 @@ public class DriverController {
 
         // find list of route cities
         model.addAttribute("routeCities", orderService.calculateRouteCities(orderId));
-
-        // convert driver entity to Dto object and add to model
-        model.addAttribute("driver", driverDTO);
 
         return "role/driver/driverInfo";
     }

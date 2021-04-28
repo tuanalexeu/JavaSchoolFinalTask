@@ -56,11 +56,16 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     @Transactional
     public OrderDTO delete(OrderDTO orderDTO) {
 
-        // Set order as null in dependencies
-        for (DriverDTO d: orderDTO.getDrivers()) {
-            d.setOrder(null);
+        if(orderDTO.getDrivers() != null) {
+            // Set order as null in dependencies
+            for (DriverDTO d: orderDTO.getDrivers()) {
+                d.setOrder(null);
+            }
         }
-        orderDTO.getLorry().setOrder(null);
+
+        if(orderDTO.getLorry() != null) {
+            orderDTO.getLorry().setOrder(null);
+        }
 
         OrderDTO refreshedOrderDTO = update(orderDTO);
 
