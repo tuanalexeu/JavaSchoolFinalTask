@@ -97,9 +97,6 @@
                                     </div>
                                 </div>
                             </td>
-                        <tr>
-                            <td>ID</td>
-                            <td>${driver.id}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -108,7 +105,7 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Order</th>
+                            <th>Order ID</th>
                             <th>${driver.order.id}</th>
                         </tr>
                         </thead>
@@ -150,8 +147,8 @@
                                             </div>
                                             <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                 <ul>
-                                                    <c:forEach items="${driver.order.loads}" var="load">
-                                                        <li>${load.city.name}</li>
+                                                    <c:forEach items="${routeCities}" var="city" varStatus="loop">
+                                                        <li>[${loop.index}] ${city.name}</li>
                                                     </c:forEach>
                                                 </ul>
                                             </div>

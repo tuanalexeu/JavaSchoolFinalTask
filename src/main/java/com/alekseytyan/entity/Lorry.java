@@ -19,7 +19,6 @@ import javax.validation.constraints.Size;
                     query = "SELECT l from Lorry l where l.capacity <= :weight AND l.isBroken = FALSE AND l.order IS NULL")
 })
 public class Lorry {
-
     @Id
     @Column(name = "ID", length = 7)
     @Pattern(regexp="[a-zA-Z]{2}\\d{5}")

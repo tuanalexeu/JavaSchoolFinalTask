@@ -33,7 +33,7 @@ public class Order {
     private List<Load> loads;
 
     @OneToOne
-    @JoinColumn(name = "LORRY")
+    @JoinColumn(name = "LORRY", referencedColumnName = "ID")
     private Lorry lorry;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.MERGE)

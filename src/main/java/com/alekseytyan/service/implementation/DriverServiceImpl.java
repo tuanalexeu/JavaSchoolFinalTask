@@ -2,6 +2,7 @@ package com.alekseytyan.service.implementation;
 
 import com.alekseytyan.dao.api.DriverDao;
 import com.alekseytyan.dto.DriverDTO;
+import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Driver;
 import com.alekseytyan.entity.enums.UserRole;
 import com.alekseytyan.service.api.DriverService;
@@ -77,5 +78,26 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
         driverDTO.getUser().setEnabled(true);
 
         return super.update(driverDTO);
+    }
+
+    @Override
+    @Transactional
+    public DriverDTO delete(DriverDTO driverDTO) {
+
+        // Set order as null in dependencies
+        driverDTO.getOrder().getDrivers().remove(driverDTO);
+
+        DriverDTO refreshedDriverDTO = update(driverDTO);
+
+        return super.delete(refreshedDriverDTO);
+    }
+
+    @Override
+    @Transactional
+    public DriverDTO deleteById(Long entityId) {
+
+        DriverDTO driverDTO = findById(entityId);
+
+        return delete(driverDTO);
     }
 }

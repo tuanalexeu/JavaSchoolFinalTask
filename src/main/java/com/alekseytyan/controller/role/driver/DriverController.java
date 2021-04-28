@@ -3,6 +3,7 @@ package com.alekseytyan.controller.role.driver;
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.entity.enums.DriverState;
 import com.alekseytyan.service.api.DriverService;
+import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,10 +18,13 @@ import java.util.List;
 public class DriverController {
 
     private final DriverService driverService;
+    private final OrderService orderService;
 
     @Autowired
-    public DriverController(DriverService driverService) {
+    public DriverController(DriverService driverService,
+                            OrderService orderService) {
         this.driverService = driverService;
+        this.orderService = orderService;
     }
 
     @ModelAttribute("driver")
@@ -40,8 +44,10 @@ public class DriverController {
         Long orderId = driverDTO.getId();
 
         // find list of co-drivers
-        List<DriverDTO> coDrivers = driverService.findCoDrivers(orderId);
-        model.addAttribute("coDrivers", coDrivers);
+        model.addAttribute("coDrivers", driverService.findCoDrivers(orderId));
+
+        // find list of route cities
+        model.addAttribute("routeCities", orderService.calculateRouteCities(orderId));
 
         // convert driver entity to Dto object and add to model
         model.addAttribute("driver", driverDTO);
