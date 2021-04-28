@@ -29,13 +29,10 @@ public class LoadCrudController {
         this.cityService = cityService;
     }
 
-    @ModelAttribute("cityNames")
-    public List<String> cityNames() {
-        return cityService.findAllNames();
-    }
-
     @PostMapping(value = "/add-load")
-    public String addRoutePoint(@ModelAttribute LoadDTO loadDTO) {
+    public String addRoutePoint(Model model, @ModelAttribute LoadDTO loadDTO) {
+
+        model.addAttribute("cityNames", cityService.findAllNames());
 
         loadService.save(loadDTO);
 
@@ -46,6 +43,7 @@ public class LoadCrudController {
     public String editLoad(Model model, @PathVariable Long id) {
 
         model.addAttribute("editLoad", loadService.findById(id));
+        model.addAttribute("cityNames", cityService.findAllNames());
 
         OrderDTO orderDTO = orderService.findById(loadService.findOrderId(id));
         model.addAttribute("order", orderDTO);
