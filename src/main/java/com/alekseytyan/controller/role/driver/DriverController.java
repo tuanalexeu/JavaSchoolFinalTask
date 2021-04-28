@@ -49,12 +49,12 @@ public class DriverController {
         return "role/driver/driverInfo";
     }
 
-    @PostMapping(value = "/info")
+    @PostMapping(value = "/save")
     public String getInfo(Model model, @RequestParam String status) {
         DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");
         driverDTO.setState(DriverState.valueOf(status));
         driverService.update(driverDTO);
 
-        return "role/driver/driverInfo";
+        return "redirect:/driver/info";
     }
 }

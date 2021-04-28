@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 
@@ -74,29 +75,25 @@
                                     <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${driver.state} </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item">
-                                            <form action="/driver/info" method="post">
-<%--                                                <input type="submit" value="DUTY" name="Duty">--%>
+                                            <form action="/driver/save" method="post">
                                                 <button type="submit" value="DUTY" name="status">Duty</button>
                                             </form>
                                         </a>
                                         <a class="dropdown-item">
-                                            <form action="/driver/info" method="post">
+                                            <form action="/driver/save" method="post">
                                                 <button type="submit" value="DRIVING" name="status">Driving</button>
                                             </form>
                                         </a>
                                         <a class="dropdown-item">
-                                            <form action="/driver/info" method="post">
+                                            <form action="/driver/save" method="post">
                                                 <button type="submit" value="RESTING" name="status">Resting</button>
                                             </form>
                                         </a>
                                         <a class="dropdown-item">
-                                            <form action="/driver/info" method="post">
+                                            <form action="/driver/save" method="post">
                                                 <button type="submit" value="UNLOADING" name="status">Unloading</button>
                                             </form>
                                         </a>
-<%--                                            <a class="dropdown-item">DRIVING</a>--%>
-<%--                                            <a class="dropdown-item">RESTING</a>--%>
-<%--                                            <a class="dropdown-item">UNLOADING</a>--%>
                                     </div>
                                 </div>
                             </td>
@@ -158,7 +155,9 @@
                                                     </c:forEach>
                                                 </ul>
                                             </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">Ok</button></div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">Ok</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -175,77 +174,82 @@
                                                 <h4 class="modal-title" style="color: rgb(133, 135, 150);">Drivers</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
-                                                <div class="main-container">
-                                                    <ul class="columns">
-                                                        <li class="column to-do-column">
-                                                            <div class="column-header">
-                                                                <h4>Prepared</h4>
-                                                            </div>
-                                                            <ul class="task-list" id="prepared">
-                                                                <c:forEach items="${driver.order.loads}" var="load">
-                                                                    <c:if test="${load.load.status eq 'PREPARED'}">
-                                                                        <li class="task">
-                                                                            <p>${load.load.name}</p>
-                                                                            <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.load.status}</button>
-                                                                                <div class="dropdown-menu">
-                                                                                    <a class="dropdown-item" href="#">PREPARED</a>
-                                                                                    <a class="dropdown-item" href="#">SENT</a>
-                                                                                    <a class="dropdown-item" href="#">DELIVERED</a>
+                                            <form:form action="/driver/save-loads" method="post" modelAttribute="driver">
+                                                <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
+                                                    <div class="main-container">
+                                                        <ul class="columns">
+                                                            <li class="column to-do-column">
+                                                                <div class="column-header">
+                                                                    <h4>Prepared</h4>
+                                                                </div>
+                                                                <ul class="task-list" id="prepared">
+                                                                    <c:forEach items="${driver.order.loads}" var="load" varStatus="loop">
+                                                                        <c:if test="${load.status eq 'PREPARED'}">
+                                                                            <li class="task">
+                                                                                <p>${load.name}</p>
+                                                                                <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
+                                                                                    <form:select  path="order.loads[${loop.index}]">
+                                                                                            <form:option value="DUTY">Duty</form:option>
+                                                                                            <form:option value="RESTING">Resting</form:option>
+                                                                                            <form:option value="DRIVING">Driving</form:option>
+                                                                                            <form:option value="UNLOADING">Unloading</form:option>
+                                                                                    </form:select>
                                                                                 </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </ul>
-                                                        </li>
+                                                                            </li>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                </ul>
+                                                            </li>
 
-                                                        <li class="column doing-column">
-                                                            <div class="column-header">
-                                                                <h4>Sent</h4>
-                                                            </div>
-                                                            <ul class="task-list" id="sent">
-                                                                <c:forEach items="${driver.order.loads}" var="load">
-                                                                    <c:if test="${load.load.status eq 'SENT'}">
-                                                                        <li class="task">
-                                                                            <p>${load.load.name}</p>
-                                                                            <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.load.status}</button>
-                                                                                <div class="dropdown-menu">
-                                                                                    <a class="dropdown-item" href="#">PREPARED</a>
-                                                                                    <a class="dropdown-item" href="#">SENT</a>
-                                                                                    <a class="dropdown-item" href="#">DELIVERED</a>
+                                                            <li class="column doing-column">
+                                                                <div class="column-header">
+                                                                    <h4>Sent</h4>
+                                                                </div>
+                                                                <ul class="task-list" id="sent">
+                                                                    <c:forEach items="${driver.order.loads}" var="load">
+                                                                        <c:if test="${load.load.status eq 'SENT'}">
+                                                                            <li class="task">
+                                                                                <p>${load.load.name}</p>
+                                                                                <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.load.status}</button>
+                                                                                    <div class="dropdown-menu">
+                                                                                        <a class="dropdown-item" href="#">PREPARED</a>
+                                                                                        <a class="dropdown-item" href="#">SENT</a>
+                                                                                        <a class="dropdown-item" href="#">DELIVERED</a>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="column doing-column">
-                                                            <div class="column-header">
-                                                                <h4>Delivered</h4>
-                                                            </div>
-                                                            <ul class="task-list" id="delivered">
-                                                                <c:forEach items="${driver.order.loads}" var="load">
-                                                                    <c:if test="${load.load.status eq 'DELIVERED'}">
-                                                                        <li class="task">
-                                                                            <p>${load.load.name}</p>
-                                                                            <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.load.status}</button>
-                                                                                <div class="dropdown-menu">
-                                                                                    <a class="dropdown-item" href="#">PREPARED</a>
-                                                                                    <a class="dropdown-item" href="#">SENT</a>
-                                                                                    <a class="dropdown-item" href="#">DELIVERED</a>
+                                                                            </li>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="column doing-column">
+                                                                <div class="column-header">
+                                                                    <h4>Delivered</h4>
+                                                                </div>
+                                                                <ul class="task-list" id="delivered">
+                                                                    <c:forEach items="${driver.order.loads}" var="load">
+                                                                        <c:if test="${load.load.status eq 'DELIVERED'}">
+                                                                            <li class="task">
+                                                                                <p>${load.load.name}</p>
+                                                                                <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.load.status}</button>
+                                                                                    <div class="dropdown-menu">
+                                                                                        <a class="dropdown-item" href="#">PREPARED</a>
+                                                                                        <a class="dropdown-item" href="#">SENT</a>
+                                                                                        <a class="dropdown-item" href="#">DELIVERED</a>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
+                                                                            </li>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">Ok</button></div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-light" type="submit" style="border-color: #dc58b8;color: #dc58b8;">Save</button>
+                                                </div>
+                                            </form:form>
                                         </div>
                                     </div>
                                 </div>
