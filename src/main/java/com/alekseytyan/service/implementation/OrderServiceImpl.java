@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,12 +44,23 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
+    public List<City> calculateRouteCities(Long orderId) {
+        Order order = getDao().findById(orderId);
+
+        // TODO calculate route
+
+        return new ArrayList<>();
+    }
+
+    @Override
     @Transactional
     public OrderDTO delete(OrderDTO orderDTO) {
 
+        // Set order as null in dependencies
         for (DriverDTO d: orderDTO.getDrivers()) {
             d.setOrder(null);
         }
+        orderDTO.getLorry().setOrder(null);
 
         OrderDTO refreshedOrderDTO = update(orderDTO);
 

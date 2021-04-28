@@ -1,7 +1,10 @@
 package com.alekseytyan.service.api;
 
 import com.alekseytyan.dto.OrderDTO;
+import com.alekseytyan.entity.City;
 import com.alekseytyan.entity.Order;
+
+import java.util.List;
 
 public interface OrderService extends AbstractService<Order, OrderDTO, Long> {
     /**
@@ -17,4 +20,10 @@ public interface OrderService extends AbstractService<Order, OrderDTO, Long> {
      * @return - time as hours
      */
     int calculateRouteTime(Long orderId);
+
+    /**
+     * Method calculates route of order
+     * @return - list of cities we need to visit in order to complete current order
+     */
+    List<City> calculateRouteCities(Long orderId);
 }
