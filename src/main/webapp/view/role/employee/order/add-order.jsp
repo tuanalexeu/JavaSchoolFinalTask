@@ -189,7 +189,7 @@
                     </div>
                 </div>
 
-                <form:form name="saveOrderForm" action="/employee/verify-order" method="post" modelAttribute="order">
+                <form:form name="saveOrderForm" action="/employee/save-order" method="post" modelAttribute="order">
                     <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">
                         <div class="card shadow">
                             <div class="card-body">
@@ -227,17 +227,17 @@
                                                 <form:select  path="drivers[0].firstName" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px;">
                                                     <c:forEach items="${suitableDrivers}" var="driver">
                                                         <form:option value="${driver.firstName}">[${driver.id}] ${driver.firstName} ${driver.lastName}</form:option>
-                                                        <input:hidden path="drivers[0].lastName" value="${driver.lastName}"/>
-                                                        <input:hidden path="drivers[0].id" value="${driver.id}"/>
-                                                        <input:hidden path="drivers[0].hoursWorked" value="${driver.hoursWorked}"/>
-                                                        <input:hidden path="drivers[0].state" value="${driver.state}"/>
-                                                        <input:hidden path="drivers[0].city.name" value="${driver.city.name}"/>
-                                                        <input:hidden path="drivers[0].lorry" value="${driver.lorry}"/>
-                                                        <input:hidden path="drivers[0].order" value="${order.id}"/>
-                                                        <input:hidden path="drivers[0].user.email" value="${driver.user.email}"/>
-                                                        <input:hidden path="drivers[0].user.password" value="${driver.user.password}"/>
-                                                        <input:hidden path="drivers[0].user.enabled" value="${driver.user.enabled}"/>
-                                                        <input:hidden path="drivers[0].user.role" value="${driver.user.role}"/>
+<%--                                                        <input:hidden path="drivers[0].lastName" value="${driver.lastName}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].id" value="${driver.id}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].hoursWorked" value="${driver.hoursWorked}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].state" value="${driver.state}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].city.name" value="${driver.city.name}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].lorry" value="${driver.lorry}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].order" value="${order.id}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].user.email" value="${driver.user.email}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].user.password" value="${driver.user.password}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].user.enabled" value="${driver.user.enabled}"/>--%>
+<%--                                                        <input:hidden path="drivers[0].user.role" value="${driver.user.role}"/>--%>
                                                     </c:forEach>
                                                 </form:select>
                                             </div>
@@ -250,17 +250,17 @@
                                                 <form:select  path="drivers[1].firstName" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px;">
                                                     <c:forEach items="${suitableDrivers}" var="driver">
                                                         <form:option value="${driver.firstName}">[${driver.id}] ${driver.firstName} ${driver.lastName}</form:option>
-                                                        <input:hidden path="drivers[1].lastName" value="${driver.lastName}"/>
-                                                        <input:hidden path="drivers[1].id" value="${driver.id}"/>
-                                                        <input:hidden path="drivers[1].hoursWorked" value="${driver.hoursWorked}"/>
-                                                        <input:hidden path="drivers[1].state" value="${driver.state}"/>
-                                                        <input:hidden path="drivers[1].city.name" value="${driver.city.name}"/>
-                                                        <input:hidden path="drivers[1].lorry" value="${driver.lorry}"/>
-                                                        <input:hidden path="drivers[1].order" value="${order.id}"/>
-                                                        <input:hidden path="drivers[1].user.email" value="${driver.user.email}"/>
-                                                        <input:hidden path="drivers[1].user.password" value="${driver.user.password}"/>
-                                                        <input:hidden path="drivers[1].user.enabled" value="${driver.user.enabled}"/>
-                                                        <input:hidden path="drivers[1].user.role" value="${driver.user.role}"/>
+<%--                                                        <input:hidden path="drivers[1].lastName" value="${driver.lastName}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].id" value="${driver.id}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].hoursWorked" value="${driver.hoursWorked}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].state" value="${driver.state}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].city.name" value="${driver.city.name}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].lorry" value="${driver.lorry}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].order" value="${order.id}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].user.email" value="${driver.user.email}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].user.password" value="${driver.user.password}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].user.enabled" value="${driver.user.enabled}"/>--%>
+<%--                                                        <input:hidden path="drivers[1].user.role" value="${driver.user.role}"/>--%>
                                                     </c:forEach>
                                                 </form:select>
                                             </div>
