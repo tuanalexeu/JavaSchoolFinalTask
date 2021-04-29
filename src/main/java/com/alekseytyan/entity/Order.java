@@ -1,9 +1,6 @@
 package com.alekseytyan.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -17,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "ORDER_LOGIWEB")
 @Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 public class Order {
 

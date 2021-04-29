@@ -1,9 +1,6 @@
 package com.alekseytyan.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -11,8 +8,9 @@ import javax.validation.constraints.Min;
 @Entity
 @Table(name = "MAP")
 @Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
-public class Map {
+public class DistanceMap {
 
     @Id
     @Column(name = "ID")

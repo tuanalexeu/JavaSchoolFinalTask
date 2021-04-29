@@ -1,9 +1,6 @@
 package com.alekseytyan.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -13,6 +10,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "LORRY")
 @Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(exclude = "order")
 @NamedQueries({
         @NamedQuery(name = "Lorry.findSuitableLorries",

@@ -1,10 +1,7 @@
 package com.alekseytyan.entity;
 
 import com.alekseytyan.entity.enums.LoadStatus;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -15,6 +12,7 @@ import javax.validation.constraints.Min;
 @Entity
 @Table(name = "LOAD_LOGIWEB")
 @Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 public class Load {
 
