@@ -3,6 +3,7 @@ package com.alekseytyan.controller.role.driver;
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.entity.enums.DriverState;
 import com.alekseytyan.service.api.DriverService;
+import com.alekseytyan.service.api.MapService;
 import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,12 +18,15 @@ public class DriverController {
 
     private final DriverService driverService;
     private final OrderService orderService;
+    private final MapService mapService;
 
     @Autowired
     public DriverController(DriverService driverService,
-                            OrderService orderService) {
+                            OrderService orderService,
+                            MapService mapService) {
         this.driverService = driverService;
         this.orderService = orderService;
+        this.mapService = mapService;
     }
 
     @ModelAttribute("driver")
@@ -45,7 +49,14 @@ public class DriverController {
         model.addAttribute("coDrivers", driverService.findCoDrivers(orderId));
 
         // find list of route cities
-        model.addAttribute("routeCities", orderService.calculateRouteCities(orderId));
+        model.addAttribute("route", orderService.calculateRoute(
+                orderService.convertToEntity(
+                        orderService.findById(orderId)
+                ),
+                mapService.convertToEntity(
+                        mapService.findAll()
+                )
+        ));
 
         return "role/driver/driverInfo";
     }

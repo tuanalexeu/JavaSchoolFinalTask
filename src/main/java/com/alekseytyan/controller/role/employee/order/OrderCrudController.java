@@ -4,10 +4,8 @@ import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.dto.LoadDTO;
-import com.alekseytyan.service.api.CityService;
-import com.alekseytyan.service.api.DriverService;
-import com.alekseytyan.service.api.LorryService;
-import com.alekseytyan.service.api.OrderService;
+import com.alekseytyan.service.api.*;
+import com.alekseytyan.util.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,20 +19,22 @@ public class OrderCrudController {
 
     private final OrderService orderService;
     private final CityService cityService;
-
     private final DriverService driverService;
     private final LorryService lorryService;
+    private final MapService mapService;
 
 
     @Autowired
     public OrderCrudController(OrderService orderService,
                                CityService cityService,
                                LorryService lorryService,
-                               DriverService driverService) {
+                               DriverService driverService,
+                               MapService mapService) {
         this.orderService = orderService;
         this.cityService = cityService;
         this.driverService = driverService;
         this.lorryService = lorryService;
+        this.mapService = mapService;
     }
 
     @ModelAttribute("cityNames")
@@ -61,21 +61,19 @@ public class OrderCrudController {
         return "role/employee/order/add-order";
     }
 
-    @GetMapping(value = "/edit-order/{id}")
-    public String editOrder(Model model, @PathVariable Long id) {
+    @GetMapping(value ={"/edit-order/{id}", "/edit-order/{id}/{error}"})
+    public String editOrder(Model model,
+                            @PathVariable Long id,
+                            @PathVariable boolean error) {
 
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderService.findById(id));
 
+        if(error) {
+            model.addAttribute("error", true);
+        }
+
         return "role/employee/order/edit-order";
-    }
-
-    @PostMapping(value = "/save-order")
-    public String editOrder(@ModelAttribute OrderDTO orderDTO) {
-
-        orderService.update(orderDTO);
-
-        return "redirect:/employee/orders";
     }
 
     @GetMapping(value = "/delete-order/{id}")
@@ -86,12 +84,24 @@ public class OrderCrudController {
         return "redirect:/employee/orders";
     }
 
-    @PostMapping(value = "/verify-order")
+    @PostMapping(value = "/save-order")
     public String verifyOrder(@ModelAttribute OrderDTO orderDTO) {
 
-        // TODO verify order, if at least one of the conditions isn't met
-        //  (the route is impossible, not each load has both loading & unloading points, no truck or drivers have been chosen)
-        //  the order must not be seen by user
+        Route route = orderService.calculateRoute(
+                orderService.convertToEntity(
+                        orderDTO
+                ),
+                mapService.convertToEntity(
+                        mapService.findAll()
+                )
+        );
+        orderDTO.setVerified(route.isPossible());
+
+        if(!route.isPossible()) {
+            return "redirect:/employee/edit-order/" + orderDTO.getId() + "/true";
+        }
+
+        orderService.update(orderDTO);
 
         return "redirect:/employee/orders";
     }
