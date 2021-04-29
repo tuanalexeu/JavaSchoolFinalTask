@@ -38,5 +38,5 @@ public class Order {
     private List<Driver> drivers;
 
     @Column(name = "VERIFIED", columnDefinition = "boolean default false")
-    private boolean verified;
+    private boolean isVerified;
 }

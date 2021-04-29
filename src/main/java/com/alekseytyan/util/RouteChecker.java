@@ -128,18 +128,6 @@ public class RouteChecker {
     }
 
     /**
-     * Method checks distance between two cities
-     */
-    private int checkDistance(City cityFrom, City cityTo) {
-        for (DistanceMap d: distances) {
-            if(d.getCityFrom().equals(cityFrom) && d.getCityTo().equals(cityTo)) {
-                return d.getDistance();
-            }
-        }
-        throw new IllegalStateException("Route between cities does not exist");
-    }
-
-    /**
      * Method calculates actual time need to complete the order
      * @return - time as hours
      */
