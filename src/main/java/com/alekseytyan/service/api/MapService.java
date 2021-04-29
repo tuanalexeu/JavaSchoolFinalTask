@@ -1,7 +1,7 @@
 package com.alekseytyan.service.api;
 
 import com.alekseytyan.dto.MapDTO;
-import com.alekseytyan.entity.Map;
+import com.alekseytyan.entity.DistanceMap;
 
-public interface MapService extends AbstractService<Map, MapDTO, Long> {
+public interface MapService extends AbstractService<DistanceMap, MapDTO, Long> {
 }
