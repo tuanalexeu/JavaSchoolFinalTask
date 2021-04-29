@@ -67,10 +67,6 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     @Override
     public DriverDTO update(DriverDTO driverDTO) {
 
-        // Encrypt password in service method.
-        // Protected from changing on frontend side
-        driverDTO.getUser().setPassword(passwordEncoder.encode(driverDTO.getUser().getPassword()));
-
         // Set role
         driverDTO.getUser().setRole(UserRole.ROLE_DRIVER);
 

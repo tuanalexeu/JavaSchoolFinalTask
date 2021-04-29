@@ -58,4 +58,12 @@ public class DriverController {
 
         return "redirect:/driver/info";
     }
+
+    @PostMapping(value = "/save-loads")
+    public String saveLoadStatus(@ModelAttribute DriverDTO driverDTO) {
+
+        driverService.update(driverDTO);
+
+        return "redirect:/driver/driverInfo";
+    }
 }

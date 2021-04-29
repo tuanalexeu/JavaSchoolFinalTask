@@ -102,7 +102,7 @@
                                                                 <h3 style="margin: 10px;">Hours worked</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="hoursWorked" path="hours_worked" cssErrorClass="errorBox"/>
+                                                                <form:input id="hoursWorked" path="hoursWorked" cssErrorClass="errorBox"/>
                                                             </div>
                                                         </div>
                                                     </div>
