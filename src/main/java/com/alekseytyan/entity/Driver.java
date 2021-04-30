@@ -1,10 +1,7 @@
 package com.alekseytyan.entity;
 
 import com.alekseytyan.entity.enums.DriverState;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -18,9 +15,10 @@ import javax.validation.constraints.Min;
         @NamedQuery(name = "Driver.findCoDrivers",
                 query = "SELECT d FROM Driver d where d.order.id = :id"),
         @NamedQuery(name = "Driver.findSuitableDrivers",
-                query = "SELECT d FROM Driver d where d.hours_worked <= d.hours_worked + :hours AND d.city.name = :cityName AND d.order IS NULL")
+                query = "SELECT d FROM Driver d where d.hoursWorked <= d.hoursWorked + :hours AND d.city.name = :cityName AND d.order IS NULL")
 })
 @Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 public class Driver {
 
@@ -37,7 +35,7 @@ public class Driver {
 
     @Column(name = "HOURS_WORKED", nullable = false)
     @Min(0) @Max(176)
-    private int hours_worked;
+    private int hoursWorked;
 
     @Column(name = "STATE", nullable = false)
     @Enumerated(EnumType.STRING)

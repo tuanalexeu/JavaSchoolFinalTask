@@ -1,19 +1,25 @@
 package com.alekseytyan.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Class represents Order entity which contain list of loads, responsible drivers and used lorry
+ */
+
 @Entity
 @Table(name = "ORDER_LOGIWEB")
 @Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
+@NamedQueries({
+        @NamedQuery(name = "Order.findVerified",
+                    query = "select o from Order o where o.isVerified = TRUE")
+})
 public class Order {
 
     @Id
@@ -29,9 +35,12 @@ public class Order {
     private List<Load> loads;
 
     @OneToOne
-    @JoinColumn(name = "LORRY")
+    @JoinColumn(name = "LORRY", referencedColumnName = "ID")
     private Lorry lorry;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.MERGE)
     private List<Driver> drivers;
+
+    @Column(name = "VERIFIED", columnDefinition = "boolean default false")
+    private boolean isVerified;
 }

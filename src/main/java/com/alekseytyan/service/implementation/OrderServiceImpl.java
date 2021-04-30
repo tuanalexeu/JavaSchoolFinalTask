@@ -3,22 +3,23 @@ package com.alekseytyan.service.implementation;
 import com.alekseytyan.dao.api.OrderDao;
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.dto.OrderDTO;
-import com.alekseytyan.entity.Order;
+import com.alekseytyan.entity.City;
+import com.alekseytyan.entity.DistanceMap;
 import com.alekseytyan.entity.Load;
-import com.alekseytyan.service.api.DriverService;
+import com.alekseytyan.entity.Order;
 import com.alekseytyan.service.api.OrderService;
-import com.alekseytyan.util.LoadChecker;
+import com.alekseytyan.util.Route;
+import com.alekseytyan.util.RouteChecker;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, OrderDTO, Long> implements OrderService {
+
 
     @Autowired
     public OrderServiceImpl(OrderDao dao, ModelMapper mapper) {
@@ -26,32 +27,18 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public LoadChecker checkRoutePoints(Long orderId) {
-
-        List<Load> loadList = getDao().findById(orderId).getLoads();
-
-        // TODO iterate collection and find LOADING & UNLOADING points
-
-        return new LoadChecker("TODO", new ArrayList<>());
-    }
-
-    @Override
-    public Long calculateWeight(Long orderId) {
-
-        Order order = getDao().findById(orderId);
-
-        // TODO calculate final weight of the order
-
-        return 0L;
-    }
-
-    @Override
     @Transactional
     public OrderDTO delete(OrderDTO orderDTO) {
 
-        for (DriverDTO d: orderDTO.getDrivers()) {
-            d.setOrder(null);
+        if(orderDTO.getDrivers() != null) {
+            // Set order as null in dependencies
+            for (DriverDTO d: orderDTO.getDrivers()) {
+                d.setOrder(null);
+            }
+        }
+
+        if(orderDTO.getLorry() != null) {
+            orderDTO.getLorry().setOrder(null);
         }
 
         OrderDTO refreshedOrderDTO = update(orderDTO);
@@ -66,5 +53,26 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
         OrderDTO orderDTO = findById(entityId);
 
         return delete(orderDTO);
+    }
+
+    @Override
+    public List<OrderDTO> findVerified() {
+        return convertToDTO(getDao().findVerified());
+    }
+
+    @Override
+    public Route calculateRoute(Order order, List<DistanceMap> distanceMaps) {
+
+        List<Load> loads = order.getLoads();
+        City cityStart = order.getLorry().getCity();
+        
+        return RouteChecker.calculateRoute(distanceMaps, loads, cityStart);
+    }
+
+    @Override
+    public int calculateWeight(Order order) {
+        List<Load> loads = order.getLoads();
+
+        return RouteChecker.calculateMaxWeight(loads);
     }
 }

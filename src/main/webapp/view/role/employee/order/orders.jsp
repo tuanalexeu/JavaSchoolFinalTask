@@ -93,8 +93,8 @@
                                         <td>${order.finished ? "Finished" : "In process"}</td>
                                         <td>${order.lorry.regNum}</td>
                                         <td>
-                                            <a href="#route-modal" data-toggle="modal" data-target="#route-modal" style="color: #DC58B8">Route</a>
-                                            <div class="modal fade" role="dialog" tabindex="-1" id="route-modal">
+                                            <a href="#route-modal${order.id}" data-toggle="modal" data-target="#route-modal${order.id}" style="color: #DC58B8">Route</a>
+                                            <div class="modal fade" role="dialog" tabindex="-1" id="route-modal${order.id}">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -115,8 +115,8 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="#drivers-modal" data-toggle="modal" data-target="#drivers-modal" style="color: #DC58B8">Drivers</a>
-                                            <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal">
+                                            <a href="#drivers-modal${order.id}" data-toggle="modal" data-target="#drivers-modal${order.id}" style="color: #DC58B8">Drivers</a>
+                                            <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal${order.id}">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">

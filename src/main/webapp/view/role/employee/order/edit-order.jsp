@@ -54,6 +54,9 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Edit order</h3>
+                <c:if test="${error}">
+                    <h3 class="text-dark mb-4" style="color: #ea4335">Looks like you haven't configured order properly...</h3>
+                </c:if>
                 <div class="card shadow">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">Loads</p>
@@ -85,13 +88,11 @@
                                                                 <h3 style="margin: 10px;">City (Loading)</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <div class="dropdown">
-                                                                    <form:select  path="cityLoad.name">
-                                                                        <c:forEach items="${cityNames}" var="name">
-                                                                            <form:option value="${name}">${name}</form:option>
-                                                                        </c:forEach>
-                                                                    </form:select>
-                                                                </div>
+                                                                <form:select  path="cityLoad.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                    <c:forEach items="${cityNames}" var="name">
+                                                                        <form:option value="${name}">${name}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -101,13 +102,11 @@
                                                                 <h3 style="margin: 10px;">City (Unloading)</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <div class="dropdown">
-                                                                    <form:select  path="cityUnload.name">
-                                                                        <c:forEach items="${cityNames}" var="name">
-                                                                            <form:option value="${name}">${name}</form:option>
-                                                                        </c:forEach>
-                                                                    </form:select>
-                                                                </div>
+                                                                <form:select  path="cityUnload.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                    <c:forEach items="${cityNames}" var="name">
+                                                                        <form:option value="${name}">${name}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -149,9 +148,11 @@
                                 <thead>
                                 <tr>
                                     <th>Load id</th>
+                                    <th>Description</th>
                                     <th>City (Loading)</th>
                                     <th>City (Unloading)</th>
-                                    <th>Load info</th>
+                                    <th>Weight</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -162,29 +163,11 @@
                                                 <button class="btn btn-primary btn-block btn-user" id="editPoint" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${load.id}</button>
                                             </form>
                                         </td>
+                                        <td>${load.name}</td>
                                         <td>${load.cityLoad.name}</td>
                                         <td>${load.cityUnload.name}</td>
-                                        <td>
-                                            <a href="#load-modal" data-toggle="modal" data-target="#load-modal" style="color: #DC58B8">Info</a>
-                                            <div class="modal fade" role="dialog" tabindex="-1" id="load-modal">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title" style="color: rgb(133, 135, 150);">Load info</h4>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                                                        </div>
-                                                        <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
-                                                            <ul>
-                                                                <li>${load.name}</li>
-                                                                <li>${load.weight}</li>
-                                                                <li>${load.status}</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
+                                        <td>${load.weight}</td>
+                                        <td>${load.status}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -209,79 +192,97 @@
                     </div>
                 </div>
 
-                <form:form name="saveOrderForm" action="/employee/checkPoints" method="post" modelAttribute="order">
-                    <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6 text-nowrap">
-                                        <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="padding: 10px;margin: 10px;"></button>
-                                            <div class="dropdown-menu">
-                                                <form:select  path="lorry.regNum">
-                                                    <c:forEach items="${suitableLorries}" var="lorry">
-                                                        <form:option value="${lorry.regNum}">${lorry.regNum}</form:option>
-                                                        <input:hidden path="lorry.capacity" value="${lorry.capacity}"/>
-                                                        <input:hidden path="lorry.shiftTime" value="${lorry.shiftTime}"/>
-                                                        <input:hidden path="lorry.city.name" value="${lorry.city.name}"/>
-                                                        <input:hidden path="lorry.broken" value="${lorry.broken}"/>
-                                                        <input:hidden path="lorry.order" value="${lorry.order}"/>
-                                                    </c:forEach>
-                                                </form:select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6 text-nowrap">
-                                        <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div></div>
-                                        <div class="row">
-                                            <div class="col" style="padding: 10px;">
-                                                <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>
-                                            </div>
-                                            <div class="col">
-                                                <div class="dropdown" style="padding: 10px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="padding: 10px;">Dropdown </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">First Item</a>
-                                                        <a class="dropdown-item" href="#">Second Item</a>
-                                                        <a class="dropdown-item" href="#">Third Item</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col" style="padding: 10px;">
-                                                <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>
-                                            </div>
-                                            <div class="col">
-                                                <div class="dropdown" style="padding: 10px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="padding: 10px;">Dropdown </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">First Item</a>
-                                                        <a class="dropdown-item" href="#">Second Item</a>
-                                                        <a class="dropdown-item" href="#">Third Item</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <form:hidden name="id" value="${order.id}" path="id"/>
-                </form:form>
-
+<%--                <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">--%>
+<%--                    <div class="card shadow">--%>
+<%--                        <div class="card-body">--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-md-6 text-nowrap">--%>
+<%--                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-md-6">--%>
+<%--                                    <form action="/employee/apply-truck">--%>
+<%--                                        <input type="hidden" name="orderId" value="${order.id}">--%>
+<%--                                        <div class="dropdown">--%>
+<%--                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLorryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+<%--                                                Choose--%>
+<%--                                            </button>--%>
+<%--                                            <div class="dropdown-menu" aria-labelledby="dropdownLorryButton">--%>
+<%--                                                <c:forEach items="suitableLorries" var="lorry">--%>
+<%--                                                    <button type="submit" name="id" value="${lorry.regNum}">${lorry.regNum}</button>--%>
+<%--                                                </c:forEach>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </form>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="card-body">--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-md-6 text-nowrap">--%>
+<%--                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-md-6">--%>
+<%--                                    <div></div>--%>
+<%--                                    <div class="row">--%>
+<%--                                        <div class="col" style="padding: 5px;">--%>
+<%--                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="col">--%>
+<%--                                            <form action="/employee/apply-driver" method="post">--%>
+<%--                                                <div class="dropdown">--%>
+<%--                                                    <input type="hidden" name="orderId" value="${order.id}">--%>
+<%--                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver1Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+<%--                                                        Choose--%>
+<%--                                                    </button>--%>
+<%--                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver1Button">--%>
+<%--                                                        <c:forEach items="suitableDrivers" var="driver">--%>
+<%--                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>--%>
+<%--                                                        </c:forEach>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </form>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="row">--%>
+<%--                                        <div class="col" style="padding: 5px;">--%>
+<%--                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="col">--%>
+<%--                                            <form action="/employee/apply-driver" method="post">--%>
+<%--                                                <input type="hidden" name="orderId" value="${order.id}">--%>
+<%--                                                <div class="dropdown">--%>
+<%--                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver2Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+<%--                                                        Choose--%>
+<%--                                                    </button>--%>
+<%--                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver2Button">--%>
+<%--                                                        <c:forEach items="suitableDrivers" var="driver">--%>
+<%--                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>--%>
+<%--                                                        </c:forEach>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </form>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
                 <div class="container" style="text-align: center;">
-                    <button form="saveOrderForm" class="btn btn-primary" type="button" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Save</button>
+                    <form action="/employee/orders">
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Back</button>
+                    </form>
+                </div>
+                <div class="container" style="text-align: center;">
+                    <form action="/employee/delete-order/${order.id}">
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Delete</button>
+                    </form>
+                </div>
+                <div class="container" style="text-align: center;">
+                    <form action="/employee/verify-order/${order.id}">
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Save</button>
+                    </form>
                 </div>
             </div>
         </div>

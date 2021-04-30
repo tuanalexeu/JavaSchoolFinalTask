@@ -118,17 +118,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <c:if test="${not empty editDriver.lorry}">
+                            <form:hidden id="lorry" path="lorry.regNum" value="${editDriver.lorry.regNum}" cssErrorClass="errorBox"/>
+                        </c:if>
+
+                        <c:if test="${not empty editDriver.order}">
+                            <form:hidden id="order" path="order.id" value="${editDriver.order.id}" cssErrorClass="errorBox"/>
+                        </c:if>
+
                         <form:hidden id="email" path="user.email" value="${editDriver.user.email}" cssErrorClass="errorBox"/>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h3 style="margin: 10px;">Password</h3>
-                                </div>
-                                <div class="col-md-6">
-                                    <form:password id="password" path="user.password" cssErrorClass="errorBox"/>
-                                </div>
-                            </div>
-                        </div>
+                        <form:hidden id="password" path="user.password" value="${editDriver.user.password}" cssErrorClass="errorBox"/>
                     </div>
                 </form:form>
                 <div class="modal-footer">

@@ -2,6 +2,7 @@ package com.alekseytyan.service.implementation;
 
 import com.alekseytyan.dao.api.DriverDao;
 import com.alekseytyan.dto.DriverDTO;
+import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Driver;
 import com.alekseytyan.entity.enums.UserRole;
 import com.alekseytyan.service.api.DriverService;
@@ -42,7 +43,7 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
 
     @Override
     @Transactional(readOnly = true)
-    public List<DriverDTO> findSuitableDrivers(String cityName, Long hours) {
+    public List<DriverDTO> findSuitableDrivers(String cityName, int hours) {
         return convertToDTO(getDao().findSuitableDrivers(cityName, hours));
     }
 
@@ -66,10 +67,6 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     @Override
     public DriverDTO update(DriverDTO driverDTO) {
 
-        // Encrypt password in service method.
-        // Protected from changing on frontend side
-        driverDTO.getUser().setPassword(passwordEncoder.encode(driverDTO.getUser().getPassword()));
-
         // Set role
         driverDTO.getUser().setRole(UserRole.ROLE_DRIVER);
 
@@ -77,5 +74,28 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
         driverDTO.getUser().setEnabled(true);
 
         return super.update(driverDTO);
+    }
+
+    @Override
+    @Transactional
+    public DriverDTO delete(DriverDTO driverDTO) {
+
+        if(driverDTO.getOrder() != null) {
+            // Set order as null in dependencies
+            driverDTO.getOrder().getDrivers().remove(driverDTO);
+        }
+
+        DriverDTO refreshedDriverDTO = update(driverDTO);
+
+        return super.delete(refreshedDriverDTO);
+    }
+
+    @Override
+    @Transactional
+    public DriverDTO deleteById(Long entityId) {
+
+        DriverDTO driverDTO = findById(entityId);
+
+        return delete(driverDTO);
     }
 }

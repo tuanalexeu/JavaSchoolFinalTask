@@ -12,6 +12,8 @@ public class OrderDTO {
 
     private boolean isFinished;
 
+    private boolean isVerified;
+
     @ToString.Exclude
     private List<LoadDTO> loads;
 

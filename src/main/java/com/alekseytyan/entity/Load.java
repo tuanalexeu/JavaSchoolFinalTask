@@ -1,17 +1,18 @@
 package com.alekseytyan.entity;
 
 import com.alekseytyan.entity.enums.LoadStatus;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 
+/**
+ * Class represents LOAD entity which needs delivering from A to B point
+ */
 @Entity
 @Table(name = "LOAD_LOGIWEB")
 @Getter @Setter @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 public class Load {
 
@@ -21,11 +22,11 @@ public class Load {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "CITY_LOAD")
+    @JoinColumn(name = "CITY_LOAD", nullable = false)
     private City cityLoad;
 
     @ManyToOne
-    @JoinColumn(name = "CITY_UNLOAD")
+    @JoinColumn(name = "CITY_UNLOAD", nullable = false)
     private City cityUnload;
 
     @ManyToOne

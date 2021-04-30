@@ -3,6 +3,8 @@ package com.alekseytyan.controller.role.driver;
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.entity.enums.DriverState;
 import com.alekseytyan.service.api.DriverService;
+import com.alekseytyan.service.api.MapService;
+import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,17 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping(value = "/driver")
 public class DriverController {
 
     private final DriverService driverService;
+    private final OrderService orderService;
+    private final MapService mapService;
 
     @Autowired
-    public DriverController(DriverService driverService) {
+    public DriverController(DriverService driverService,
+                            OrderService orderService,
+                            MapService mapService) {
         this.driverService = driverService;
+        this.orderService = orderService;
+        this.mapService = mapService;
     }
 
     @ModelAttribute("driver")
@@ -40,11 +46,17 @@ public class DriverController {
         Long orderId = driverDTO.getId();
 
         // find list of co-drivers
-        List<DriverDTO> coDrivers = driverService.findCoDrivers(orderId);
-        model.addAttribute("coDrivers", coDrivers);
+        model.addAttribute("coDrivers", driverService.findCoDrivers(orderId));
 
-        // convert driver entity to Dto object and add to model
-        model.addAttribute("driver", driverDTO);
+//        // find list of route cities
+//        model.addAttribute("route", orderService.calculateRoute(
+//                orderService.convertToEntity(
+//                        orderService.findById(orderId)
+//                ),
+//                mapService.convertToEntity(
+//                        mapService.findAll()
+//                )
+//        ));
 
         return "role/driver/driverInfo";
     }
@@ -56,5 +68,13 @@ public class DriverController {
         driverService.update(driverDTO);
 
         return "redirect:/driver/info";
+    }
+
+    @PostMapping(value = "/save-loads")
+    public String saveLoadStatus(@ModelAttribute DriverDTO driverDTO) {
+
+        driverService.update(driverDTO);
+
+        return "redirect:/driver/driverInfo";
     }
 }

@@ -113,7 +113,7 @@
                 </form:form>
                 <div class="modal-footer">
                     <form action="/employee/edit-order/${editLoad.order.id}">
-                        <button class="btn btn-light" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Back</button>
+                        <button class="btn btn-light" type="submit" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Back</button>
                     </form>
                     <form action="/employee/delete-load/${editLoad.id}">
                         <button class="btn btn-light" type="submit" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Delete</button>
