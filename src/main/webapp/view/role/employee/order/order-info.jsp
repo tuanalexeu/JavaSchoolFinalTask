@@ -152,22 +152,6 @@
                                             </div>
                                             <div class="col">
 
-                                                <form:select  path="drivers[0].firstName" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px;">
-                                                    <c:forEach items="${suitableDrivers}" var="driver">
-                                                        <form:option value="${driver.firstName}">[${driver.id}] ${driver.firstName} ${driver.lastName}</form:option>
-                                                        <%--                                                        <input:hidden path="drivers[0].lastName" value="${driver.lastName}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].id" value="${driver.id}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].hoursWorked" value="${driver.hoursWorked}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].state" value="${driver.state}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].city.name" value="${driver.city.name}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].lorry" value="${driver.lorry}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].order.id" value="${order.id}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].user.email" value="${driver.user.email}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].user.password" value="${driver.user.password}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].user.enabled" value="${driver.user.enabled}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[0].user.role" value="${driver.user.role}"/>--%>
-                                                    </c:forEach>
-                                                </form:select>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -209,9 +193,6 @@
                     <form action="/employee/delete-order/${order.id}" method="get">
                         <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Delete</button>
                     </form>
-                </div>
-                <div class="container" style="text-align: center;">
-                    <button form="saveOrderForm" class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Save</button>
                 </div>
             </div>
         </div>

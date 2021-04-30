@@ -54,6 +54,9 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Edit order</h3>
+                <c:if test="${error}">
+                    <h3 class="text-dark mb-4" style="color: #ea4335">Looks like you haven't configured order properly...</h3>
+                </c:if>
                 <div class="card shadow">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">Loads</p>
@@ -85,11 +88,11 @@
                                                                 <h3 style="margin: 10px;">City (Loading)</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                    <form:select  path="cityLoad.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
-                                                                        <c:forEach items="${cityNames}" var="name">
-                                                                            <form:option value="${name}">${name}</form:option>
-                                                                        </c:forEach>
-                                                                    </form:select>
+                                                                <form:select  path="cityLoad.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                    <c:forEach items="${cityNames}" var="name">
+                                                                        <form:option value="${name}">${name}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -99,11 +102,11 @@
                                                                 <h3 style="margin: 10px;">City (Unloading)</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                    <form:select  path="cityUnload.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
-                                                                        <c:forEach items="${cityNames}" var="name">
-                                                                            <form:option value="${name}">${name}</form:option>
-                                                                        </c:forEach>
-                                                                    </form:select>
+                                                                <form:select  path="cityUnload.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                    <c:forEach items="${cityNames}" var="name">
+                                                                        <form:option value="${name}">${name}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -189,89 +192,83 @@
                     </div>
                 </div>
 
-                <form:form name="saveOrderForm" action="/employee/save-order" method="post" modelAttribute="order">
-                    <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6 text-nowrap">
-                                        <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <form:select path="lorry.regNum" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
-                                            <c:forEach items="${suitableLorries}" var="lorry">
-                                                <form:option value="${lorry.regNum}">${lorry.regNum}</form:option>
-                                                <input:hidden path="lorry.capacity" value="${lorry.capacity}"/>
-                                                <input:hidden path="lorry.shiftTime" value="${lorry.shiftTime}"/>
-                                                <input:hidden path="lorry.city.name" value="${lorry.city.name}"/>
-                                                <input:hidden path="lorry.broken" value="${lorry.broken}"/>
-                                                <input:hidden path="lorry.order.id" value="${lorry.order.id}"/>
-                                            </c:forEach>
-                                        </form:select>
-                                    </div>
+                <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6 text-nowrap">
-                                        <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div></div>
-                                        <div class="row">
-                                            <div class="col" style="padding: 5px;">
-                                                <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>
-                                            </div>
-                                            <div class="col">
-
-                                                <form:select  path="drivers[0].firstName" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px;">
-                                                    <c:forEach items="${suitableDrivers}" var="driver">
-                                                        <form:option value="${driver.firstName}">[${driver.id}] ${driver.firstName} ${driver.lastName}</form:option>
-<%--                                                        <input:hidden path="drivers[0].lastName" value="${driver.lastName}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].id" value="${driver.id}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].hoursWorked" value="${driver.hoursWorked}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].state" value="${driver.state}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].city.name" value="${driver.city.name}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].lorry" value="${driver.lorry}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].order.id" value="${order.id}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].user.email" value="${driver.user.email}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].user.password" value="${driver.user.password}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].user.enabled" value="${driver.user.enabled}"/>--%>
-<%--                                                        <input:hidden path="drivers[0].user.role" value="${driver.user.role}"/>--%>
-                                                    </c:forEach>
-                                                </form:select>
+                                <div class="col-md-6">
+                                    <form action="/employee/apply-truck">
+                                        <input type="hidden" name="orderId" value="${order.id}">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLorryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Choose
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownLorryButton">
+                                                <c:forEach items="suitableLorries" var="lorry">
+                                                    <button type="submit" name="id" value="${lorry.regNum}">${lorry.regNum}</button>
+                                                </c:forEach>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col" style="padding: 5px;">
-                                                <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>
-                                            </div>
-                                            <div class="col">
-                                                <form:select  path="drivers[1].firstName" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px;">
-                                                    <c:forEach items="${suitableDrivers}" var="driver">
-                                                        <form:option value="${driver.firstName}">[${driver.id}] ${driver.firstName} ${driver.lastName}</form:option>
-<%--                                                        <input:hidden path="drivers[1].lastName" value="${driver.lastName}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].id" value="${driver.id}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].hoursWorked" value="${driver.hoursWorked}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].state" value="${driver.state}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].city.name" value="${driver.city.name}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].lorry" value="${driver.lorry}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].order.id" value="${order.id}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].user.email" value="${driver.user.email}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].user.password" value="${driver.user.password}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].user.enabled" value="${driver.user.enabled}"/>--%>
-<%--                                                        <input:hidden path="drivers[1].user.role" value="${driver.user.role}"/>--%>
-                                                    </c:forEach>
-                                                </form:select>
-                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div></div>
+                                    <div class="row">
+                                        <div class="col" style="padding: 5px;">
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>
+                                        </div>
+                                        <div class="col">
+                                            <form action="/employee/apply-driver" method="post">
+                                                <div class="dropdown">
+                                                    <input type="hidden" name="orderId" value="${order.id}">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver1Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Choose
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver1Button">
+                                                        <c:forEach items="suitableDrivers" var="driver">
+                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" style="padding: 5px;">
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>
+                                        </div>
+                                        <div class="col">
+                                            <form action="/employee/apply-driver/" method="post">
+                                                <input type="hidden" name="orderId" value="${order.id}">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver2Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Choose
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver2Button">
+                                                        <c:forEach items="suitableDrivers" var="driver">
+                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <form:hidden name="id" value="${order.id}" path="id"/>
-                </form:form>
+                </div>
+
                 <div class="container" style="text-align: center;">
                     <form action="/employee/orders">
                         <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Back</button>
@@ -283,7 +280,9 @@
                     </form>
                 </div>
                 <div class="container" style="text-align: center;">
-                    <button form="saveOrderForm" class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Save</button>
+                    <form action="/employee/verify-order/${order.id}">
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Save</button>
+                    </form>
                 </div>
             </div>
         </div>

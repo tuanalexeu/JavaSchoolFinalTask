@@ -40,7 +40,7 @@ public class EmployeeController {
     @GetMapping(path = "/orders")
     public String showOrders(Model model) {
 
-        model.addAttribute("orders", orderService.findAll());
+        model.addAttribute("orders", orderService.findVerified());
 
         return "role/employee/order/orders";
     }
