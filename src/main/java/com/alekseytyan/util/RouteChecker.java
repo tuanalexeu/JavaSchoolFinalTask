@@ -17,37 +17,9 @@ import java.util.stream.Collectors;
 @Getter @Setter
 public class RouteChecker {
 
-    /**
-     * List of loads which are all in current order
-     */
-    private List<Load> loads;
+    public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads, City cityStart) {
 
-    /**
-     * Map contains pair of two cities and the distance between them
-     */
-    private List<DistanceMap> distances;
-
-    /**
-     * City which the order will start from
-     */
-    private City cityStart;
-
-    /**
-     * List contains cities, that we need to visit during ordering
-     */
-    private List<City> cities;
-
-    public RouteChecker(List<Load> loads,
-                        List<DistanceMap> distanceMaps,
-                        City cityStart) {
-        this.loads = loads;
-        this.distances = distanceMaps;
-        this.cityStart = cityStart;
-
-        this.cities = checkCities();
-    }
-
-    public Route calculateRoute() {
+        List<City> cities = checkCities(loads);
 
         Set<Node> nodes = new HashSet<>();
 
@@ -98,7 +70,7 @@ public class RouteChecker {
 
             List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
 
-            if(checkIfContains(currentCities,cities) && n.getDistance() < distance) {
+            if(checkIfContains(currentCities, cities) && n.getDistance() < distance) {
                 finalCities = currentCities;
                 distance = n.getDistance();
                 isPossible = true;
@@ -111,8 +83,6 @@ public class RouteChecker {
         route.setPossible(isPossible);
         route.setCityList(finalCities);
         route.setDistance(distance);
-        route.setTime(calculateRouteTime(distance));
-        route.setMaxWeight(calculateMaxWeight());
 
         return route;
     }
@@ -139,9 +109,11 @@ public class RouteChecker {
      * Calculates max weight on the way
      * @return - weight as int number
      */
-    public int calculateMaxWeight() {
+    public static int calculateMaxWeight(List<Load> loads) {
 
         int maxWeight = 0;
+
+        List<City> cities = checkCities(loads);
 
         for (City c: cities) {
 
@@ -165,7 +137,7 @@ public class RouteChecker {
      * Method converts set of cities to a map key set
      * @return - Map, where cities are stored as keys
      */
-    private List<City> checkCities() {
+    private static List<City> checkCities(List<Load> loads) {
 
         // Map contains city and the weight a truck needs to be able to get
         List<City> routeWeight = new ArrayList<>();

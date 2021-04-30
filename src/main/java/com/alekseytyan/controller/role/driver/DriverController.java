@@ -48,15 +48,15 @@ public class DriverController {
         // find list of co-drivers
         model.addAttribute("coDrivers", driverService.findCoDrivers(orderId));
 
-        // find list of route cities
-        model.addAttribute("route", orderService.calculateRoute(
-                orderService.convertToEntity(
-                        orderService.findById(orderId)
-                ),
-                mapService.convertToEntity(
-                        mapService.findAll()
-                )
-        ));
+//        // find list of route cities
+//        model.addAttribute("route", orderService.calculateRoute(
+//                orderService.convertToEntity(
+//                        orderService.findById(orderId)
+//                ),
+//                mapService.convertToEntity(
+//                        mapService.findAll()
+//                )
+//        ));
 
         return "role/driver/driverInfo";
     }
