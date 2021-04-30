@@ -56,13 +56,27 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
+    public List<OrderDTO> findVerified() {
+        return convertToDTO(getDao().findVerified());
+    }
+
+    @Override
     public Route calculateRoute(Order order, List<DistanceMap> distanceMaps) {
 
         List<Load> loads = order.getLoads();
+
         City cityStart = order.getLorry().getCity();
 
         RouteChecker routeChecker = new RouteChecker(loads, distanceMaps, cityStart);
         
         return routeChecker.calculateRoute();
+    }
+
+    @Override
+    public int calculateWeight(Order order) {
+        List<Load> loads = order.getLoads();
+
+        RouteChecker routeChecker = new RouteChecker(loads, null, null);
+        return routeChecker.calculateMaxWeight();
     }
 }

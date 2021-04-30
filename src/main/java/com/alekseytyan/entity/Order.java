@@ -16,6 +16,10 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@NamedQueries({
+        @NamedQuery(name = "Order.findVerified",
+                    query = "select o from Order o where o.isVerified = TRUE")
+})
 public class Order {
 
     @Id

@@ -43,7 +43,7 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
 
     @Override
     @Transactional(readOnly = true)
-    public List<DriverDTO> findSuitableDrivers(String cityName, Long hours) {
+    public List<DriverDTO> findSuitableDrivers(String cityName, int hours) {
         return convertToDTO(getDao().findSuitableDrivers(cityName, hours));
     }
 

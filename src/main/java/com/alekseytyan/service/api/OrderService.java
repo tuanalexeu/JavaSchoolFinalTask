@@ -9,5 +9,10 @@ import com.alekseytyan.util.Route;
 import java.util.List;
 
 public interface OrderService extends AbstractService<Order, OrderDTO, Long> {
+
+    List<OrderDTO> findVerified();
+
     Route calculateRoute(Order order, List<DistanceMap> distanceMaps);
+
+    int calculateWeight(Order order);
 }

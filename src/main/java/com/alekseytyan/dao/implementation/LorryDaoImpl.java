@@ -13,9 +13,10 @@ public class LorryDaoImpl extends AbstractDaoImpl<Lorry, String> implements Lorr
     }
 
     @Override
-    public List<Lorry> findSuitableLorries(Long weight) {
+    public List<Lorry> findSuitableLorries(int weight) {
         return entityManager
                 .createNamedQuery("Lorry.findSuitableLorries", Lorry.class)
+                .setParameter("weight", weight)
                 .getResultList();
     }
 }

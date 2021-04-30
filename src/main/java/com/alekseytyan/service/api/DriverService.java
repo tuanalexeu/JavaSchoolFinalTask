@@ -8,5 +8,5 @@ import java.util.List;
 public interface DriverService extends AbstractService<Driver, DriverDTO, Long> {
     DriverDTO findDriverByUser(String email);
     List<DriverDTO> findCoDrivers(Long orderId);
-    List<DriverDTO> findSuitableDrivers(String cityName, Long hours);
+    List<DriverDTO> findSuitableDrivers(String cityName, int hours);
 }
