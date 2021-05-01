@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -54,24 +55,26 @@ public class OrderCrudController {
 
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderService.save(new OrderDTO()));
-        model.addAttribute("error", false);
 
-        return "role/employee/order/edit-order";
+        return "role/employee/order/add-order";
     }
 
     @GetMapping(value ={"/edit-order/{id}", "/edit-order/{id}/{error}"})
     public String editOrder(Model model,
                             @PathVariable Long id,
-                            @PathVariable(required = false) boolean error) {
+                            @PathVariable(required = false) String error) {
 
         OrderDTO orderDTO = orderService.findById(id);
 
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderDTO);
-        model.addAttribute("error", error);
+
+        if(error != null) {
+            model.addAttribute("error", error);
+        }
+
 
         model.addAttribute("suitableLorries", lorryService.findSuitableLorries(orderDTO));
-
 
         if(orderDTO.getLorry() != null) {
 
@@ -79,6 +82,8 @@ public class OrderCrudController {
             model.addAttribute("suitableDrivers", driverService.findSuitableDrivers(
                                                                         orderDTO.getLorry().getCity().getName(),
                                                                         route.getTime()));
+        } else {
+            model.addAttribute("suitableDrivers", new ArrayList<DriverDTO>());
         }
 
         return "role/employee/order/edit-order";
@@ -92,36 +97,11 @@ public class OrderCrudController {
         return new RedirectView("/employee/orders");
     }
 
-    @GetMapping("/verify-order/{orderId}")
-    public RedirectView verifyOrder(@PathVariable Long orderId) {
-
-        OrderDTO orderDTO = orderService.findById(orderId);
-
-        if(orderDTO.getLorry() == null) {
-            return new RedirectView("/employee/edit-order/" + orderId + "/true");
-        }
-
-        Route route = orderService.calculateRoute(orderDTO);
-        orderDTO.setVerified(route.isPossible());
-
-        if(!route.isPossible()) {
-            return new RedirectView("employee/edit-order/" + orderId+ "/true");
-        }
-
-        orderService.update(orderDTO);
-
-        return new RedirectView("/employee/orders");
-    }
-
-    @PostMapping(value = "/apply-truck/")
+    @PostMapping(value = "/apply-truck")
     public RedirectView applyTruck(@RequestParam Long orderId,
                                    @RequestParam String regNum) {
         OrderDTO orderDTO = orderService.findById(orderId);
         LorryDTO lorryDTO = lorryService.findById(regNum);
-
-        lorryDTO.setOrder(orderDTO);
-        lorryService.update(lorryDTO);
-
 
         orderDTO.setLorry(lorryDTO);
         orderService.update(orderDTO);
@@ -142,7 +122,33 @@ public class OrderCrudController {
         orderDTO.getDrivers().add(driverDTO);
         orderService.update(orderDTO);
 
-        return new RedirectView("/employee/edit-order/" + orderDTO);
+        return new RedirectView("/employee/edit-order/" + orderId);
+    }
+
+    @GetMapping("/verify-order/{orderId}")
+    public RedirectView verifyOrder(@PathVariable Long orderId) {
+
+        OrderDTO orderDTO = orderService.findById(orderId);
+
+        if(orderDTO.getLorry() == null) {
+            return new RedirectView("/employee/edit-order/" + orderId + "/lorryError");
+        }
+
+        Route route = orderService.calculateRoute(orderDTO);
+        if(!route.isPossible()) {
+            return new RedirectView("/employee/edit-order/" + orderId+ "/routeError");
+        }
+
+        if(orderDTO.getDrivers().size() != 2) {
+            return new RedirectView("/employee/edit-order" + orderId + "/driverError");
+        }
+
+
+        orderDTO.setVerified(route.isPossible());
+
+        orderService.update(orderDTO);
+
+        return new RedirectView("/employee/orders");
     }
 
 }

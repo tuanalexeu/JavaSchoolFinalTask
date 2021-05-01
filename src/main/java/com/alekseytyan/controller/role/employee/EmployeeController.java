@@ -41,6 +41,7 @@ public class EmployeeController {
     public String showOrders(Model model) {
 
         model.addAttribute("orders", orderService.findVerified());
+        model.addAttribute("routeList", orderService.calculateRoute(orderService.findVerified()));
 
         return "role/employee/order/orders";
     }
