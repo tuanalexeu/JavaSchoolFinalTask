@@ -54,9 +54,10 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Edit order</h3>
-                <c:if test="${error}">
-                    <h3 class="text-dark mb-4" style="color: #ea4335">Looks like you haven't configured order properly...</h3>
+                <c:if test="${error ne null}">
+                    <p style="color: #ea4335">${error}</p>
                 </c:if>
+
                 <div class="card shadow">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">Loads</p>

@@ -83,7 +83,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${orders}" var="order">
+                                <c:forEach items="${orders}" var="order" varStatus="outer_loop">
                                     <tr>
                                         <td>
                                             <form action="/employee/view-order/${order.id}">
@@ -102,12 +102,11 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                                         </div>
                                                         <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
-                                                            There will be route points soon...
-<%--                                                            <ul>--%>
-<%--                                                                <c:forEach items="${order.loads}" var="load">--%>
-<%--                                                                    <li>${load.city.name}</li>--%>
-<%--                                                                </c:forEach>--%>
-<%--                                                            </ul>--%>
+                                                            <ul>
+                                                                <c:forEach items="${routeList[outer_loop.index].cityList}" var="city" varStatus="loop">
+                                                                    <li>[${loop.index}] ${city.name}</li>
+                                                                </c:forEach>
+                                                            </ul>
                                                         </div>
                                                         <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
                                                     </div>
