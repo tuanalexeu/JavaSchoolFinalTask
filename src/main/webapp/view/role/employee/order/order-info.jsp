@@ -23,7 +23,7 @@
 <body id="page-top">
 <div id="wrapper">
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
-        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
         </a>
@@ -117,81 +117,50 @@
                     </div>
                 </div>
 
-                <form:form name="saveOrderForm" action="/employee/save-order" method="post" modelAttribute="order">
-                    <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6 text-nowrap">
-                                        <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <form:select path="lorry.regNum" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
-                                            <c:forEach items="${suitableLorries}" var="lorry">
-                                                <form:option value="${lorry.regNum}">${lorry.regNum}</form:option>
-                                                <input:hidden path="lorry.capacity" value="${lorry.capacity}"/>
-                                                <input:hidden path="lorry.shiftTime" value="${lorry.shiftTime}"/>
-                                                <input:hidden path="lorry.city.name" value="${lorry.city.name}"/>
-                                                <input:hidden path="lorry.broken" value="${lorry.broken}"/>
-                                                <input:hidden path="lorry.order.id" value="${lorry.order.id}"/>
-                                            </c:forEach>
-                                        </form:select>
-                                    </div>
+                <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Chosen truck:</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">${order.lorry.regNum}</p>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6 text-nowrap">
-                                        <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div></div>
-                                        <div class="row">
-                                            <div class="col" style="padding: 5px;">
-                                                <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>
-                                            </div>
-                                            <div class="col">
-
-                                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choosen drivers:</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div></div>
+                                    <div class="row">
+                                        <div class="col" style="padding: 5px;">
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col" style="padding: 5px;">
-                                                <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>
-                                            </div>
-                                            <div class="col">
-                                                <form:select  path="drivers[1].firstName" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px;">
-                                                    <c:forEach items="${suitableDrivers}" var="driver">
-                                                        <form:option value="${driver.firstName}">[${driver.id}] ${driver.firstName} ${driver.lastName}</form:option>
-                                                        <%--                                                        <input:hidden path="drivers[1].lastName" value="${driver.lastName}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].id" value="${driver.id}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].hoursWorked" value="${driver.hoursWorked}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].state" value="${driver.state}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].city.name" value="${driver.city.name}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].lorry" value="${driver.lorry}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].order.id" value="${order.id}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].user.email" value="${driver.user.email}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].user.password" value="${driver.user.password}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].user.enabled" value="${driver.user.enabled}"/>--%>
-                                                        <%--                                                        <input:hidden path="drivers[1].user.role" value="${driver.user.role}"/>--%>
-                                                    </c:forEach>
-                                                </form:select>
-                                            </div>
+                                        <div class="col">
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">${order.drivers[0]}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" style="padding: 5px;">
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">${order.drivers[1]}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <form:hidden name="id" value="${order.id}" path="id"/>
-                </form:form>
+                </div>
+
                 <div class="container" style="text-align: center;">
                     <form action="/employee/orders">
                         <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Back</button>
-                    </form>
-                </div>
-                <div class="container" style="text-align: center;">
-                    <form action="/employee/delete-order/${order.id}" method="get">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Delete</button>
                     </form>
                 </div>
             </div>

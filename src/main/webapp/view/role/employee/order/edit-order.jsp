@@ -23,7 +23,7 @@
 <body id="page-top">
 <div id="wrapper">
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
-        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
         </a>
@@ -192,82 +192,83 @@
                     </div>
                 </div>
 
-<%--                <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">--%>
-<%--                    <div class="card shadow">--%>
-<%--                        <div class="card-body">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-md-6 text-nowrap">--%>
-<%--                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-md-6">--%>
-<%--                                    <form action="/employee/apply-truck">--%>
-<%--                                        <input type="hidden" name="orderId" value="${order.id}">--%>
-<%--                                        <div class="dropdown">--%>
-<%--                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLorryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
-<%--                                                Choose--%>
-<%--                                            </button>--%>
-<%--                                            <div class="dropdown-menu" aria-labelledby="dropdownLorryButton">--%>
-<%--                                                <c:forEach items="suitableLorries" var="lorry">--%>
-<%--                                                    <button type="submit" name="id" value="${lorry.regNum}">${lorry.regNum}</button>--%>
-<%--                                                </c:forEach>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </form>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="card-body">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-md-6 text-nowrap">--%>
-<%--                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-md-6">--%>
-<%--                                    <div></div>--%>
-<%--                                    <div class="row">--%>
-<%--                                        <div class="col" style="padding: 5px;">--%>
-<%--                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="col">--%>
-<%--                                            <form action="/employee/apply-driver" method="post">--%>
-<%--                                                <div class="dropdown">--%>
-<%--                                                    <input type="hidden" name="orderId" value="${order.id}">--%>
-<%--                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver1Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
-<%--                                                        Choose--%>
-<%--                                                    </button>--%>
-<%--                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver1Button">--%>
-<%--                                                        <c:forEach items="suitableDrivers" var="driver">--%>
-<%--                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>--%>
-<%--                                                        </c:forEach>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </form>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="row">--%>
-<%--                                        <div class="col" style="padding: 5px;">--%>
-<%--                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="col">--%>
-<%--                                            <form action="/employee/apply-driver" method="post">--%>
-<%--                                                <input type="hidden" name="orderId" value="${order.id}">--%>
-<%--                                                <div class="dropdown">--%>
-<%--                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver2Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
-<%--                                                        Choose--%>
-<%--                                                    </button>--%>
-<%--                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver2Button">--%>
-<%--                                                        <c:forEach items="suitableDrivers" var="driver">--%>
-<%--                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>--%>
-<%--                                                        </c:forEach>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </form>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <form action="/employee/apply-truck">
+                                        <input type="hidden" name="orderId" value="${order.id}">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLorryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Choose
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownLorryButton">
+                                                <c:forEach items="suitableLorries" var="lorry">
+                                                    <input type="hidden" name="id" value="${lorry.regNum}">
+                                                    <button type="submit">${lorry.regNum}</button>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div></div>
+                                    <div class="row">
+                                        <div class="col" style="padding: 5px;">
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>
+                                        </div>
+                                        <div class="col">
+                                            <form action="/employee/apply-driver" method="post">
+                                                <div class="dropdown">
+                                                    <input type="hidden" name="orderId" value="${order.id}">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver1Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Choose
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver1Button">
+                                                        <c:forEach items="suitableDrivers" var="driver">
+                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" style="padding: 5px;">
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>
+                                        </div>
+                                        <div class="col">
+                                            <form action="/employee/apply-driver" method="post">
+                                                <input type="hidden" name="orderId" value="${order.id}">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver2Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Choose
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver2Button">
+                                                        <c:forEach items="suitableDrivers" var="driver">
+                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="container" style="text-align: center;">
                     <form action="/employee/orders">
