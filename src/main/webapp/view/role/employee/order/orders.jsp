@@ -86,7 +86,7 @@
                                 <c:forEach items="${orders}" var="order">
                                     <tr>
                                         <td>
-                                            <form action="/employee/edit-order/${order.id}">
+                                            <form action="/employee/view-order/${order.id}">
                                                 <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${order.id}</button>
                                             </form>
                                         </td>
