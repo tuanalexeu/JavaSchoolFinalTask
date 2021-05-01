@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping(value = "/employee")
@@ -23,11 +24,11 @@ public class DriverCrudController {
     }
 
     @PostMapping(value = "/add-driver")
-    public String addDriver(@ModelAttribute DriverDTO driver) {
+    public RedirectView addDriver(@ModelAttribute DriverDTO driver) {
 
         driverService.save(driver);
 
-        return "redirect:/employee/drivers";
+        return new RedirectView("/employee/drivers");
     }
 
     @GetMapping(value = "/edit-driver/{id}")
@@ -40,18 +41,18 @@ public class DriverCrudController {
     }
 
     @PostMapping(value = "/edit-driver")
-    public String editDriver(@ModelAttribute DriverDTO driver) {
+    public RedirectView editDriver(@ModelAttribute DriverDTO driver) {
 
         driverService.update(driver);
 
-        return "redirect:/employee/drivers";
+        return new RedirectView("/employee/drivers");
     }
 
     @GetMapping(value = "/delete-driver/{id}")
-    public String deleteDriver(@PathVariable Long id) {
+    public RedirectView deleteDriver(@PathVariable Long id) {
 
         driverService.deleteById(id);
 
-        return "redirect:/employee/drivers";
+        return new RedirectView("/employee/drivers");
     }
 }

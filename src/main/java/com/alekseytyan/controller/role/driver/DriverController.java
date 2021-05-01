@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping(value = "/driver")
@@ -62,19 +63,19 @@ public class DriverController {
     }
 
     @PostMapping(value = "/save")
-    public String getInfo(Model model, @RequestParam String status) {
+    public RedirectView getInfo(Model model, @RequestParam String status) {
         DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");
         driverDTO.setState(DriverState.valueOf(status));
         driverService.update(driverDTO);
 
-        return "redirect:/driver/info";
+        return new RedirectView("/driver/info");
     }
 
     @PostMapping(value = "/save-loads")
-    public String saveLoadStatus(@ModelAttribute DriverDTO driverDTO) {
+    public RedirectView saveLoadStatus(@ModelAttribute DriverDTO driverDTO) {
 
         driverService.update(driverDTO);
 
-        return "redirect:/driver/driverInfo";
+        return new RedirectView("/driver/driverInfo");
     }
 }
