@@ -7,6 +7,7 @@ import com.alekseytyan.entity.City;
 import com.alekseytyan.entity.DistanceMap;
 import com.alekseytyan.entity.Load;
 import com.alekseytyan.entity.Order;
+import com.alekseytyan.service.api.MapService;
 import com.alekseytyan.service.api.OrderService;
 import com.alekseytyan.util.Route;
 import com.alekseytyan.util.RouteChecker;
@@ -20,10 +21,14 @@ import java.util.List;
 @Service
 public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, OrderDTO, Long> implements OrderService {
 
+    private final MapService mapService;
+
 
     @Autowired
-    public OrderServiceImpl(OrderDao dao, ModelMapper mapper) {
+    public OrderServiceImpl(OrderDao dao, ModelMapper mapper, MapService mapService) {
         super(dao, mapper, OrderDTO.class, Order.class);
+
+        this.mapService = mapService;
     }
 
     @Override
@@ -61,7 +66,11 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
-    public Route calculateRoute(Order order, List<DistanceMap> distanceMaps) {
+    public Route calculateRoute(OrderDTO orderDTO) {
+
+        List<DistanceMap> distanceMaps = mapService.convertToEntity(mapService.findAll());
+
+        Order order = convertToEntity(orderDTO);
 
         List<Load> loads = order.getLoads();
         City cityStart = order.getLorry().getCity();

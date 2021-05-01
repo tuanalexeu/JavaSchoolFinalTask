@@ -12,7 +12,7 @@ public interface OrderService extends AbstractService<Order, OrderDTO, Long> {
 
     List<OrderDTO> findVerified();
 
-    Route calculateRoute(Order order, List<DistanceMap> distanceMaps);
+    Route calculateRoute(OrderDTO orderDTO);
 
     int calculateWeight(Order order);
 }
