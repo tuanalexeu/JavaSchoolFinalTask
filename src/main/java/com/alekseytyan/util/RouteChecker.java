@@ -19,7 +19,7 @@ public class RouteChecker {
 
     public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads, City cityStart) {
 
-        List<City> cities = checkCities(loads);
+        Set<City> cities = checkCities(loads);
 
         Set<Node> nodes = new HashSet<>();
 
@@ -70,7 +70,7 @@ public class RouteChecker {
 
             List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
 
-            if(checkIfContains(currentCities, cities) && n.getDistance() < distance) {
+            if(checkIfContains(currentCities, new ArrayList<>(cities)) && n.getDistance() < distance) {
                 finalCities = currentCities;
                 distance = n.getDistance();
                 isPossible = true;
@@ -83,6 +83,7 @@ public class RouteChecker {
         route.setPossible(isPossible);
         route.setCityList(finalCities);
         route.setDistance(distance);
+        route.setTime(calculateRouteTime(distance));
 
         return route;
     }
@@ -101,7 +102,7 @@ public class RouteChecker {
      * Method calculates actual time need to complete the order
      * @return - time as hours
      */
-    public int calculateRouteTime(int distance) {
+    public static int calculateRouteTime(int distance) {
         return distance / 96;
     }
 
@@ -113,7 +114,7 @@ public class RouteChecker {
 
         int maxWeight = 0;
 
-        List<City> cities = checkCities(loads);
+        Set<City> cities = checkCities(loads);
 
         for (City c: cities) {
 
@@ -137,10 +138,10 @@ public class RouteChecker {
      * Method converts set of cities to a map key set
      * @return - Map, where cities are stored as keys
      */
-    private static List<City> checkCities(List<Load> loads) {
+    private static Set<City> checkCities(List<Load> loads) {
 
         // Map contains city and the weight a truck needs to be able to get
-        List<City> routeWeight = new ArrayList<>();
+        Set<City> routeWeight = new HashSet<>();
 
         // Get set of all cities we need to visit on the way
         loads.forEach(l -> {

@@ -14,5 +14,7 @@ public interface OrderService extends AbstractService<Order, OrderDTO, Long> {
 
     Route calculateRoute(OrderDTO orderDTO);
 
+    List<Route> calculateRoute(List<OrderDTO> orderDTOList);
+
     int calculateWeight(Order order);
 }

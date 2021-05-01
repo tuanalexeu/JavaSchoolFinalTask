@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -76,6 +77,26 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
         City cityStart = order.getLorry().getCity();
         
         return RouteChecker.calculateRoute(distanceMaps, loads, cityStart);
+    }
+
+    @Override
+    public List<Route> calculateRoute(List<OrderDTO> orderDTOList) {
+
+
+        List<DistanceMap> distanceMaps = mapService.convertToEntity(mapService.findAll());
+        List<Route> routes = new ArrayList<>();
+
+
+        List<Order> orders = convertToEntity(orderDTOList);
+
+        for (Order o: orders) {
+            List<Load> loads = o.getLoads();
+            City cityStart = o.getLorry().getCity();
+
+            routes.add(RouteChecker.calculateRoute(distanceMaps, loads, cityStart));
+        }
+
+        return routes;
     }
 
     @Override
