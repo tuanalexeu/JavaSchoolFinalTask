@@ -3,6 +3,7 @@ package com.alekseytyan.controller.auth;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,13 +20,13 @@ public class AuthController {
     }
 
     @GetMapping(value = {"/login", "/login/{error}"})
-    public String login(@PathVariable(required = false) boolean error) {
+    public String login(Model model, @PathVariable(required = false) boolean error) {
         if(hasAnyRole()) {
             return "redirect:/homePage";
         }
 
         if(error) {
-            // TODO print message for failed authentication
+            model.addAttribute("errorMessage", "Invalid email or password!");
         }
 
         return "auth/login";

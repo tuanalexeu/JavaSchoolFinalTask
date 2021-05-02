@@ -3,7 +3,6 @@ package com.alekseytyan.controller.role.driver;
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.entity.enums.DriverState;
 import com.alekseytyan.service.api.DriverService;
-import com.alekseytyan.service.api.MapService;
 import com.alekseytyan.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,15 +18,12 @@ public class DriverController {
 
     private final DriverService driverService;
     private final OrderService orderService;
-    private final MapService mapService;
 
     @Autowired
     public DriverController(DriverService driverService,
-                            OrderService orderService,
-                            MapService mapService) {
+                            OrderService orderService) {
         this.driverService = driverService;
         this.orderService = orderService;
-        this.mapService = mapService;
     }
 
     @ModelAttribute("driver")
@@ -44,20 +40,16 @@ public class DriverController {
 
         // Find driver's id
         DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");
-        Long orderId = driverDTO.getId();
 
-        // find list of co-drivers
-        model.addAttribute("coDrivers", driverService.findCoDrivers(orderId));
+        if(driverDTO.getOrder() != null) {
+            Long orderId = driverDTO.getOrder().getId();
 
-//        // find list of route cities
-//        model.addAttribute("route", orderService.calculateRoute(
-//                orderService.convertToEntity(
-//                        orderService.findById(orderId)
-//                ),
-//                mapService.convertToEntity(
-//                        mapService.findAll()
-//                )
-//        ));
+            // find list of co-drivers
+            model.addAttribute("coDrivers", driverService.findCoDrivers(orderId));
+
+            // find list of route cities
+            model.addAttribute("route", orderService.calculateRoute(orderService.findById(orderId)));
+        }
 
         return "role/driver/driverInfo";
     }
