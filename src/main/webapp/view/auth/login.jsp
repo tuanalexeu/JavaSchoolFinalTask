@@ -19,7 +19,10 @@
     <div class="card shadow-lg o-hidden border-0 my-5" style="border-radius: 20px">
         <div class="p-5" style="background: rgb(255,103,173);max-width: 400px;margin: initial;border-radius: 20px;">
             <div class="text-center">
-                <h4 class="mb-4" style="color: rgb(255,255,255);">Welcome Back!</h4>
+                <h3 class="mb-4" style="color: rgb(255,255,255);">Welcome Back!</h3>
+                <c:if test="${errorMessage ne null}">
+                    <h5 class="mb-5" style="color: #ea4335">${error}</h5>
+                </c:if>
             </div>
             <form class="user" method="post" action="/login">
                 <div class="form-group">
@@ -28,11 +31,6 @@
                 <div class="form-group">
                     <input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password">
                 </div>
-<%--                <div class="form-group">--%>
-<%--                    <div class="custom-control custom-checkbox small">--%>
-<%--                        <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1" style="color: rgb(255,255,255);">Remember Me</label></div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
                 <button class="btn btn-primary btn-block text-white btn-user" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Login</button>
                 <hr>
                 <hr>

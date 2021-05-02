@@ -73,22 +73,22 @@
                                 <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
                                     <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${driver.state} </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="/driver/save" method="post">
                                                 <button type="submit" value="DUTY" name="status">Duty</button>
                                             </form>
                                         </a>
-                                        <a class="dropdown-item">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="/driver/save" method="post">
                                                 <button type="submit" value="DRIVING" name="status">Driving</button>
                                             </form>
                                         </a>
-                                        <a class="dropdown-item">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="/driver/save" method="post">
                                                 <button type="submit" value="RESTING" name="status">Resting</button>
                                             </form>
                                         </a>
-                                        <a class="dropdown-item">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="/driver/save" method="post">
                                                 <button type="submit" value="UNLOADING" name="status">Unloading</button>
                                             </form>
@@ -136,7 +136,12 @@
                         <tr>
                             <td>Route points</td>
                             <td>
-                                <a href="#routepoints-modal" data-toggle="modal" data-target="#routepoints-modal" style="color: #DC58B8">View</a>
+                                <c:if test="${empty driver.order}">
+                                    <p>No order assigned</p>
+                                </c:if>
+                                <c:if test="${not empty driver.order}">
+                                    <a href="#routepoints-modal" data-toggle="modal" data-target="#routepoints-modal" style="color: #DC58B8">View</a>
+                                </c:if>
                                 <div class="modal fade" role="dialog" tabindex="-1" id="routepoints-modal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -146,7 +151,7 @@
                                             </div>
                                             <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                 <ul>
-                                                    <c:forEach items="${routeCities}" var="city" varStatus="loop">
+                                                    <c:forEach items="${route.cityList}" var="city" varStatus="loop">
                                                         <li>[${loop.index}] ${city.name}</li>
                                                     </c:forEach>
                                                 </ul>
@@ -162,7 +167,12 @@
                         <tr>
                             <td>Loads</td>
                             <td>
-                                <a href="#loads-modal" data-toggle="modal" data-target="#loads-modal" style="color: #DC58B8">View</a>
+                                <c:if test="${empty driver.order}">
+                                    <p>No order assigned</p>
+                                </c:if>
+                                <c:if test="${not empty driver.order}">
+                                    <a href="#loads-modal" data-toggle="modal" data-target="#loads-modal" style="color: #DC58B8">View</a>
+                                </c:if>
                                 <div class="modal fade" role="dialog" tabindex="-1" id="loads-modal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -185,10 +195,9 @@
                                                                                 <p>${load.name}</p>
                                                                                 <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
                                                                                     <form:select  path="order.loads[${loop.index}].status">
-                                                                                            <form:option value="DUTY">Duty</form:option>
-                                                                                            <form:option value="RESTING">Resting</form:option>
-                                                                                            <form:option value="DRIVING">Driving</form:option>
-                                                                                            <form:option value="UNLOADING">Unloading</form:option>
+                                                                                            <form:option selected="selected" cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="PREPARED">Prepared</form:option>
+                                                                                            <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="SENT">Sent</form:option>
+                                                                                            <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="DELIVERED">Delivered</form:option>
                                                                                     </form:select>
                                                                                 </div>
                                                                             </li>
@@ -208,10 +217,9 @@
                                                                                 <p>${load.name}</p>
                                                                                 <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
                                                                                     <form:select  path="order.loads[${loop.index}].status">
-                                                                                        <form:option value="DUTY">Duty</form:option>
-                                                                                        <form:option value="RESTING">Resting</form:option>
-                                                                                        <form:option value="DRIVING">Driving</form:option>
-                                                                                        <form:option value="UNLOADING">Unloading</form:option>
+                                                                                        <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="PREPARED">Prepared</form:option>
+                                                                                        <form:option selected="selected" cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="SENT">Sent</form:option>
+                                                                                        <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="DELIVERED">Delivered</form:option>
                                                                                     </form:select>
                                                                                 </div>
                                                                             </li>
@@ -230,10 +238,9 @@
                                                                                 <p>${load.name}</p>
                                                                                 <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
                                                                                     <form:select  path="order.loads[${loop.index}].status">
-                                                                                        <form:option value="DUTY">Duty</form:option>
-                                                                                        <form:option value="RESTING">Resting</form:option>
-                                                                                        <form:option value="DRIVING">Driving</form:option>
-                                                                                        <form:option value="UNLOADING">Unloading</form:option>
+                                                                                        <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="PREPARED">Prepared</form:option>
+                                                                                        <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="SENT">Sent</form:option>
+                                                                                        <form:option selected="selected" cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="DELIVERED">Delivered</form:option>
                                                                                     </form:select>
                                                                                 </div>
                                                                             </li>

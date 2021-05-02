@@ -107,6 +107,9 @@
                                                                     <li>[${loop.index}] ${city.name}</li>
                                                                 </c:forEach>
                                                             </ul>
+                                                            <h4>Distance: ${routeList[outer_loop.index].distance}km</h4>
+                                                            <h4>Time: ${routeList[outer_loop.index].time}h</h4>
+                                                            <h4>Needed capacity: ${routeList[outer_loop.index].maxWeight}kg</h4>
                                                         </div>
                                                         <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
                                                     </div>
