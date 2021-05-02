@@ -29,7 +29,7 @@ public class DriverDaoImpl extends AbstractDaoImpl<Driver, Long> implements Driv
     }
 
     @Override
-    public List<Driver> findSuitableDrivers(String cityName, long hours) {
+    public List<Driver> findSuitableDrivers(String cityName, int hours) {
         return entityManager.
                 createNamedQuery("Driver.findSuitableDrivers", Driver.class)
                 .setParameter("cityName", cityName)

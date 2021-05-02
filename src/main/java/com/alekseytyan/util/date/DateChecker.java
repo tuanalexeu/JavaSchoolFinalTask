@@ -18,7 +18,7 @@ public class DateChecker {
 
     private LocalDateTime start;
     private LocalDateTime end;
-    private long hours;
+    private int hours;
 
     /**
      * Method calculates hours the drivers are going to spend in duty
@@ -44,7 +44,7 @@ public class DateChecker {
         }
 
         DateChecker dateChecker = new DateChecker();
-        dateChecker.setHours(neededHours);
+        dateChecker.setHours((int) neededHours);
         dateChecker.setStart(start);
         dateChecker.setEnd(end);
 

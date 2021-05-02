@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping(value = "/driver")
 public class DriverController {
@@ -49,13 +51,15 @@ public class DriverController {
 
             // find list of route cities
             model.addAttribute("route", orderService.calculateRoute(orderService.findById(orderId)));
+
+            model.addAttribute("loads", orderService.convertLoadsToMap(driverDTO.getOrder()));
         }
 
         return "role/driver/driverInfo";
     }
 
     @PostMapping(value = "/save")
-    public RedirectView getInfo(Model model, @RequestParam String status) {
+    public RedirectView saveStatus(Model model, @RequestParam String status) {
         DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");
         driverDTO.setState(DriverState.valueOf(status));
         driverService.update(driverDTO);
@@ -64,10 +68,16 @@ public class DriverController {
     }
 
     @PostMapping(value = "/save-loads")
-    public RedirectView saveLoadStatus(@ModelAttribute DriverDTO driverDTO) {
+    public RedirectView saveLoads(Model model, @ModelAttribute Map<Long, String> loads) {
+
+        DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");
+
+        if(driverDTO.getOrder() != null) {
+            driverDTO.getOrder().setLoads(orderService.convertLoadsToList(loads, driverDTO));
+        }
 
         driverService.update(driverDTO);
 
-        return new RedirectView("/driver/driverInfo");
+        return new RedirectView("/driver/info");
     }
 }

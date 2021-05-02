@@ -27,7 +27,6 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
                              PasswordEncoder passwordEncoder) {
 
         super(dao, mapper, DriverDTO.class, Driver.class);
-
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -48,8 +47,13 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     public List<DriverDTO> findSuitableDrivers(OrderDTO orderDTO, Route route) {
         String cityName = orderDTO.getLorry().getCity().getName();
 
-        DateChecker dateChecker = DateChecker.calculateHoursInMonth(route.getTime());
-        return convertToDTO(getDao().findSuitableDrivers(cityName, dateChecker.getHours()));
+        DateChecker dateChecker;
+        if(route.isPossible()) {
+            dateChecker = DateChecker.calculateHoursInMonth(route.getTime());
+            return convertToDTO(getDao().findSuitableDrivers(cityName, dateChecker.getHours()));
+        }
+
+        return convertToDTO(getDao().findSuitableDrivers(cityName, 177));
     }
 
     @Override

@@ -2,11 +2,13 @@ package com.alekseytyan.service.implementation;
 
 import com.alekseytyan.dao.api.OrderDao;
 import com.alekseytyan.dto.DriverDTO;
+import com.alekseytyan.dto.LoadDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.City;
 import com.alekseytyan.entity.DistanceMap;
 import com.alekseytyan.entity.Load;
 import com.alekseytyan.entity.Order;
+import com.alekseytyan.entity.enums.LoadStatus;
 import com.alekseytyan.service.api.MapService;
 import com.alekseytyan.service.api.OrderService;
 import com.alekseytyan.util.pathfinding.Route;
@@ -17,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, OrderDTO, Long> implements OrderService {
@@ -100,9 +104,35 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
+    public Map<Long, String> convertLoadsToMap(OrderDTO orderDTO) {
+
+        Map<Long, String> loads = new HashMap<>();
+
+        for (LoadDTO l: orderDTO.getLoads()) {
+            loads.put(l.getId(), l.getStatus().toString());
+        }
+
+        return loads;
+    }
+
+    @Override
+    public List<LoadDTO> convertLoadsToList(Map<Long, String> loads, DriverDTO driverDTO) {
+
+        List<LoadDTO> list = driverDTO.getOrder().getLoads();
+
+        for (LoadDTO l: list) {
+            l.setStatus(LoadStatus.valueOf(loads.get(l.getId())));
+        }
+
+        return list;
+    }
+
+    @Override
     public int calculateWeight(Order order) {
         List<Load> loads = order.getLoads();
 
         return RouteChecker.calculateMaxWeight(loads);
     }
+
+
 }

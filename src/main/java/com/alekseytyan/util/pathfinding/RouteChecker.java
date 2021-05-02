@@ -84,8 +84,13 @@ public class RouteChecker {
         route.setCityList(finalCities);
         route.setDistance(distance);
         route.setTime(calculateRouteTime(distance));
+        route.setMaxWeight(calculateMaxWeight(loads));
 
         return route;
+    }
+
+    public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads) {
+        return calculateRoute(distances, loads, loads.get(0).getCityLoad());
     }
 
 

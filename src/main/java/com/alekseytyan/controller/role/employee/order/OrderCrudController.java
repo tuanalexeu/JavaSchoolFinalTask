@@ -133,7 +133,7 @@ public class OrderCrudController {
         }
 
         if(orderDTO.getDrivers().size() != 2) {
-            return new RedirectView("/employee/edit-order" + orderId + "/3");
+            return new RedirectView("/employee/edit-order/" + orderId + "/3");
         }
 
         orderDTO.setVerified(route.isPossible());
