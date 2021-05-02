@@ -1,4 +1,4 @@
-package com.alekseytyan.util.graph;
+package com.alekseytyan.util.pathfinding.graph;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -51,10 +53,10 @@
                 </ul>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Trucks</h3>
+                <h3 class="text-dark mb-4">Edit order</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
-                        <p class="text-primary m-0 font-weight-bold">Trucks list</p>
+                        <p class="text-primary m-0 font-weight-bold">Loads</p>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -67,84 +69,72 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newLorry-modal">New truck</button>
-                                <div class="modal fade" id="newLorry-modal" role="dialog" tabindex="-1" aria-hidden="true">
+                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newPoint-modal">New route point</button>
+                                <div class="modal fade" id="newPoint-modal" role="dialog" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">New truck</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                                <h4 class="modal-title">New point</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <div class="modal-body">
-                                                <form:form action="/employee/add-lorry" method="post" modelAttribute="newLorry">
-                                                    <div class="modal-body">
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <h3 style="margin: 10px;">Reg number</h3>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <form:input id="regNum" path="regNum" cssErrorClass="errorBox"/>
-                                                                </div>
+                                            <form:form action="/employee/add-load" method="post" modelAttribute="newLoad">
+                                                <div class="modal-body">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h3 style="margin: 10px;">City (Loading)</h3>
                                                             </div>
-                                                        </div>
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <h3 style="margin: 10px;">Shift time</h3>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <form:input id="shiftTime" path="shiftTime" cssErrorClass="errorBox"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <h3 style="margin: 10px;">Capacity</h3>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <form:input id="capactiy" path="capacity" cssErrorClass="errorBox"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <h3 style="margin: 10px;">Status</h3>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="dropdown">
-                                                                        <form:select id="status" path="broken" cssErrorClass="errorBox">
-                                                                            <form:option value="true">Broken</form:option>
-                                                                            <form:option value="false">Serviceable</form:option>
-                                                                        </form:select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <h3 style="margin: 10px;">City</h3>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="dropdown">
-                                                                        <form:select  path="city.name">
-                                                                            <c:forEach items="${cities}" var="city">
-                                                                                <form:option value="${city}">${city}</form:option>
-                                                                            </c:forEach>
-                                                                        </form:select>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="col-md-6">
+                                                                <form:select  path="cityLoad.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                    <c:forEach items="${cityNames}" var="name">
+                                                                        <form:option value="${name}">${name}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
-                                                        <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h3 style="margin: 10px;">City (Unloading)</h3>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <form:select  path="cityUnload.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                    <c:forEach items="${cityNames}" var="name">
+                                                                        <form:option value="${name}">${name}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </form:form>
-                                            </div>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h3 style="margin: 10px;">Load description</h3>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <form:input id="loadDescription" path="name" cssErrorClass="errorBox"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h3 style="margin: 10px;">Load weight</h3>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <form:input id="weight" path="weight" cssErrorClass="errorBox"/>
+                                                                <form:hidden id="status" path="status" value="PREPARED" cssErrorClass="errorBox"/>
+                                                                <form:hidden path="order.id" value="${order.id}" cssErrorClass="errorBox"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
+                                                    <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                                                </div>
+                                            </form:form>
                                         </div>
                                     </div>
                                 </div>
@@ -154,27 +144,27 @@
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Truck registration number</th>
-                                    <th>Shift time</th>
-                                    <th>Capacity</th>
-                                    <th>State</th>
-                                    <th>City</th>
-                                    <th>Order</th>
+                                    <th>Load id</th>
+                                    <th>Description</th>
+                                    <th>City (Loading)</th>
+                                    <th>City (Unloading)</th>
+                                    <th>Weight</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${lorries}" var="truck">
+                                <c:forEach items="${order.loads}" var="load">
                                     <tr>
                                         <td>
-                                            <form action="/employee/edit-lorry/${truck.regNum}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${truck.regNum}</button>
+                                            <form action="/employee/edit-load/${load.id}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editPoint" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${load.id}</button>
                                             </form>
                                         </td>
-                                        <td>${truck.shiftTime}</td>
-                                        <td>${truck.capacity}</td>
-                                        <td>${truck.broken ? "Broken" : "Servicable"}</td>
-                                        <td>${truck.city.name}</td>
-                                        <td>${truck.order.id}</td>
+                                        <td>${load.name}</td>
+                                        <td>${load.cityLoad.name}</td>
+                                        <td>${load.cityUnload.name}</td>
+                                        <td>${load.weight}</td>
+                                        <td>${load.status}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -197,6 +187,30 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="container" style="margin-top: 10px;margin-bottom: 10px;width: 600px;">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h3>Please, add any order to see available trucks and drivers</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" style="text-align: center;">
+                    <form action="/employee/orders">
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Back</button>
+                    </form>
+                </div>
+                <div class="container" style="text-align: center;">
+                    <form action="/employee/delete-order/${order.id}">
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Delete</button>
+                    </form>
+                </div>
+                <div class="container" style="text-align: center;">
+                    <form action="/employee/verify-order/${order.id}">
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Save</button>
+                    </form>
                 </div>
             </div>
         </div>

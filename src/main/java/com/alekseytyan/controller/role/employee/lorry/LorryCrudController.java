@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping(value = "/employee")
@@ -22,11 +23,11 @@ public class LorryCrudController {
     }
 
     @PostMapping(value = "/add-lorry")
-    public String addLorry(@ModelAttribute LorryDTO lorry) {
+    public RedirectView addLorry(@ModelAttribute LorryDTO lorry) {
 
         lorryService.save(lorry);
 
-        return "redirect:/employee/lorries";
+        return new RedirectView("/employee/lorries");
     }
 
     @GetMapping(value = "/edit-lorry/{id}")
@@ -39,19 +40,19 @@ public class LorryCrudController {
     }
 
     @PostMapping(value = "/edit-lorry")
-    public String editLorry(@ModelAttribute LorryDTO lorry) {
+    public RedirectView editLorry(@ModelAttribute LorryDTO lorry) {
 
         lorryService.update(lorry);
 
-        return "redirect:/employee/lorries";
+        return new RedirectView("/employee/lorries");
     }
 
     @GetMapping(value = "/delete-lorry/{id}")
-    public String deleteLorry(@PathVariable String id) {
+    public RedirectView deleteLorry(@PathVariable String id) {
 
         lorryService.deleteById(id);
 
-        return "redirect:/employee/lorries";
+        return new RedirectView("/employee/lorries");
     }
 
 }

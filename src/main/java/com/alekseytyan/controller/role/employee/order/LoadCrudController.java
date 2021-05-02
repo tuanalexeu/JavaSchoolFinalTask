@@ -1,7 +1,6 @@
 package com.alekseytyan.controller.role.employee.order;
 
 import com.alekseytyan.dto.LoadDTO;
-import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.service.api.CityService;
 import com.alekseytyan.service.api.OrderService;
 import com.alekseytyan.service.api.LoadService;
@@ -9,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping(value = "/employee")
@@ -30,13 +28,13 @@ public class LoadCrudController {
     }
 
     @PostMapping(value = "/add-load")
-    public String addRoutePoint(Model model, @ModelAttribute LoadDTO loadDTO) {
+    public RedirectView addRoutePoint(Model model, @ModelAttribute LoadDTO loadDTO) {
 
         model.addAttribute("cityNames", cityService.findAllNames());
 
         loadService.save(loadDTO);
 
-        return "redirect:/employee/edit-order/" + loadDTO.getOrder().getId();
+        return new RedirectView("/employee/edit-order/" + loadDTO.getOrder().getId());
     }
 
     @GetMapping(value = "/edit-load/{id}")
@@ -44,30 +42,28 @@ public class LoadCrudController {
 
         model.addAttribute("editLoad", loadService.findById(id));
         model.addAttribute("cityNames", cityService.findAllNames());
-
-        OrderDTO orderDTO = orderService.findById(loadService.findOrderId(id));
-        model.addAttribute("order", orderDTO);
+        model.addAttribute("order", orderService.findById(loadService.findOrderId(id)));
 
         return "role/employee/order/edit-load";
     }
 
     @PostMapping(value = "/save-load")
-    public String editLoad(@ModelAttribute LoadDTO loadDTO) {
+    public RedirectView editLoad(@ModelAttribute LoadDTO loadDTO) {
 
         loadService.update(loadDTO);
 
-        return "redirect:/employee/edit-order/" + loadDTO.getOrder().getId();
+        return new RedirectView("/employee/edit-order/" + loadDTO.getOrder().getId());
     }
 
     @GetMapping(value = "/delete-load/{id}")
-    public String deleteLoad(@PathVariable Long id) {
+    public RedirectView deleteLoad(@PathVariable Long id) {
 
         // We need order id to return editing process of order after we finish deleting current route point
         Long orderId = loadService.findOrderId(id);
 
         loadService.deleteById(id);
 
-        return "redirect:/employee/edit-order/" + orderId;
+        return new RedirectView("/employee/edit-order/" + orderId);
 
     }
 

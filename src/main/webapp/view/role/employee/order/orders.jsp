@@ -20,7 +20,7 @@
 <body id="page-top">
 <div id="wrapper">
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
-        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
         </a>
@@ -83,10 +83,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${orders}" var="order">
+                                <c:forEach items="${orders}" var="order" varStatus="outer_loop">
                                     <tr>
                                         <td>
-                                            <form action="/employee/edit-order/${order.id}">
+                                            <form action="/employee/view-order/${order.id}">
                                                 <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${order.id}</button>
                                             </form>
                                         </td>
@@ -102,12 +102,14 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                                         </div>
                                                         <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
-                                                            There will be route points soon...
-<%--                                                            <ul>--%>
-<%--                                                                <c:forEach items="${order.loads}" var="load">--%>
-<%--                                                                    <li>${load.city.name}</li>--%>
-<%--                                                                </c:forEach>--%>
-<%--                                                            </ul>--%>
+                                                            <ul>
+                                                                <c:forEach items="${routeList[outer_loop.index].cityList}" var="city" varStatus="loop">
+                                                                    <li>[${loop.index}] ${city.name}</li>
+                                                                </c:forEach>
+                                                            </ul>
+                                                            <h4>Distance: ${routeList[outer_loop.index].distance}km</h4>
+                                                            <h4>Time: ${routeList[outer_loop.index].time}h</h4>
+                                                            <h4>Needed capacity: ${routeList[outer_loop.index].maxWeight}kg</h4>
                                                         </div>
                                                         <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
                                                     </div>

@@ -31,7 +31,10 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
 
     @Override
     @Transactional(readOnly = true)
-    public List<LorryDTO> findSuitableLorries(int weight) {
+    public List<LorryDTO> findSuitableLorries(OrderDTO orderDTO) {
+
+        int weight = orderService.calculateWeight(orderService.convertToEntity(orderDTO));
+
         return convertToDTO(getDao().findSuitableLorries(weight));
     }
 

@@ -5,15 +5,14 @@ import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.dto.LoadDTO;
 import com.alekseytyan.service.api.*;
-import com.alekseytyan.util.Route;
+import com.alekseytyan.util.error.ErrorChecker;
+import com.alekseytyan.util.pathfinding.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,18 +23,14 @@ public class OrderCrudController {
     private final LorryService lorryService;
     private final DriverService driverService;
     private final CityService cityService;
-    private final MapService mapService;
-
 
     @Autowired
     public OrderCrudController(OrderService orderService,
                                CityService cityService,
-                               MapService mapService,
                                LorryService lorryService,
                                DriverService driverService) {
         this.orderService = orderService;
         this.cityService = cityService;
-        this.mapService = mapService;
         this.driverService = driverService;
         this.lorryService = lorryService;
     }
@@ -45,139 +40,71 @@ public class OrderCrudController {
         return cityService.findAllNames();
     }
 
+    @GetMapping(value = "/view-order/{orderId}")
+    public String viewOrder(Model model, @PathVariable Long orderId) {
+
+        model.addAttribute("order", orderService.findById(orderId));
+
+        return "role/employee/order/order-info";
+    }
+
+
     @GetMapping(value = "/add-order")
     public String addOrder(Model model) {
 
-
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderService.save(new OrderDTO()));
-        model.addAttribute("error", false);
 
-        model.addAttribute("suitableLorries", new ArrayList<>());
-        model.addAttribute("suitableDrivers", new ArrayList<>());
-
-        return "role/employee/order/edit-order";
+        return "role/employee/order/add-order";
     }
 
-    @GetMapping(value ={"/edit-order/{id}", "/edit-order/{id}/{error}"})
+    @GetMapping(value ={"/edit-order/{id}", "/edit-order/{id}/{errorCode}"})
     public String editOrder(Model model,
                             @PathVariable Long id,
-                            @PathVariable(required = false) boolean error) {
+                            @PathVariable(required = false) Integer errorCode) {
 
         OrderDTO orderDTO = orderService.findById(id);
 
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderDTO);
-        model.addAttribute("error", error);
-
-        model.addAttribute("suitableLorries", lorryService.findSuitableLorries(
-                                                    orderService.calculateWeight(
-                                                            orderService.convertToEntity(orderDTO)
-                                                    )
-                                                 )
-        );
 
 
+
+        if(errorCode != null) {
+            model.addAttribute("error", ErrorChecker.getMessage(errorCode));
+        }
+
+        model.addAttribute("suitableLorries", lorryService.findSuitableLorries(orderDTO));
         if(orderDTO.getLorry() != null) {
-
-            Route route = orderService.calculateRoute(
-                    orderService.convertToEntity(orderDTO),
-                    mapService.convertToEntity(mapService.findAll())
-            );
-
-            model.addAttribute("suitableDrivers", driverService.findSuitableDrivers(
-                    orderDTO.getLorry().getCity().getName(),
-                    route.getTime()));
+            model.addAttribute("suitableDrivers", driverService.findSuitableDrivers(orderDTO, orderService.calculateRoute(orderDTO)));
         }
 
         return "role/employee/order/edit-order";
     }
 
     @GetMapping(value = "/delete-order/{id}")
-    public String deleteOrder(@PathVariable Long id) {
+    public RedirectView deleteOrder(@PathVariable Long id) {
 
         orderService.deleteById(id);
-
-        return "redirect:/employee/orders";
-    }
-
-//    @GetMapping(value = "/verify-order/{orderId}")
-//    public String verifyOrder(@PathVariable Long orderId) {
-//
-//        OrderDTO orderDTO = orderService.findById(orderId);
-//
-//        if(orderDTO.getLorry() == null) {
-//            return "redirect:/employee/edit-order/" + orderDTO + "/true";
-//        }
-//
-//        Route route = orderService.calculateRoute(
-//                orderService.convertToEntity(
-//                        orderDTO
-//                ),
-//                mapService.convertToEntity(
-//                        mapService.findAll()
-//                )
-//        );
-//        orderDTO.setVerified(route.isPossible());
-//
-//        if(!route.isPossible()) {
-//            return "redirect:/employee/edit-order/" + orderDTO.getId() + "/true";
-//        }
-//
-//        orderService.update(orderDTO);
-//
-//        return "redirect:/employee/orders";
-//    }
-
-    @GetMapping("/verify-order/{orderId}")
-    public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes,
-                                                      @PathVariable Long orderId) {
-
-        OrderDTO orderDTO = orderService.findById(orderId);
-
-        if(orderDTO.getLorry() == null) {
-            return new RedirectView("/employee/edit-order/" + orderDTO + "/true");
-        }
-
-        Route route = orderService.calculateRoute(
-                orderService.convertToEntity(
-                        orderDTO
-                ),
-                mapService.convertToEntity(
-                        mapService.findAll()
-                )
-        );
-        orderDTO.setVerified(route.isPossible());
-
-        if(!route.isPossible()) {
-            return new RedirectView("employee/edit-order/" + orderDTO.getId() + "/true");
-        }
-
-        orderService.update(orderDTO);
-
-//        attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
-//        attributes.addAttribute("attribute", "redirectWithRedirectView");
 
         return new RedirectView("/employee/orders");
     }
 
-    @PostMapping(value = "/apply-truck/")
-    public String applyTruck(@RequestParam Long orderId, @RequestParam String regNum) {
+    @PostMapping(value = "/apply-truck")
+    public RedirectView applyTruck(@RequestParam Long orderId,
+                                   @RequestParam String regNum) {
         OrderDTO orderDTO = orderService.findById(orderId);
         LorryDTO lorryDTO = lorryService.findById(regNum);
-
-        lorryDTO.setOrder(orderDTO);
-        lorryService.update(lorryDTO);
-
 
         orderDTO.setLorry(lorryDTO);
         orderService.update(orderDTO);
 
-        return "redirect:/employee/edit-order/" + orderId;
+        return new RedirectView("/employee/edit-order/" + orderId);
     }
 
     @PostMapping(value = "/apply-driver")
-    public String applyDriver(@RequestParam Long orderId, @RequestParam Long id) {
+    public RedirectView applyDriver(@RequestParam Long orderId,
+                                    @RequestParam Long id) {
         OrderDTO orderDTO = orderService.findById(orderId);
         DriverDTO driverDTO = driverService.findById(id);
 
@@ -188,7 +115,31 @@ public class OrderCrudController {
         orderDTO.getDrivers().add(driverDTO);
         orderService.update(orderDTO);
 
-        return "redirect:/employee/edit-order/" + orderDTO;
+        return new RedirectView("/employee/edit-order/" + orderId);
+    }
+
+    @GetMapping("/verify-order/{orderId}")
+    public RedirectView verifyOrder(@PathVariable Long orderId) {
+
+        OrderDTO orderDTO = orderService.findById(orderId);
+
+        if(orderDTO.getLorry() == null) {
+            return new RedirectView("/employee/edit-order/" + orderId + "/1");
+        }
+
+        Route route = orderService.calculateRoute(orderDTO);
+        if(!route.isPossible()) {
+            return new RedirectView("/employee/edit-order/" + orderId+ "/2");
+        }
+
+        if(orderDTO.getDrivers().size() != 2) {
+            return new RedirectView("/employee/edit-order/" + orderId + "/3");
+        }
+
+        orderDTO.setVerified(route.isPossible());
+        orderService.update(orderDTO);
+
+        return new RedirectView("/employee/orders");
     }
 
 }

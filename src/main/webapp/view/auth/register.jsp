@@ -36,8 +36,8 @@
                     <hr>
                     <hr>
                 </form>
-                <div class="text-center"><a class="small" href="Desktop/JavaSchoolFinalTask/src/main/webapp/view/auth/forgot_password.jsp" style="border-color: rgb(255,255,255);color: rgb(255,255,255);">Forgot Password?</a></div>
-                <div class="text-center"><a class="small" href="Desktop/JavaSchoolFinalTask/src/main/webapp/view/auth/login.jsp" style="color: rgb(255,255,255);">Already have an account? Login!</a></div>
+                <div class="text-center"><a class="small" href="Desktop/JavaSchoolFinalTask/logiweb/srciweb/src/main/webapp/view/auth/forgot_password.jsp" style="border-color: rgb(255,255,255);color: rgb(255,255,255);">Forgot Password?</a></div>
+                <div class="text-center"><a class="small" href="Desktop/JavaSchoolFinalTask/logiweb/srciweb/src/main/webapp/view/auth/login.jsp" style="color: rgb(255,255,255);">Already have an account? Login!</a></div>
             </div>
         </div>
     </div>

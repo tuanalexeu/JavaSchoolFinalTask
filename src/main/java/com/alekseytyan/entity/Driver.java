@@ -15,7 +15,7 @@ import javax.validation.constraints.Min;
         @NamedQuery(name = "Driver.findCoDrivers",
                 query = "SELECT d FROM Driver d where d.order.id = :id"),
         @NamedQuery(name = "Driver.findSuitableDrivers",
-                query = "SELECT d FROM Driver d where d.hoursWorked <= d.hoursWorked + :hours AND d.city.name = :cityName AND d.order IS NULL")
+                query = "SELECT d FROM Driver d where (d.hoursWorked + :hours <= 176) AND d.city.name = :cityName AND d.order IS NULL")
 })
 @Getter @Setter @NoArgsConstructor
 @AllArgsConstructor

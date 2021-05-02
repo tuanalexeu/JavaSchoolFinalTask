@@ -5,6 +5,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -34,11 +35,12 @@ public class Order {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Load> loads;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "LORRY", referencedColumnName = "ID")
     private Lorry lorry;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.MERGE)
+    @Size(max = 2)
     private List<Driver> drivers;
 
     @Column(name = "VERIFIED", columnDefinition = "boolean default false")

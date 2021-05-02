@@ -6,6 +6,8 @@ import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Driver;
 import com.alekseytyan.entity.enums.UserRole;
 import com.alekseytyan.service.api.DriverService;
+import com.alekseytyan.util.date.DateChecker;
+import com.alekseytyan.util.pathfinding.Route;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +27,6 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
                              PasswordEncoder passwordEncoder) {
 
         super(dao, mapper, DriverDTO.class, Driver.class);
-
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -43,8 +44,16 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
 
     @Override
     @Transactional(readOnly = true)
-    public List<DriverDTO> findSuitableDrivers(String cityName, int hours) {
-        return convertToDTO(getDao().findSuitableDrivers(cityName, hours));
+    public List<DriverDTO> findSuitableDrivers(OrderDTO orderDTO, Route route) {
+        String cityName = orderDTO.getLorry().getCity().getName();
+
+        DateChecker dateChecker;
+        if(route.isPossible()) {
+            dateChecker = DateChecker.calculateHoursInMonth(route.getTime());
+            return convertToDTO(getDao().findSuitableDrivers(cityName, dateChecker.getHours()));
+        }
+
+        return convertToDTO(getDao().findSuitableDrivers(cityName, 177));
     }
 
     @Override

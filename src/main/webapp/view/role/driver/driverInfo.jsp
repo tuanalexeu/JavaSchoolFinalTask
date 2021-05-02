@@ -21,14 +21,13 @@
 <body id="page-top">
 <div id="wrapper">
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
-        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
         </a>
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
                 <li class="nav-item"><a class="nav-link active" href="/driver/info"><i class="fas fa-window-maximize"></i><span>My info</span></a></li>
-                <%--                    <li class="nav-item"><a class="nav-link" href="/driver/order"><i class="fas fa-table"></i><span>My orders</span></a></li>--%>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
@@ -74,22 +73,22 @@
                                 <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
                                     <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${driver.state} </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="/driver/save" method="post">
                                                 <button type="submit" value="DUTY" name="status">Duty</button>
                                             </form>
                                         </a>
-                                        <a class="dropdown-item">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="/driver/save" method="post">
                                                 <button type="submit" value="DRIVING" name="status">Driving</button>
                                             </form>
                                         </a>
-                                        <a class="dropdown-item">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="/driver/save" method="post">
                                                 <button type="submit" value="RESTING" name="status">Resting</button>
                                             </form>
                                         </a>
-                                        <a class="dropdown-item">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="/driver/save" method="post">
                                                 <button type="submit" value="UNLOADING" name="status">Unloading</button>
                                             </form>
@@ -137,7 +136,12 @@
                         <tr>
                             <td>Route points</td>
                             <td>
-                                <a href="#routepoints-modal" data-toggle="modal" data-target="#routepoints-modal" style="color: #DC58B8">View</a>
+                                <c:if test="${empty driver.order}">
+                                    <p>No order assigned</p>
+                                </c:if>
+                                <c:if test="${not empty driver.order}">
+                                    <a href="#routepoints-modal" data-toggle="modal" data-target="#routepoints-modal" style="color: #DC58B8">View</a>
+                                </c:if>
                                 <div class="modal fade" role="dialog" tabindex="-1" id="routepoints-modal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -147,7 +151,7 @@
                                             </div>
                                             <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                 <ul>
-                                                    <c:forEach items="${routeCities}" var="city" varStatus="loop">
+                                                    <c:forEach items="${route.cityList}" var="city" varStatus="loop">
                                                         <li>[${loop.index}] ${city.name}</li>
                                                     </c:forEach>
                                                 </ul>
@@ -163,7 +167,12 @@
                         <tr>
                             <td>Loads</td>
                             <td>
-                                <a href="#loads-modal" data-toggle="modal" data-target="#loads-modal" style="color: #DC58B8">View</a>
+                                <c:if test="${empty driver.order}">
+                                    <p>No order assigned</p>
+                                </c:if>
+                                <c:if test="${not empty driver.order}">
+                                    <a href="#loads-modal" data-toggle="modal" data-target="#loads-modal" style="color: #DC58B8">View</a>
+                                </c:if>
                                 <div class="modal fade" role="dialog" tabindex="-1" id="loads-modal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -171,7 +180,7 @@
                                                 <h4 class="modal-title" style="color: rgb(133, 135, 150);">Loads</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <form:form action="/driver/save-loads" method="post" modelAttribute="driver">
+                                            <form:form action="/driver/save-loads" method="post" modelAttribute="loads">
                                                 <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                     <div class="main-container">
                                                         <ul class="columns">
@@ -180,16 +189,15 @@
                                                                     <h4>Prepared</h4>
                                                                 </div>
                                                                 <ul class="task-list" id="prepared">
-                                                                    <c:forEach items="${driver.order.loads}" var="load" varStatus="loop">
-                                                                        <c:if test="${load.status eq 'PREPARED'}">
+                                                                    <c:forEach items="${loads}" var="load" varStatus="loop">
+                                                                        <c:if test="${load.value eq 'PREPARED'}">
                                                                             <li class="task">
-                                                                                <p>${load.name}</p>
+                                                                                <p>${driver.order.loads[loop.index].name}</p>
                                                                                 <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
-                                                                                    <form:select  path="order.loads[${loop.index}].status">
-                                                                                            <form:option value="DUTY">Duty</form:option>
-                                                                                            <form:option value="RESTING">Resting</form:option>
-                                                                                            <form:option value="DRIVING">Driving</form:option>
-                                                                                            <form:option value="UNLOADING">Unloading</form:option>
+                                                                                    <form:select  path="load[${load.key}]">
+                                                                                            <form:option selected="selected" cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="PREPARED">Prepared</form:option>
+                                                                                            <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="SENT">Sent</form:option>
+                                                                                            <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="DELIVERED">Delivered</form:option>
                                                                                     </form:select>
                                                                                 </div>
                                                                             </li>
@@ -203,16 +211,15 @@
                                                                     <h4>Sent</h4>
                                                                 </div>
                                                                 <ul class="task-list" id="sent">
-                                                                    <c:forEach items="${driver.order.loads}" var="load" varStatus="loop">
-                                                                        <c:if test="${load.status eq 'SENT'}">
+                                                                    <c:forEach items="${loads}" var="load" varStatus="loop">
+                                                                        <c:if test="${load.value eq 'SENT'}">
                                                                             <li class="task">
-                                                                                <p>${load.name}</p>
+                                                                                <p>${driver.order.loads[loop.index].name}</p>
                                                                                 <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
-                                                                                    <form:select  path="order.loads[${loop.index}].status">
-                                                                                        <form:option value="DUTY">Duty</form:option>
-                                                                                        <form:option value="RESTING">Resting</form:option>
-                                                                                        <form:option value="DRIVING">Driving</form:option>
-                                                                                        <form:option value="UNLOADING">Unloading</form:option>
+                                                                                    <form:select  path="load[${load.key}]">
+                                                                                        <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="PREPARED">Prepared</form:option>
+                                                                                        <form:option selected="selected" cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="SENT">Sent</form:option>
+                                                                                        <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="DELIVERED">Delivered</form:option>
                                                                                     </form:select>
                                                                                 </div>
                                                                             </li>
@@ -225,16 +232,15 @@
                                                                     <h4>Delivered</h4>
                                                                 </div>
                                                                 <ul class="task-list" id="delivered">
-                                                                    <c:forEach items="${driver.order.loads}" var="load" varStatus="loop">
-                                                                        <c:if test="${load.status eq 'DELIVERED'}">
+                                                                    <c:forEach items="${loads}" var="load" varStatus="loop">
+                                                                        <c:if test="${load.value eq 'DELIVERED'}">
                                                                             <li class="task">
-                                                                                <p>${load.name}</p>
+                                                                                <p>${driver.order.loads[loop.index].name}</p>
                                                                                 <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
-                                                                                    <form:select  path="order.loads[${loop.index}].status">
-                                                                                        <form:option value="DUTY">Duty</form:option>
-                                                                                        <form:option value="RESTING">Resting</form:option>
-                                                                                        <form:option value="DRIVING">Driving</form:option>
-                                                                                        <form:option value="UNLOADING">Unloading</form:option>
+                                                                                    <form:select  path="load[${load.key}]">
+                                                                                        <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="PREPARED">Prepared</form:option>
+                                                                                        <form:option cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="SENT">Sent</form:option>
+                                                                                        <form:option selected="selected" cssClass="background: #ffffff; color: #dc58b8; border-color: #dc58b8;" value="DELIVERED">Delivered</form:option>
                                                                                     </form:select>
                                                                                 </div>
                                                                             </li>
@@ -245,26 +251,6 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-
-
-                                                <form:hidden id="firstName" path="firstName" value="${driver.firstName}" cssErrorClass="errorBox"/>
-                                                <form:hidden id="lastName" path="lastName" value="${driver.lastName}" cssErrorClass="errorBox"/>
-                                                <form:hidden id="hoursWorked" path="hoursWorked" value="${driver.hoursWorked}" cssErrorClass="errorBox"/>
-                                                <form:hidden id="state" path="state" value="${driver.state}" cssErrorClass="errorBox"/>
-                                                <form:hidden id="city" path="city.name" value="${driver.city.name}" cssErrorClass="errorBox"/>
-
-
-
-                                                <c:if test="${not empty driver.lorry}">
-                                                    <form:hidden id="lorry" path="lorry.regNum" value="${driver.lorry.regNum}" cssErrorClass="errorBox"/>
-                                                </c:if>
-
-                                                <c:if test="${not empty driver.order}">
-                                                    <form:hidden id="order" path="order.id" value="${driver.order.id}" cssErrorClass="errorBox"/>
-                                                </c:if>
-
-                                                <form:hidden id="email" path="user.email" value="${driver.user.email}" cssErrorClass="errorBox"/>
-                                                <form:hidden id="password" path="user.password" value="${driver.user.password}" cssErrorClass="errorBox"/>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-light" type="submit" style="border-color: #dc58b8;color: #dc58b8;">Save</button>
                                                 </div>
