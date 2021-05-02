@@ -19,20 +19,6 @@
 
 <body id="page-top">
     <div id="wrapper">
-<%--        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">--%>
-<%--            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">--%>
-<%--                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>--%>
-<%--                    <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>--%>
-<%--                </a>--%>
-<%--                <hr class="sidebar-divider my-0">--%>
-<%--                <ul class="navbar-nav text-light" id="accordionSidebar">--%>
-<%--                    <li class="nav-item"><a class="nav-link" href="../role/admin/table.html"><i class="fas fa-table"></i><span>Table</span></a></li>--%>
-<%--                    <li class="nav-item"><a class="nav-link" href="../role/admin/table.html"><i class="fas fa-table"></i><span>Table</span></a></li>--%>
-<%--                    <li class="nav-item"><a class="nav-link" href="../role/admin/table.html"><i class="fas fa-table"></i><span>Table</span></a></li>--%>
-<%--                </ul>--%>
-<%--                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>--%>
-<%--            </div>--%>
-<%--        </nav>--%>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ff67ad;">
@@ -54,7 +40,7 @@
                     <div class="row mb-3">
                         <div class="col-lg-4">
                             <div class="card mb-3">
-                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/dogs/image2.jpeg" width="160" height="160">
+                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="<c:url value="/assets/img/dogs/image2.jpeg"/>" width="160" height="160">
                                     <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Change Photo</button></div>
                                 </div>
                             </div>

@@ -132,7 +132,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 text-nowrap">
-                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choosen drivers:</p>
+                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Chosen drivers:</p>
                                 </div>
                                 <div class="col-md-6">
                                     <div></div>
@@ -141,7 +141,7 @@
                                             <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>
                                         </div>
                                         <div class="col">
-                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">${order.drivers[0]}</p>
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">${order.drivers[0].firstName} ${order.drivers[0].lastName}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -149,7 +149,7 @@
                                             <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>
                                         </div>
                                         <div class="col">
-                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">${order.drivers[1]}</p>
+                                            <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">${order.drivers[1].firstName} ${order.drivers[1].lastName}</p>
                                         </div>
                                     </div>
                                 </div>
