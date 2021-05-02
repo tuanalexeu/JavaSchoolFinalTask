@@ -1,10 +1,8 @@
 package com.alekseytyan.service.api;
 
 import com.alekseytyan.dto.OrderDTO;
-import com.alekseytyan.entity.City;
-import com.alekseytyan.entity.DistanceMap;
 import com.alekseytyan.entity.Order;
-import com.alekseytyan.util.Route;
+import com.alekseytyan.util.pathfinding.Route;
 
 import java.util.List;
 
