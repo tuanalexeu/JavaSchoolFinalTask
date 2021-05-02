@@ -5,14 +5,14 @@ import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.dto.LoadDTO;
 import com.alekseytyan.service.api.*;
-import com.alekseytyan.util.Route;
+import com.alekseytyan.util.error.ErrorChecker;
+import com.alekseytyan.util.pathfinding.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -52,38 +52,31 @@ public class OrderCrudController {
     @GetMapping(value = "/add-order")
     public String addOrder(Model model) {
 
-
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderService.save(new OrderDTO()));
 
         return "role/employee/order/add-order";
     }
 
-    @GetMapping(value ={"/edit-order/{id}", "/edit-order/{id}/{error}"})
+    @GetMapping(value ={"/edit-order/{id}", "/edit-order/{id}/{errorCode}"})
     public String editOrder(Model model,
                             @PathVariable Long id,
-                            @PathVariable(required = false) String error) {
+                            @PathVariable(required = false) Integer errorCode) {
 
         OrderDTO orderDTO = orderService.findById(id);
 
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderDTO);
 
-        if(error != null) {
-            model.addAttribute("error", error);
+
+
+        if(errorCode != null) {
+            model.addAttribute("error", ErrorChecker.getMessage(errorCode));
         }
 
-
         model.addAttribute("suitableLorries", lorryService.findSuitableLorries(orderDTO));
-
         if(orderDTO.getLorry() != null) {
-
-            Route route = orderService.calculateRoute(orderDTO);
-            model.addAttribute("suitableDrivers", driverService.findSuitableDrivers(
-                                                                        orderDTO.getLorry().getCity().getName(),
-                                                                        route.getTime()));
-        } else {
-            model.addAttribute("suitableDrivers", new ArrayList<DriverDTO>());
+            model.addAttribute("suitableDrivers", driverService.findSuitableDrivers(orderDTO, orderService.calculateRoute(orderDTO)));
         }
 
         return "role/employee/order/edit-order";
@@ -131,21 +124,19 @@ public class OrderCrudController {
         OrderDTO orderDTO = orderService.findById(orderId);
 
         if(orderDTO.getLorry() == null) {
-            return new RedirectView("/employee/edit-order/" + orderId + "/lorryError");
+            return new RedirectView("/employee/edit-order/" + orderId + "/1");
         }
 
         Route route = orderService.calculateRoute(orderDTO);
         if(!route.isPossible()) {
-            return new RedirectView("/employee/edit-order/" + orderId+ "/routeError");
+            return new RedirectView("/employee/edit-order/" + orderId+ "/2");
         }
 
         if(orderDTO.getDrivers().size() != 2) {
-            return new RedirectView("/employee/edit-order" + orderId + "/driverError");
+            return new RedirectView("/employee/edit-order" + orderId + "/3");
         }
 
-
         orderDTO.setVerified(route.isPossible());
-
         orderService.update(orderDTO);
 
         return new RedirectView("/employee/orders");
