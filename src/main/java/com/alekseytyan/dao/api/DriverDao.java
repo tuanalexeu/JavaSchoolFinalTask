@@ -8,5 +8,5 @@ public interface DriverDao extends AbstractDao<Driver, Long> {
     Driver findDriverByUser(String email);
     List<Driver> findCoDrivers(Long orderId);
 
-    List<Driver> findSuitableDrivers(String cityName, int hours);
+    List<Driver> findSuitableDrivers(String cityName, long hours);
 }
