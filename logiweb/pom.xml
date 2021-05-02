@@ -19,24 +19,9 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+
     <build>
         <finalName>logiweb</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
-            </plugin>
-        </plugins>
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>JavaSchoolFinalTask</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-    </dependencies>
 
 </project>
