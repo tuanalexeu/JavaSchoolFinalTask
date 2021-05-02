@@ -1,4 +1,4 @@
-package com.alekseytyan.util;
+package com.alekseytyan.util.pathfinding;
 
 import com.alekseytyan.entity.City;
 import lombok.AllArgsConstructor;

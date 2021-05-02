@@ -1,10 +1,10 @@
-package com.alekseytyan.util;
+package com.alekseytyan.util.pathfinding;
 
 import com.alekseytyan.entity.City;
 import com.alekseytyan.entity.DistanceMap;
 import com.alekseytyan.entity.Load;
-import com.alekseytyan.util.graph.Graph;
-import com.alekseytyan.util.graph.Node;
+import com.alekseytyan.util.pathfinding.graph.Graph;
+import com.alekseytyan.util.pathfinding.graph.Node;
 import lombok.Getter;
 import lombok.Setter;
 
