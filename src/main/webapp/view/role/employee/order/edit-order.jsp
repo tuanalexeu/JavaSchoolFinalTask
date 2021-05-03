@@ -58,6 +58,11 @@
                     <p style="color: #ea4335">${error}</p>
                 </c:if>
 
+                <c:if test="${routePossibility ne null}">
+                    <p style="color: #ea4335">${routePossibility}</p>
+                </c:if>
+
+
                 <div class="card shadow">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">Loads</p>
@@ -201,19 +206,26 @@
                                     <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="/employee/apply-truck" method="post">
-                                        <input type="hidden" name="orderId" value="${order.id}">
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLorryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Choose
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownLorryButton">
-                                                <c:forEach items="${suitableLorries}" var="lorry">
-                                                    <button type="submit" name="regNum" value="${lorry.regNum}">${lorry.regNum}</button>
-                                                </c:forEach>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <c:choose>
+                                        <c:when test="${truckId ne null}">
+                                            <button disabled="disabled">${truckId}</button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form action="/employee/apply-truck" method="post">
+                                                <input type="hidden" name="orderId" value="${order.id}">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLorryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Choose
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownLorryButton">
+                                                        <c:forEach items="${suitableLorries}" var="lorry">
+                                                            <button type="submit" name="regNum" value="${lorry.regNum}">${lorry.regNum}</button>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>
@@ -223,28 +235,41 @@
                                     <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <div></div>
                                     <div class="row">
                                         <div class="col" style="padding: 5px;">
                                             <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 1:</p>
                                         </div>
                                         <div class="col">
-                                            <c:forEach items="${suitableDrivers}" var="driver">
-                                                <p>${driver.firstName} ${driver.lastName}</p>
-                                            </c:forEach>
-                                            <form action="/employee/apply-driver" method="post">
-                                                <div class="dropdown">
-                                                    <input type="hidden" name="orderId" value="${order.id}">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver1Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Choose
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver1Button">
-                                                        <c:forEach items="${suitableDrivers}" var="driver">
-                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
-                                                        </c:forEach>
-                                                    </div>
-                                                </div>
-                                            </form>
+
+                                            <c:choose>
+                                                <c:when test="${truckId eq null}">
+                                                    <button disabled="disabled">Choose a truck first</button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:choose>
+                                                        <c:when test="${driver1id ne null}">
+                                                            <button disabled="disabled">${driver1.firstName} ${driver1.lastName}</button>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <form action="/employee/apply-driver" method="post">
+                                                                <div class="dropdown">
+                                                                    <input type="hidden" name="orderId" value="${order.id}">
+                                                                    <input type="hidden" name="num" value="${1}">
+                                                                    <input type="hidden" name="regNum" value="${truckId}">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver1Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Choose
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver1Button">
+                                                                        <c:forEach items="${suitableDrivers}" var="driver">
+                                                                            <button type="submit" name="driver1Id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
+                                                                        </c:forEach>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -252,19 +277,44 @@
                                             <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Driver 2:</p>
                                         </div>
                                         <div class="col">
-                                            <form action="/employee/apply-driver" method="post">
-                                                <input type="hidden" name="orderId" value="${order.id}">
-                                                <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver2Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Choose
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownDriver2Button">
-                                                        <c:forEach items="${suitableDrivers}" var="driver">
-                                                            <button type="submit" name="id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
-                                                        </c:forEach>
-                                                    </div>
-                                                </div>
-                                            </form>
+
+                                            <c:choose>
+                                                <c:when test="${truckId eq null}">
+                                                    <button disabled="disabled">Choose a truck first</button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:choose>
+                                                        <c:when test="${driver1id eq null}">
+                                                            <button disabled="disabled">Choose the 1st driver first</button>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <c:choose>
+                                                                <c:when test="${driver2id ne null}">
+                                                                    <button disabled="disabled">${driver2.firstName} ${driver2.lastName}</button>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <form action="/employee/apply-driver" method="post">
+                                                                        <div class="dropdown">
+                                                                            <input type="hidden" name="orderId" value="${order.id}">
+                                                                            <input type="hidden" name="num" value="${2}">
+                                                                            <input type="hidden" name="regNum" value="${truckId}">
+                                                                            <input type="hidden" name="driver1Id" value="${driver1.id}">
+                                                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDriver2Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                Choose
+                                                                            </button>
+                                                                            <div class="dropdown-menu" aria-labelledby="dropdownDriver2Button">
+                                                                                <c:forEach items="${suitableDrivers}" var="driver">
+                                                                                    <button type="submit" name="driver2Id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
+                                                                                </c:forEach>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </div>
@@ -284,7 +334,20 @@
                     </form>
                 </div>
                 <div class="container" style="text-align: center;">
-                    <form action="/employee/verify-order/${order.id}">
+                    <form action="/employee/verify-order">
+
+                        <c:if test="${truckId ne null}">
+                            <input type="hidden" name="regNum" value="${truckId}">
+                        </c:if>
+
+                        <c:if test="${driver1 ne null}">
+                            <input type="hidden" name="driver1Id" value="${driver1.id}">
+                        </c:if>
+
+                        <c:if test="${driver2 ne null}">
+                            <input type="hidden" name="driver2Id" value="${driver2.id}">
+                        </c:if>
+                        <input type="hidden" name="orderId" value="${order.id}">
                         <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Save</button>
                     </form>
                 </div>

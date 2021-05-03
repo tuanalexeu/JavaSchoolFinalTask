@@ -21,7 +21,7 @@
             <div class="text-center">
                 <h3 class="mb-4" style="color: rgb(255,255,255);">Welcome Back!</h3>
                 <c:if test="${errorMessage ne null}">
-                    <h5 class="mb-5" style="color: #ea4335">${error}</h5>
+                    <h5 class="mb-5" style="color: #ea4335">${errorMessage}</h5>
                 </c:if>
             </div>
             <form class="user" method="post" action="/login">

@@ -207,11 +207,6 @@
                         <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Delete</button>
                     </form>
                 </div>
-                <div class="container" style="text-align: center;">
-                    <form action="/employee/verify-order/${order.id}">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Save</button>
-                    </form>
-                </div>
             </div>
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">

@@ -157,7 +157,11 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="container" style="text-align: center;">
+                    <form action="/employee/delete-order/${order.id}">
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Delete</button>
+                    </form>
+                </div>
                 <div class="container" style="text-align: center;">
                     <form action="/employee/orders">
                         <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Back</button>
