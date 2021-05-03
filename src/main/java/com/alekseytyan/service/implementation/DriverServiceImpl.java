@@ -2,10 +2,12 @@ package com.alekseytyan.service.implementation;
 
 import com.alekseytyan.dao.api.DriverDao;
 import com.alekseytyan.dto.DriverDTO;
+import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Driver;
 import com.alekseytyan.entity.enums.UserRole;
 import com.alekseytyan.service.api.DriverService;
+import com.alekseytyan.service.api.OrderService;
 import com.alekseytyan.util.date.DateChecker;
 import com.alekseytyan.util.pathfinding.Route;
 import org.modelmapper.ModelMapper;
@@ -21,13 +23,18 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
 
     private final PasswordEncoder passwordEncoder;
 
+    private final OrderService orderService;
+
     @Autowired
     public DriverServiceImpl(DriverDao dao,
                              ModelMapper mapper,
-                             PasswordEncoder passwordEncoder) {
+                             PasswordEncoder passwordEncoder,
+                             OrderService orderService) {
 
         super(dao, mapper, DriverDTO.class, Driver.class);
+
         this.passwordEncoder = passwordEncoder;
+        this.orderService = orderService;
     }
 
     @Override
@@ -44,8 +51,8 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
 
     @Override
     @Transactional(readOnly = true)
-    public List<DriverDTO> findSuitableDrivers(OrderDTO orderDTO, Route route) {
-        String cityName = orderDTO.getLorry().getCity().getName();
+    public List<DriverDTO> findSuitableDrivers(OrderDTO orderDTO, Route route, LorryDTO lorryDTO) {
+        String cityName = lorryDTO.getCity().getName();
 
         DateChecker dateChecker;
         if(route.isPossible()) {
@@ -92,6 +99,12 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
         if(driverDTO.getOrder() != null) {
             // Set order as null in dependencies
             driverDTO.getOrder().getDrivers().remove(driverDTO);
+
+            if(driverDTO.getOrder().getDrivers().size() == 0) {
+                OrderDTO orderDTO = orderService.findById(driverDTO.getOrder().getId());
+
+                orderService.delete(orderDTO);
+            }
         }
 
         DriverDTO refreshedDriverDTO = update(driverDTO);

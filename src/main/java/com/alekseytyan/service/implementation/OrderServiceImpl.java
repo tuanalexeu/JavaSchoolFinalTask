@@ -28,7 +28,6 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
 
     private final MapService mapService;
 
-
     @Autowired
     public OrderServiceImpl(OrderDao dao, ModelMapper mapper, MapService mapService) {
         super(dao, mapper, OrderDTO.class, Order.class);
@@ -44,6 +43,7 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
             // Set order as null in dependencies
             for (DriverDTO d: orderDTO.getDrivers()) {
                 d.setOrder(null);
+                d.setLorry(null);
             }
         }
 
@@ -78,9 +78,13 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
         Order order = convertToEntity(orderDTO);
 
         List<Load> loads = order.getLoads();
-        City cityStart = order.getLorry().getCity();
-        
-        return RouteChecker.calculateRoute(distanceMaps, loads, cityStart);
+
+        if(orderDTO.getLorry() != null) {
+            City cityStart = order.getLorry().getCity();
+            return RouteChecker.calculateRoute(distanceMaps, loads, cityStart);
+        } else {
+            return RouteChecker.calculateRoute(distanceMaps, loads);
+        }
     }
 
     @Override

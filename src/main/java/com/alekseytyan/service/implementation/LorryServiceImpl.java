@@ -46,13 +46,11 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
             // Set order as null in dependencies
             OrderDTO orderDTO = orderService.findById(lorryDTO.getOrder().getId());
 
-            orderDTO.setLorry(null);
-
             if(orderDTO.getDrivers() != null) {
                 orderDTO.getDrivers().forEach(d -> d.setLorry(null));
             }
 
-            orderService.update(orderDTO);
+            orderService.delete(orderDTO);
         }
 
         lorryDTO.setOrder(null);
