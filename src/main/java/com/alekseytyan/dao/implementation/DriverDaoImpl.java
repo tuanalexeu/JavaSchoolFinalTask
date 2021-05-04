@@ -36,4 +36,9 @@ public class DriverDaoImpl extends AbstractDaoImpl<Driver, Long> implements Driv
                 .setParameter("hours", hours)
                 .getResultList();
     }
+
+    @Override
+    public List<Driver> findWithoutUser() {
+        return entityManager.createNamedQuery("Driver.findWithoutUser", Driver.class).getResultList();
+    }
 }

@@ -64,6 +64,11 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     }
 
     @Override
+    public List<DriverDTO> findWithoutUser() {
+        return convertToDTO(getDao().findWithoutUser());
+    }
+
+    @Override
     public DriverDTO save(DriverDTO driverDTO) {
 
         // Encrypt password in service method.

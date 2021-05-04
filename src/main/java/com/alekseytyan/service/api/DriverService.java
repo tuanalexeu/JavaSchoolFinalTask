@@ -12,4 +12,6 @@ public interface DriverService extends AbstractService<Driver, DriverDTO, Long> 
     DriverDTO findDriverByUser(String email);
     List<DriverDTO> findCoDrivers(Long orderId);
     List<DriverDTO> findSuitableDrivers(OrderDTO orderDTO, Route route, LorryDTO lorryDTO);
+
+    List<DriverDTO> findWithoutUser();
 }

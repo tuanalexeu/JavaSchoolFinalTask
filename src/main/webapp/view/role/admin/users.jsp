@@ -27,9 +27,9 @@
         </a>
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item"><a class="nav-link active" href="/employee/orders"><i class="fas fa-table"></i><span>Orders</span></a></li>
-                <li class="nav-item"><a class="nav-link active" href="/employee/drivers"><i class="fas fa-table"></i><span>Drivers</span></a></li>
-                <li class="nav-item"><a class="nav-link active" href="/employee/lorries"><i class="fas fa-table"></i><span>Lorries</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="/admin/users"><i class="fas fa-table"></i><span>Users</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="/admin/approve-users"><i class="fas fa-table"></i><span>Approve new users</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="/admin/approve-drivers"><i class="fas fa-table"></i><span>Approve new drivers</span></a></li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
@@ -38,6 +38,11 @@
         <div id="content">
             <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ffffff;">
                 <ul class="navbar-nav ml-auto flex-nowrap">
+                    <li class="nav-item" style="padding: 5px">
+                        <form action="/employee/orders">
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Change to manager</button>
+                        </form>
+                    </li>
                     <li class="nav-item" style="padding: 5px">
                         <form action="/profile">
                             <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
@@ -51,10 +56,10 @@
                 </ul>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Drivers</h3>
+                <h3 class="text-dark mb-4">Users</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
-                        <p class="text-primary m-0 font-weight-bold">Drivers list</p>
+                        <p class="text-primary m-0 font-weight-bold">List</p>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -74,7 +79,7 @@
                                             <div class="modal-header">
                                                 <h4 class="modal-title">New driver</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <form:form action="/employee/add-driver" method="post" modelAttribute="newDriver">
+                                            <form:form action="/employee/add-user" method="post" modelAttribute="newUser">
                                                 <div class="modal-body">
                                                     <div class="container">
                                                         <div class="row">
@@ -99,43 +104,33 @@
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <h3 style="margin: 10px;">Hours worked</h3>
+                                                                <h3 style="margin: 10px;">Email</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="hoursWorked" path="hoursWorked" cssErrorClass="errorBox"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <h3 style="margin: 10px;">Status</h3>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="dropdown">
-                                                                    <form:select id="status" path="state" cssErrorClass="errorBox">
-                                                                        <form:option value="DUTY">Duty</form:option>
-                                                                        <form:option value="DRIVING">Driving</form:option>
-                                                                        <form:option value="RESTING">Resting</form:option>
-                                                                        <form:option value="UNLOADING">Unloading</form:option>
-                                                                    </form:select>
-                                                                </div>
+                                                                <form:input id="email" path="email" cssErrorClass="errorBox"/>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <h3 style="margin: 10px;">City</h3>
+                                                                <h3 style="margin: 10px;">Password</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <div class="dropdown">
-                                                                    <form:select  path="city.name">
-                                                                        <c:forEach items="${cities}" var="city">
-                                                                            <form:option value="${city}">${city}</form:option>
-                                                                        </c:forEach>
-                                                                    </form:select>
-                                                                </div>
+                                                                <form:input id="password" path="password" cssErrorClass="errorBox"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h3 style="margin: 10px;">Role</h3>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <form:select id="status" path="role" cssErrorClass="errorBox">
+                                                                    <form:option value="ROLE_DRIVER">Driver</form:option>
+                                                                    <form:option value="ROLE_EMPLOYEE">Employee</form:option>
+                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -154,32 +149,25 @@
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Driver ID</th>
                                     <th>Name</th>
-                                    <th>Hours worked</th>
-                                    <th>State</th>
-                                    <th>City</th>
-                                    <th>Lorry</th>
-                                    <th>Order id</th>
-                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Role</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${drivers}" var="driver">
+                                <c:forEach items="${users}" var="user">
                                     <tr>
-                                        <td>${driver.id}</td>
                                         <td>
-                                            <form action="/employee/edit-driver/${driver.id}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${driver.firstName} ${driver.lastName}</button>
+                                            <form action="/employee/edit-user" method="post">
+                                                <input type="hidden" name="email" value="${user.email}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${user.firstName} ${user.lastName}</button>
                                             </form>
 
                                         </td>
-                                        <td>${driver.hoursWorked}</td>
-                                        <td>${driver.state}</td>
-                                        <td>${driver.city.name}</td>
-                                        <td>${driver.lorry.regNum}</td>
-                                        <td>${driver.order.id}</td>
-                                        <td>${driver.user.email}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.password}</td>
+                                        <td>${user.role}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

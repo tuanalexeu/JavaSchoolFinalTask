@@ -17,6 +17,8 @@ public class HomePageController {
             return new RedirectView("/employee/orders");
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DRIVER"))) {
             return new RedirectView("/driver/info");
+        } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            return new RedirectView("/admin/users");
         } else {
             throw new NoSuchRoleException("Invalid user role");
         }
