@@ -11,7 +11,8 @@ import org.springframework.context.annotation.Import;
         DataSourceConfig.class,
         DataMappingConfig.class,
         WebConfig.class,
-        WebSecurityConfig.class
+        WebSecurityConfig.class,
+        EmailConfig.class
 })
 public class AppConfig {
 }

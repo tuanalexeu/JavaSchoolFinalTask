@@ -72,7 +72,7 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newDriver-modal">New driver</button>
+                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newDriver-modal">New user</button>
                                 <div class="modal fade" id="newDriver-modal" role="dialog" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -151,7 +151,6 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Password</th>
                                     <th>Role</th>
                                 </tr>
                                 </thead>
@@ -159,14 +158,13 @@
                                 <c:forEach items="${users}" var="user">
                                     <tr>
                                         <td>
-                                            <form action="/employee/edit-user" method="post">
+                                            <form action="/admin/edit-user" method="post">
                                                 <input type="hidden" name="email" value="${user.email}">
                                                 <button class="btn btn-primary btn-block btn-user" id="editUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${user.firstName} ${user.lastName}</button>
                                             </form>
 
                                         </td>
                                         <td>${user.email}</td>
-                                        <td>${user.password}</td>
                                         <td>${user.role}</td>
                                     </tr>
                                 </c:forEach>

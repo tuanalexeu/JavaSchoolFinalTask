@@ -57,7 +57,7 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Edit routePoint</h3>
-                <form:form id="editLoadForm" action="/employee/save-user" method="post" modelAttribute="editUser">
+                <form:form id="editUserForm" action="/employee/save-user" method="post" modelAttribute="editUser">
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
@@ -95,10 +95,6 @@
                         <form:hidden id="email" path="email" value="${editUser.email}" cssErrorClass="errorBox"/>
                         <form:hidden id="password" path="password" value="${editUser.password}" cssErrorClass="errorBox"/>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
-                        <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
-                    </div>
                 </form:form>
                 <div class="modal-footer">
                     <form action="/admin/users">
@@ -108,7 +104,7 @@
                         <input type="hidden" name="email" value="${editUser.email}">
                         <button class="btn btn-light" type="submit" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Delete</button>
                     </form>
-                    <button form="editLoadForm" class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                    <button form="editUserForm" class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
                 </div>
             </div>
         </div>

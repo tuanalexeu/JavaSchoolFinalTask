@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class AuthController {
@@ -30,14 +31,6 @@ public class AuthController {
         }
 
         return "auth/login";
-    }
-
-    @GetMapping(value = "/register")
-    public String register() {
-        if(hasAnyRole()) {
-            return "redirect:/homePage";
-        }
-        return "auth/register";
     }
 
     @GetMapping(value = "/forgotPassword")

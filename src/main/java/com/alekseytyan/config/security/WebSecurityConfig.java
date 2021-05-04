@@ -26,13 +26,15 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Import(value = { DataSourceConfig.class })
+@Import(value = {
+        DataSourceConfig.class
+})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     @Autowired
-    public void setDataSource(DataSource dataSource) {
+    public WebSecurityConfig(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -51,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/driver/**").hasRole("DRIVER")
-                .antMatchers("/employee/**").hasRole("EMPLOYEE")
+                .antMatchers("/employee/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/login*", "/register*", "/forgotPassword*", "/*", "/homePage*", "/welcome*", "/assets/**").permitAll()
                 .antMatchers("/profile*").hasAnyRole("DRIVER", "EMPLOYEE", "ADMIN")
@@ -68,7 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(logoutSuccessHandler())
-
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 

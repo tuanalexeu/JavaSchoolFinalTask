@@ -94,7 +94,7 @@
                                         <td>${user.password}</td>
                                         <td>${user.role}</td>
                                         <td>
-                                            <form action="/employee/approve-user">
+                                            <form action="/admin/approve-user">
                                                 <input type="hidden" name="email" value="${user.email}">
                                                 <button class="btn btn-primary btn-block btn-user" id="approveUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Approve</button>
                                             </form>

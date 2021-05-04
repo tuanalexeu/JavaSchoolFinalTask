@@ -5,14 +5,12 @@ import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Driver;
-import com.alekseytyan.entity.enums.UserRole;
 import com.alekseytyan.service.api.DriverService;
 import com.alekseytyan.service.api.OrderService;
 import com.alekseytyan.util.date.DateChecker;
 import com.alekseytyan.util.pathfinding.Route;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,19 +19,15 @@ import java.util.List;
 @Service
 public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, DriverDTO, Long> implements DriverService {
 
-    private final PasswordEncoder passwordEncoder;
-
     private final OrderService orderService;
 
     @Autowired
     public DriverServiceImpl(DriverDao dao,
                              ModelMapper mapper,
-                             PasswordEncoder passwordEncoder,
                              OrderService orderService) {
 
         super(dao, mapper, DriverDTO.class, Driver.class);
 
-        this.passwordEncoder = passwordEncoder;
         this.orderService = orderService;
     }
 
@@ -66,35 +60,6 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     @Override
     public List<DriverDTO> findWithoutUser() {
         return convertToDTO(getDao().findWithoutUser());
-    }
-
-    @Override
-    public DriverDTO save(DriverDTO driverDTO) {
-
-        // Encrypt password in service method.
-        // Protected from changing on frontend side
-        driverDTO.getUser().setPassword(passwordEncoder.encode(driverDTO.getUser().getPassword()));
-
-        // Set role
-        driverDTO.getUser().setRole(UserRole.ROLE_DRIVER);
-
-        // Set account activation (Required by Spring Security)
-        driverDTO.getUser().setEnabled(true);
-
-        // call super method to save DTO with prepared properties
-        return super.save(driverDTO);
-    }
-
-    @Override
-    public DriverDTO update(DriverDTO driverDTO) {
-
-        // Set role
-        driverDTO.getUser().setRole(UserRole.ROLE_DRIVER);
-
-        // Set account activation (Required by Spring Security)
-        driverDTO.getUser().setEnabled(true);
-
-        return super.update(driverDTO);
     }
 
     @Override
