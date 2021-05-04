@@ -108,30 +108,6 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
-    public Map<Long, String> convertLoadsToMap(OrderDTO orderDTO) {
-
-        Map<Long, String> loads = new HashMap<>();
-
-        for (LoadDTO l: orderDTO.getLoads()) {
-            loads.put(l.getId(), l.getStatus().toString());
-        }
-
-        return loads;
-    }
-
-    @Override
-    public List<LoadDTO> convertLoadsToList(Map<Long, String> loads, DriverDTO driverDTO) {
-
-        List<LoadDTO> list = driverDTO.getOrder().getLoads();
-
-        for (LoadDTO l: list) {
-            l.setStatus(LoadStatus.valueOf(loads.get(l.getId())));
-        }
-
-        return list;
-    }
-
-    @Override
     public int calculateWeight(Order order) {
         List<Load> loads = order.getLoads();
 
