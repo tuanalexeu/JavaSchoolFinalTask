@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Logiweb Tableau</title>
+<!--    <h:outputStylesheet library="css" name="tableau.css" />-->
+    <h:outputScript>
+        function onMessage(message) {
+            // console.log('websocket push message::' + message);
+            location.reload();
+        }
+    </h:outputScript>
+</h:head>
+<h:body>
+
+    <div id="header" class="ui-g-12">
+        LogiWeb Tableau
+    </div>
+    <div id="main" class="ui-g-12">
+        <div id="orders-table" class="ui-g-12 ui-md-12 ui-lg-8">
+            <h3>Latest orders</h3>
+            <p:dataTable var="order" reflow="true" value="#{tableauView.latestOrders}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{order.id}" />
+                </p:column>
+                <p:column headerText="Date">
+                    <h:outputText value="#{order.creationDate}" />
+                </p:column>
+                <p:column headerText="From">
+                    <h:outputText value="#{order.fromCity.name}" />
+                </p:column>
+                <p:column headerText="To">
+                    <h:outputText value="#{order.toCity.name}" />
+                </p:column>
+                <p:column headerText="Weight, kg">
+                    <h:outputText value="#{order.weight}" />
+                </p:column>
+                <p:column headerText="Status">
+                    <h:outputText value="#{order.status}" />
+                </p:column>
+            </p:dataTable>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-4">
+            <div class="ui-g-12 ui-md-6 ui-lg-12">
+                <p:chart type="pie" styleClass="side-chart" model="#{tableauView.driverStatistics}"/>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-12">
+                <p:chart type="pie" styleClass="side-chart" model="#{tableauView.truckStatistics}"  />
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="ui-g-12">
+        <h:outputText value="LogiWeb &copy; 2018" />
+    </div>
+
+    <f:websocket channel="websocket" onmessage="onMessage" />
+
+</h:body>
+</html>
