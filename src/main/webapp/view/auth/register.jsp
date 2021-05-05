@@ -57,8 +57,8 @@
                     <hr>
                 </form:form>
 
-                <div class="text-center"><a class="small" href="/forgotPassword" style="border-color: rgb(255,255,255);color: rgb(255,255,255);">Forgot Password?</a></div>
-                <div class="text-center"><a class="small" href="/login" style="color: rgb(255,255,255);">Already have an account? Login!</a></div>
+                <div class="text-center"><a class="small" href="${pageContext.request.contextPath}/forgotPassword" style="border-color: rgb(255,255,255);color: rgb(255,255,255);">Forgot Password?</a></div>
+                <div class="text-center"><a class="small" href="${pageContext.request.contextPath}/login" style="color: rgb(255,255,255);">Already have an account? Login!</a></div>
             </div>
         </div>
     </div>

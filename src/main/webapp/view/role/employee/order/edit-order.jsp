@@ -29,9 +29,9 @@
         </a>
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item"><a class="nav-link active" href="/employee/orders"><i class="fas fa-table"></i><span>Orders</span></a></li>
-                <li class="nav-item"><a class="nav-link active" href="/employee/drivers"><i class="fas fa-table"></i><span>Drivers</span></a></li>
-                <li class="nav-item"><a class="nav-link active" href="/employee/lorries"><i class="fas fa-table"></i><span>Lorries</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/employee/orders"><i class="fas fa-table"></i><span>Orders</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/employee/drivers"><i class="fas fa-table"></i><span>Drivers</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/employee/lorries"><i class="fas fa-table"></i><span>Lorries</span></a></li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
@@ -41,12 +41,12 @@
             <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ffffff;">
                 <ul class="navbar-nav ml-auto flex-nowrap">
                     <li class="nav-item" style="padding: 5px">
-                        <form action="/profile">
+                        <form action="${pageContext.request.contextPath}/profile">
                             <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
-                        <form action="/logout">
+                        <form action="${pageContext.request.contextPath}/logout">
                             <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
                         </form>
                     </li>
@@ -211,7 +211,7 @@
                                             <button disabled="disabled">${truckId}</button>
                                         </c:when>
                                         <c:otherwise>
-                                            <form action="/employee/apply-truck" method="post">
+                                            <form action="${pageContext.request.contextPath}/employee/apply-truck" method="post">
                                                 <input type="hidden" name="orderId" value="${order.id}">
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLorryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -251,7 +251,7 @@
                                                             <button disabled="disabled">${driver1.firstName} ${driver1.lastName}</button>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <form action="/employee/apply-driver" method="post">
+                                                            <form action="${pageContext.request.contextPath}/employee/apply-driver" method="post">
                                                                 <div class="dropdown">
                                                                     <input type="hidden" name="orderId" value="${order.id}">
                                                                     <input type="hidden" name="num" value="${1}">
@@ -293,7 +293,7 @@
                                                                     <button disabled="disabled">${driver2.firstName} ${driver2.lastName}</button>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    <form action="/employee/apply-driver" method="post">
+                                                                    <form action="${pageContext.request.contextPath}/employee/apply-driver" method="post">
                                                                         <div class="dropdown">
                                                                             <input type="hidden" name="orderId" value="${order.id}">
                                                                             <input type="hidden" name="num" value="${2}">

@@ -27,9 +27,9 @@
         </a>
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item"><a class="nav-link active" href="/admin/users"><i class="fas fa-table"></i><span>Users</span></a></li>
-                <li class="nav-item"><a class="nav-link active" href="/admin/approve-users"><i class="fas fa-table"></i><span>Approve new users</span></a></li>
-                <li class="nav-item"><a class="nav-link active" href="/admin/approve-drivers"><i class="fas fa-table"></i><span>Approve new drivers</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/admin/users"><i class="fas fa-table"></i><span>Users</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/admin/approve-users"><i class="fas fa-table"></i><span>Approve new users</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/admin/approve-drivers"><i class="fas fa-table"></i><span>Approve new drivers</span></a></li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
@@ -39,17 +39,17 @@
             <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ffffff;">
                 <ul class="navbar-nav ml-auto flex-nowrap">
                     <li class="nav-item" style="padding: 5px">
-                        <form action="/employee/orders">
+                        <form action="${pageContext.request.contextPath}/employee/orders">
                             <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Change to manager</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
-                        <form action="/profile">
+                        <form action="${pageContext.request.contextPath}/profile">
                             <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
-                        <form action="/logout">
+                        <form action="${pageContext.request.contextPath}/logout">
                             <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
                         </form>
                     </li>
@@ -92,7 +92,7 @@
                                                 <div class="dropdown-menu">
                                                     <c:forEach items="${newUsers}" var="user">
                                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
-                                                            <form action="/admin/approve-driver" method="post">
+                                                            <form action="${pageContext.request.contextPath}/admin/approve-driver" method="post">
                                                                 <input type="hidden" name="driverId" value="${driver.id}">
                                                                 <input type="hidden" name="email" value="${user.email}">
                                                                 <button type="submit">${user.firstName} ${user.lastName}</button>

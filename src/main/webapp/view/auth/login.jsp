@@ -24,7 +24,7 @@
                     <h5 class="mb-5" style="color: #ea4335">${errorMessage}</h5>
                 </c:if>
             </div>
-            <form class="user" method="post" action="/login">
+            <form class="user" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="form-group">
                     <input class="form-control form-control-user" type="text" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="username">
                 </div>
@@ -35,8 +35,8 @@
                 <hr>
                 <hr>
             </form>
-            <div class="text-center"><a class="small" href="/forgotPassword" style="color: rgb(255,255,255);">Forgot Password?</a></div>
-            <div class="text-center" style="color: rgb(255,255,255);"><a class="small" href="/register" style="color: rgb(255,255,255);">Create an Account!</a></div>
+            <div class="text-center"><a class="small" href="${pageContext.request.contextPath}/forgotPassword" style="color: rgb(255,255,255);">Forgot Password?</a></div>
+            <div class="text-center" style="color: rgb(255,255,255);"><a class="small" href="${pageContext.request.contextPath}/register" style="color: rgb(255,255,255);">Create an Account!</a></div>
         </div>
     </div>
 </div>

@@ -27,7 +27,7 @@
         </a>
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item"><a class="nav-link active" href="/driver/info"><i class="fas fa-window-maximize"></i><span>My info</span></a></li>
+                <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/driver/info"><i class="fas fa-window-maximize"></i><span>My info</span></a></li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
@@ -37,12 +37,12 @@
             <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ffffff;">
                 <ul class="navbar-nav ml-auto flex-nowrap">
                     <li class="nav-item" style="padding: 5px">
-                        <form action="/profile">
+                        <form action="${pageContext.request.contextPath}/profile">
                             <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
-                        <form action="/logout">
+                        <form action="${pageContext.request.contextPath}/logout">
                             <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
                         </form>
                     </li>
@@ -74,22 +74,22 @@
                                     <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${driver.state} </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
-                                            <form action="/driver/save" method="post">
+                                            <form action="${pageContext.request.contextPath}/driver/save" method="post">
                                                 <button type="submit" value="DUTY" name="status">Duty</button>
                                             </form>
                                         </a>
                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
-                                            <form action="/driver/save" method="post">
+                                            <form action="${pageContext.request.contextPath}/driver/save" method="post">
                                                 <button type="submit" value="DRIVING" name="status">Driving</button>
                                             </form>
                                         </a>
                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
-                                            <form action="/driver/save" method="post">
+                                            <form action="${pageContext.request.contextPath}/driver/save" method="post">
                                                 <button type="submit" value="RESTING" name="status">Resting</button>
                                             </form>
                                         </a>
                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
-                                            <form action="/driver/save" method="post">
+                                            <form action="${pageContext.request.contextPath}/driver/save" method="post">
                                                 <button type="submit" value="UNLOADING" name="status">Unloading</button>
                                             </form>
                                         </a>
@@ -210,17 +210,17 @@
                                             <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.status} </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
-                                                    <form action="/driver/save-load">
+                                                    <form action="${pageContext.request.contextPath}/driver/save-load">
                                                         <button type="submit" value="PREPARED" name="status">Prepared</button>
                                                     </form>
                                                 </a>
                                                 <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
-                                                    <form action="/driver/save-load">
+                                                    <form action="${pageContext.request.contextPath}/driver/save-load">
                                                         <button type="submit" value="SENT" name="status">Sent</button>
                                                     </form>
                                                 </a>
                                                 <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
-                                                    <form action="/driver/save-load">
+                                                    <form action="${pageContext.request.contextPath}/driver/save-load">
                                                         <button type="submit" value="DELIVERED" name="status">Delivered</button>
                                                     </form>
                                                 </a>
