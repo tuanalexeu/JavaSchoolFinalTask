@@ -12,28 +12,28 @@
     </welcome-file-list>
 
     <servlet>
-        <servlet-name>CargoManagerDashboard</servlet-name>
+        <servlet-name>InfoTable</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>CargoManagerDashboard</servlet-name>
+        <servlet-name>InfoTable</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>CargoManagerDashboard</servlet-name>
+        <servlet-name>InfoTable</servlet-name>
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>CargoManagerDashboard</servlet-name>
+        <servlet-name>InfoTable</servlet-name>
         <url-pattern>*.faces</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>CargoManagerDashboard</servlet-name>
+        <servlet-name>InfoTable</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
