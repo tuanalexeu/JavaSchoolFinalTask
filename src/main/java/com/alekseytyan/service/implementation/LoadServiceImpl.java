@@ -4,6 +4,7 @@ import com.alekseytyan.dao.api.LoadDao;
 import com.alekseytyan.dto.LoadDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Load;
+import com.alekseytyan.listener.DataSourceEventPublisher;
 import com.alekseytyan.service.api.LoadService;
 import com.alekseytyan.service.api.OrderService;
 import org.modelmapper.ModelMapper;
@@ -21,8 +22,10 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
         this.orderService = orderService;
     }
 
-    public LoadServiceImpl(LoadDao dao, ModelMapper mapper) {
-        super(dao, mapper, LoadDTO.class, Load.class);
+    public LoadServiceImpl(LoadDao dao,
+                           ModelMapper mapper,
+                           DataSourceEventPublisher publisher) {
+        super(dao, mapper, publisher, LoadDTO.class, Load.class);
     }
 
     @Override

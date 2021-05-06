@@ -1,6 +1,7 @@
 package com.alekseytyan.service.implementation;
 
 import com.alekseytyan.dao.api.AbstractDao;
+import com.alekseytyan.listener.DataSourceEventPublisher;
 import com.alekseytyan.service.api.AbstractService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,10 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E, ID>, DTO, 
     @Getter(value = AccessLevel.PROTECTED)
     @Setter(value = AccessLevel.PROTECTED)
     private ModelMapper mapper;
+
+    @Getter(value = AccessLevel.PROTECTED)
+    @Setter(value = AccessLevel.PROTECTED)
+    private DataSourceEventPublisher publisher;
 
 
     private final Class<DTO> dtoClass;

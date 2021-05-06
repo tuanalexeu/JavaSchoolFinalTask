@@ -3,6 +3,7 @@ package com.alekseytyan.service.implementation;
 import com.alekseytyan.dao.api.CityDao;
 import com.alekseytyan.dto.CityDTO;
 import com.alekseytyan.entity.City;
+import com.alekseytyan.listener.DataSourceEventPublisher;
 import com.alekseytyan.service.api.CityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ import java.util.List;
 public class CityServiceImpl extends AbstractServiceImpl<City, CityDao, CityDTO, String> implements CityService {
 
     @Autowired
-    public CityServiceImpl(CityDao dao, ModelMapper mapper) {
-        super(dao, mapper, CityDTO.class, City.class);
+    public CityServiceImpl(CityDao dao,
+                           ModelMapper mapper,
+                           DataSourceEventPublisher publisher) {
+        super(dao, mapper, publisher, CityDTO.class, City.class);
     }
 
     @Override

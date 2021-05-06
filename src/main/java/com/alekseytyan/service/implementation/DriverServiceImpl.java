@@ -5,6 +5,7 @@ import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Driver;
+import com.alekseytyan.listener.DataSourceEventPublisher;
 import com.alekseytyan.service.api.DriverService;
 import com.alekseytyan.service.api.OrderService;
 import com.alekseytyan.util.date.DateChecker;
@@ -24,11 +25,28 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     @Autowired
     public DriverServiceImpl(DriverDao dao,
                              ModelMapper mapper,
-                             OrderService orderService) {
+                             OrderService orderService,
+                             DataSourceEventPublisher publisher) {
 
-        super(dao, mapper, DriverDTO.class, Driver.class);
+        super(dao, mapper, publisher, DriverDTO.class, Driver.class);
 
         this.orderService = orderService;
+    }
+
+    @Override
+    public DriverDTO save(DriverDTO driverDTO) {
+
+        getPublisher().publishEvent("driver.add");
+
+        return super.save(driverDTO);
+    }
+
+    @Override
+    public DriverDTO update(DriverDTO driverDTO) {
+
+        getPublisher().publishEvent("driver.update");
+
+        return super.update(driverDTO);
     }
 
     @Override
@@ -78,6 +96,8 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
         }
 
         DriverDTO refreshedDriverDTO = update(driverDTO);
+
+        getPublisher().publishEvent("driver.delete");
 
         return super.delete(refreshedDriverDTO);
     }

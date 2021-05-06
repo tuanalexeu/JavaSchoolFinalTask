@@ -5,6 +5,7 @@ import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Lorry;
+import com.alekseytyan.listener.DataSourceEventPublisher;
 import com.alekseytyan.service.api.LorryService;
 import com.alekseytyan.service.api.OrderService;
 import org.modelmapper.ModelMapper;
@@ -25,8 +26,26 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
     }
 
     @Autowired
-    public LorryServiceImpl(LorryDao dao, ModelMapper mapper) {
-        super(dao, mapper, LorryDTO.class, Lorry.class);
+    public LorryServiceImpl(LorryDao dao,
+                            ModelMapper mapper,
+                            DataSourceEventPublisher publisher) {
+        super(dao, mapper, publisher, LorryDTO.class, Lorry.class);
+    }
+
+    @Override
+    public LorryDTO save(LorryDTO lorryDTO) {
+
+        getPublisher().publishEvent("truck.add");
+
+        return super.save(lorryDTO);
+    }
+
+    @Override
+    public LorryDTO update(LorryDTO lorryDTO) {
+
+        getPublisher().publishEvent("truck.update");
+
+        return super.update(lorryDTO);
     }
 
     @Override
@@ -57,6 +76,8 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
 
 
         LorryDTO refreshedLorryDTO = update(lorryDTO);
+
+        getPublisher().publishEvent("truck.delete");
 
         return super.delete(refreshedLorryDTO);
     }

@@ -9,6 +9,7 @@ import com.alekseytyan.entity.DistanceMap;
 import com.alekseytyan.entity.Load;
 import com.alekseytyan.entity.Order;
 import com.alekseytyan.entity.enums.LoadStatus;
+import com.alekseytyan.listener.DataSourceEventPublisher;
 import com.alekseytyan.service.api.MapService;
 import com.alekseytyan.service.api.OrderService;
 import com.alekseytyan.util.pathfinding.Route;
@@ -29,10 +30,29 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     private final MapService mapService;
 
     @Autowired
-    public OrderServiceImpl(OrderDao dao, ModelMapper mapper, MapService mapService) {
-        super(dao, mapper, OrderDTO.class, Order.class);
+    public OrderServiceImpl(OrderDao dao,
+                            ModelMapper mapper,
+                            MapService mapService,
+                            DataSourceEventPublisher publisher) {
+        super(dao, mapper, publisher, OrderDTO.class, Order.class);
 
         this.mapService = mapService;
+    }
+
+    @Override
+    public OrderDTO save(OrderDTO orderDTO) {
+
+        getPublisher().publishEvent("order.add");
+
+        return super.save(orderDTO);
+    }
+
+    @Override
+    public OrderDTO update(OrderDTO orderDTO) {
+
+        getPublisher().publishEvent("order.update");
+
+        return super.update(orderDTO);
     }
 
     @Override
@@ -52,6 +72,8 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
         }
 
         OrderDTO refreshedOrderDTO = update(orderDTO);
+
+        getPublisher().publishEvent("order.delete");
 
         return super.delete(refreshedOrderDTO);
     }

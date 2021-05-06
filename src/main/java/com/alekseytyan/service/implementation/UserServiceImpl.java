@@ -4,6 +4,7 @@ import com.alekseytyan.controller.auth.exception.UserAlreadyExistException;
 import com.alekseytyan.dao.api.UserDao;
 import com.alekseytyan.dto.UserDTO;
 import com.alekseytyan.entity.User;
+import com.alekseytyan.listener.DataSourceEventPublisher;
 import com.alekseytyan.service.api.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,9 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
     @Autowired
     public UserServiceImpl(UserDao dao,
                            ModelMapper mapper,
-                           PasswordEncoder passwordEncoder) {
-        super(dao, mapper, UserDTO.class, User.class);
+                           PasswordEncoder passwordEncoder,
+                           DataSourceEventPublisher publisher) {
+        super(dao, mapper, publisher, UserDTO.class, User.class);
 
         this.passwordEncoder = passwordEncoder;
     }
