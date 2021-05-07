@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.service.implementation;
 
+import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
 import com.alekseytyan.logiweb.dao.api.AbstractDao;
 import com.alekseytyan.logiweb.service.api.AbstractService;
 import lombok.AccessLevel;
@@ -22,6 +23,10 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E, ID>, DTO, 
     @Getter(value = AccessLevel.PROTECTED)
     @Setter(value = AccessLevel.PROTECTED)
     private ModelMapper mapper;
+
+    @Getter(value = AccessLevel.PROTECTED)
+    @Setter(value = AccessLevel.PROTECTED)
+    private DataSourceEventPublisher publisher;
 
 
     private final Class<DTO> dtoClass;

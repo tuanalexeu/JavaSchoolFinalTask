@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 
@@ -23,21 +24,41 @@
                 <div class="text-center">
                     <h4 class="mb-4" style="color: rgb(255,255,255);">Create an Account!</h4>
                 </div>
-                <form class="user">
+                <form:form action="/reg-process" method="post" modelAttribute="user">
                     <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="First Name" name="first_name"></div>
-                        <div class="col-sm-6"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Last Name" name="last_name"></div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <form:input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="First Name"  path="firstName" name="first_name"/>
+                        </div>
+                        <div class="col-sm-6">
+                            <form:input class="form-control form-control-user" type="text" id="exampleLastName" placeholder="Last Name" path="lastName" name="last_name"/>
+                        </div>
                     </div>
-                    <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email"></div>
+                    <div class="form-group">
+                        <form:input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" path="email" name="email"/>
+                    </div>
                     <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password"></div>
-                        <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password_repeat"></div>
-                    </div><button class="btn btn-primary btn-block text-white btn-user" id="register_button" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Register Account</button>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <form:input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" path="password" name="password"/>
+                        </div>
+                        <div class="col-sm-6">
+                            <form:input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" path="matchingPassword" name="password_repeat"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <form:select class="form-control form-control-user" placeholder="Role" path="role" name="role">
+                                <form:option value="ROLE_DRIVER">Driver</form:option>
+                                <form:option value="ROLE_EMPLOYEE">Employee</form:option>
+                            </form:select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block text-white btn-user" id="register_button" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Register Account</button>
                     <hr>
                     <hr>
-                </form>
-                <div class="text-center"><a class="small" href="Desktop/JavaSchoolFinalTask/logiweb/srciweb/src/main/webapp/view/auth/forgot_password.jsp" style="border-color: rgb(255,255,255);color: rgb(255,255,255);">Forgot Password?</a></div>
-                <div class="text-center"><a class="small" href="Desktop/JavaSchoolFinalTask/logiweb/srciweb/src/main/webapp/view/auth/login.jsp" style="color: rgb(255,255,255);">Already have an account? Login!</a></div>
+                </form:form>
+
+                <div class="text-center"><a class="small" href="${pageContext.request.contextPath}/forgotPassword" style="border-color: rgb(255,255,255);color: rgb(255,255,255);">Forgot Password?</a></div>
+                <div class="text-center"><a class="small" href="${pageContext.request.contextPath}/login" style="color: rgb(255,255,255);">Already have an account? Login!</a></div>
             </div>
         </div>
     </div>

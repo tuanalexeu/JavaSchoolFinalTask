@@ -25,12 +25,12 @@
                     <div class="container">
                         <ul class="navbar-nav ml-auto flex-nowrap">
                             <li class="nav-item" style="padding: 5px">
-                                <form action="/login">
+                                <form action="${pageContext.request.contextPath}/login">
                                     <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Sign in</button>
                                 </form>
                             </li>
                             <li class="nav-item" style="padding: 5px">
-                                <form action="/register">
+                                <form action="${pageContext.request.contextPath}/register">
                                     <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Sign up</button>
                                 </form>
                             </li>

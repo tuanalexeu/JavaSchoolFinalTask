@@ -15,9 +15,21 @@ import javax.validation.constraints.Size;
 @NamedQueries({
         @NamedQuery(name = "Lorry.findSuitableLorries",
                     query = "SELECT l from Lorry l " +
-                            "where l.capacity >= :weight " +
+                            "WHERE l.capacity >= :weight " +
                             "AND l.isBroken = FALSE " +
-                            "AND NOT EXISTS (SELECT o from Order o where o.lorry.regNum = l.regNum)")
+                            "AND NOT EXISTS (SELECT o from Order o where o.lorry.regNum = l.regNum)"),
+        @NamedQuery(name = "Lorry.countAvailable",
+                query = "SELECT COUNT(l) from Lorry l " +
+                        "WHERE l.capacity >= :weight " +
+                        "AND l.isBroken = FALSE " +
+                        "AND NOT EXISTS (SELECT o from Order o where o.lorry.regNum = l.regNum)"),
+        @NamedQuery(name = "Lorry.countUnavailable",
+                query = "SELECT COUNT(l) from Lorry l " +
+                        "WHERE l.capacity >= :weight " +
+                        "AND l.isBroken = FALSE " +
+                        "AND EXISTS (SELECT o from Order o where o.lorry.regNum = l.regNum)"),
+        @NamedQuery(name = "Lorry.countBroken",
+                query = "SELECT COUNT(l) FROM Lorry l WHERE l.isBroken = TRUE")
 })
 public class Lorry {
     @Id

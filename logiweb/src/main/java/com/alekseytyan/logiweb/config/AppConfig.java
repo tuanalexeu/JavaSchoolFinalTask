@@ -6,12 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@ComponentScan("com.alekseytyan")
+@ComponentScan("com.alekseytyan.logiweb")
 @Import(value = {
         DataSourceConfig.class,
         DataMappingConfig.class,
         WebConfig.class,
-        WebSecurityConfig.class
+        WebSecurityConfig.class,
+        EmailConfig.class
 })
 public class AppConfig {
 }

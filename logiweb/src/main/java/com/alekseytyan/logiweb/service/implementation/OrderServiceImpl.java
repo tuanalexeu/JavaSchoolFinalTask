@@ -1,39 +1,54 @@
 package com.alekseytyan.logiweb.service.implementation;
 
-import com.alekseytyan.logiweb.dao.api.OrderDao;
 import com.alekseytyan.logiweb.dto.DriverDTO;
-import com.alekseytyan.logiweb.dto.LoadDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
+import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
+import com.alekseytyan.logiweb.util.pathfinding.Route;
+import com.alekseytyan.logiweb.util.pathfinding.RouteChecker;
+import com.alekseytyan.logiweb.dao.api.OrderDao;
 import com.alekseytyan.logiweb.entity.City;
 import com.alekseytyan.logiweb.entity.DistanceMap;
 import com.alekseytyan.logiweb.entity.Load;
 import com.alekseytyan.logiweb.entity.Order;
-import com.alekseytyan.logiweb.entity.enums.LoadStatus;
 import com.alekseytyan.logiweb.service.api.MapService;
 import com.alekseytyan.logiweb.service.api.OrderService;
-import com.alekseytyan.logiweb.util.pathfinding.Route;
-import com.alekseytyan.logiweb.util.pathfinding.RouteChecker;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, OrderDTO, Long> implements OrderService {
 
     private final MapService mapService;
 
-
     @Autowired
-    public OrderServiceImpl(OrderDao dao, ModelMapper mapper, MapService mapService) {
-        super(dao, mapper, OrderDTO.class, Order.class);
+    public OrderServiceImpl(OrderDao dao,
+                            ModelMapper mapper,
+                            MapService mapService,
+                            DataSourceEventPublisher publisher) {
+        super(dao, mapper, publisher, OrderDTO.class, Order.class);
 
         this.mapService = mapService;
+    }
+
+    @Override
+    public OrderDTO save(OrderDTO orderDTO) {
+
+        getPublisher().publishEvent("order");
+
+        return super.save(orderDTO);
+    }
+
+    @Override
+    public OrderDTO update(OrderDTO orderDTO) {
+
+        getPublisher().publishEvent("order");
+
+        return super.update(orderDTO);
     }
 
     @Override
@@ -44,6 +59,7 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
             // Set order as null in dependencies
             for (DriverDTO d: orderDTO.getDrivers()) {
                 d.setOrder(null);
+                d.setLorry(null);
             }
         }
 
@@ -52,6 +68,8 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
         }
 
         OrderDTO refreshedOrderDTO = update(orderDTO);
+
+        getPublisher().publishEvent("order");
 
         return super.delete(refreshedOrderDTO);
     }
@@ -78,9 +96,13 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
         Order order = convertToEntity(orderDTO);
 
         List<Load> loads = order.getLoads();
-        City cityStart = order.getLorry().getCity();
-        
-        return RouteChecker.calculateRoute(distanceMaps, loads, cityStart);
+
+        if(orderDTO.getLorry() != null) {
+            City cityStart = order.getLorry().getCity();
+            return RouteChecker.calculateRoute(distanceMaps, loads, cityStart);
+        } else {
+            return RouteChecker.calculateRoute(distanceMaps, loads);
+        }
     }
 
     @Override
@@ -101,30 +123,6 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
         }
 
         return routes;
-    }
-
-    @Override
-    public Map<Long, String> convertLoadsToMap(OrderDTO orderDTO) {
-
-        Map<Long, String> loads = new HashMap<>();
-
-        for (LoadDTO l: orderDTO.getLoads()) {
-            loads.put(l.getId(), l.getStatus().toString());
-        }
-
-        return loads;
-    }
-
-    @Override
-    public List<LoadDTO> convertLoadsToList(Map<Long, String> loads, DriverDTO driverDTO) {
-
-        List<LoadDTO> list = driverDTO.getOrder().getLoads();
-
-        for (LoadDTO l: list) {
-            l.setStatus(LoadStatus.valueOf(loads.get(l.getId())));
-        }
-
-        return list;
     }
 
     @Override

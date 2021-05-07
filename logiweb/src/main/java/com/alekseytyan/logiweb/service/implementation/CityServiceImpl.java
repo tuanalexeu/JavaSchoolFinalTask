@@ -1,7 +1,8 @@
 package com.alekseytyan.logiweb.service.implementation;
 
-import com.alekseytyan.logiweb.dao.api.CityDao;
 import com.alekseytyan.logiweb.dto.CityDTO;
+import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
+import com.alekseytyan.logiweb.dao.api.CityDao;
 import com.alekseytyan.logiweb.entity.City;
 import com.alekseytyan.logiweb.service.api.CityService;
 import org.modelmapper.ModelMapper;
@@ -15,8 +16,10 @@ import java.util.List;
 public class CityServiceImpl extends AbstractServiceImpl<City, CityDao, CityDTO, String> implements CityService {
 
     @Autowired
-    public CityServiceImpl(CityDao dao, ModelMapper mapper) {
-        super(dao, mapper, CityDTO.class, City.class);
+    public CityServiceImpl(CityDao dao,
+                           ModelMapper mapper,
+                           DataSourceEventPublisher publisher) {
+        super(dao, mapper, publisher, CityDTO.class, City.class);
     }
 
     @Override

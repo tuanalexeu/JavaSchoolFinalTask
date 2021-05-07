@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface LorryDao extends AbstractDao<Lorry, String> {
     List<Lorry> findSuitableLorries(int weight);
+
+    long countAvailable();
+    long countUnavailable();
+    long countBroken();
 }

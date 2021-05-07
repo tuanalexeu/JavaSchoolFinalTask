@@ -1,16 +1,20 @@
 package com.alekseytyan.logiweb.controller.role.employee.order;
 
 import com.alekseytyan.logiweb.dto.DriverDTO;
+import com.alekseytyan.logiweb.dto.LoadDTO;
 import com.alekseytyan.logiweb.dto.LorryDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
-import com.alekseytyan.logiweb.dto.LoadDTO;
-import com.alekseytyan.logiweb.service.api.*;
+import com.alekseytyan.logiweb.service.api.CityService;
+import com.alekseytyan.logiweb.service.api.DriverService;
+import com.alekseytyan.logiweb.service.api.LorryService;
+import com.alekseytyan.logiweb.service.api.OrderService;
 import com.alekseytyan.logiweb.util.error.ErrorChecker;
 import com.alekseytyan.logiweb.util.pathfinding.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -58,25 +62,45 @@ public class OrderCrudController {
         return "role/employee/order/add-order";
     }
 
-    @GetMapping(value ={"/edit-order/{id}", "/edit-order/{id}/{errorCode}"})
+    @GetMapping(value = "/edit-order")
     public String editOrder(Model model,
-                            @PathVariable Long id,
-                            @PathVariable(required = false) Integer errorCode) {
+                            @RequestParam Long orderId,
+                            @RequestParam(required = false) Integer errorCode,
+                            @RequestParam(required = false) String regNum,
+                            @RequestParam(required = false) Long driver1id,
+                            @RequestParam(required = false) Long driver2id) {
 
-        OrderDTO orderDTO = orderService.findById(id);
+        OrderDTO orderDTO = orderService.findById(orderId);
 
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderDTO);
 
+        if(!orderService.calculateRoute(orderDTO).isPossible()) {
+            model.addAttribute("routePossibility",
+                    "This route isn't possible to complete (Some ways between cities are missing)");
+        }
 
+        if(regNum != null) {
+            model.addAttribute("truckId", regNum);
+        }
+
+        if(driver1id != null) {
+            model.addAttribute("driver1id", driver1id);
+            model.addAttribute("driver1", driverService.findById(driver1id));
+        }
+
+        if(driver2id != null) {
+            model.addAttribute("driver2id", driver2id);
+            model.addAttribute("driver2", driverService.findById(driver2id));
+        }
 
         if(errorCode != null) {
             model.addAttribute("error", ErrorChecker.getMessage(errorCode));
         }
 
         model.addAttribute("suitableLorries", lorryService.findSuitableLorries(orderDTO));
-        if(orderDTO.getLorry() != null) {
-            model.addAttribute("suitableDrivers", driverService.findSuitableDrivers(orderDTO, orderService.calculateRoute(orderDTO)));
+        if(regNum != null) {
+            model.addAttribute("suitableDrivers", driverService.findSuitableDrivers(orderDTO, orderService.calculateRoute(orderDTO), lorryService.findById(regNum)));
         }
 
         return "role/employee/order/edit-order";
@@ -91,50 +115,89 @@ public class OrderCrudController {
     }
 
     @PostMapping(value = "/apply-truck")
-    public RedirectView applyTruck(@RequestParam Long orderId,
+    public RedirectView applyTruck(Model model,
+                                   RedirectAttributes attributes,
+                                   @RequestParam Long orderId,
                                    @RequestParam String regNum) {
-        OrderDTO orderDTO = orderService.findById(orderId);
-        LorryDTO lorryDTO = lorryService.findById(regNum);
 
-        orderDTO.setLorry(lorryDTO);
-        orderService.update(orderDTO);
+        attributes.addAttribute("orderId", orderId);
+        attributes.addAttribute("regNum", regNum);
+        model.addAttribute("regNum", regNum);
 
-        return new RedirectView("/employee/edit-order/" + orderId);
+        return new RedirectView("/employee/edit-order");
     }
 
     @PostMapping(value = "/apply-driver")
-    public RedirectView applyDriver(@RequestParam Long orderId,
-                                    @RequestParam Long id) {
-        OrderDTO orderDTO = orderService.findById(orderId);
-        DriverDTO driverDTO = driverService.findById(id);
+    public RedirectView applyDriver(RedirectAttributes attributes,
+                                    @RequestParam Long orderId,
+                                    @RequestParam Long driver1Id,
+                                    @RequestParam(required = false) Long driver2Id,
+                                    @RequestParam String regNum,
+                                    @RequestParam Integer num) {
 
-        driverDTO.setOrder(orderDTO);
-        driverDTO.setLorry(orderDTO.getLorry());
-        driverService.update(driverDTO);
+        attributes.addAttribute("orderId", orderId);
+        attributes.addAttribute("regNum", regNum);
 
-        orderDTO.getDrivers().add(driverDTO);
-        orderService.update(orderDTO);
+        if(num == 1) {
+            attributes.addAttribute("driver1id", driver1Id);
+        } else if(num == 2) {
+            attributes.addAttribute("driver1id", driver1Id);
+            attributes.addAttribute("driver2id", driver2Id);
+        }
 
-        return new RedirectView("/employee/edit-order/" + orderId);
+        return new RedirectView("/employee/edit-order");
     }
 
-    @GetMapping("/verify-order/{orderId}")
-    public RedirectView verifyOrder(@PathVariable Long orderId) {
+    @GetMapping("/verify-order")
+    public RedirectView verifyOrder(RedirectAttributes attributes,
+                                    @RequestParam Long orderId,
+                                    @RequestParam(required = false) String regNum,
+                                    @RequestParam(required = false) Long driver1Id,
+                                    @RequestParam(required = false) Long driver2Id) {
 
         OrderDTO orderDTO = orderService.findById(orderId);
 
-        if(orderDTO.getLorry() == null) {
-            return new RedirectView("/employee/edit-order/" + orderId + "/1");
+        attributes.addAttribute("orderId", orderId);
+
+        if(regNum == null) {
+            attributes.addAttribute("errorCode", 1);
+            return new RedirectView("/employee/edit-order");
         }
 
         Route route = orderService.calculateRoute(orderDTO);
         if(!route.isPossible()) {
-            return new RedirectView("/employee/edit-order/" + orderId+ "/2");
+            attributes.addAttribute("errorCode", 2);
+            return new RedirectView("/employee/edit-order");
         }
 
-        if(orderDTO.getDrivers().size() != 2) {
-            return new RedirectView("/employee/edit-order/" + orderId + "/3");
+        if(driver1Id == null || driver2Id == null) {
+            attributes.addAttribute("errorCode", 3);
+            return new RedirectView("/employee/edit-order");
         }
+
+        if(driver1Id.equals(driver2Id)) {
+            attributes.addAttribute("errorCode", 4);
+            return new RedirectView("/employee/edit-order");
+        }
+
+        LorryDTO lorryDTO = lorryService.findById(regNum);
+        DriverDTO driverDTO = driverService.findById(driver1Id);
+        DriverDTO driver2DTO = driverService.findById(driver2Id);
+
+        orderDTO.setLorry(lorryDTO);
+        orderDTO.getDrivers().add(driverDTO);
+        orderDTO.getDrivers().add(driver2DTO);
+
+        driverDTO.setOrder(orderDTO);
+        driver2DTO.setOrder(orderDTO);
+
+        driverDTO.setLorry(lorryDTO);
+        driver2DTO.setLorry(lorryDTO);
+
+        driverService.update(driverDTO);
+        driverService.update(driver2DTO);
+
+        orderService.update(orderDTO);
 
         orderDTO.setVerified(route.isPossible());
         orderService.update(orderDTO);

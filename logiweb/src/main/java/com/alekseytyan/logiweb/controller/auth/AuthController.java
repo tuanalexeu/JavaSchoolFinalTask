@@ -32,14 +32,6 @@ public class AuthController {
         return "auth/login";
     }
 
-    @GetMapping(value = "/register")
-    public String register() {
-        if(hasAnyRole()) {
-            return "redirect:/homePage";
-        }
-        return "auth/register";
-    }
-
     @GetMapping(value = "/forgotPassword")
     public String forgotPassword() {
         if(hasAnyRole()) {

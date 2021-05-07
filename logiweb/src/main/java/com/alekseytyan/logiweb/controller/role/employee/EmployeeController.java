@@ -1,6 +1,7 @@
 package com.alekseytyan.logiweb.controller.role.employee;
 
-import com.alekseytyan.logiweb.entity.*;
+import com.alekseytyan.logiweb.entity.Driver;
+import com.alekseytyan.logiweb.entity.Lorry;
 import com.alekseytyan.logiweb.service.api.CityService;
 import com.alekseytyan.logiweb.service.api.DriverService;
 import com.alekseytyan.logiweb.service.api.LorryService;

@@ -1,7 +1,7 @@
 package com.alekseytyan.logiweb.dao.implementation;
 
 import com.alekseytyan.logiweb.dao.api.DriverDao;
-import com.alekseytyan.logiweb.entity.*;
+import com.alekseytyan.logiweb.entity.Driver;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -35,5 +35,20 @@ public class DriverDaoImpl extends AbstractDaoImpl<Driver, Long> implements Driv
                 .setParameter("cityName", cityName)
                 .setParameter("hours", hours)
                 .getResultList();
+    }
+
+    @Override
+    public List<Driver> findWithoutUser() {
+        return entityManager.createNamedQuery("Driver.findWithoutUser", Driver.class).getResultList();
+    }
+
+    @Override
+    public long countAvailable() {
+        return entityManager.createNamedQuery("Driver.countAvailable", Long.class).getSingleResult();
+    }
+
+    @Override
+    public long countUnavailable() {
+        return entityManager.createNamedQuery("Driver.countUnavailable", Long.class).getSingleResult();
     }
 }

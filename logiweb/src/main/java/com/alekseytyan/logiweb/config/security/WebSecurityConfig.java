@@ -1,13 +1,15 @@
 package com.alekseytyan.logiweb.config.security;
 
-import com.alekseytyan.logiweb.config.DataSourceConfig;
-import com.alekseytyan.logiweb.config.security.handler.CustomAccessDeniedHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomAuthenticationFailureHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomLogoutSuccessHandler;
+import com.alekseytyan.logiweb.config.DataSourceConfig;
+import com.alekseytyan.logiweb.config.security.handler.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,13 +26,15 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Import(value = { DataSourceConfig.class })
+@Import(value = {
+        DataSourceConfig.class
+})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     @Autowired
-    public void setDataSource(DataSource dataSource) {
+    public WebSecurityConfig(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -49,9 +53,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/driver/**").hasRole("DRIVER")
-                .antMatchers("/employee/**").hasRole("EMPLOYEE")
+                .antMatchers("/employee/**").hasAnyRole("EMPLOYEE", "ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/login*", "/register*", "/forgotPassword*", "/*", "/homePage*", "/welcome*", "/assets/**").permitAll()
-                .antMatchers("/profile*").hasAnyRole("DRIVER", "EMPLOYEE")
+                .antMatchers("/profile*").hasAnyRole("DRIVER", "EMPLOYEE", "ADMIN")
                 .anyRequest().authenticated()
 
                 .and()
@@ -65,8 +70,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(logoutSuccessHandler())
-
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+    }
+
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl r = new RoleHierarchyImpl();
+        r.setHierarchy("ROLE_ADMIN > ROLE_EMPLOYEE and ROLE_ADMIN > ROLE_DRIVER");
+        return r;
     }
 
     @Bean

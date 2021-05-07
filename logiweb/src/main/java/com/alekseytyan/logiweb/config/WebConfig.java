@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = {"com.alekseytyan.logiweb.controller"})
+@ComponentScan(basePackages = { "com.alekseytyan.logiweb.controller" })
 public class WebConfig implements WebMvcConfigurer {
 
     @Override

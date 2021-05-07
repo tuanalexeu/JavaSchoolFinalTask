@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -28,13 +29,17 @@ public class LoadCrudController {
     }
 
     @PostMapping(value = "/add-load")
-    public RedirectView addRoutePoint(Model model, @ModelAttribute LoadDTO loadDTO) {
+    public RedirectView addRoutePoint(RedirectAttributes attributes,
+                                      Model model,
+                                      @ModelAttribute LoadDTO loadDTO) {
 
         model.addAttribute("cityNames", cityService.findAllNames());
 
         loadService.save(loadDTO);
 
-        return new RedirectView("/employee/edit-order/" + loadDTO.getOrder().getId());
+        attributes.addAttribute("orderId", loadDTO.getOrder().getId());
+
+        return new RedirectView("/employee/edit-order");
     }
 
     @GetMapping(value = "/edit-load/{id}")
@@ -48,22 +53,31 @@ public class LoadCrudController {
     }
 
     @PostMapping(value = "/save-load")
-    public RedirectView editLoad(@ModelAttribute LoadDTO loadDTO) {
+    public RedirectView editLoad(RedirectAttributes attributes,
+                                 @ModelAttribute LoadDTO loadDTO) {
 
         loadService.update(loadDTO);
 
-        return new RedirectView("/employee/edit-order/" + loadDTO.getOrder().getId());
+        attributes.addAttribute("orderId", loadDTO.getOrder().getId());
+
+        return new RedirectView("/employee/edit-order");
     }
 
     @GetMapping(value = "/delete-load/{id}")
-    public RedirectView deleteLoad(@PathVariable Long id) {
+    public RedirectView deleteLoad(RedirectAttributes attributes,
+                                   @PathVariable Long id) {
 
         // We need order id to return editing process of order after we finish deleting current route point
         Long orderId = loadService.findOrderId(id);
 
         loadService.deleteById(id);
 
-        return new RedirectView("/employee/edit-order/" + orderId);
+        if(orderService.findById(orderId).getLoads().isEmpty()) {
+            return new RedirectView("/employee/add-order");
+        } else {
+            attributes.addAttribute("orderId", orderId);
+            return new RedirectView("/employee/edit-order");
+        }
 
     }
 

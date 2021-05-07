@@ -1,9 +1,9 @@
 package com.alekseytyan.logiweb.util.pathfinding;
 
+import com.alekseytyan.logiweb.util.pathfinding.graph.Graph;
 import com.alekseytyan.logiweb.entity.City;
 import com.alekseytyan.logiweb.entity.DistanceMap;
 import com.alekseytyan.logiweb.entity.Load;
-import com.alekseytyan.logiweb.util.pathfinding.graph.Graph;
 import com.alekseytyan.logiweb.util.pathfinding.graph.Node;
 import lombok.Getter;
 import lombok.Setter;

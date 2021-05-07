@@ -1,8 +1,10 @@
 package com.alekseytyan.logiweb.service.implementation;
 
-import com.alekseytyan.logiweb.dao.api.LorryDao;
 import com.alekseytyan.logiweb.dto.LorryDTO;
+import com.alekseytyan.logiweb.dto.LorryStatsDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
+import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
+import com.alekseytyan.logiweb.dao.api.LorryDao;
 import com.alekseytyan.logiweb.entity.Lorry;
 import com.alekseytyan.logiweb.service.api.LorryService;
 import com.alekseytyan.logiweb.service.api.OrderService;
@@ -24,8 +26,26 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
     }
 
     @Autowired
-    public LorryServiceImpl(LorryDao dao, ModelMapper mapper) {
-        super(dao, mapper, LorryDTO.class, Lorry.class);
+    public LorryServiceImpl(LorryDao dao,
+                            ModelMapper mapper,
+                            DataSourceEventPublisher publisher) {
+        super(dao, mapper, publisher, LorryDTO.class, Lorry.class);
+    }
+
+    @Override
+    public LorryDTO save(LorryDTO lorryDTO) {
+
+        getPublisher().publishEvent("truck");
+
+        return super.save(lorryDTO);
+    }
+
+    @Override
+    public LorryDTO update(LorryDTO lorryDTO) {
+
+        getPublisher().publishEvent("truck");
+
+        return super.update(lorryDTO);
     }
 
     @Override
@@ -38,6 +58,17 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
     }
 
     @Override
+    public LorryStatsDTO getStatistics() {
+        LorryStatsDTO lorryStatsDTO = new LorryStatsDTO();
+
+        lorryStatsDTO.setAvailable(getDao().countAvailable());
+        lorryStatsDTO.setUnavailable(getDao().countUnavailable());
+        lorryStatsDTO.setBroken(getDao().countBroken());
+
+        return lorryStatsDTO;
+    }
+
+    @Override
     @Transactional
     public LorryDTO delete(LorryDTO lorryDTO) {
 
@@ -45,19 +76,19 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
             // Set order as null in dependencies
             OrderDTO orderDTO = orderService.findById(lorryDTO.getOrder().getId());
 
-            orderDTO.setLorry(null);
-
             if(orderDTO.getDrivers() != null) {
                 orderDTO.getDrivers().forEach(d -> d.setLorry(null));
             }
 
-            orderService.update(orderDTO);
+            orderService.delete(orderDTO);
         }
 
         lorryDTO.setOrder(null);
 
 
         LorryDTO refreshedLorryDTO = update(lorryDTO);
+
+        getPublisher().publishEvent("truck");
 
         return super.delete(refreshedLorryDTO);
     }

@@ -1,8 +1,11 @@
 package com.alekseytyan.logiweb.controller.role.driver;
 
 import com.alekseytyan.logiweb.dto.DriverDTO;
+import com.alekseytyan.logiweb.dto.LoadDTO;
 import com.alekseytyan.logiweb.entity.enums.DriverState;
+import com.alekseytyan.logiweb.entity.enums.LoadStatus;
 import com.alekseytyan.logiweb.service.api.DriverService;
+import com.alekseytyan.logiweb.service.api.LoadService;
 import com.alekseytyan.logiweb.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,20 +15,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Map;
-
 @Controller
 @RequestMapping(value = "/driver")
 public class DriverController {
 
     private final DriverService driverService;
     private final OrderService orderService;
+    private final LoadService loadService;
 
     @Autowired
     public DriverController(DriverService driverService,
-                            OrderService orderService) {
+                            OrderService orderService,
+                            LoadService loadService) {
         this.driverService = driverService;
         this.orderService = orderService;
+        this.loadService = loadService;
     }
 
     @ModelAttribute("driver")
@@ -52,7 +56,7 @@ public class DriverController {
             // find list of route cities
             model.addAttribute("route", orderService.calculateRoute(orderService.findById(orderId)));
 
-            model.addAttribute("loads", orderService.convertLoadsToMap(driverDTO.getOrder()));
+            model.addAttribute("loads", driverDTO.getOrder().getLoads());
         }
 
         return "role/driver/driverInfo";
@@ -67,16 +71,14 @@ public class DriverController {
         return new RedirectView("/driver/info");
     }
 
-    @PostMapping(value = "/save-loads")
-    public RedirectView saveLoads(Model model, @ModelAttribute Map<Long, String> loads) {
+    @GetMapping(value = "/save-load")
+    public RedirectView saveLoads(@RequestParam Long loadId,
+                                  @RequestParam String status) {
 
-        DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");
+        LoadDTO loadDTO = loadService.findById(loadId);
+        loadDTO.setStatus(LoadStatus.valueOf(status));
 
-        if(driverDTO.getOrder() != null) {
-            driverDTO.getOrder().setLoads(orderService.convertLoadsToList(loads, driverDTO));
-        }
-
-        driverService.update(driverDTO);
+        loadService.update(loadDTO);
 
         return new RedirectView("/driver/info");
     }

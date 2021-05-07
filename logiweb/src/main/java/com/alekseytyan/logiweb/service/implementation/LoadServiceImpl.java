@@ -1,8 +1,9 @@
 package com.alekseytyan.logiweb.service.implementation;
 
-import com.alekseytyan.logiweb.dao.api.LoadDao;
 import com.alekseytyan.logiweb.dto.LoadDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
+import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
+import com.alekseytyan.logiweb.dao.api.LoadDao;
 import com.alekseytyan.logiweb.entity.Load;
 import com.alekseytyan.logiweb.service.api.LoadService;
 import com.alekseytyan.logiweb.service.api.OrderService;
@@ -21,8 +22,10 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
         this.orderService = orderService;
     }
 
-    public LoadServiceImpl(LoadDao dao, ModelMapper mapper) {
-        super(dao, mapper, LoadDTO.class, Load.class);
+    public LoadServiceImpl(LoadDao dao,
+                           ModelMapper mapper,
+                           DataSourceEventPublisher publisher) {
+        super(dao, mapper, publisher, LoadDTO.class, Load.class);
     }
 
     @Override
