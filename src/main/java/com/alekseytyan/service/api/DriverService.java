@@ -1,6 +1,7 @@
 package com.alekseytyan.service.api;
 
 import com.alekseytyan.dto.DriverDTO;
+import com.alekseytyan.dto.DriverStatsDTO;
 import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Driver;
@@ -14,4 +15,6 @@ public interface DriverService extends AbstractService<Driver, DriverDTO, Long> 
     List<DriverDTO> findSuitableDrivers(OrderDTO orderDTO, Route route, LorryDTO lorryDTO);
 
     List<DriverDTO> findWithoutUser();
+
+    DriverStatsDTO getStatistics();
 }

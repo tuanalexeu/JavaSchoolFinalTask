@@ -19,4 +19,19 @@ public class LorryDaoImpl extends AbstractDaoImpl<Lorry, String> implements Lorr
                 .setParameter("weight", weight)
                 .getResultList();
     }
+
+    @Override
+    public long countAvailable() {
+        return entityManager.createNamedQuery("Lorry.countAvailable", Long.class).getSingleResult();
+    }
+
+    @Override
+    public long countUnavailable() {
+        return entityManager.createNamedQuery("Lorry.countUnavailable", Long.class).getSingleResult();
+    }
+
+    @Override
+    public long countBroken() {
+        return entityManager.createNamedQuery("Lorry.countBroken", Long.class).getSingleResult();
+    }
 }

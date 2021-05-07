@@ -3,6 +3,7 @@ package com.alekseytyan.service.implementation;
 import com.alekseytyan.dao.api.LorryDao;
 import com.alekseytyan.dto.DriverDTO;
 import com.alekseytyan.dto.LorryDTO;
+import com.alekseytyan.dto.LorryStatsDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Lorry;
 import com.alekseytyan.listener.DataSourceEventPublisher;
@@ -35,7 +36,7 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
     @Override
     public LorryDTO save(LorryDTO lorryDTO) {
 
-        getPublisher().publishEvent("truck.add");
+        getPublisher().publishEvent("truck");
 
         return super.save(lorryDTO);
     }
@@ -43,7 +44,7 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
     @Override
     public LorryDTO update(LorryDTO lorryDTO) {
 
-        getPublisher().publishEvent("truck.update");
+        getPublisher().publishEvent("truck");
 
         return super.update(lorryDTO);
     }
@@ -55,6 +56,17 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
         int weight = orderService.calculateWeight(orderService.convertToEntity(orderDTO));
 
         return convertToDTO(getDao().findSuitableLorries(weight));
+    }
+
+    @Override
+    public LorryStatsDTO getStatistics() {
+        LorryStatsDTO lorryStatsDTO = new LorryStatsDTO();
+
+        lorryStatsDTO.setAvailable(getDao().countAvailable());
+        lorryStatsDTO.setUnavailable(getDao().countUnavailable());
+        lorryStatsDTO.setBroken(getDao().countBroken());
+
+        return lorryStatsDTO;
     }
 
     @Override
@@ -77,7 +89,7 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
 
         LorryDTO refreshedLorryDTO = update(lorryDTO);
 
-        getPublisher().publishEvent("truck.delete");
+        getPublisher().publishEvent("truck");
 
         return super.delete(refreshedLorryDTO);
     }

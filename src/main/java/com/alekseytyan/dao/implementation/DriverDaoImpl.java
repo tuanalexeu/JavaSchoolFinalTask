@@ -41,4 +41,14 @@ public class DriverDaoImpl extends AbstractDaoImpl<Driver, Long> implements Driv
     public List<Driver> findWithoutUser() {
         return entityManager.createNamedQuery("Driver.findWithoutUser", Driver.class).getResultList();
     }
+
+    @Override
+    public long countAvailable() {
+        return entityManager.createNamedQuery("Driver.countAvailable", Long.class).getSingleResult();
+    }
+
+    @Override
+    public long countUnavailable() {
+        return entityManager.createNamedQuery("Driver.countUnavailable", Long.class).getSingleResult();
+    }
 }

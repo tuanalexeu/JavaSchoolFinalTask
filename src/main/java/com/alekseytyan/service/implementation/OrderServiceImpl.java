@@ -42,7 +42,7 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     @Override
     public OrderDTO save(OrderDTO orderDTO) {
 
-        getPublisher().publishEvent("order.add");
+        getPublisher().publishEvent("order");
 
         return super.save(orderDTO);
     }
@@ -50,7 +50,7 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     @Override
     public OrderDTO update(OrderDTO orderDTO) {
 
-        getPublisher().publishEvent("order.update");
+        getPublisher().publishEvent("order");
 
         return super.update(orderDTO);
     }
@@ -73,7 +73,7 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
 
         OrderDTO refreshedOrderDTO = update(orderDTO);
 
-        getPublisher().publishEvent("order.delete");
+        getPublisher().publishEvent("order");
 
         return super.delete(refreshedOrderDTO);
     }

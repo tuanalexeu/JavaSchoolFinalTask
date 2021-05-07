@@ -2,6 +2,7 @@ package com.alekseytyan.service.implementation;
 
 import com.alekseytyan.dao.api.DriverDao;
 import com.alekseytyan.dto.DriverDTO;
+import com.alekseytyan.dto.DriverStatsDTO;
 import com.alekseytyan.dto.LorryDTO;
 import com.alekseytyan.dto.OrderDTO;
 import com.alekseytyan.entity.Driver;
@@ -36,7 +37,7 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     @Override
     public DriverDTO save(DriverDTO driverDTO) {
 
-        getPublisher().publishEvent("driver.add");
+        getPublisher().publishEvent("driver");
 
         return super.save(driverDTO);
     }
@@ -44,7 +45,7 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     @Override
     public DriverDTO update(DriverDTO driverDTO) {
 
-        getPublisher().publishEvent("driver.update");
+        getPublisher().publishEvent("driver");
 
         return super.update(driverDTO);
     }
@@ -81,6 +82,16 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     }
 
     @Override
+    public DriverStatsDTO getStatistics() {
+        DriverStatsDTO driverStatsDTO = new DriverStatsDTO();
+
+        driverStatsDTO.setAvailable(getDao().countAvailable());
+        driverStatsDTO.setUnavailable(getDao().countUnavailable());
+
+        return driverStatsDTO;
+    }
+
+    @Override
     @Transactional
     public DriverDTO delete(DriverDTO driverDTO) {
 
@@ -97,7 +108,7 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
 
         DriverDTO refreshedDriverDTO = update(driverDTO);
 
-        getPublisher().publishEvent("driver.delete");
+        getPublisher().publishEvent("driver");
 
         return super.delete(refreshedDriverDTO);
     }
