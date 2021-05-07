@@ -1,8 +1,10 @@
-package com.alekseytyan.infotable;
+package com.alekseytyan.infotable.bean;
+
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
-import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
@@ -21,16 +23,16 @@ import javax.jms.TextMessage;
                 propertyValue = "javax.jms.Queue"
         ),
 })
-public class ReadMessageMDB implements MessageListener {
+@RequiredArgsConstructor
+public class MessageDrivenBean implements MessageListener {
 
+    private final WebSocket webSocket;
+
+    @SneakyThrows
     @Override
     public void onMessage(Message message) {
         TextMessage textMessage = (TextMessage) message;
-        try {
-            System.out.println("Message received: " + textMessage.getText());
-        } catch (JMSException e) {
-            System.out.println(
-              "Error while trying to consume messages: " + e.getMessage());
-        }
+        webSocket.interpretMsg(textMessage.getText());
     }
+
 }
