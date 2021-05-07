@@ -1,6 +1,5 @@
 package com.alekseytyan.infotable.bean;
 
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
 import javax.ejb.ActivationConfigProperty;
@@ -23,10 +22,13 @@ import javax.jms.TextMessage;
                 propertyValue = "javax.jms.Queue"
         ),
 })
-@RequiredArgsConstructor
 public class MessageDrivenBean implements MessageListener {
 
     private final WebSocket webSocket;
+
+    public MessageDrivenBean() {
+        webSocket = new WebSocket();
+    }
 
     @SneakyThrows
     @Override
