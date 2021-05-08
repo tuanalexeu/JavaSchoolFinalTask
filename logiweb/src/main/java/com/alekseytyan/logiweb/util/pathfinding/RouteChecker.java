@@ -19,7 +19,94 @@ public class RouteChecker {
 
     public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads, City cityStart) {
 
+//        Map<List<City>, Integer> finalCities = new HashMap<>();
+//
+//        for (Load l: loads) {
+//
+//            Set<City> lCities = checkCities(l);
+//
+//            Set<Node> nodes = convertToNodeList(lCities, distances);
+//
+//            Graph lGraph = new Graph(nodes);
+//
+//            Node nodeStart = new Node(cityStart);
+//            for (Node n: nodes) {
+//                if(n.equals(nodeStart)) {
+//                    nodeStart = n;
+//                }
+//            }
+//
+//            lGraph = Graph.calculateShortestPathFromSource(lGraph, nodeStart);
+//
+//            int distance = Integer.MAX_VALUE;
+//
+//
+//            List<City> finalRoute = new ArrayList<>();
+//            boolean isPossible = false;
+//
+//            for (Node n: lGraph.getNodes()) {
+//
+//                List<Node> n2 = n.getShortestPath();
+//                n2.add(n);
+//
+//                List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
+//
+//                if(checkIfContains(currentCities, new ArrayList<>(lCities)) && n.getDistance() < distance) {
+//                    finalRoute = currentCities;
+//                    distance = n.getDistance();
+//                    isPossible = true;
+//                }
+//            }
+//
+//            finalCities.put(finalRoute, distance);
+//        }
+
+
         Set<City> cities = checkCities(loads);
+        Set<Node> nodes = convertToNodeList(cities, distances);
+        Graph graph = new Graph(nodes);
+        Node nodeStart = new Node(cityStart);
+        for (Node n: nodes) {
+            if(n.equals(nodeStart)) {
+                nodeStart = n;
+            }
+        }
+
+        graph = Graph.calculateShortestPathFromSource(graph, nodeStart);
+
+        int distance = Integer.MAX_VALUE;
+
+
+        List<City> finalCities = new ArrayList<>();
+        boolean isPossible = false;
+
+        for (Node n: graph.getNodes()) {
+
+            List<Node> n2 = n.getShortestPath();
+            n2.add(n);
+
+            List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
+
+            if(checkIfContains(currentCities, new ArrayList<>(cities)) && n.getDistance() < Integer.MAX_VALUE) {
+                finalCities = currentCities;
+                distance = n.getDistance();
+                isPossible = true;
+            }
+
+        }
+
+        Route route = new Route();
+
+        route.setPossible(isPossible);
+        route.setCityList(finalCities);
+        route.setDistance(distance);
+        route.setTime(calculateRouteTime(distance));
+        route.setMaxWeight(calculateMaxWeight(loads));
+
+        return route;
+    }
+
+    private static Set<Node> convertToNodeList(Set<City> cities, List<DistanceMap> distances) {
 
         Set<Node> nodes = new HashSet<>();
 
@@ -46,47 +133,7 @@ public class RouteChecker {
             nodes.add(node2);
         }
 
-        Graph graph = new Graph(nodes);
-
-        Node nodeStart = new Node(cityStart);
-        for (Node n: nodes) {
-            if(n.equals(nodeStart)) {
-                nodeStart = n;
-            }
-        }
-
-        graph = Graph.calculateShortestPathFromSource(graph, nodeStart);
-
-        int distance = Integer.MAX_VALUE;
-
-
-        List<City> finalCities = new ArrayList<>();
-        boolean isPossible = false;
-
-        for (Node n: graph.getNodes()) {
-
-            List<Node> n2 = n.getShortestPath();
-            n2.add(n);
-
-            List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
-
-            if(checkIfContains(currentCities, new ArrayList<>(cities)) && n.getDistance() < distance) {
-                finalCities = currentCities;
-                distance = n.getDistance();
-                isPossible = true;
-            }
-
-        }
-
-        Route route = new Route();
-
-        route.setPossible(isPossible);
-        route.setCityList(finalCities);
-        route.setDistance(distance);
-        route.setTime(calculateRouteTime(distance));
-        route.setMaxWeight(calculateMaxWeight(loads));
-
-        return route;
+        return nodes;
     }
 
     public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads) {
@@ -155,5 +202,14 @@ public class RouteChecker {
         });
 
         return routeWeight;
+    }
+
+    private static Set<City> checkCities(Load load) {
+
+        Set<City> result = new HashSet<>();
+        result.add(load.getCityLoad());
+        result.add(load.getCityUnload());
+
+        return result;
     }
 }
