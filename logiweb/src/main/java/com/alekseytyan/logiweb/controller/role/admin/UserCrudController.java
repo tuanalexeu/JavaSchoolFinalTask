@@ -1,6 +1,6 @@
 package com.alekseytyan.logiweb.controller.role.admin;
 
-import com.alekseytyan.logiweb.controller.auth.exception.UserAlreadyExistException;
+import com.alekseytyan.logiweb.exception.UserAlreadyExistException;
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

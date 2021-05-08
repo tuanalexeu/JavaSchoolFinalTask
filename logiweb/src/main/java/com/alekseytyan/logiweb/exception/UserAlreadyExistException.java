@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.controller.auth.exception;
+package com.alekseytyan.logiweb.exception;
 
 public class UserAlreadyExistException extends Exception {
     public UserAlreadyExistException(String message) {

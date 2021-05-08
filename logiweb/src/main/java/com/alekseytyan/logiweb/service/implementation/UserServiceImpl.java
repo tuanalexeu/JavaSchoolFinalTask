@@ -1,6 +1,6 @@
 package com.alekseytyan.logiweb.service.implementation;
 
-import com.alekseytyan.logiweb.controller.auth.exception.UserAlreadyExistException;
+import com.alekseytyan.logiweb.exception.UserAlreadyExistException;
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.dao.api.UserDao;
 import com.alekseytyan.logiweb.entity.User;

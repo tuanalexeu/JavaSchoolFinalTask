@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.util.error;
+package com.alekseytyan.logiweb.exception;
 
 public class NoSuchErrorException extends RuntimeException {
     public NoSuchErrorException(String message) {
