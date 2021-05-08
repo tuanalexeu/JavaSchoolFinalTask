@@ -13,7 +13,9 @@ package com.alekseytyan.logiweb.entity;
 @AllArgsConstructor
 @NamedQueries({
         @NamedQuery(name = "User.findDisabled",
-                query = "select u from User u where u.enabled = FALSE")
+                query = "select u from User u where u.enabled = FALSE"),
+        @NamedQuery(name = "User.findWithoutDriver",
+                query = "select u from User u where u.role = 'ROLE_DRIVER'")
 })
 public class User {
 

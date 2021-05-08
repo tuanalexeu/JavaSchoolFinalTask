@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.controller.role.admin;
 
+import com.alekseytyan.logiweb.controller.auth.exception.UserAlreadyExistException;
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,9 @@ public class UserCrudController {
     }
 
     @PostMapping(value = "/add-user")
-    public RedirectView addUser(@ModelAttribute UserDTO newUser) {
+    public RedirectView addUser(@ModelAttribute UserDTO newUser) throws UserAlreadyExistException {
 
-        userService.save(newUser);
+        userService.registerNewUserAccount(newUser);
 
         return new RedirectView("/admin/users");
     }

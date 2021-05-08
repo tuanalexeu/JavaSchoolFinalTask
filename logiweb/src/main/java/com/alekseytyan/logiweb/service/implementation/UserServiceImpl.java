@@ -36,20 +36,20 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
     }
 
     @Override
-    public User registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException {
+    public UserDTO registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException {
         if (emailExists(userDto.getEmail())) {
             throw new UserAlreadyExistException("There is an account with that email address: "
                     + userDto.getEmail());
         }
 
-        User user = new User();
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setEmail(userDto.getEmail());
-        user.setRole(userDto.getRole());
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        return getDao().save(user);
+        return super.save(userDto);
+    }
+
+    @Override
+    public List<UserDTO> findWithoutDriver() {
+        return convertToDTO(getDao().findWithoutDriver());
     }
 
     private boolean emailExists(String email) {

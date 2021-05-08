@@ -1,6 +1,7 @@
 package com.alekseytyan.logiweb.dao.implementation;
 
 import com.alekseytyan.logiweb.dao.api.UserDao;
+import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,10 @@ public class UserDaoImpl extends AbstractDaoImpl<User, String> implements UserDa
     @Override
     public List<User> findDisabled() {
         return entityManager.createNamedQuery("User.findDisabled", User.class).getResultList();
+    }
+
+    @Override
+    public List<User> findWithoutDriver() {
+        return entityManager.createNamedQuery("User.findWithoutDriver", User.class).getResultList();
     }
 }

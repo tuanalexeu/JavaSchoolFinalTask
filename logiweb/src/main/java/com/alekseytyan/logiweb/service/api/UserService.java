@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface UserService extends AbstractService<User, UserDTO, String> {
     List<UserDTO> findDisabled();
-    User registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException;
+    UserDTO registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException;
+    List<UserDTO> findWithoutDriver();
 }

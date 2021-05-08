@@ -55,7 +55,7 @@ public class AdminController {
     public String approveDrivers(Model model) {
 
         model.addAttribute("newDrivers", driverService.findWithoutUser());
-        model.addAttribute("newUsers", userService.findDisabled());
+        model.addAttribute("newUsers", userService.findWithoutDriver());
 
         return "role/admin/approve-drivers";
     }
