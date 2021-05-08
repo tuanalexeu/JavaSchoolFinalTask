@@ -127,8 +127,11 @@
                             <form:hidden id="order" path="order.id" value="${editDriver.order.id}" cssErrorClass="errorBox"/>
                         </c:if>
 
-                        <form:hidden id="email" path="user.email" value="${editDriver.user.email}" cssErrorClass="errorBox"/>
-                        <form:hidden id="password" path="user.password" value="${editDriver.user.password}" cssErrorClass="errorBox"/>
+                        <c:if test="${not empty editDriver.user}">
+                            <form:hidden id="email" path="user.email" value="${editDriver.user.email}" cssErrorClass="errorBox"/>
+                            <form:hidden id="password" path="user.password" value="${editDriver.user.password}" cssErrorClass="errorBox"/>
+                            <form:hidden id="role" path="user.role" value="${editDriver.user.role}" cssErrorClass="errorBox"/>
+                        </c:if>
                     </div>
                 </form:form>
                 <div class="modal-footer">

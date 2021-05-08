@@ -79,7 +79,7 @@
                                             <div class="modal-header">
                                                 <h4 class="modal-title">New driver</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <form:form action="/employee/add-user" method="post" modelAttribute="newUser">
+                                            <form:form action="/admin/add-user" method="post" modelAttribute="newUser">
                                                 <div class="modal-body">
                                                     <div class="container">
                                                         <div class="row">
@@ -134,6 +134,19 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h3 style="margin: 10px;">Enabled</h3>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <form:select id="status" path="enabled" cssErrorClass="errorBox">
+                                                                    <form:option value="true">True</form:option>
+                                                                    <form:option value="false">False</form:option>
+                                                                </form:select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
@@ -152,6 +165,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    <th>Enabled</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -166,6 +180,7 @@
                                         </td>
                                         <td>${user.email}</td>
                                         <td>${user.role}</td>
+                                        <td>${user.enabled}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

@@ -57,7 +57,7 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Edit routePoint</h3>
-                <form:form id="editUserForm" action="/employee/save-user" method="post" modelAttribute="editUser">
+                <form:form id="editUserForm" action="/admin/save-user" method="post" modelAttribute="editUser">
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
@@ -92,6 +92,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 style="margin: 10px;">Enabled</h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <form:select id="status" path="enabled" cssErrorClass="errorBox">
+                                        <form:option value="true">True</form:option>
+                                        <form:option value="false">False</form:option>
+                                    </form:select>
+                                </div>
+                            </div>
+                        </div>
                         <form:hidden id="email" path="email" value="${editUser.email}" cssErrorClass="errorBox"/>
                         <form:hidden id="password" path="password" value="${editUser.password}" cssErrorClass="errorBox"/>
                     </div>
@@ -100,7 +113,7 @@
                     <form action="${pageContext.request.contextPath}/admin/users">
                         <button class="btn btn-light" type="submit" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Back</button>
                     </form>
-                    <form action="${pageContext.request.contextPath}/employee/delete-user">
+                    <form action="${pageContext.request.contextPath}/admin/delete-user" method="post">
                         <input type="hidden" name="email" value="${editUser.email}">
                         <button class="btn btn-light" type="submit" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Delete</button>
                     </form>

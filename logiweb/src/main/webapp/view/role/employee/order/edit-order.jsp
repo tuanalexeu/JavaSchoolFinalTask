@@ -260,8 +260,8 @@
                                                                         Choose
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownDriver1Button">
-                                                                        <c:forEach items="${suitableDrivers}" var="driver">
-                                                                            <button type="submit" name="driver1Id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
+                                                                        <c:forEach items="${suitableDrivers}" var="user">
+                                                                            <button type="submit" name="driver1Id" value="${user.id}">[${user.id}] ${user.firstName} ${user.lastName}</button>
                                                                         </c:forEach>
                                                                     </div>
                                                                 </div>
@@ -303,8 +303,8 @@
                                                                                 Choose
                                                                             </button>
                                                                             <div class="dropdown-menu" aria-labelledby="dropdownDriver2Button">
-                                                                                <c:forEach items="${suitableDrivers}" var="driver">
-                                                                                    <button type="submit" name="driver2Id" value="${driver.id}">[${driver.id}] ${driver.firstName} ${driver.lastName}</button>
+                                                                                <c:forEach items="${suitableDrivers}" var="user">
+                                                                                    <button type="submit" name="driver2Id" value="${user.id}">[${user.id}] ${user.firstName} ${user.lastName}</button>
                                                                                 </c:forEach>
                                                                             </div>
                                                                         </div>

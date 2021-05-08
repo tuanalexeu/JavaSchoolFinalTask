@@ -112,7 +112,12 @@
                         <tr>
                             <td>Co-drivers ID list</td>
                             <td>
-                                <a href="#codrivers-modal" data-toggle="modal" data-target="#codrivers-modal" style="color: #DC58B8">View</a>
+                                <c:if test="${empty driver.order}">
+                                    <p>No order assigned</p>
+                                </c:if>
+                                <c:if test="${not empty driver.order}">
+                                    <a href="#codrivers-modal" data-toggle="modal" data-target="#codrivers-modal" style="color: #DC58B8">View</a>
+                                </c:if>
                                 <div class="modal fade" role="dialog" tabindex="-1" id="codrivers-modal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -122,8 +127,8 @@
                                             </div>
                                             <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                 <ul>
-                                                    <c:forEach items="${coDrivers}" var="driver">
-                                                        <li>${driver.id} ${driver.firstName} ${driver.lastName}</li>
+                                                    <c:forEach items="${coDrivers}" var="user">
+                                                        <li>${user.id} ${user.firstName} ${user.lastName}</li>
                                                     </c:forEach>
                                                 </ul>
                                             </div>
@@ -211,16 +216,19 @@
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                                     <form action="${pageContext.request.contextPath}/driver/save-load">
+                                                        <input type="hidden" name="loadId" value="${load.id}">
                                                         <button type="submit" value="PREPARED" name="status">Prepared</button>
                                                     </form>
                                                 </a>
                                                 <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                                     <form action="${pageContext.request.contextPath}/driver/save-load">
+                                                        <input type="hidden" name="loadId" value="${load.id}">
                                                         <button type="submit" value="SENT" name="status">Sent</button>
                                                     </form>
                                                 </a>
                                                 <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                                     <form action="${pageContext.request.contextPath}/driver/save-load">
+                                                        <input type="hidden" name="loadId" value="${load.id}">
                                                         <button type="submit" value="DELIVERED" name="status">Delivered</button>
                                                     </form>
                                                 </a>

@@ -81,7 +81,6 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Password</th>
                                     <th>Role</th>
                                     <th>Action</th>
                                 </tr>
@@ -91,12 +90,15 @@
                                     <tr>
                                         <td>${user.firstName} ${user.lastName}</td>
                                         <td>${user.email}</td>
-                                        <td>${user.password}</td>
                                         <td>${user.role}</td>
                                         <td>
-                                            <form action="${pageContext.request.contextPath}/admin/approve-user">
+                                            <form action="${pageContext.request.contextPath}/admin/approve-user" method="post">
                                                 <input type="hidden" name="email" value="${user.email}">
                                                 <button class="btn btn-primary btn-block btn-user" id="approveUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Approve</button>
+                                            </form>
+                                            <form action="${pageContext.request.contextPath}/admin/delete-user" method="post">
+                                                <input type="hidden" name="email" value="${user.email}">
+                                                <button class="btn btn-primary btn-block btn-user" id="deleteUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">x</button>
                                             </form>
                                         </td>
                                     </tr>

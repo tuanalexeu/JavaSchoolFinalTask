@@ -56,7 +56,7 @@
                 </ul>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Approve new drivers</h3>
+                <h3 class="text-dark mb-4">Apply drivers to users</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">List</p>
@@ -78,31 +78,33 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
-                                    <th>User</th>
+                                    <th>Driver</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${newDrivers}" var="driver">
-                                    <tr>
-                                        <td>${driver.id}</td>
-                                        <td>${driver.firstName} ${driver.lastName}</td>
+                                <c:forEach items="${newUsers}" var="user">
+                                    <c:if test="${user.driver.id eq null}">
+                                        <tr>
+                                        <td>${user.email}</td>
+                                        <td>${user.firstName} ${user.lastName}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Choose</button>
                                                 <div class="dropdown-menu">
-                                                    <c:forEach items="${newUsers}" var="user">
+                                                    <c:forEach items="${newDrivers}" var="driver">
                                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                                             <form action="${pageContext.request.contextPath}/admin/approve-driver" method="post">
                                                                 <input type="hidden" name="driverId" value="${driver.id}">
                                                                 <input type="hidden" name="email" value="${user.email}">
-                                                                <button type="submit">${user.firstName} ${user.lastName}</button>
+                                                                <button type="submit">${driver.firstName} ${driver.lastName}</button>
                                                             </form>
                                                         </a>
                                                     </c:forEach>
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
                                 </tbody>
                             </table>

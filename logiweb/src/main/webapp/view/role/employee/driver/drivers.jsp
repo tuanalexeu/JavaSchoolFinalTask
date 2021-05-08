@@ -106,8 +106,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    // password logic
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-md-6">
@@ -163,25 +161,23 @@
                                     <th>City</th>
                                     <th>Lorry</th>
                                     <th>Order id</th>
-                                    <th>User</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${drivers}" var="driver">
+                                <c:forEach items="${drivers}" var="user">
                                     <tr>
-                                        <td>${driver.id}</td>
+                                        <td>${user.id}</td>
                                         <td>
-                                            <form action="/employee/edit-driver/${driver.id}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${driver.firstName} ${driver.lastName}</button>
+                                            <form action="/employee/edit-driver/${user.id}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${user.firstName} ${user.lastName}</button>
                                             </form>
 
                                         </td>
-                                        <td>${driver.hoursWorked}</td>
-                                        <td>${driver.state}</td>
-                                        <td>${driver.city.name}</td>
-                                        <td>${driver.lorry.regNum}</td>
-                                        <td>${driver.order.id}</td>
-                                        <td>${driver.user.email}</td>
+                                        <td>${user.hoursWorked}</td>
+                                        <td>${user.state}</td>
+                                        <td>${user.city.name}</td>
+                                        <td>${user.lorry.regNum}</td>
+                                        <td>${user.order.id}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
