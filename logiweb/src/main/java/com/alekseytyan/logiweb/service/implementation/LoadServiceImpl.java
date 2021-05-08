@@ -23,9 +23,8 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
     }
 
     public LoadServiceImpl(LoadDao dao,
-                           ModelMapper mapper,
-                           DataSourceEventPublisher publisher) {
-        super(dao, mapper, publisher, LoadDTO.class, Load.class);
+                           ModelMapper mapper) {
+        super(dao, mapper, LoadDTO.class, Load.class);
     }
 
     @Override
@@ -35,6 +34,7 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
     }
 
     @Override
+    @Transactional
     public LoadDTO delete(LoadDTO loadDTO) {
 
         OrderDTO orderDTO = loadDTO.getOrder();
@@ -48,6 +48,7 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
     }
 
     @Override
+    @Transactional
     public LoadDTO deleteById(Long entityId) {
 
         LoadDTO loadDTO = findById(entityId);

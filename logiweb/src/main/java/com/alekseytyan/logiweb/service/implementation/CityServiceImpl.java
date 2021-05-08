@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.service.implementation;
 
+import com.alekseytyan.logiweb.aspect.LogAnnotation;
 import com.alekseytyan.logiweb.dto.CityDTO;
 import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
 import com.alekseytyan.logiweb.dao.api.CityDao;
@@ -17,12 +18,12 @@ public class CityServiceImpl extends AbstractServiceImpl<City, CityDao, CityDTO,
 
     @Autowired
     public CityServiceImpl(CityDao dao,
-                           ModelMapper mapper,
-                           DataSourceEventPublisher publisher) {
-        super(dao, mapper, publisher, CityDTO.class, City.class);
+                           ModelMapper mapper) {
+        super(dao, mapper, CityDTO.class, City.class);
     }
 
     @Override
+    @LogAnnotation
     @Transactional(readOnly = true)
     public List<String> findAllNames() {
         return getDao().findAllNames();

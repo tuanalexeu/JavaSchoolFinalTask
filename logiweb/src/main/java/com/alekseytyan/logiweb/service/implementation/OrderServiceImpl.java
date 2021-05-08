@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.service.implementation;
 
+import com.alekseytyan.logiweb.aspect.CrudAnnotation;
 import com.alekseytyan.logiweb.dto.DriverDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
 import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
@@ -28,31 +29,29 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     @Autowired
     public OrderServiceImpl(OrderDao dao,
                             ModelMapper mapper,
-                            MapService mapService,
-                            DataSourceEventPublisher publisher) {
-        super(dao, mapper, publisher, OrderDTO.class, Order.class);
+                            MapService mapService) {
+        super(dao, mapper, OrderDTO.class, Order.class);
 
         this.mapService = mapService;
     }
 
     @Override
+    @Transactional
+    @CrudAnnotation(code = "order")
     public OrderDTO save(OrderDTO orderDTO) {
-
-        getPublisher().publishEvent("order");
-
         return super.save(orderDTO);
     }
 
     @Override
+    @Transactional
+    @CrudAnnotation(code = "order")
     public OrderDTO update(OrderDTO orderDTO) {
-
-        getPublisher().publishEvent("order");
-
         return super.update(orderDTO);
     }
 
     @Override
     @Transactional
+    @CrudAnnotation(code = "order")
     public OrderDTO delete(OrderDTO orderDTO) {
 
         if(orderDTO.getDrivers() != null) {
@@ -68,8 +67,6 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
         }
 
         OrderDTO refreshedOrderDTO = update(orderDTO);
-
-        getPublisher().publishEvent("order");
 
         return super.delete(refreshedOrderDTO);
     }

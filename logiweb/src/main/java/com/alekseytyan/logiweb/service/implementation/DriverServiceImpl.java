@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.service.implementation;
 
+import com.alekseytyan.logiweb.aspect.CrudAnnotation;
 import com.alekseytyan.logiweb.dto.DriverDTO;
 import com.alekseytyan.logiweb.dto.DriverStatsDTO;
 import com.alekseytyan.logiweb.dto.LorryDTO;
@@ -11,6 +12,7 @@ import com.alekseytyan.logiweb.entity.Driver;
 import com.alekseytyan.logiweb.service.api.DriverService;
 import com.alekseytyan.logiweb.service.api.OrderService;
 import com.alekseytyan.logiweb.util.date.DateChecker;
+import org.checkerframework.checker.units.qual.C;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,27 +28,24 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     @Autowired
     public DriverServiceImpl(DriverDao dao,
                              ModelMapper mapper,
-                             OrderService orderService,
-                             DataSourceEventPublisher publisher) {
+                             OrderService orderService) {
 
-        super(dao, mapper, publisher, DriverDTO.class, Driver.class);
+        super(dao, mapper, DriverDTO.class, Driver.class);
 
         this.orderService = orderService;
     }
 
     @Override
+    @Transactional
+    @CrudAnnotation(code = "driver")
     public DriverDTO save(DriverDTO driverDTO) {
-
-        getPublisher().publishEvent("driver");
-
         return super.save(driverDTO);
     }
 
     @Override
+    @Transactional
+    @CrudAnnotation(code = "driver")
     public DriverDTO update(DriverDTO driverDTO) {
-
-        getPublisher().publishEvent("driver");
-
         return super.update(driverDTO);
     }
 
@@ -77,11 +76,13 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<DriverDTO> findWithoutUser() {
         return convertToDTO(getDao().findWithoutUser());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public DriverStatsDTO getStatistics() {
         DriverStatsDTO driverStatsDTO = new DriverStatsDTO();
 
@@ -93,6 +94,7 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
 
     @Override
     @Transactional
+    @CrudAnnotation(code = "driver")
     public DriverDTO delete(DriverDTO driverDTO) {
 
         if(driverDTO.getOrder() != null) {
@@ -107,8 +109,6 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
         }
 
         DriverDTO refreshedDriverDTO = update(driverDTO);
-
-        getPublisher().publishEvent("driver");
 
         return super.delete(refreshedDriverDTO);
     }

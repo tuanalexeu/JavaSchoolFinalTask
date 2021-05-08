@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.service.implementation;
 
+import com.alekseytyan.logiweb.aspect.CrudAnnotation;
 import com.alekseytyan.logiweb.dto.LorryDTO;
 import com.alekseytyan.logiweb.dto.LorryStatsDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
@@ -27,25 +28,8 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
 
     @Autowired
     public LorryServiceImpl(LorryDao dao,
-                            ModelMapper mapper,
-                            DataSourceEventPublisher publisher) {
-        super(dao, mapper, publisher, LorryDTO.class, Lorry.class);
-    }
-
-    @Override
-    public LorryDTO save(LorryDTO lorryDTO) {
-
-        getPublisher().publishEvent("truck");
-
-        return super.save(lorryDTO);
-    }
-
-    @Override
-    public LorryDTO update(LorryDTO lorryDTO) {
-
-        getPublisher().publishEvent("truck");
-
-        return super.update(lorryDTO);
+                            ModelMapper mapper) {
+        super(dao, mapper, LorryDTO.class, Lorry.class);
     }
 
     @Override
@@ -58,6 +42,7 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
     }
 
     @Override
+    @Transactional(readOnly = true)
     public LorryStatsDTO getStatistics() {
         LorryStatsDTO lorryStatsDTO = new LorryStatsDTO();
 
@@ -70,6 +55,21 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
 
     @Override
     @Transactional
+    @CrudAnnotation(code = "truck")
+    public LorryDTO save(LorryDTO lorryDTO) {
+        return super.save(lorryDTO);
+    }
+
+    @Override
+    @Transactional
+    @CrudAnnotation(code = "truck")
+    public LorryDTO update(LorryDTO lorryDTO) {
+        return super.update(lorryDTO);
+    }
+
+    @Override
+    @Transactional
+    @CrudAnnotation(code = "truck")
     public LorryDTO delete(LorryDTO lorryDTO) {
 
         if(lorryDTO.getOrder() != null) {
@@ -87,8 +87,6 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
 
 
         LorryDTO refreshedLorryDTO = update(lorryDTO);
-
-        getPublisher().publishEvent("truck");
 
         return super.delete(refreshedLorryDTO);
     }

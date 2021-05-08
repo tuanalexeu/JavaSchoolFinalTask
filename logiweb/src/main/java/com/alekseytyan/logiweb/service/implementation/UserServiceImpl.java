@@ -2,7 +2,6 @@ package com.alekseytyan.logiweb.service.implementation;
 
 import com.alekseytyan.logiweb.controller.auth.exception.UserAlreadyExistException;
 import com.alekseytyan.logiweb.dto.UserDTO;
-import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
 import com.alekseytyan.logiweb.dao.api.UserDao;
 import com.alekseytyan.logiweb.entity.User;
 import com.alekseytyan.logiweb.service.api.UserService;
@@ -23,9 +22,8 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
     @Autowired
     public UserServiceImpl(UserDao dao,
                            ModelMapper mapper,
-                           PasswordEncoder passwordEncoder,
-                           DataSourceEventPublisher publisher) {
-        super(dao, mapper, publisher, UserDTO.class, User.class);
+                           PasswordEncoder passwordEncoder) {
+        super(dao, mapper, UserDTO.class, User.class);
 
         this.passwordEncoder = passwordEncoder;
     }
