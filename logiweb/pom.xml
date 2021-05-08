@@ -16,6 +16,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+    <packaging>war</packaging>
+
     <dependencies>
 
         <dependency>
@@ -255,7 +257,7 @@
                     <server>tomcat</server>
                     <username>admin1</username>
                     <password>admin1</password>
-                    <path>/${project.artifactId}</path>
+                    <path>/</path>
                     <update>true</update>
                 </configuration>
             </plugin>

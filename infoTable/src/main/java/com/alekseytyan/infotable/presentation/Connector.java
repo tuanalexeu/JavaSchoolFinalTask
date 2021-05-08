@@ -25,13 +25,13 @@ public abstract class Connector {
 
     public Connector() {
         orderClient = ClientBuilder.newClient();
-        orderTarget = orderClient.target("http://" + HOST_NAME + "/logiweb/inf-table/orders");
+        orderTarget = orderClient.target("http://" + HOST_NAME + "/info-table/orders");
 
         driverClient = ClientBuilder.newClient();
-        driverTarget = driverClient.target("http://" + HOST_NAME + "/logiweb/inf-table/driver-stats");
+        driverTarget = driverClient.target("http://" + HOST_NAME + "/info-table/driver-stats");
 
         lorryClient = ClientBuilder.newClient();
-        lorryTarget = lorryClient.target("http://" + HOST_NAME + "/logiweb/inf-table/lorry-stats");
+        lorryTarget = lorryClient.target("http://" + HOST_NAME + "/info-table/lorry-stats");
 
         objectMapper = new ObjectMapper();
     }
