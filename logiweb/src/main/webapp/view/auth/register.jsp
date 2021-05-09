@@ -23,6 +23,9 @@
             <div class="p-5" style="border-color: rgb(255,255,255);margin: initial;background: rgb(255,103,173);border-radius: 20px;">
                 <div class="text-center">
                     <h4 class="mb-4" style="color: rgb(255,255,255);">Create an Account!</h4>
+                    <c:if test="${not empty message}">
+                        <h5 class="mb-5" style="color: rgb(152,59,59);">${message}</h5>
+                    </c:if>
                 </div>
                 <form:form action="/reg-process" method="post" modelAttribute="user">
                     <div class="form-group row">

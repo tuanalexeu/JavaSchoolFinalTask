@@ -30,4 +30,6 @@ public class UserDTO {
     private DriverDTO driver;
 
     private boolean enabled;
+
+    private boolean emailConfirmed;
 }

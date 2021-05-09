@@ -36,7 +36,7 @@ public class AdminController {
     @GetMapping(value = "/approve-users")
     public String approveUsers(Model model) {
 
-        model.addAttribute("newUsers", userService.findDisabled());
+        model.addAttribute("newUsers", userService.findDisabledAndVerified());
 
         return "role/admin/approve-users";
     }

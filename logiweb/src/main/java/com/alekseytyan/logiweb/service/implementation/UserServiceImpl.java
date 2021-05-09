@@ -34,6 +34,11 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
     }
 
     @Override
+    public List<UserDTO> findDisabledAndVerified() {
+        return convertToDTO(getDao().findDisabledAndVerified());
+    }
+
+    @Override
     public UserDTO registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException {
         if (emailExists(userDto.getEmail())) {
             throw new UserAlreadyExistException("There is an account with that email address: "

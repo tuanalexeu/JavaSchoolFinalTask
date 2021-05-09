@@ -15,7 +15,9 @@ package com.alekseytyan.logiweb.entity;
         @NamedQuery(name = "User.findDisabled",
                 query = "select u from User u where u.enabled = FALSE"),
         @NamedQuery(name = "User.findWithoutDriver",
-                query = "select u from User u where u.role = 'ROLE_DRIVER'")
+                query = "select u from User u where u.role = 'ROLE_DRIVER'"),
+        @NamedQuery(name = "User.findVerifiedAndDisabled",
+                query = "select u from User u where u.enabled = FALSE and u.emailConfirmed = TRUE")
 })
 public class User {
 
@@ -42,4 +44,7 @@ public class User {
 
     @Column(name = "ENABLED", columnDefinition = "boolean default false")
     private boolean enabled;
+
+    @Column(name = "EMAIL_CONFIRMED", columnDefinition = "boolean default false")
+    private boolean emailConfirmed;
 }
