@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.util.pathfinding.graph;
+package com.alekseytyan.logiweb.util.pathfinding.dijkstra.graph;
 
 import com.alekseytyan.logiweb.entity.City;
 import lombok.Getter;

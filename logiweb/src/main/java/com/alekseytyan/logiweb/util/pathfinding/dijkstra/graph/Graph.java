@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.util.pathfinding.graph;
+package com.alekseytyan.logiweb.util.pathfinding.dijkstra.graph;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
