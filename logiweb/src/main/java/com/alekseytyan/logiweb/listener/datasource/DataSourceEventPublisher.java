@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.listener;
+package com.alekseytyan.logiweb.listener.datasource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;

@@ -1,16 +1,18 @@
 package com.alekseytyan.logiweb.exception;
 
+import com.alekseytyan.logiweb.aspect.LogAnnotation;
 import com.alekseytyan.logiweb.exception.httpcode.AccessDeniedException;
 import com.alekseytyan.logiweb.exception.httpcode.BadRequestException;
 import com.alekseytyan.logiweb.exception.httpcode.InternalException;
 import com.alekseytyan.logiweb.exception.httpcode.NotFoundException;
+import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-@ControllerAdvice
+@ControllerAdvice(basePackages = {"com.alekseytyan.logiweb.controller"})
 public class CustomControllerAdvice {
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
@@ -46,6 +48,7 @@ public class CustomControllerAdvice {
     }
 
     @ExceptionHandler(Exception.class)
+    @LogAnnotation
     public ModelAndView anyException() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("error/defaultError");

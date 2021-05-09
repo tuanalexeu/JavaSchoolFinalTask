@@ -1,6 +1,5 @@
 package com.alekseytyan.logiweb.service.implementation;
 
-import com.alekseytyan.logiweb.aspect.CrudAnnotation;
 import com.alekseytyan.logiweb.aspect.LogAnnotation;
 import com.alekseytyan.logiweb.dao.api.AbstractDao;
 import com.alekseytyan.logiweb.service.api.AbstractService;

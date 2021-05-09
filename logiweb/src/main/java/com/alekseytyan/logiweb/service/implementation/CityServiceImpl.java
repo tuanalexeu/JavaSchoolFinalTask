@@ -2,7 +2,6 @@ package com.alekseytyan.logiweb.service.implementation;
 
 import com.alekseytyan.logiweb.aspect.LogAnnotation;
 import com.alekseytyan.logiweb.dto.CityDTO;
-import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
 import com.alekseytyan.logiweb.dao.api.CityDao;
 import com.alekseytyan.logiweb.entity.City;
 import com.alekseytyan.logiweb.service.api.CityService;

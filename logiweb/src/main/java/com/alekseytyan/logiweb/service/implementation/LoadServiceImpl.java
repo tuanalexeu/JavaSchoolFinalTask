@@ -2,7 +2,6 @@ package com.alekseytyan.logiweb.service.implementation;
 
 import com.alekseytyan.logiweb.dto.LoadDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
-import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
 import com.alekseytyan.logiweb.dao.api.LoadDao;
 import com.alekseytyan.logiweb.entity.Load;
 import com.alekseytyan.logiweb.service.api.LoadService;

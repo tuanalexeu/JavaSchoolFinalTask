@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.listener;
+package com.alekseytyan.logiweb.listener.datasource;
 
 import lombok.Getter;
 import lombok.Setter;

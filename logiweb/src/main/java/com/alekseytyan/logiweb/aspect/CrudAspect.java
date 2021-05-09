@@ -1,6 +1,6 @@
 package com.alekseytyan.logiweb.aspect;
 
-import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
+import com.alekseytyan.logiweb.listener.datasource.DataSourceEventPublisher;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

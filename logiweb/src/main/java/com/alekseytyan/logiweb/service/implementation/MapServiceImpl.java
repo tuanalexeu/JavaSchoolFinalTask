@@ -1,7 +1,6 @@
 package com.alekseytyan.logiweb.service.implementation;
 
 import com.alekseytyan.logiweb.dto.MapDTO;
-import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
 import com.alekseytyan.logiweb.dao.api.MapDao;
 import com.alekseytyan.logiweb.entity.DistanceMap;
 import com.alekseytyan.logiweb.service.api.MapService;

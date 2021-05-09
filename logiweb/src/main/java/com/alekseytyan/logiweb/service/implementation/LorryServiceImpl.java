@@ -4,7 +4,6 @@ import com.alekseytyan.logiweb.aspect.CrudAnnotation;
 import com.alekseytyan.logiweb.dto.LorryDTO;
 import com.alekseytyan.logiweb.dto.LorryStatsDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
-import com.alekseytyan.logiweb.listener.DataSourceEventPublisher;
 import com.alekseytyan.logiweb.dao.api.LorryDao;
 import com.alekseytyan.logiweb.entity.Lorry;
 import com.alekseytyan.logiweb.service.api.LorryService;
