@@ -60,6 +60,13 @@ public class RegisterController {
                                                         UserDTO userDto,
                                             HttpServletRequest request,
                                             Errors errors) {
+
+        if(!userDto.getPassword().equals(userDto.getMatchingPassword())) {
+            ModelAndView mav = new ModelAndView("auth/register", "user", userDto);
+            mav.addObject("message", "Password doesn't match");
+            return mav;
+        }
+
         try {
             UserDTO registered = userService.registerNewUserAccount(userDto);
 
