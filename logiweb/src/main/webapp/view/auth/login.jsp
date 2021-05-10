@@ -20,8 +20,8 @@
         <div class="p-5" style="background: rgb(255,103,173);max-width: 400px;margin: initial;border-radius: 20px;">
             <div class="text-center">
                 <h3 class="mb-4" style="color: rgb(255,255,255);">Welcome Back!</h3>
-                <c:if test="${not empty bad_credentials}">
-                    <h5 class="mb-5" style="color: #ea4335">${bad_credentials}</h5>
+                <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+                    <h5 class="mb-5" style="color: #ea4335">${SPRING_SECURITY_LAST_EXCEPTION}</h5>
                 </c:if>
             </div>
             <form class="user" method="post" action="${pageContext.request.contextPath}/login">
