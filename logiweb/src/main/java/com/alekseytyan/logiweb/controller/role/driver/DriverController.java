@@ -47,6 +47,10 @@ public class DriverController {
         // Find driver's id
         DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");
 
+        if(driverDTO == null) {
+            return "role/driver/no-driver";
+        }
+
         if(driverDTO.getOrder() != null) {
             Long orderId = driverDTO.getOrder().getId();
 
