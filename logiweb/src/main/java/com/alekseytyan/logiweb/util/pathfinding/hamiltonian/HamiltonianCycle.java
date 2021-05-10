@@ -35,17 +35,16 @@ public class HamiltonianCycle {
         int V = g.getvCount();
 
         // path matrix
-        int path[] = new int[V];
+        int[] path = new int[V];
         // initialize to -1 except starting Vertex
         for(int i=0; i<V; i++){
             path[i] = -1;
         }
         path[0] = 0;
 
-        if(solveHamCircuit(V, g, path, 1) == false){
+        if(!solveHamCircuit(V, g, path, 1)) {
             System.out.println("Solution does not exist!");
-        }
-        else{
+        } else {
             System.out.println("Solution exists! The following is one of the solutions:");
             for(int i=0; i<V; i++){
                 System.out.print(" " + path[i] + " ");
@@ -54,7 +53,7 @@ public class HamiltonianCycle {
 
     }
 
-    static boolean canBeAdded(int v, Graph g, int path[], int pos){
+    static boolean canBeAdded(int v, Graph g, int[] path, int pos){
         // if vertex is already adjacent of previously added vertex
         if(g.getAdj()[pos - 1][v] == 0){
             return false;
@@ -69,15 +68,10 @@ public class HamiltonianCycle {
         return true;
     }
 
-    static boolean solveHamCircuit(int V, Graph g, int path[], int pos){
+    static boolean solveHamCircuit(int V, Graph g, int[] path, int pos){
         // check if all are included and if it makes a circle
-        if(pos == V){
-            if( g.getAdj()[path[pos - 1]][path[0]] == 1){
-                return true;
-            }
-            else{
-                return false;
-            }
+        if(pos == V) {
+            return g.getAdj()[path[pos - 1]][path[0]] == 1;
         }
 
         // try adding different vertices
@@ -89,7 +83,7 @@ public class HamiltonianCycle {
                 path[pos] = v;
 
                 // call function again recursively to build the path
-                if (solveHamCircuit(V, g, path, pos + 1) == true){
+                if (solveHamCircuit(V, g, path, pos + 1)){
                     return true;
                 }
 

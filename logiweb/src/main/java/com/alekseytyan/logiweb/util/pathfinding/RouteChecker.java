@@ -1,10 +1,10 @@
 package com.alekseytyan.logiweb.util.pathfinding;
 
-import com.alekseytyan.logiweb.util.pathfinding.dijkstra.graph.Graph;
+import com.alekseytyan.logiweb.util.pathfinding.dijkstra.Graph;
 import com.alekseytyan.logiweb.entity.City;
 import com.alekseytyan.logiweb.entity.DistanceMap;
 import com.alekseytyan.logiweb.entity.Load;
-import com.alekseytyan.logiweb.util.pathfinding.dijkstra.graph.Node;
+import com.alekseytyan.logiweb.util.pathfinding.dijkstra.Node;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,49 +18,6 @@ import java.util.stream.Collectors;
 public class RouteChecker {
 
     public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads, City cityStart) {
-
-//        Map<List<City>, Integer> finalCities = new HashMap<>();
-//
-//        for (Load l: loads) {
-//
-//            Set<City> lCities = checkCities(l);
-//
-//            Set<Node> nodes = convertToNodeList(lCities, distances);
-//
-//            Graph lGraph = new Graph(nodes);
-//
-//            Node nodeStart = new Node(cityStart);
-//            for (Node n: nodes) {
-//                if(n.equals(nodeStart)) {
-//                    nodeStart = n;
-//                }
-//            }
-//
-//            lGraph = Graph.calculateShortestPathFromSource(lGraph, nodeStart);
-//
-//            int distance = Integer.MAX_VALUE;
-//
-//
-//            List<City> finalRoute = new ArrayList<>();
-//            boolean isPossible = false;
-//
-//            for (Node n: lGraph.getNodes()) {
-//
-//                List<Node> n2 = n.getShortestPath();
-//                n2.add(n);
-//
-//                List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
-//
-//                if(checkIfContains(currentCities, new ArrayList<>(lCities)) && n.getDistance() < distance) {
-//                    finalRoute = currentCities;
-//                    distance = n.getDistance();
-//                    isPossible = true;
-//                }
-//            }
-//
-//            finalCities.put(finalRoute, distance);
-//        }
-
 
         Set<City> cities = checkCities(loads);
         Set<Node> nodes = convertToNodeList(cities, distances);

@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Graph {
 
-    private int vCount;
-    private int[][] adj;
+    private final int vCount;
+    private final int[][] adj;
 
     public int getvCount() {
         return vCount;
