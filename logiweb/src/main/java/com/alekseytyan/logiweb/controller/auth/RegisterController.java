@@ -22,7 +22,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -55,15 +54,15 @@ public class RegisterController {
         return "auth/register";
     }
 
+    // Removed @Valid at UserDTO param
     @PostMapping("/reg-process")
-    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid
-                                                        UserDTO userDto,
+    public ModelAndView registerUserAccount(@ModelAttribute("user") UserDTO userDto,
                                             HttpServletRequest request,
                                             Errors errors) {
 
         if(!userDto.getPassword().equals(userDto.getMatchingPassword())) {
             ModelAndView mav = new ModelAndView("auth/register", "user", userDto);
-            mav.addObject("message", "Password doesn't match");
+            mav.addObject("message", "Passwords don't match");
             return mav;
         }
 

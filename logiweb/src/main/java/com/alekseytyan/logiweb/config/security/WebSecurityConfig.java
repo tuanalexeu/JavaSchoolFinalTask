@@ -4,10 +4,11 @@ import com.alekseytyan.logiweb.config.security.handler.CustomAuthenticationFailu
 import com.alekseytyan.logiweb.config.security.handler.CustomLogoutSuccessHandler;
 import com.alekseytyan.logiweb.config.DataSourceConfig;
 import com.alekseytyan.logiweb.config.security.handler.CustomAccessDeniedHandler;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,7 +18,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -27,16 +30,12 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Import(value = {
-        DataSourceConfig.class
+        DataSourceConfig.class,
 })
+@AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
-
-    @Autowired
-    public WebSecurityConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -52,9 +51,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .expressionHandler(webExpressionHandler())
                 .antMatchers("/info-table/**").anonymous()
                 .antMatchers("/driver/**").hasRole("DRIVER")
-                .antMatchers("/employee/**").hasAnyRole("EMPLOYEE", "ADMIN")
+                .antMatchers("/employee/**").hasAnyRole("EMPLOYEE")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/login*", "/register*", "/forgotPassword*", "/*", "/homePage*", "/welcome*", "/assets/**").permitAll()
                 .antMatchers("/profile*").hasAnyRole("DRIVER", "EMPLOYEE", "ADMIN")
@@ -62,9 +62,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .formLogin()
+                .failureHandler(authenticationFailureHandler())
                 .loginPage("/login")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/homePage", true)
-                .failureUrl("/login?error=true")
+//                .failureUrl("/login?error=true")
                 .and()
                 .logout()
                 .logoutUrl("/performLogOut")
@@ -79,6 +81,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         RoleHierarchyImpl r = new RoleHierarchyImpl();
         r.setHierarchy("ROLE_ADMIN > ROLE_EMPLOYEE and ROLE_ADMIN > ROLE_DRIVER");
         return r;
+    }
+
+    private SecurityExpressionHandler<FilterInvocation> webExpressionHandler() {
+        DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler = new DefaultWebSecurityExpressionHandler();
+        defaultWebSecurityExpressionHandler.setRoleHierarchy(roleHierarchy());
+        return defaultWebSecurityExpressionHandler;
+    }
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
     }
 
     @Bean
