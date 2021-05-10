@@ -73,7 +73,9 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E, ID>, DTO, 
     @Override
     @LogAnnotation
     public DTO convertToDTO(E entity) {
-        return getMapper().map(entity, dtoClass);
+        return entity != null
+                ? getMapper().map(entity, dtoClass)
+                : null;
     }
 
     @Override

@@ -14,10 +14,11 @@ public class DriverDaoImpl extends AbstractDaoImpl<Driver, Long> implements Driv
 
     @Override
     public Driver findDriverByUser(String email) {
-        return (Driver) entityManager
-                .createNamedQuery("Driver.findByUser")
+        return entityManager
+                .createNamedQuery("Driver.findByUser", Driver.class)
                 .setParameter("email", email)
-                .getSingleResult();
+                .getResultList()
+                .stream().findFirst().orElse(null);
     }
 
     @Override
