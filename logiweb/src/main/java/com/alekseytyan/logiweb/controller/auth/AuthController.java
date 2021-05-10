@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthController {
@@ -19,14 +20,14 @@ public class AuthController {
                 || a.getAuthority().equals("ROLE_EMPLOYEE"));
     }
 
-    @GetMapping(value = {"/login", "/login/{error}"})
-    public String login(Model model, @PathVariable(required = false) boolean error) {
+    @GetMapping(value = "/login")
+    public String login(Model model, @RequestParam(required = false) boolean error) {
         if(hasAnyRole()) {
             return "redirect:/homePage";
         }
 
         if(error) {
-            model.addAttribute("errorMessage", "Invalid email or password!");
+            model.addAttribute("bad_credentials", "Invalid email or password!");
         }
 
         return "auth/login";

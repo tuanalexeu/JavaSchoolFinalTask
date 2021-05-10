@@ -107,8 +107,10 @@ public class RegisterController {
             return "redirect:/register";
         }
 
+        verificationService.delete(verificationToken);
+
         user.setEmailConfirmed(true);
-        userService.save(user);
+        userService.update(user);
 
         return "auth/registration-finished";
     }

@@ -22,6 +22,7 @@ public class VerificationTokenDaoImpl extends AbstractDaoImpl<VerificationToken,
         return entityManager
                 .createNamedQuery("VerificationToken.findByToken",VerificationToken.class)
                 .setParameter("token", token)
-                .getSingleResult();
+                .getResultList()
+                .stream().findFirst().orElse(null);
     }
 }

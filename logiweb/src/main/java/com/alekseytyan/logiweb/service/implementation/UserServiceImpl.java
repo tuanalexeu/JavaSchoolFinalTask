@@ -1,9 +1,11 @@
 package com.alekseytyan.logiweb.service.implementation;
 
+import com.alekseytyan.logiweb.dto.DriverDTO;
 import com.alekseytyan.logiweb.exception.UserAlreadyExistException;
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.dao.api.UserDao;
 import com.alekseytyan.logiweb.entity.User;
+import com.alekseytyan.logiweb.service.api.DriverService;
 import com.alekseytyan.logiweb.service.api.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +20,29 @@ import java.util.List;
 public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO, String> implements UserService {
 
     private final PasswordEncoder passwordEncoder;
+    private final DriverService driverService;
 
     @Autowired
     public UserServiceImpl(UserDao dao,
                            ModelMapper mapper,
+                           DriverService driverService,
                            PasswordEncoder passwordEncoder) {
         super(dao, mapper, UserDTO.class, User.class);
 
         this.passwordEncoder = passwordEncoder;
+        this.driverService = driverService;
     }
+
+    @Override
+    public UserDTO deleteById(String email) {
+
+        DriverDTO driverDTO = driverService.findDriverByUser(email);
+        driverDTO.setUser(null);
+        driverService.update(driverDTO);
+
+        return convertToDTO(getDao().deleteById(email));
+    }
+
 
     @Override
     public List<UserDTO> findDisabled() {
