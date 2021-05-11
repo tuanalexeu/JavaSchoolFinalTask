@@ -2,10 +2,8 @@ package com.alekseytyan.logiweb.controller.auth;
 
 import com.alekseytyan.logiweb.service.api.LoginAttemptService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +50,7 @@ public class AuthController {
 
     private String getClientIP(HttpServletRequest request) {
         String xfHeader = request.getHeader("X-Forwarded-For");
-        if (xfHeader == null){
+        if (xfHeader == null) {
             return request.getRemoteAddr();
         }
         return xfHeader.split(",")[0];

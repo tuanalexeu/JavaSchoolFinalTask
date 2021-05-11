@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@Component
+@Component
 @AllArgsConstructor
-public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler implements AuthenticationFailureHandler {
+public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
 //    private final MessageSource messages;
 //    private final LocaleResolver localeResolver;
@@ -34,12 +34,7 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
 
         super.onAuthenticationFailure(request, response, exception);
 
-        final String xfHeader = request.getHeader("X-Forwarded-For");
-        if (xfHeader == null) {
-            loginAttemptService.loginFailed(request.getRemoteAddr());
-        } else {
-            loginAttemptService.loginFailed(xfHeader.split(",")[0]);
-        }
+        loginAttemptService.loginFailed(getClientIP(request));
 
 //        Locale locale = localeResolver.resolveLocale(request);
 
@@ -58,5 +53,13 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
         }
 
         request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, errorMessage);
+    }
+
+    private String getClientIP(HttpServletRequest request) {
+        String xfHeader = request.getHeader("X-Forwarded-For");
+        if (xfHeader == null) {
+            return request.getRemoteAddr();
+        }
+        return xfHeader.split(",")[0];
     }
 }

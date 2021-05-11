@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
+public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 
     public CustomLogoutSuccessHandler() {
         super();
