@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.service.implementation;
+package com.alekseytyan.logiweb.service.implementation.security;
 
 import com.alekseytyan.logiweb.dao.api.VerificationTokenDao;
 import com.alekseytyan.logiweb.dto.UserDTO;
@@ -6,6 +6,7 @@ import com.alekseytyan.logiweb.dto.VerificationTokenDTO;
 import com.alekseytyan.logiweb.entity.auth.VerificationToken;
 import com.alekseytyan.logiweb.service.api.UserService;
 import com.alekseytyan.logiweb.service.api.VerificationService;
+import com.alekseytyan.logiweb.service.implementation.AbstractServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

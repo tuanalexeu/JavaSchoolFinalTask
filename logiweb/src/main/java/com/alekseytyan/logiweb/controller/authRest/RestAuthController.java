@@ -57,12 +57,44 @@ public class RestAuthController {
         String result = passwordService.validatePasswordResetToken(token);
         if(result != null) {
             String message = messages.getMessage("auth.message." + result, null, locale);
-            return "redirect:/login?error=true"
+            return "redirect:/login?lang="
                     + locale.getLanguage() + "&message=" + message;
         } else {
             model.addAttribute("token", token);
-            return "redirect:/updatePassword" + locale.getLanguage();
+            return "redirect:/update-password?lang=" + locale.getLanguage();
         }
+    }
+
+    @GetMapping(value = "/update-password")
+    public String updatePassword() {
+        return "auth/update-password";
+    }
+
+//    @PostMapping("/save-password")
+//    public GenericResponse savePassword(final Locale locale, @Valid PasswordDTO passwordDto) {
+//
+//        String result = passwordService.validatePasswordResetToken(passwordDto.getToken());
+//
+//        if(result != null) {
+//            return new GenericResponse(messages.getMessage(
+//                    "auth.message." + result, null, locale));
+//        }
+//
+//        UserDTO user = userService.getUserByPasswordResetToken(passwordDto.getToken());
+//
+//        if(user != null) {
+//            userService.changeUserPassword(user.get(), passwordDto.getNewPassword());
+//            return new GenericResponse(messages.getMessage(
+//                    "message.resetPasswordSuc", null, locale));
+//        } else {
+//            return new GenericResponse(messages.getMessage(
+//                    "auth.message.invalid", null, locale));
+//        }
+//    }
+
+    @GetMapping(value = "/email-error")
+    public String emailError() {
+        return "auth/email-error";
     }
 
 
@@ -86,6 +118,8 @@ public class RestAuthController {
         String port = requestURL.getPort() == -1 ? "" : ":" + requestURL.getPort();
         return requestURL.getProtocol() + "://" + requestURL.getHost() + port;
     }
+
+
 
 
 }

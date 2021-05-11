@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.service.implementation;
+package com.alekseytyan.logiweb.service.implementation.security;
 
 import com.alekseytyan.logiweb.service.api.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;

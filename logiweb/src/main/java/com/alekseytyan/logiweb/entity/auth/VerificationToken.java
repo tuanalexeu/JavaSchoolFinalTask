@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.entity.auth;
 
+import com.alekseytyan.logiweb.entity.security.User;
 import com.alekseytyan.logiweb.util.date.ExpiryDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.Calendar;
 
 @Entity
 @Table(name = "VERIFICATION")
