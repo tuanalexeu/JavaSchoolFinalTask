@@ -1,7 +1,7 @@
 package com.alekseytyan.logiweb.dao.implementation;
 
 import com.alekseytyan.logiweb.dao.api.UserDao;
-import com.alekseytyan.logiweb.entity.User;
+import com.alekseytyan.logiweb.entity.auth.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

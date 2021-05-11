@@ -1,8 +1,8 @@
 package com.alekseytyan.logiweb.dao.implementation;
 
 import com.alekseytyan.logiweb.dao.api.VerificationTokenDao;
-import com.alekseytyan.logiweb.entity.User;
-import com.alekseytyan.logiweb.entity.VerificationToken;
+import com.alekseytyan.logiweb.entity.auth.User;
+import com.alekseytyan.logiweb.entity.auth.VerificationToken;
 import org.springframework.stereotype.Repository;
 
 @Repository

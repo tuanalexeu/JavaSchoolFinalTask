@@ -2,7 +2,7 @@ package com.alekseytyan.logiweb.service.api;
 
 import com.alekseytyan.logiweb.exception.UserAlreadyExistException;
 import com.alekseytyan.logiweb.dto.UserDTO;
-import com.alekseytyan.logiweb.entity.User;
+import com.alekseytyan.logiweb.entity.auth.User;
 
 import java.util.List;
 

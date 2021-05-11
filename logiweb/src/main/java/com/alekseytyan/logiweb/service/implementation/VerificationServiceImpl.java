@@ -3,7 +3,7 @@ package com.alekseytyan.logiweb.service.implementation;
 import com.alekseytyan.logiweb.dao.api.VerificationTokenDao;
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.dto.VerificationTokenDTO;
-import com.alekseytyan.logiweb.entity.VerificationToken;
+import com.alekseytyan.logiweb.entity.auth.VerificationToken;
 import com.alekseytyan.logiweb.service.api.UserService;
 import com.alekseytyan.logiweb.service.api.VerificationService;
 import org.modelmapper.ModelMapper;

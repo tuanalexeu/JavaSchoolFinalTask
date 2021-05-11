@@ -2,7 +2,7 @@ package com.alekseytyan.logiweb.service.api;
 
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.dto.VerificationTokenDTO;
-import com.alekseytyan.logiweb.entity.VerificationToken;
+import com.alekseytyan.logiweb.entity.auth.VerificationToken;
 
 public interface VerificationService extends AbstractService<VerificationToken, VerificationTokenDTO, Long> {
     void createVerificationToken(UserDTO userDTO, String token);
