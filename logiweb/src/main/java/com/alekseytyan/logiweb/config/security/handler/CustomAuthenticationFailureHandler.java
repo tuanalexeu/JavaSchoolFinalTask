@@ -1,9 +1,11 @@
 package com.alekseytyan.logiweb.config.security.handler;
 
+import com.alekseytyan.logiweb.service.api.LoginAttemptService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.WebAttributes;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.LocaleResolver;
@@ -13,13 +15,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Locale;
 
 //@Component
-public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+@AllArgsConstructor
+public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
 //    private final MessageSource messages;
 //    private final LocaleResolver localeResolver;
+
+    private final LoginAttemptService loginAttemptService;
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
@@ -29,6 +33,13 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
         setDefaultFailureUrl("/login?error=true");
 
         super.onAuthenticationFailure(request, response, exception);
+
+        final String xfHeader = request.getHeader("X-Forwarded-For");
+        if (xfHeader == null) {
+            loginAttemptService.loginFailed(request.getRemoteAddr());
+        } else {
+            loginAttemptService.loginFailed(xfHeader.split(",")[0]);
+        }
 
 //        Locale locale = localeResolver.resolveLocale(request);
 
