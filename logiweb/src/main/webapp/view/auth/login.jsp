@@ -23,6 +23,10 @@
                 <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
                     <h5 class="mb-5" style="color: #ea4335">${SPRING_SECURITY_LAST_EXCEPTION}</h5>
                 </c:if>
+
+                <c:if test="${not empty message}">
+                    <h5 class="mb-5" style="color: #ea4335">${message}</h5>
+                </c:if>
             </div>
             <form class="user" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="form-group">
