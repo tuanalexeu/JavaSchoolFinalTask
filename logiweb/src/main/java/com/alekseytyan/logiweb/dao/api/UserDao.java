@@ -1,6 +1,6 @@
 package com.alekseytyan.logiweb.dao.api;
 
-import com.alekseytyan.logiweb.entity.auth.User;
+import com.alekseytyan.logiweb.entity.security.User;
 
 import java.util.List;
 

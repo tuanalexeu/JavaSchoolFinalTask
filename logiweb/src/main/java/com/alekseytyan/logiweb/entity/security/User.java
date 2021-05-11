@@ -1,15 +1,19 @@
-package com.alekseytyan.logiweb.entity.auth;
+package com.alekseytyan.logiweb.entity.security;
 
-        import com.alekseytyan.logiweb.entity.Driver;
-        import com.alekseytyan.logiweb.entity.enums.UserRole;
-        import lombok.*;
 
-        import javax.persistence.*;
-        import javax.validation.constraints.Pattern;
+import com.alekseytyan.logiweb.entity.Driver;
+import com.alekseytyan.logiweb.entity.enums.UserRole;
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import java.util.Collection;
 
 @Entity
 @Table(name = "USER_LOGIWEB")
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 @EqualsAndHashCode
 @AllArgsConstructor
 @NamedQueries({
@@ -35,6 +39,15 @@ public class User {
 
     @Column(name = "LAST_NAME")
     private String lastName;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "USERS_ROLES",
+            joinColumns = @JoinColumn(
+                    name = "USER_EMAIL", referencedColumnName = "EMAIL"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "ROLE_ID", referencedColumnName = "ID"))
+    private Collection<Role> roles;
 
     @Column(name = "ROLE", nullable = false)
     @Enumerated(EnumType.STRING)

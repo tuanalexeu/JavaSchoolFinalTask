@@ -1,12 +1,13 @@
-package com.alekseytyan.logiweb.service.implementation;
+package com.alekseytyan.logiweb.service.implementation.security;
 
 import com.alekseytyan.logiweb.dto.DriverDTO;
 import com.alekseytyan.logiweb.exception.UserAlreadyExistException;
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.dao.api.UserDao;
-import com.alekseytyan.logiweb.entity.auth.User;
+import com.alekseytyan.logiweb.entity.security.User;
 import com.alekseytyan.logiweb.service.api.DriverService;
 import com.alekseytyan.logiweb.service.api.UserService;
+import com.alekseytyan.logiweb.service.implementation.AbstractServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -56,6 +57,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
 
     @Override
     public UserDTO registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException {
+
         if (emailExists(userDto.getEmail())) {
             throw new UserAlreadyExistException("There is an account with that email address: "
                     + userDto.getEmail());

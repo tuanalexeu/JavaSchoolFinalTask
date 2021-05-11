@@ -1,24 +1,27 @@
 package com.alekseytyan.logiweb.config.security;
 
+import com.alekseytyan.logiweb.config.DataSourceConfig;
 import com.alekseytyan.logiweb.config.security.handler.CustomAuthenticationFailureHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomLogoutSuccessHandler;
-import com.alekseytyan.logiweb.config.DataSourceConfig;
 import com.alekseytyan.logiweb.config.security.handler.CustomAccessDeniedHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomSuccessLoginHandler;
 import com.alekseytyan.logiweb.service.api.LoginAttemptService;
-import com.alekseytyan.logiweb.service.implementation.LoginAttemptServiceImpl;
+import com.alekseytyan.logiweb.service.implementation.security.LoginAttemptServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
@@ -39,6 +42,9 @@ import javax.sql.DataSource;
 @AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+//    private final UserDetailsService userDetailsService;
+//    private final AuthenticationProvider authenticationProvider;
+
     private final DataSource dataSource;
 //    private final AuthenticationSuccessHandler successHandler;
 //    private final AuthenticationFailureHandler failureHandler;
@@ -51,6 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select EMAIL, ROLE "
                         + "from USER_LOGIWEB where EMAIL = ?")
                 .passwordEncoder(passwordEncoder());
+
+//        auth.userDetailsService(authen);
+//        auth.authenticationProvider(authenticationProvider);
     }
 
     protected void configure(HttpSecurity http) throws Exception {
@@ -60,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .expressionHandler(webExpressionHandler())
                 .antMatchers("/info-table/**").anonymous()
                 .antMatchers("/driver/**").hasRole("DRIVER")
-                .antMatchers("/employee/**").hasAnyRole("EMPLOYEE")
+                .antMatchers("/employee/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/login*", "/register*", "/forgotPassword*", "/*", "/homePage*", "/welcome*", "/assets/**").permitAll()
                 .antMatchers("/profile*").hasAnyRole("DRIVER", "EMPLOYEE", "ADMIN")
