@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.service.implementation;
+package com.alekseytyan.logiweb.service.implementation.security;
 
 import com.alekseytyan.logiweb.dao.api.PasswordResetTokenDao;
 import com.alekseytyan.logiweb.dto.PasswordResetTokenDTO;
@@ -6,6 +6,7 @@ import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.entity.auth.PasswordResetToken;
 import com.alekseytyan.logiweb.service.api.PasswordService;
 import com.alekseytyan.logiweb.service.api.UserService;
+import com.alekseytyan.logiweb.service.implementation.AbstractServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

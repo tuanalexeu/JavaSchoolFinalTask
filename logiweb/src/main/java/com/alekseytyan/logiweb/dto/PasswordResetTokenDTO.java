@@ -1,6 +1,5 @@
 package com.alekseytyan.logiweb.dto;
 
-import com.alekseytyan.logiweb.entity.auth.User;
 import lombok.Data;
 import lombok.ToString;
 
@@ -13,7 +12,7 @@ public class PasswordResetTokenDTO {
     private String token;
 
     @ToString.Exclude
-    private User user;
+    private UserDTO user;
 
     private Date expiryDate;
 }

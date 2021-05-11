@@ -2,7 +2,7 @@ package com.alekseytyan.logiweb.dao.implementation;
 
 import com.alekseytyan.logiweb.dao.api.PasswordResetTokenDao;
 import com.alekseytyan.logiweb.entity.auth.PasswordResetToken;
-import com.alekseytyan.logiweb.entity.auth.User;
+import com.alekseytyan.logiweb.entity.security.User;
 import org.springframework.stereotype.Repository;
 
 @Repository

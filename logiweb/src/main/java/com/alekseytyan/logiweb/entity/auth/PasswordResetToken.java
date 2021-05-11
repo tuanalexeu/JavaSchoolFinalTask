@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.entity.auth;
 
+import com.alekseytyan.logiweb.entity.security.User;
 import com.alekseytyan.logiweb.util.date.ExpiryDate;
 import lombok.Getter;
 import lombok.Setter;
