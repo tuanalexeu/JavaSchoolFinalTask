@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.controller.auth;
+package com.alekseytyan.logiweb.controller.authRest;
 
 
 import com.alekseytyan.logiweb.service.api.UserService;

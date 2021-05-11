@@ -1,5 +1,6 @@
-package com.alekseytyan.logiweb.entity;
+package com.alekseytyan.logiweb.entity.auth;
 
+        import com.alekseytyan.logiweb.entity.Driver;
         import com.alekseytyan.logiweb.entity.enums.UserRole;
         import lombok.*;
 

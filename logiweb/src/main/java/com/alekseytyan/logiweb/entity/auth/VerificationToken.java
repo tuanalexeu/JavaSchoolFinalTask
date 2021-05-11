@@ -1,5 +1,6 @@
-package com.alekseytyan.logiweb.entity;
+package com.alekseytyan.logiweb.entity.auth;
 
+import com.alekseytyan.logiweb.util.date.ExpiryDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,6 @@ import java.util.Calendar;
 })
 public class VerificationToken {
 
-    private static final int EXPIRATION = 60 * 24;
 
     public VerificationToken(User user, String token) {
         this.token = token;
@@ -36,12 +36,6 @@ public class VerificationToken {
     @JoinColumn(nullable = false, name = "USER_EMAIL")
     private User user;
     
-    private Date expiryDate = calculateExpiryDate();
-   
-    private Date calculateExpiryDate() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Timestamp(cal.getTime().getTime()));
-        cal.add(Calendar.MINUTE, VerificationToken.EXPIRATION);
-        return new Date(cal.getTime().getTime());
-    }
+    private Date expiryDate = ExpiryDate.calculateExpiryDate();
+
 }
