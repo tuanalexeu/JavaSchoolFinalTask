@@ -25,4 +25,9 @@ public class EmailServiceImpl implements EmailService {
         message.setText(text);
         emailSender.send(message);
     }
+
+    @Override
+    public void sendSimpleMessage(SimpleMailMessage email) {
+        emailSender.send(email);
+    }
 }
