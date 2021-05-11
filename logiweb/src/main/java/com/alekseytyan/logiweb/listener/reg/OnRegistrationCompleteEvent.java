@@ -1,6 +1,6 @@
 package com.alekseytyan.logiweb.listener.reg;
 
-import com.alekseytyan.logiweb.entity.User;
+import com.alekseytyan.logiweb.entity.auth.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;

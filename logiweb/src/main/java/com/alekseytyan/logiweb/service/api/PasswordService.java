@@ -6,4 +6,6 @@ import com.alekseytyan.logiweb.entity.auth.PasswordResetToken;
 
 public interface PasswordService extends AbstractService<PasswordResetToken, PasswordResetTokenDTO, Long> {
     void createPasswordResetTokenForUser(UserDTO user, String token);
+
+    String validatePasswordResetToken(String token);
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,9 @@ public class AuthController {
 
     @GetMapping(value = "/login")
     public String login(HttpServletRequest request,
-                        @RequestParam(required = false) boolean error) {
+                        Model model,
+                        @RequestParam(required = false) boolean error,
+                        @RequestParam(required = false) String message) {
         if(hasAnyRole()) {
             return "redirect:/homePage";
         }
@@ -38,6 +41,10 @@ public class AuthController {
             if (loginAttemptService.isBlocked(getClientIP(request))) {
                 throw new RuntimeException("blocked");
             }
+        }
+
+        if(message != null) {
+            model.addAttribute("message", message);
         }
 
         return "auth/login";

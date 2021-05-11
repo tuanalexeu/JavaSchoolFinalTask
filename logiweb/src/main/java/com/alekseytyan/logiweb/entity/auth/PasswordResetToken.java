@@ -1,12 +1,19 @@
 package com.alekseytyan.logiweb.entity.auth;
 
 import com.alekseytyan.logiweb.util.date.ExpiryDate;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table(name = "PASSWORD_RESET_TOKEN")
+@Getter @Setter
+@NamedQueries({
+        @NamedQuery(name = "PasswordResetToken.findByToken",
+                query = "SELECT pt FROM PasswordResetToken pt where pt.token = :token")
+})
 public class PasswordResetToken {
 
     @Id

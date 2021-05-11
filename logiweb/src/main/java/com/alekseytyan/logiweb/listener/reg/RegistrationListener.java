@@ -1,6 +1,6 @@
 package com.alekseytyan.logiweb.listener.reg;
 
-import com.alekseytyan.logiweb.entity.User;
+import com.alekseytyan.logiweb.entity.auth.User;
 import com.alekseytyan.logiweb.service.api.EmailService;
 import com.alekseytyan.logiweb.service.api.UserService;
 import com.alekseytyan.logiweb.service.api.VerificationService;
