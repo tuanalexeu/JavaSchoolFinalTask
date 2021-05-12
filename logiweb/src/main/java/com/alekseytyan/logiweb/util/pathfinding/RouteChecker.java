@@ -19,8 +19,89 @@ public class RouteChecker {
 
     public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads, City cityStart) {
 
+
+//        List<Route> elementaryRoutes = new ArrayList<>();
+//
+//        // Находим оптимальный маршрут для каждого груза по отдельности
+//        for (Load l: loads) {
+//            Set<City> cities = new HashSet<>();
+//            cities.add(l.getCityLoad());
+//            cities.add(l.getCityUnload());
+//
+//            Set<Node> nodes = convertToNodeList(distances);
+//            Graph graph = new Graph(nodes);
+//            Node nodeStart = new Node(l.getCityLoad());
+//
+//            for (Node n: nodes) {
+//                if(n.equals(nodeStart)) {
+//                    nodeStart = n;
+//                }
+//            }
+//
+//            graph = Graph.calculateShortestPathFromSource(graph, nodeStart);
+//
+//            int distance = Integer.MAX_VALUE;
+//
+//            List<City> finalCities = new ArrayList<>();
+//            boolean isPossible = false;
+//
+//            for (Node n: graph.getNodes()) {
+//
+//                List<Node> n2 = n.getShortestPath();
+//                n2.add(n);
+//
+//                List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
+//
+//                if(checkIfContains(currentCities, new ArrayList<>(cities)) && n.getDistance() < Integer.MAX_VALUE) {
+//                    finalCities = currentCities;
+//                    distance = n.getDistance();
+//                    isPossible = true;
+//                }
+//
+//            }
+//
+//            Route route = new Route();
+//
+//            route.setPossible(isPossible);
+//            route.setCityList(finalCities);
+//            route.setDistance(distance);
+//            route.setTime(calculateRouteTime(distance));
+//            route.setMaxWeight(calculateMaxWeight(loads));
+//
+//            elementaryRoutes.add(route);
+//
+//        }
+//
+//        Route maxRoute = new Route();
+//        maxRoute.setCityList(new ArrayList<>());
+//
+//        for (Route r: elementaryRoutes) {
+//            if(r.getCityList().size() > maxRoute.getCityList().size()) {
+//                maxRoute = r;
+//            }
+//        }
+//
+//        for (Route r: elementaryRoutes) {
+//            if(!r.equals(maxRoute) && r.isPossible()) {
+//
+//                // We don't need to do anything if one route is completely upon another
+//
+//                if(!checkIfContains(r.getCityList(), maxRoute.getCityList())) {
+//                    // TODO check if there's common cities among these two routes
+//
+//                    // 1) if there is, add that route to the first
+//
+//                    // 2) otherwise, complete the first route and then go to another
+//                }
+//            }
+//        }
+
+
+
+
+
         Set<City> cities = checkCities(loads);
-        Set<Node> nodes = convertToNodeList(cities, distances);
+        Set<Node> nodes = convertToNodeList(distances);
         Graph graph = new Graph(nodes);
         Node nodeStart = new Node(cityStart);
         for (Node n: nodes) {
@@ -63,7 +144,7 @@ public class RouteChecker {
         return route;
     }
 
-    private static Set<Node> convertToNodeList(Set<City> cities, List<DistanceMap> distances) {
+    private static Set<Node> convertToNodeList(List<DistanceMap> distances) {
 
         Set<Node> nodes = new HashSet<>();
 
@@ -98,6 +179,12 @@ public class RouteChecker {
     }
 
 
+    /**
+     * Checks if the second list (c2) contains the first list (c1)
+     * @param c1 - 1st list
+     * @param c2 - 2nd list
+     * @return - true, if contains
+     */
     public static boolean checkIfContains(List<City> c1, List<City> c2) {
         for (City c: c2) {
             if(!c1.contains(c)) {
@@ -168,5 +255,16 @@ public class RouteChecker {
         result.add(load.getCityUnload());
 
         return result;
+    }
+
+    private static City checkCommonCity(List<City> c1, List<City> c2) {
+        for (City c: c1) {
+            for (City c_inner: c2) {
+                if(c.equals(c_inner)) {
+                    return c;
+                }
+            }
+        }
+        return null;
     }
 }

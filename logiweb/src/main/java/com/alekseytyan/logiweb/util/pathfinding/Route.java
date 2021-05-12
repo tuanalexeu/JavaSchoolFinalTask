@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.Formatter;
 import java.util.List;
+import java.util.Objects;
 
 @Getter @Setter
 @AllArgsConstructor
@@ -32,5 +33,19 @@ public class Route {
                         "Max weight: %d\n",
                         isPossible, cityList, distance, time, maxWeight)
                 .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Route)) return false;
+        Route route = (Route) o;
+        return isPossible == route.isPossible
+                && cityList.equals(route.cityList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isPossible, cityList);
     }
 }
