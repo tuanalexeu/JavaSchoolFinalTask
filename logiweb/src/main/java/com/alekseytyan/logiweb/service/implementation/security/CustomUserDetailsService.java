@@ -5,7 +5,7 @@ import com.alekseytyan.logiweb.entity.security.Privilege;
 import com.alekseytyan.logiweb.entity.security.Role;
 import com.alekseytyan.logiweb.service.api.RoleService;
 import com.alekseytyan.logiweb.service.api.UserService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +18,20 @@ import java.util.*;
 
 @Service("userDetailService")
 @Transactional
-@AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
+    private UserService userService;
+    private RoleService roleService;
 
-    private final UserService userService;
-    private final RoleService roleService;
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email)
@@ -38,7 +46,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         return new org.springframework.security.core.userdetails.User(
-          user.getEmail(), user.getPassword(), user.isEnabled(), true, true, 
+          user.getEmail(), user.getPassword(), user.isEnabled(), true, true,
           true, getAuthorities(userService.convertToEntity(user).getRoles()));
     }
 

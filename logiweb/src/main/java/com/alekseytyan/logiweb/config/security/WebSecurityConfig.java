@@ -1,17 +1,13 @@
 package com.alekseytyan.logiweb.config.security;
 
 import com.alekseytyan.logiweb.config.DataSourceConfig;
-import com.alekseytyan.logiweb.config.security.handler.CustomAuthenticationFailureHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomLogoutSuccessHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomAccessDeniedHandler;
-import com.alekseytyan.logiweb.config.security.handler.CustomSuccessLoginHandler;
-import com.alekseytyan.logiweb.service.api.LoginAttemptService;
-import com.alekseytyan.logiweb.service.implementation.security.LoginAttemptServiceImpl;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
@@ -36,18 +32,44 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@ComponentScan(value = {"com.alekseytyan.logiweb"})
 @Import(value = {
-        DataSourceConfig.class,
+        DataSourceConfig.class
 })
-@AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    private final UserDetailsService userDetailsService;
-//    private final AuthenticationProvider authenticationProvider;
+    private UserDetailsService userDetailsService;
+    private AuthenticationProvider authenticationProvider;
 
-    private final DataSource dataSource;
-//    private final AuthenticationSuccessHandler successHandler;
-//    private final AuthenticationFailureHandler failureHandler;
+    private AuthenticationSuccessHandler successHandler;
+    private AuthenticationFailureHandler failureHandler;
+
+    private DataSource dataSource;
+
+    @Autowired
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Autowired
+    public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
+        this.authenticationProvider = authenticationProvider;
+    }
+
+    @Autowired
+    public void setSuccessHandler(AuthenticationSuccessHandler successHandler) {
+        this.successHandler = successHandler;
+    }
+
+    @Autowired
+    public void setFailureHandler(AuthenticationFailureHandler failureHandler) {
+        this.failureHandler = failureHandler;
+    }
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -58,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         + "from USER_LOGIWEB where EMAIL = ?")
                 .passwordEncoder(passwordEncoder());
 
-//        auth.userDetailsService(authen);
+//        auth.userDetailsService(userDetailsService);
 //        auth.authenticationProvider(authenticationProvider);
     }
 
@@ -79,8 +101,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .successHandler(authenticationSuccessHandler())
-                .failureHandler(authenticationFailureHandler())
+                .successHandler(successHandler)
+                .failureHandler(failureHandler)
                 .defaultSuccessUrl("/homePage", true)
                 .and()
                 .logout()
@@ -102,21 +124,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler = new DefaultWebSecurityExpressionHandler();
         defaultWebSecurityExpressionHandler.setRoleHierarchy(roleHierarchy());
         return defaultWebSecurityExpressionHandler;
-    }
-
-    @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new CustomSuccessLoginHandler(loginAttemptService());
-    }
-
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        return new CustomAuthenticationFailureHandler(loginAttemptService());
-    }
-
-    @Bean
-    public LoginAttemptService loginAttemptService() {
-        return new LoginAttemptServiceImpl();
     }
 
     @Bean

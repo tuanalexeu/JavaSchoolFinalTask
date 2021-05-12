@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.controller.auth;
 
+import com.alekseytyan.logiweb.exception.UserBlockedException;
 import com.alekseytyan.logiweb.service.api.LoginAttemptService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -37,7 +38,7 @@ public class AuthController {
 
         if(error) {
             if (loginAttemptService.isBlocked(getClientIP(request))) {
-                throw new RuntimeException("blocked");
+                throw new UserBlockedException();
             }
         }
 

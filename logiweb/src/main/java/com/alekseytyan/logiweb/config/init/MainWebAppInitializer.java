@@ -1,6 +1,6 @@
 package com.alekseytyan.logiweb.config.init;
 
-import com.alekseytyan.logiweb.config.AppConfig;
+import com.alekseytyan.logiweb.config.*;
 import com.alekseytyan.logiweb.config.security.WebSecurityConfig;
 import lombok.var;
 import org.springframework.web.WebApplicationInitializer;
@@ -16,17 +16,24 @@ public class MainWebAppInitializer implements WebApplicationInitializer {
     public void onStartup(final ServletContext sc) {
 
         var ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(AppConfig.class);
+
+        ctx.register(AsynchronousSpringEventsConfig.class);
+        ctx.register(DataMappingConfig.class);
+        ctx.register(DataSourceConfig.class);
+        ctx.register(EmailConfig.class);
+        ctx.register(JmsConfig.class);
+        ctx.register(WebConfig.class);
+        ctx.register(WebSecurityConfig.class);
+
+
         ctx.setServletContext(sc);
 
         var servlet = sc.addServlet("dispatcher", new DispatcherServlet(ctx));
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
 
-        var root = new AnnotationConfigWebApplicationContext();
-        root.register(WebSecurityConfig.class);
 
-        sc.addListener(new ContextLoaderListener(root));
+        sc.addListener(new ContextLoaderListener(ctx));
         sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"))
                 .addMappingForUrlPatterns(null, false, "/*");
 

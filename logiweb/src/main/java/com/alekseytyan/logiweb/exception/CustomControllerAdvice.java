@@ -57,12 +57,20 @@ public class CustomControllerAdvice {
         return mav;
     }
 
-    @ExceptionHandler(Exception.class)
-    @LogAnnotation
-    public ModelAndView anyException() {
+    @ExceptionHandler(UserBlockedException.class)
+    public ModelAndView userBlocked() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("error/defaultError");
+        mav.setViewName("error/userBlocked");
         return mav;
     }
+
+
+//    @ExceptionHandler(Exception.class)
+//    @LogAnnotation
+//    public ModelAndView anyException() {
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("error/defaultError");
+//        return mav;
+//    }
 
 }
