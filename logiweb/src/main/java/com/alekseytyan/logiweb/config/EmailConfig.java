@@ -14,7 +14,7 @@ import java.util.Properties;
 @PropertySource("classpath:security.properties")
 public class EmailConfig {
 
-    private Environment environment;
+    private final Environment environment;
 
     @Autowired
     public EmailConfig(Environment environment) {

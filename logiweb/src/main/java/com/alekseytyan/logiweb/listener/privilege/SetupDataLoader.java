@@ -25,20 +25,14 @@ public class SetupDataLoader implements
 
     boolean alreadySetup = false;
 
-    private final UserService userService;
     private final RoleService roleService;
     private final PrivilegeService privilegeService;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SetupDataLoader(UserService userService,
-                           RoleService roleService,
-                           PrivilegeService privilegeService,
-                           PasswordEncoder passwordEncoder) {
-        this.userService = userService;
+    public SetupDataLoader(RoleService roleService,
+                           PrivilegeService privilegeService) {
         this.roleService = roleService;
         this.privilegeService = privilegeService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
