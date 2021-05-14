@@ -3,9 +3,11 @@ package com.alekseytyan.logiweb.dto;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 
 @Data
-public class LorryDTO {
+public class LorryDTO implements Serializable {
 
     private String regNum;
 

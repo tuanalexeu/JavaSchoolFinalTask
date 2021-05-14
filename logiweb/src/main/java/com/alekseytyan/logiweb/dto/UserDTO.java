@@ -8,11 +8,12 @@ import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Data
 @PasswordMatches
-public class UserDTO {
+public class UserDTO implements Serializable {
 
     @ValidEmail
     @NotNull
@@ -28,7 +29,7 @@ public class UserDTO {
 
     private String lastName;
 
-    private Collection<RoleDTO> roles;
+//    private Collection<RoleDTO> roles;
 
     private UserRole role;
 

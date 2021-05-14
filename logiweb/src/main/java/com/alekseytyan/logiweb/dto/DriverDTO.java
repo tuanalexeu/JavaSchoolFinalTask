@@ -4,8 +4,10 @@ import com.alekseytyan.logiweb.entity.enums.DriverState;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Data
-public class DriverDTO {
+public class DriverDTO implements Serializable {
 
     private Long id;
 

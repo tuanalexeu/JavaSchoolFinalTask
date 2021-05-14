@@ -4,10 +4,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 @Data
-public class RoleDTO {
+public class RoleDTO implements Serializable {
     private Long id;
 
     private String name;
