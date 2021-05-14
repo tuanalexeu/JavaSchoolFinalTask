@@ -40,14 +40,14 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "USERS_ROLES",
-            joinColumns = @JoinColumn(
-                    name = "USER_EMAIL", referencedColumnName = "EMAIL"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "ROLE_ID", referencedColumnName = "ID"))
-    private Collection<Role> roles;
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(
+//            name = "USERS_ROLES",
+//            joinColumns = @JoinColumn(
+//                    name = "USER_EMAIL", referencedColumnName = "EMAIL"),
+//            inverseJoinColumns = @JoinColumn(
+//                    name = "ROLE_ID", referencedColumnName = "ID"))
+//    private Collection<Role> roles;
 
     @Column(name = "ROLE", nullable = false)
     @Enumerated(EnumType.STRING)

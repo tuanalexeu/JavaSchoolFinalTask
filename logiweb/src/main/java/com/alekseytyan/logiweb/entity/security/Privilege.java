@@ -23,7 +23,10 @@ public class Privilege {
 
     private String name;
 
-    @ManyToMany(mappedBy = "privileges")
+//    @ManyToMany(mappedBy = "privileges")
+//    private Collection<Role> roles;
+
+    @ManyToMany
     private Collection<Role> roles;
 
     public Privilege(String name) {

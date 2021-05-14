@@ -22,7 +22,11 @@ public class Role {
     private Long id;
 
     private String name;
-    @ManyToMany(mappedBy = "roles")
+
+//    @ManyToMany(mappedBy = "roles")
+//    private Collection<User> users;
+
+    @ManyToMany
     private Collection<User> users;
 
     public Role(String name) {

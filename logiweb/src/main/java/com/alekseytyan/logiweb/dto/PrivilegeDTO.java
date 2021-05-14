@@ -3,10 +3,12 @@ package com.alekseytyan.logiweb.dto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.io.Serializable;
 import java.util.Collection;
 
 @Data
-public class PrivilegeDTO {
+public class PrivilegeDTO implements Serializable {
 
     private Long id;
     private String name;
