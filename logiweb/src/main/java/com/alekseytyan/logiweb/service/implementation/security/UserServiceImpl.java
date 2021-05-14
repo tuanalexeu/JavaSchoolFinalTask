@@ -37,9 +37,13 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
     @Override
     public UserDTO deleteById(String email) {
 
+
         DriverDTO driverDTO = driverService.findDriverByUser(email);
-        driverDTO.setUser(null);
-        driverService.update(driverDTO);
+
+        if(driverDTO != null) {
+            driverDTO.setUser(null);
+            driverService.update(driverDTO);
+        }
 
         return convertToDTO(getDao().deleteById(email));
     }

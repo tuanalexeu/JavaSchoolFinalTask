@@ -45,9 +45,13 @@ public class CustomUserDetailsService implements UserDetailsService {
                       roleService.findByName("ROLE_USER"))));
         }
 
+//        return new org.springframework.security.core.userdetails.User(
+//          user.getEmail(), user.getPassword(), user.isEnabled(), true, true,
+//          true, getAuthorities(userService.convertToEntity(user).getRoles()));
+
         return new org.springframework.security.core.userdetails.User(
-          user.getEmail(), user.getPassword(), user.isEnabled(), true, true,
-          true, getAuthorities(userService.convertToEntity(user).getRoles()));
+                user.getEmail(), user.getPassword(), user.isEnabled(), true, true,
+                true, new ArrayList<>());
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(Collection<Role> roles) {
