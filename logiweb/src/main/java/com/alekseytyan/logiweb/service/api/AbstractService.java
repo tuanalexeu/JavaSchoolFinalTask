@@ -1,5 +1,7 @@
 package com.alekseytyan.logiweb.service.api;
 
+import com.alekseytyan.logiweb.aspect.CrudAnnotation;
+
 import java.util.List;
 
 public interface AbstractService<E, DTO, ID> {
@@ -7,12 +9,16 @@ public interface AbstractService<E, DTO, ID> {
 
     List<DTO> findAll();
 
+    @CrudAnnotation(code = "update")
     DTO save(DTO dto);
 
+    @CrudAnnotation(code = "update")
     DTO update(DTO dto);
 
+    @CrudAnnotation(code = "update")
     DTO delete(DTO dto);
 
+    @CrudAnnotation(code = "update")
     DTO deleteById(ID entityId);
 
     DTO convertToDTO(E entity);

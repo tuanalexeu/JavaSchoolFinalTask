@@ -4,10 +4,7 @@ import com.alekseytyan.logiweb.config.DataSourceConfig;
 import com.alekseytyan.logiweb.config.security.handler.CustomLogoutSuccessHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
@@ -32,6 +29,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableAspectJAutoProxy
 @ComponentScan(value = {"com.alekseytyan.logiweb"})
 @Import(value = {
         DataSourceConfig.class
@@ -89,7 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .expressionHandler(webExpressionHandler())
-                .antMatchers("/info-table/**").anonymous()
+                .antMatchers("/info-table/**").permitAll()
                 .antMatchers("/driver/**").hasRole("DRIVER")
                 .antMatchers("/employee/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
