@@ -7,6 +7,8 @@ import com.alekseytyan.logiweb.entity.Load;
 import com.alekseytyan.logiweb.util.pathfinding.dijkstra.Node;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,88 +19,9 @@ import java.util.stream.Collectors;
 @Getter @Setter
 public class RouteChecker {
 
+    private static final Logger logger = LoggerFactory.getLogger(RouteChecker.class);
+
     public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads, City cityStart) {
-
-
-//        List<Route> elementaryRoutes = new ArrayList<>();
-//
-//        // Находим оптимальный маршрут для каждого груза по отдельности
-//        for (Load l: loads) {
-//            Set<City> cities = new HashSet<>();
-//            cities.add(l.getCityLoad());
-//            cities.add(l.getCityUnload());
-//
-//            Set<Node> nodes = convertToNodeList(distances);
-//            Graph graph = new Graph(nodes);
-//            Node nodeStart = new Node(l.getCityLoad());
-//
-//            for (Node n: nodes) {
-//                if(n.equals(nodeStart)) {
-//                    nodeStart = n;
-//                }
-//            }
-//
-//            graph = Graph.calculateShortestPathFromSource(graph, nodeStart);
-//
-//            int distance = Integer.MAX_VALUE;
-//
-//            List<City> finalCities = new ArrayList<>();
-//            boolean isPossible = false;
-//
-//            for (Node n: graph.getNodes()) {
-//
-//                List<Node> n2 = n.getShortestPath();
-//                n2.add(n);
-//
-//                List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
-//
-//                if(checkIfContains(currentCities, new ArrayList<>(cities)) && n.getDistance() < Integer.MAX_VALUE) {
-//                    finalCities = currentCities;
-//                    distance = n.getDistance();
-//                    isPossible = true;
-//                }
-//
-//            }
-//
-//            Route route = new Route();
-//
-//            route.setPossible(isPossible);
-//            route.setCityList(finalCities);
-//            route.setDistance(distance);
-//            route.setTime(calculateRouteTime(distance));
-//            route.setMaxWeight(calculateMaxWeight(loads));
-//
-//            elementaryRoutes.add(route);
-//
-//        }
-//
-//        Route maxRoute = new Route();
-//        maxRoute.setCityList(new ArrayList<>());
-//
-//        for (Route r: elementaryRoutes) {
-//            if(r.getCityList().size() > maxRoute.getCityList().size()) {
-//                maxRoute = r;
-//            }
-//        }
-//
-//        for (Route r: elementaryRoutes) {
-//            if(!r.equals(maxRoute) && r.isPossible()) {
-//
-//                // We don't need to do anything if one route is completely upon another
-//
-//                if(!checkIfContains(r.getCityList(), maxRoute.getCityList())) {
-//                    // TODO check if there's common cities among these two routes
-//
-//                    // 1) if there is, add that route to the first
-//
-//                    // 2) otherwise, complete the first route and then go to another
-//                }
-//            }
-//        }
-
-
-
-
 
         Set<City> cities = checkCities(loads);
         Set<Node> nodes = convertToNodeList(distances);
@@ -123,9 +46,11 @@ public class RouteChecker {
             List<Node> n2 = n.getShortestPath();
             n2.add(n);
 
+            logger.info(n2.toString());
+
             List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
 
-            if(checkIfContains(currentCities, new ArrayList<>(cities)) && n.getDistance() < Integer.MAX_VALUE) {
+            if(checkIfContains(currentCities, new ArrayList<>(cities)) && n.getDistance() < distance) {
                 finalCities = currentCities;
                 distance = n.getDistance();
                 isPossible = true;
@@ -237,34 +162,14 @@ public class RouteChecker {
     private static Set<City> checkCities(List<Load> loads) {
 
         // Map contains city and the weight a truck needs to be able to get
-        Set<City> routeWeight = new HashSet<>();
+        Set<City> cities = new HashSet<>();
 
         // Get set of all cities we need to visit on the way
         loads.forEach(l -> {
-            routeWeight.add(l.getCityLoad());
-            routeWeight.add(l.getCityUnload());
+            cities.add(l.getCityLoad());
+            cities.add(l.getCityUnload());
         });
 
-        return routeWeight;
-    }
-
-    private static Set<City> checkCities(Load load) {
-
-        Set<City> result = new HashSet<>();
-        result.add(load.getCityLoad());
-        result.add(load.getCityUnload());
-
-        return result;
-    }
-
-    private static City checkCommonCity(List<City> c1, List<City> c2) {
-        for (City c: c1) {
-            for (City c_inner: c2) {
-                if(c.equals(c_inner)) {
-                    return c;
-                }
-            }
-        }
-        return null;
+        return cities;
     }
 }
