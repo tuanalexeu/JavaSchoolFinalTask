@@ -34,14 +34,6 @@
             <version>30.1-jre</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-ra -->
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-ra</artifactId>
-            <version>5.16.0</version>
-        </dependency>
-
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -211,6 +203,32 @@
             <version>5.3.5</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.apache.activemq</groupId>-->
+<!--            <artifactId>activemq-spring</artifactId>-->
+<!--            <version>5.13.3</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>artemis-jms-client</artifactId>
+            <version>2.15.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-naming-client -->
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-naming-client</artifactId>
+            <version>1.0.13.Final</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>javax.jms</groupId>
+            <artifactId>javax.jms-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-websocket</artifactId>
@@ -221,6 +239,14 @@
             <artifactId>spring-messaging</artifactId>
             <version>5.3.6</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-client-all -->
+<!--        <dependency>-->
+<!--            <groupId>org.wildfly</groupId>-->
+<!--            <artifactId>wildfly-client-all</artifactId>-->
+<!--            <version>23.0.2.Final</version>-->
+<!--        </dependency>-->
+
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
         <dependency>
@@ -236,17 +262,10 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>javax.jms-api</artifactId>
-            <version>2.0.1</version>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.12</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>artemis-jms-client</artifactId>
-            <version>2.15.0</version>
-        </dependency>
-
 
     </dependencies>
 
@@ -270,6 +289,27 @@
                     <password>admin1</password>
                     <path>/</path>
                     <update>true</update>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>2.0.2.Final</version>
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>install</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>deploy</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+                <configuration>
+                    <filename>${project.build.finalName}.war</filename>
+                    <hostname>localhost</hostname>
+                    <port>8081</port>
+                    <username>admin</username>
+                    <password>admin</password>
                 </configuration>
             </plugin>
         </plugins>

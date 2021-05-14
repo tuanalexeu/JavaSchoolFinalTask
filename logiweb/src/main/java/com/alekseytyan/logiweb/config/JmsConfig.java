@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter;
 import org.springframework.jms.core.JmsTemplate;
-
 
 import javax.jms.*;
 import javax.naming.Context;
@@ -18,22 +18,22 @@ import java.util.Properties;
 
 @Configuration
 @EnableJms
+@PropertySource("classpath:jms.properties")
 public class JmsConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(JmsConfig.class);
 
-
-    private final String login = "root";
-    private final String password = "root";
+    private final String SEC_CRED_LOGIN = "admin";
+    private final String SEC_CRED_PASS = "admin";
 
     @Bean
     public Context context() throws NamingException {
         Properties props = new Properties();
-        props.put(Context.INITIAL_CONTEXT_FACTORY, "org.wildfly.naming.client.WildFlyInitialContextFactory");
-        props.put(Context.PROVIDER_URL, "http-remoting://127.0.0.1:8081");
+        props.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory");
+        props.put(Context.PROVIDER_URL, "tcp://127.0.0.1:61616");
         props.put("jboss.naming.client.ejb.context", true);
-        props.put(Context.SECURITY_PRINCIPAL, login);
-        props.put(Context.SECURITY_CREDENTIALS, password);
+        props.put(Context.SECURITY_PRINCIPAL, SEC_CRED_LOGIN);
+        props.put(Context.SECURITY_CREDENTIALS, SEC_CRED_PASS);
         return new InitialContext(props);
     }
 
@@ -44,17 +44,17 @@ public class JmsConfig {
 
     @Bean
     public JMSContext jmsContext(TopicConnectionFactory connectionFactory) {
-        return connectionFactory.createContext(login, password);
+        return connectionFactory.createContext(SEC_CRED_LOGIN, SEC_CRED_PASS);
     }
 
     @Bean
     public TopicConnectionFactory connectionFactory() throws NamingException {
-        TopicConnectionFactory connectionFactory = (TopicConnectionFactory) context().lookup("jms/RemoteConnectionFactory");
+        TopicConnectionFactory connectionFactory = (TopicConnectionFactory) context().lookup("java:/RemoteJmsXA");
 
         UserCredentialsConnectionFactoryAdapter userCredentialsConnectionFactoryAdapter =
                 new UserCredentialsConnectionFactoryAdapter();
-        userCredentialsConnectionFactoryAdapter.setUsername(login);
-        userCredentialsConnectionFactoryAdapter.setPassword(password);
+        userCredentialsConnectionFactoryAdapter.setUsername(SEC_CRED_LOGIN);
+        userCredentialsConnectionFactoryAdapter.setPassword(SEC_CRED_PASS);
         userCredentialsConnectionFactoryAdapter.setTargetConnectionFactory(connectionFactory);
 
         return userCredentialsConnectionFactoryAdapter;
@@ -73,13 +73,14 @@ public class JmsConfig {
 
         Topic topic;
 
-        TopicConnection topicConnection = factory.createTopicConnection(login, password);
-        TopicSession session = topicConnection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
+        try (TopicConnection topicConnection = factory.createTopicConnection(SEC_CRED_LOGIN, SEC_CRED_PASS);
+             TopicSession session = topicConnection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE)) {
+            topicConnection.start();
+            topic = session.createTopic("Logiweb");
+        }
 
-        topicConnection.start();
-        topic = session.createTopic("Logiweb");
+        logger.info("Connection's been established");
 
-        logger.info("Connection to topic is established");
 
         return topic;
     }
