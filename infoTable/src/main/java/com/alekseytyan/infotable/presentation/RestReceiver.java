@@ -33,7 +33,7 @@ public class RestReceiver extends Connector {
 
     public LorryStatsDTO getLorryStats() throws JsonProcessingException {
         return getObjectMapper().readValue(
-                getOrderTarget().request("application/json").get(String.class),
+                getLorryTarget().request("application/json").get(String.class),
                 new TypeReference<LorryStatsDTO>(){}
         );
     }

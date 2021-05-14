@@ -1,5 +1,6 @@
 package com.alekseytyan.infotable.presentation;
 
+import com.alekseytyan.infotable.reader.PropertyReader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;

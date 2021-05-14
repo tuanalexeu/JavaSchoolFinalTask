@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Infotable</title>
-<!--    <h:outputStylesheet library="css" name="/assets/main.css" />-->
+<!--    <h:outputStylesheet library="css" name="/assets/main.css" />&ndash;&gt;-->
 </h:head>
 
 <h:body>
@@ -24,36 +24,42 @@
                 <p:column headerText="Id">
                     <h:outputText value="#{order.id}" />
                 </p:column>
-                <p:column headerText="Id">
+                <p:column headerText="Finished">
                     <h:outputText value="#{order.finished}" />
                 </p:column>
-                <p:column headerText="Id">
+                <p:column headerText="Loads">
                     <h:outputText value="#{order.loads}" />
                 </p:column>
-                <p:column headerText="Id">
+                <p:column headerText="Truck">
                     <h:outputText value="#{order.lorry}" />
                 </p:column>
-                <p:column headerText="Id">
+                <p:column headerText="Drivers">
                     <h:outputText value="#{order.drivers}" />
                 </p:column>
             </p:dataTable>
         </div>
-<!--        <div class="ui-g-12 ui-md-12 ui-lg-4">-->
-<!--            <div class="ui-g-12 ui-md-6 ui-lg-12">-->
+        <div class="ui-g-12 ui-md-12 ui-lg-4">
+            <div class="ui-g-12 ui-md-6 ui-lg-12">
 <!--                <p:chart type="pie" styleClass="side-chart" model="#{restReceiver.driverStats}"/>-->
-<!--            </div>-->
-<!--            <div class="ui-g-12 ui-md-6 ui-lg-12">-->
+                <h2>#{restReceiver.driverStats.available}</h2>
+                <h2>#{restReceiver.driverStats.unavailable}</h2>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-12">
 <!--                <p:chart type="pie" styleClass="side-chart" model="#{restReceiver.lorryStats}"  />-->
-<!--            </div>-->
-<!--        </div>-->
+                <h2>#{restReceiver.lorryStats.available}</h2>
+                <h2>#{restReceiver.lorryStats.unavailable}</h2>
+                <h2>#{restReceiver.lorryStats.broken}</h2>
+            </div>
+        </div>
     </div>
     <div id="footer" class="ui-g-12">
         <h:outputText value="LogiWeb &copy; 2018" />
     </div>
 
-    <f:websocket channel="websocket" onmessage="socketListener"/>
+    <f:websocket channel="websocket" onmessage="socketListener()"/>
+
     <script type="text/javascript">
-        function socketListener(message, channel, event) {
+        function socketListener(message) {
             console.log('websocket push message::' + message);
             location.reload();
         }

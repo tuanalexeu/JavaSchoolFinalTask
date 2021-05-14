@@ -15,20 +15,7 @@ public class WebSocket {
     @Push(channel = "websocket")
     private PushContext push;
 
-    public void order() {
-        push.send("orders");
-    }
-
-    public void driver() {
-        push.send("driver-stats");
-    }
-
-    public void truck() {
-        push.send("lorry-stats");
-    }
-
     public void interpretMsg(String text) throws Exception {
-        Method updateLocation = WebSocket.class.getMethod(text);
-        updateLocation.invoke(this);
+        push.send(text);
     }
 }

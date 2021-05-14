@@ -1,4 +1,4 @@
-package com.alekseytyan.infotable.presentation;
+package com.alekseytyan.infotable.reader;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
