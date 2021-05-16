@@ -169,18 +169,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${users}" var="user">
+                                <c:forEach items="${users}" var="driver">
                                     <tr>
                                         <td>
                                             <form action="${pageContext.request.contextPath}/admin/edit-user" method="post">
-                                                <input type="hidden" name="email" value="${user.email}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${user.firstName} ${user.lastName}</button>
+                                                <input type="hidden" name="email" value="${driver.email}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${driver.firstName} ${driver.lastName}</button>
                                             </form>
 
                                         </td>
-                                        <td>${user.email}</td>
-                                        <td>${user.role}</td>
-                                        <td>${user.enabled}</td>
+                                        <td>${driver.email}</td>
+                                        <td>${driver.role}</td>
+                                        <td>${driver.enabled}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

@@ -82,11 +82,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${newUsers}" var="user">
-                                    <c:if test="${user.driver.id eq null}">
+                                <c:forEach items="${newUsers}" var="driver">
+                                    <c:if test="${driver.driver.id eq null}">
                                         <tr>
-                                        <td>${user.email}</td>
-                                        <td>${user.firstName} ${user.lastName}</td>
+                                        <td>${driver.email}</td>
+                                        <td>${driver.firstName} ${driver.lastName}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Choose</button>
@@ -95,7 +95,7 @@
                                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                                             <form action="${pageContext.request.contextPath}/admin/approve-driver" method="post">
                                                                 <input type="hidden" name="driverId" value="${driver.id}">
-                                                                <input type="hidden" name="email" value="${user.email}">
+                                                                <input type="hidden" name="email" value="${driver.email}">
                                                                 <button type="submit">${driver.firstName} ${driver.lastName}</button>
                                                             </form>
                                                         </a>

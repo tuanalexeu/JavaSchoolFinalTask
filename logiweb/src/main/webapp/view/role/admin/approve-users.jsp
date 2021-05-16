@@ -86,18 +86,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${newUsers}" var="user">
+                                <c:forEach items="${newUsers}" var="driver">
                                     <tr>
-                                        <td>${user.firstName} ${user.lastName}</td>
-                                        <td>${user.email}</td>
-                                        <td>${user.role}</td>
+                                        <td>${driver.firstName} ${driver.lastName}</td>
+                                        <td>${driver.email}</td>
+                                        <td>${driver.role}</td>
                                         <td>
                                             <form action="${pageContext.request.contextPath}/admin/approve-user" method="post">
-                                                <input type="hidden" name="email" value="${user.email}">
+                                                <input type="hidden" name="email" value="${driver.email}">
                                                 <button class="btn btn-primary btn-block btn-user" id="approveUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Approve</button>
                                             </form>
                                             <form action="${pageContext.request.contextPath}/admin/delete-user" method="post">
-                                                <input type="hidden" name="email" value="${user.email}">
+                                                <input type="hidden" name="email" value="${driver.email}">
                                                 <button class="btn btn-primary btn-block btn-user" id="deleteUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">x</button>
                                             </form>
                                         </td>

@@ -127,8 +127,8 @@
                                             </div>
                                             <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                 <ul>
-                                                    <c:forEach items="${coDrivers}" var="user">
-                                                        <li>${user.id} ${user.firstName} ${user.lastName}</li>
+                                                    <c:forEach items="${coDrivers}" var="driver">
+                                                        <li>${driver.id} ${driver.firstName} ${driver.lastName}</li>
                                                     </c:forEach>
                                                 </ul>
                                             </div>
@@ -195,7 +195,7 @@
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Load id</th>
+<%--                                    <th>Load id</th>--%>
                                     <th>Description</th>
                                     <th>City (Loading)</th>
                                     <th>City (Unloading)</th>
@@ -206,7 +206,7 @@
                                 <tbody>
                                 <c:forEach items="${loads}" var="load">
                                     <tr>
-                                        <td>${load.id}</td>
+<%--                                        <td>${load.id}</td>--%>
                                         <td>${load.name}</td>
                                         <td>${load.cityLoad.name}</td>
                                         <td>${load.cityUnload.name}</td>

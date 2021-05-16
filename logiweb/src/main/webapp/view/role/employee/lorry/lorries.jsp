@@ -154,7 +154,7 @@
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Truck registration number</th>
+                                    <th>Registration number</th>
                                     <th>Shift time</th>
                                     <th>Capacity</th>
                                     <th>State</th>

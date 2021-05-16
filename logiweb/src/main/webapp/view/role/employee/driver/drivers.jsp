@@ -154,7 +154,7 @@
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Driver ID</th>
+<%--                                    <th>Driver ID</th>--%>
                                     <th>Name</th>
                                     <th>Hours worked</th>
                                     <th>State</th>
@@ -164,20 +164,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${drivers}" var="user">
+                                <c:forEach items="${drivers}" var="driver">
                                     <tr>
-                                        <td>${user.id}</td>
+<%--                                        <td>${driver.id}</td>--%>
                                         <td>
-                                            <form action="/employee/edit-driver/${user.id}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${user.firstName} ${user.lastName}</button>
+                                            <form action="/employee/edit-driver/${driver.id}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${driver.firstName} ${driver.lastName}</button>
                                             </form>
 
                                         </td>
-                                        <td>${user.hoursWorked}</td>
-                                        <td>${user.state}</td>
-                                        <td>${user.city.name}</td>
-                                        <td>${user.lorry.regNum}</td>
-                                        <td>${user.order.id}</td>
+                                        <td>${driver.hoursWorked}</td>
+                                        <td>${driver.state}</td>
+                                        <td>${driver.city.name}</td>
+                                        <td>${driver.lorry.regNum}</td>
+                                        <td>${driver.order.id}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

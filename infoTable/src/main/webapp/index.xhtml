@@ -14,7 +14,7 @@
 <h:body>
 
     <div id="header" class="ui-g-12">
-        Welcome to the dashboard!
+        <h3>Welcome to the dashboard!</h3>
     </div>
 
     <div id="main" class="ui-g-12">
@@ -59,8 +59,10 @@
     <f:websocket channel="websocket" onmessage="socketListener()"/>
 
     <script type="text/javascript">
-        function socketListener(message) {
+        function socketListener(message, channel, event) {
             console.log('websocket push message::' + message);
+
+            $(".ui-g-12 h3").html("your new header");
             location.reload();
         }
     </script>
