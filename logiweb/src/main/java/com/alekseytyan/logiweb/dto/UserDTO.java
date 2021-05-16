@@ -2,22 +2,21 @@ package com.alekseytyan.logiweb.dto;
 
 import com.alekseytyan.logiweb.entity.enums.UserRole;
 import com.alekseytyan.logiweb.validation.api.PasswordMatches;
-import com.alekseytyan.logiweb.validation.api.ValidEmail;
 import com.alekseytyan.logiweb.validation.api.ValidPassword;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Collection;
 
 @Data
 @PasswordMatches
 public class UserDTO implements Serializable {
 
-    @ValidEmail
     @NotNull
     @NotEmpty
+    @Email
     private String email;
 
     @ValidPassword
@@ -28,8 +27,6 @@ public class UserDTO implements Serializable {
     private String firstName;
 
     private String lastName;
-
-//    private Collection<RoleDTO> roles;
 
     private UserRole role;
 

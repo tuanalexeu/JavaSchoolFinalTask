@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Formatter;
 
 @Aspect
 @Component
@@ -24,10 +25,16 @@ public class LogAspect {
         Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
 
-        logger.info(joinPoint.getTarget().getClass().getName() + "." +
-                joinPoint.getSignature() + "(" + Arrays.toString(joinPoint.getArgs()) + ")" +
-                " returns " + proceed +
-                ", executed in " + executionTime + "ms");
+        try(Formatter formatter = new Formatter()) {
+            logger.info(formatter.format(
+                    "%s %s(%s) returns %s, in %dms",
+                    joinPoint.getTarget().getClass().getSimpleName(),
+                    joinPoint.getSignature(),
+                    Arrays.toString(joinPoint.getArgs()),
+                    proceed,
+                    executionTime
+            ).toString());
+        }
 
         return proceed;
     }
@@ -38,13 +45,15 @@ public class LogAspect {
             throwing = "error")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable error) {
         if (logger.isErrorEnabled()) {
-            logger.error(
-                    joinPoint.getTarget().getClass().getName() + "." +
-                    joinPoint.getSignature().getName() +
-                    "(" + Arrays.toString(joinPoint.getArgs()) + ")" +
-                    " Exception : " + error,
-                    error
-            );
+            try(Formatter formatter = new Formatter()) {
+                logger.error(formatter.format(
+                        "%s %s(%s). Exception: %s",
+                        joinPoint.getTarget().getClass().getSimpleName(),
+                        joinPoint.getSignature(),
+                        Arrays.toString(joinPoint.getArgs()),
+                        error
+                ).toString());
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.controller.authRest;
 
+import com.alekseytyan.logiweb.dto.PasswordDTO;
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.exception.UserNotFoundException;
 import com.alekseytyan.logiweb.service.api.EmailService;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;

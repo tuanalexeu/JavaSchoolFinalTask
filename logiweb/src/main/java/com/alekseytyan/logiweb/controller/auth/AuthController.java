@@ -36,10 +36,8 @@ public class AuthController {
             return "redirect:/homePage";
         }
 
-        if(error) {
-            if (loginAttemptService.isBlocked(getClientIP(request))) {
-                throw new UserBlockedException();
-            }
+        if(error && loginAttemptService.isBlocked(getClientIP(request))) {
+            throw new UserBlockedException();
         }
 
         if(message != null) {
@@ -74,11 +72,11 @@ public class AuthController {
         return "auth/logout";
     }
 
-    @GetMapping(value = "/performLogOut")
-    public String performLogout() {
-        if(!hasAnyRole())  {
-            return "redirect:/welcome";
-        }
-        return "auth/logout";
-    }
+//    @GetMapping(value = "/performLogOut")
+//    public String performLogout() {
+//        if(!hasAnyRole())  {
+//            return "redirect:/welcome";
+//        }
+//        return "auth/logout";
+//    }
 }

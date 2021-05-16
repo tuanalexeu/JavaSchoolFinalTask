@@ -77,6 +77,11 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
         return convertToDTO(getDao().findWithoutDriver());
     }
 
+    @Override
+    public void deleteIfUnconfirmed(String email) {
+        getDao().deleteIfUnconfirmed(email);
+    }
+
     private boolean emailExists(String email) {
         return getDao().findById(email) != null;
     }

@@ -22,7 +22,9 @@ import java.util.Collection;
         @NamedQuery(name = "User.findWithoutDriver",
                 query = "select u from User u where u.role = 'ROLE_DRIVER'"),
         @NamedQuery(name = "User.findVerifiedAndDisabled",
-                query = "select u from User u where u.enabled = FALSE and u.emailConfirmed = TRUE")
+                query = "select u from User u where u.enabled = FALSE and u.emailConfirmed = TRUE"),
+        @NamedQuery(name = "User.deleteIfUnconfirmed",
+                query =  "delete from User u where u.email = :email and u.emailConfirmed = FALSE")
 })
 public class User {
 

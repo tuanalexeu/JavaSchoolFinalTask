@@ -8,15 +8,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class HamiltonianPath {
-    public static List<Integer> printAllHamiltonianPaths(EdgeGraph g,
-                                                int v,
-                                                boolean[] visited,
-                                                List<Integer> path,
-                                                int N) {
+    public static List<Integer> getHamiltonianPath(EdgeGraph g,
+                                                   int v,
+                                                   boolean[] visited,
+                                                   List<Integer> path,
+                                                   int N) {
         // if all the vertices are visited, then the Hamiltonian path exists
         if (path.size() == N) {
-            // print the Hamiltonian path
-            System.out.println(path);
+            // the Hamiltonian path
             return path;
         }
  
@@ -31,7 +30,7 @@ public class HamiltonianPath {
  
                 // check if adding vertex `w` to the path leads
                 // to the solution or not
-                List<Integer> list = printAllHamiltonianPaths(g, w, visited, path, N);
+                List<Integer> list = getHamiltonianPath(g, w, visited, path, N);
                 if(list != null) {
                     return list;
                 }
@@ -60,7 +59,7 @@ public class HamiltonianPath {
         boolean[] visited = new boolean[neededCities.size()];
         visited[start] = true;
  
-        List<Integer> list = printAllHamiltonianPaths(g, start, visited, path, neededCities.size());
+        List<Integer> list = getHamiltonianPath(g, start, visited, path, neededCities.size());
 
         List<Node> neededCitiesOrder = new ArrayList<>();
 
@@ -105,8 +104,6 @@ public class HamiltonianPath {
                     List<Node> path_inner = n.getShortestPath();
                     path_inner.add(n);
 
-                    System.out.println(path_inner);
-
                     finalCities.addAll(path_inner);
 
                     distance += n.getDistance();
@@ -115,12 +112,6 @@ public class HamiltonianPath {
                 }
             }
         }
-
-
-        System.out.println();
-        System.out.println(neededCitiesOrder);
-        System.out.println(finalCities);
-        System.out.println(distance);
 
         Route route = new Route();
         route.setPossible(distance < Integer.MAX_VALUE);

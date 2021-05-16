@@ -5,16 +5,13 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.TypeAnnotationsScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Set;
+import java.util.Formatter;
 
 @Aspect
 @Component
@@ -36,10 +33,16 @@ public class CrudAspect {
         Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
 
-        logger.info(joinPoint.getTarget().getClass().getName() + "." +
-                joinPoint.getSignature() + "(" + Arrays.toString(joinPoint.getArgs()) + ")" +
-                " returns " + proceed +
-                ", executed in " + executionTime + "ms");
+        try(Formatter formatter = new Formatter()) {
+            logger.info(formatter.format(
+                    "%s %s(%s) returns %s, in %dms",
+                    joinPoint.getTarget().getClass().getSimpleName(),
+                    joinPoint.getSignature(),
+                    Arrays.toString(joinPoint.getArgs()),
+                    proceed,
+                    executionTime
+            ).toString());
+        }
 
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();

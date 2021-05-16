@@ -20,9 +20,6 @@ import java.io.IOException;
 @AllArgsConstructor
 public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-//    private final MessageSource messages;
-//    private final LocaleResolver localeResolver;
-
     private final LoginAttemptService loginAttemptService;
 
     @Override
@@ -36,19 +33,13 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
 
         loginAttemptService.loginFailed(getClientIP(request));
 
-//        Locale locale = localeResolver.resolveLocale(request);
-
-//        String errorMessage = messages.getMessage("message.badCredentials", null, locale);
         String errorMessage = "Invalid password and/or login";
 
         if (exception.getMessage().equalsIgnoreCase("User is disabled")) {
-//            errorMessage = messages.getMessage("auth.message.disabled", null, locale);
             errorMessage = "The user hasn't been activated yet";
         } else if (exception.getMessage().equalsIgnoreCase("User account has expired")) {
-//            errorMessage = messages.getMessage("auth.message.expired", null, locale);
             errorMessage = "Provided token has been expired";
         } else if (exception.getMessage().equalsIgnoreCase("blocked")) {
-//            errorMessage = messages.getMessage("auth.message.blocked", null, locale);
             errorMessage = "The limit of attempts has been reached. The next one is in 24 hours";
         }
 

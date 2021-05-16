@@ -13,7 +13,7 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
    @PersistenceContext
    protected EntityManager entityManager;
 
-   public AbstractDaoImpl(Class<E> clazz) {
+   protected AbstractDaoImpl(Class<E> clazz) {
       this.clazz = clazz;
    }
 

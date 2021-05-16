@@ -9,6 +9,7 @@ import com.alekseytyan.logiweb.service.api.VerificationService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ public class RegisterController {
     private final VerificationService verificationService;
     private final MessageSource messages;
     private final ApplicationEventPublisher eventPublisher;
+    private final ThreadPoolTaskScheduler registerScheduler;
 
     private boolean hasAnyRole() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -57,8 +59,7 @@ public class RegisterController {
     // Removed @Valid at UserDTO param
     @PostMapping("/reg-process")
     public ModelAndView registerUserAccount(@ModelAttribute("user") UserDTO userDto,
-                                            HttpServletRequest request,
-                                            Errors errors) {
+                                            HttpServletRequest request) {
 
         if(!userDto.getPassword().equals(userDto.getMatchingPassword())) {
             ModelAndView mav = new ModelAndView("auth/register", "user", userDto);
@@ -69,7 +70,8 @@ public class RegisterController {
         try {
             UserDTO registered = userService.registerNewUserAccount(userDto);
 
-//            String appUrl = request.getContextPath();
+            registerScheduler.scheduleWithFixedDelay(() -> userService.deleteIfUnconfirmed(userDto.getEmail()), 259200000);
+
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(userService.convertToEntity(registered),
                     request.getLocale(), ""));
 

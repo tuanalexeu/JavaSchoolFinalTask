@@ -27,4 +27,9 @@ public class UserDaoImpl extends AbstractDaoImpl<User, String> implements UserDa
     public List<User> findDisabledAndVerified() {
         return entityManager.createNamedQuery("User.findVerifiedAndDisabled", User.class).getResultList();
     }
+
+    @Override
+    public void deleteIfUnconfirmed(String email) {
+        entityManager.createNamedQuery("User.deleteIfUnconfirmed").setParameter("email", email);
+    }
 }

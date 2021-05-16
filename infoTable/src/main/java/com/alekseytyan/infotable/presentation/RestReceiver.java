@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Named
@@ -25,7 +26,7 @@ public class RestReceiver extends Connector {
         logger.info("getOrders()");
 
         return getObjectMapper().readValue(
-                        getOrderTarget().request("application/json").get(String.class),
+                        getOrderTarget().request(MediaType.APPLICATION_JSON).get(String.class),
                         new TypeReference<List<OrderDTO>>(){}
                 );
     }
@@ -35,7 +36,7 @@ public class RestReceiver extends Connector {
         logger.info("getDriverStats()");
 
         return getObjectMapper().readValue(
-                getDriverTarget().request("application/json").get(String.class),
+                getDriverTarget().request(MediaType.APPLICATION_JSON).get(String.class),
                 new TypeReference<DriverStatsDTO>(){}
         );
     }
@@ -46,7 +47,7 @@ public class RestReceiver extends Connector {
 
 
         return getObjectMapper().readValue(
-                getLorryTarget().request("application/json").get(String.class),
+                getLorryTarget().request(MediaType.APPLICATION_JSON).get(String.class),
                 new TypeReference<LorryStatsDTO>(){}
         );
     }

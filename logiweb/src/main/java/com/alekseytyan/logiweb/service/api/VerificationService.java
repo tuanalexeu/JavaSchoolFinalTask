@@ -7,4 +7,6 @@ import com.alekseytyan.logiweb.entity.auth.VerificationToken;
 public interface VerificationService extends AbstractService<VerificationToken, VerificationTokenDTO, Long> {
     void createVerificationToken(UserDTO userDTO, String token);
     VerificationTokenDTO getVerificationToken(String token);
+
+    void deleteAll();
 }

@@ -1,29 +1,17 @@
 package com.alekseytyan.logiweb.exception;
 
-import com.alekseytyan.logiweb.aspect.LogAnnotation;
 import com.alekseytyan.logiweb.exception.httpcode.AccessDeniedException;
 import com.alekseytyan.logiweb.exception.httpcode.BadRequestException;
 import com.alekseytyan.logiweb.exception.httpcode.InternalException;
 import com.alekseytyan.logiweb.exception.httpcode.NotFoundException;
-import com.alekseytyan.logiweb.util.response.GenericResponse;
-import lombok.extern.java.Log;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice(basePackages = {"com.alekseytyan.logiweb.controller"})
 public class CustomControllerAdvice {
-
-    private static final Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException.class)

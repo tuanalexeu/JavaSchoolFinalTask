@@ -9,4 +9,6 @@ public interface UserDao extends AbstractDao<User, String> {
     List<User> findWithoutDriver();
 
     List<User> findDisabledAndVerified();
+
+    void deleteIfUnconfirmed(String email);
 }

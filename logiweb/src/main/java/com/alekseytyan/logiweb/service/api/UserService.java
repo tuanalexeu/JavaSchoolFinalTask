@@ -11,4 +11,6 @@ public interface UserService extends AbstractService<User, UserDTO, String> {
     List<UserDTO> findDisabledAndVerified();
     UserDTO registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException;
     List<UserDTO> findWithoutDriver();
+
+    void deleteIfUnconfirmed(String email);
 }
