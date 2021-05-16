@@ -35,19 +35,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
@@ -209,25 +196,18 @@
 <!--            <version>5.13.3</version>-->
 <!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>artemis-jms-client</artifactId>
-            <version>2.15.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.activemq</groupId>-->
+<!--            <artifactId>artemis-jms-client</artifactId>-->
+<!--            <version>2.15.0</version>-->
+<!--        </dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-naming-client -->
-        <dependency>
-            <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-naming-client</artifactId>
-            <version>1.0.13.Final</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>javax.jms-api</artifactId>
-            <version>2.0.1</version>
-        </dependency>
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.wildfly/wildfly-naming-client &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.wildfly</groupId>-->
+<!--            <artifactId>wildfly-naming-client</artifactId>-->
+<!--            <version>1.0.13.Final</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -292,26 +272,6 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>2.0.2.Final</version>
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>install</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>deploy</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-                <configuration>
-                    <filename>${project.build.finalName}.war</filename>
-                    <hostname>localhost</hostname>
-                    <port>8081</port>
-                    <username>admin</username>
-                    <password>admin</password>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
