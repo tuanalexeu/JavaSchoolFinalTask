@@ -1,6 +1,7 @@
 package com.alekseytyan.logiweb.service.implementation;
 
 import com.alekseytyan.logiweb.aspect.CrudAnnotation;
+import com.alekseytyan.logiweb.dto.CityDTO;
 import com.alekseytyan.logiweb.dto.LorryDTO;
 import com.alekseytyan.logiweb.dto.LorryStatsDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
@@ -36,8 +37,9 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
     public List<LorryDTO> findSuitableLorries(OrderDTO orderDTO) {
 
         int weight = orderService.calculateWeight(orderService.convertToEntity(orderDTO));
+        CityDTO cityDTO = orderDTO.getLoads().get(0).getCityLoad();
 
-        return convertToDTO(getDao().findSuitableLorries(weight));
+        return convertToDTO(getDao().findSuitableLorries(weight, cityDTO.getName()));
     }
 
     @Override

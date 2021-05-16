@@ -33,6 +33,7 @@ public class Order {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
     @Fetch(value = FetchMode.SUBSELECT)
+    @EqualsAndHashCode.Exclude
     private List<Load> loads;
 
     @OneToOne(cascade = CascadeType.MERGE)

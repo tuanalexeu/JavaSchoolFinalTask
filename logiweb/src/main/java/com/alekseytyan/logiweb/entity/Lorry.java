@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
                     query = "SELECT l from Lorry l " +
                             "WHERE l.capacity >= :weight " +
                             "AND l.isBroken = FALSE " +
+                            "AND l.city.name = :city " +
                             "AND NOT EXISTS (SELECT o from Order o where o.lorry.regNum = l.regNum)"),
         @NamedQuery(name = "Lorry.countAvailable",
                 query = "SELECT COUNT(l) from Lorry l " +
@@ -30,6 +31,7 @@ import javax.validation.constraints.Size;
                 query = "SELECT COUNT(l) FROM Lorry l WHERE l.isBroken = TRUE")
 })
 public class Lorry {
+
     @Id
     @Column(name = "ID", length = 7)
     @Pattern(regexp="[a-zA-Z]{2}\\d{5}")
@@ -52,4 +54,5 @@ public class Lorry {
 
     @OneToOne(mappedBy = "lorry")
     private Order order;
+
 }

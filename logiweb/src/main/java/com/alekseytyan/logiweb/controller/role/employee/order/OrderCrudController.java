@@ -66,9 +66,7 @@ public class OrderCrudController {
     public String editOrder(Model model,
                             @RequestParam Long orderId,
                             @RequestParam(required = false) Integer errorCode,
-                            @RequestParam(required = false) String regNum,
-                            @RequestParam(required = false) Long driver1id,
-                            @RequestParam(required = false) Long driver2id) {
+                            @RequestParam(required = false) String regNum) {
 
         OrderDTO orderDTO = orderService.findById(orderId);
 
@@ -77,21 +75,11 @@ public class OrderCrudController {
 
         if(!orderService.calculateRoute(orderDTO).isPossible()) {
             model.addAttribute("routePossibility",
-                    "This route isn't possible to complete (Some ways between cities are missing)");
+                    "This order isn't optimal (or possible) due to the route. Please, delete the last load.");
         }
 
         if(regNum != null) {
             model.addAttribute("truckId", regNum);
-        }
-
-        if(driver1id != null) {
-            model.addAttribute("driver1id", driver1id);
-            model.addAttribute("driver1", driverService.findById(driver1id));
-        }
-
-        if(driver2id != null) {
-            model.addAttribute("driver2id", driver2id);
-            model.addAttribute("driver2", driverService.findById(driver2id));
         }
 
         if(errorCode != null) {
@@ -99,8 +87,14 @@ public class OrderCrudController {
         }
 
         model.addAttribute("suitableLorries", lorryService.findSuitableLorries(orderDTO));
+
         if(regNum != null) {
-            model.addAttribute("suitableDrivers", driverService.findSuitableDrivers(orderDTO, orderService.calculateRoute(orderDTO), lorryService.findById(regNum)));
+            model.addAttribute("suitableDrivers",
+                    driverService.findSuitableDrivers(
+                            orderDTO,
+                            orderService.calculateRoute(orderDTO),
+                            lorryService.findById(regNum))
+            );
         }
 
         return "role/employee/order/edit-order";
@@ -115,40 +109,17 @@ public class OrderCrudController {
     }
 
     @PostMapping(value = "/apply-truck")
-    public RedirectView applyTruck(Model model,
-                                   RedirectAttributes attributes,
+    public RedirectView applyTruck(RedirectAttributes attributes,
                                    @RequestParam Long orderId,
                                    @RequestParam String regNum) {
 
         attributes.addAttribute("orderId", orderId);
         attributes.addAttribute("regNum", regNum);
-        model.addAttribute("regNum", regNum);
 
         return new RedirectView("/employee/edit-order");
     }
 
-    @PostMapping(value = "/apply-driver")
-    public RedirectView applyDriver(RedirectAttributes attributes,
-                                    @RequestParam Long orderId,
-                                    @RequestParam Long driver1Id,
-                                    @RequestParam(required = false) Long driver2Id,
-                                    @RequestParam String regNum,
-                                    @RequestParam Integer num) {
-
-        attributes.addAttribute("orderId", orderId);
-        attributes.addAttribute("regNum", regNum);
-
-        if(num == 1) {
-            attributes.addAttribute("driver1id", driver1Id);
-        } else if(num == 2) {
-            attributes.addAttribute("driver1id", driver1Id);
-            attributes.addAttribute("driver2id", driver2Id);
-        }
-
-        return new RedirectView("/employee/edit-order");
-    }
-
-    @GetMapping("/verify-order")
+    @PostMapping("/verify-order")
     public RedirectView verifyOrder(RedirectAttributes attributes,
                                     @RequestParam Long orderId,
                                     @RequestParam(required = false) String regNum,

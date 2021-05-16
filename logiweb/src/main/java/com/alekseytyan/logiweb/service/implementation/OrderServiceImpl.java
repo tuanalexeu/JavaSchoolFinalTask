@@ -17,8 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, OrderDTO, Long> implements OrderService {
@@ -81,7 +84,23 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
 
     @Override
     public List<OrderDTO> findVerified() {
-        return convertToDTO(getDao().findVerified());
+
+        List<OrderDTO> orderDTOList = convertToDTO(getDao().findVerified());
+        List<Route> routes = calculateRoute(orderDTOList);
+
+        int route_index = 0;
+
+        Iterator<OrderDTO> iterator = orderDTOList.listIterator();
+
+        while (iterator.hasNext()) {
+            iterator.next();
+            if (!routes.get(route_index).isPossible()) {
+                iterator.remove();
+                route_index++;
+            }
+        }
+
+        return orderDTOList;
     }
 
     @Override
@@ -89,36 +108,17 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
 
         List<DistanceMap> distanceMaps = mapService.convertToEntity(mapService.findAll());
 
-        Order order = convertToEntity(orderDTO);
-
-        List<Load> loads = order.getLoads();
-
-        if(orderDTO.getLorry() != null) {
-            City cityStart = order.getLorry().getCity();
-            return RouteChecker.calculateRoute(distanceMaps, loads, cityStart);
-        } else {
-            return RouteChecker.calculateRoute(distanceMaps, loads);
-        }
+        return RouteChecker.calculateRoute(distanceMaps, convertToEntity(orderDTO).getLoads());
     }
 
     @Override
     public List<Route> calculateRoute(List<OrderDTO> orderDTOList) {
-
-
         List<DistanceMap> distanceMaps = mapService.convertToEntity(mapService.findAll());
-        List<Route> routes = new ArrayList<>();
 
-
-        List<Order> orders = convertToEntity(orderDTOList);
-
-        for (Order o: orders) {
-            List<Load> loads = o.getLoads();
-            City cityStart = o.getLorry().getCity();
-
-            routes.add(RouteChecker.calculateRoute(distanceMaps, loads, cityStart));
-        }
-
-        return routes;
+        return convertToEntity(orderDTOList)
+                .stream()
+                .map(o -> RouteChecker.calculateRoute(distanceMaps, o.getLoads()))
+                .collect(Collectors.toList());
     }
 
     @Override

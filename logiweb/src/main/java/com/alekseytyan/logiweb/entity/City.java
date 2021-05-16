@@ -1,31 +1,24 @@
 package com.alekseytyan.logiweb.entity;
 
-import com.alekseytyan.logiweb.util.pathfinding.astar.GraphNode;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "CITY")
 @Getter @Setter @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @NamedQueries({
         @NamedQuery(name = "City.findAllNames",
                     query = "select name from City")
 })
-public class City implements GraphNode {
+public class City {
     @Id
     @Column(name = "NAME", length = 30, nullable = false)
     @Size(min = 2, max = 30)
     private String name;
-
-//    @Column(name = "LATITUDE")
-//    private double latitude;
-//
-//    @Column(name = "LONGITUDE")
-//    private double longitude;
 
     @Override
     public String toString() {
@@ -33,7 +26,15 @@ public class City implements GraphNode {
     }
 
     @Override
-    public String getName() {
-        return null;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City)) return false;
+        City city = (City) o;
+        return name.equals(city.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
