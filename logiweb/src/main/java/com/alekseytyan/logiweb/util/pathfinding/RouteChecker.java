@@ -1,10 +1,10 @@
 package com.alekseytyan.logiweb.util.pathfinding;
 
-import com.alekseytyan.logiweb.util.pathfinding.dijkstra.Graph;
 import com.alekseytyan.logiweb.entity.City;
 import com.alekseytyan.logiweb.entity.DistanceMap;
 import com.alekseytyan.logiweb.entity.Load;
 import com.alekseytyan.logiweb.util.pathfinding.dijkstra.Node;
+import com.alekseytyan.logiweb.util.pathfinding.hamiltonianpath.HamiltonianPath;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -21,55 +21,32 @@ public class RouteChecker {
 
     private static final Logger logger = LoggerFactory.getLogger(RouteChecker.class);
 
-    public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads, City cityStart) {
+    public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads) {
 
-        Set<City> cities = checkCities(loads);
-        Set<Node> nodes = convertToNodeList(distances);
-        Graph graph = new Graph(nodes);
-        Node nodeStart = new Node(cityStart);
-        for (Node n: nodes) {
-            if(n.equals(nodeStart)) {
-                nodeStart = n;
+        // Convert city set to node set
+        Set<Node> neededCities = checkCities(loads)
+                .stream()
+                .map(Node::new)
+                .collect(Collectors.toSet());
+
+        // Convert DistanceMap set to Node set
+        Set<Node> alLCities = convertToNodeList(distances);
+
+        // Choose starting node
+        Node cityStart = new Node(loads.get(0).getCityLoad());
+        for (Node n: alLCities) {
+            if(n.equals(cityStart)) {
+                cityStart = n;
             }
         }
 
-        graph = Graph.calculateShortestPathFromSource(graph, nodeStart);
-
-        int distance = Integer.MAX_VALUE;
-
-
-        List<City> finalCities = new ArrayList<>();
-        boolean isPossible = false;
-
-        for (Node n: graph.getNodes()) {
-
-            List<Node> n2 = n.getShortestPath();
-            n2.add(n);
-
-            logger.info(n2.toString());
-
-            List<City> currentCities = n2.stream().map(Node::getCity).collect(Collectors.toList());
-
-            if(checkIfContains(currentCities, new ArrayList<>(cities)) && n.getDistance() < distance) {
-                finalCities = currentCities;
-                distance = n.getDistance();
-                isPossible = true;
-            }
-
-        }
-
-        Route route = new Route();
-
-        route.setPossible(isPossible);
-        route.setCityList(finalCities);
-        route.setDistance(distance);
-        route.setTime(calculateRouteTime(distance));
+        Route route = HamiltonianPath.calculateRoute(neededCities, alLCities, cityStart);
         route.setMaxWeight(calculateMaxWeight(loads));
 
         return route;
     }
 
-    private static Set<Node> convertToNodeList(List<DistanceMap> distances) {
+    public static Set<Node> convertToNodeList(List<DistanceMap> distances) {
 
         Set<Node> nodes = new HashSet<>();
 
@@ -97,34 +74,6 @@ public class RouteChecker {
         }
 
         return nodes;
-    }
-
-    public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads) {
-        return calculateRoute(distances, loads, loads.get(0).getCityLoad());
-    }
-
-
-    /**
-     * Checks if the second list (c2) contains the first list (c1)
-     * @param c1 - 1st list
-     * @param c2 - 2nd list
-     * @return - true, if contains
-     */
-    public static boolean checkIfContains(List<City> c1, List<City> c2) {
-        for (City c: c2) {
-            if(!c1.contains(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Method calculates actual time need to complete the order
-     * @return - time as hours
-     */
-    public static int calculateRouteTime(int distance) {
-        return distance / 96;
     }
 
     /**
@@ -157,7 +106,7 @@ public class RouteChecker {
 
     /**
      * Method converts set of cities to a map key set
-     * @return - Map, where cities are stored as keys
+     * @return - Set of cities each of which is a key in a map
      */
     private static Set<City> checkCities(List<Load> loads) {
 
