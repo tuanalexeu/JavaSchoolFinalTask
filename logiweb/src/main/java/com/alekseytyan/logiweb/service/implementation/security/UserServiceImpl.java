@@ -1,6 +1,9 @@
 package com.alekseytyan.logiweb.service.implementation.security;
 
 import com.alekseytyan.logiweb.dto.DriverDTO;
+import com.alekseytyan.logiweb.entity.Driver;
+import com.alekseytyan.logiweb.entity.enums.DriverState;
+import com.alekseytyan.logiweb.entity.enums.UserRole;
 import com.alekseytyan.logiweb.exception.UserAlreadyExistException;
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.dao.api.UserDao;
@@ -50,12 +53,12 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
 
 
     @Override
-    public List<UserDTO> findDisabled(int size, int page) {
+    public List<UserDTO> findDisabled(Integer size, Integer page) {
         return convertToDTO(getDao().findDisabled(size, page));
     }
 
     @Override
-    public List<UserDTO> findDisabledAndVerified(int size, int page) {
+    public List<UserDTO> findDisabledAndVerified(Integer size, Integer page) {
         return convertToDTO(getDao().findDisabledAndVerified(size, page));
     }
 
@@ -73,7 +76,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
     }
 
     @Override
-    public List<UserDTO> findWithoutDriver(int size, int page) {
+    public List<UserDTO> findWithoutDriver(Integer size, Integer page) {
         return convertToDTO(getDao().findWithoutDriver(size, page));
     }
 

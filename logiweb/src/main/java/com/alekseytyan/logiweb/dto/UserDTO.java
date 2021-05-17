@@ -2,6 +2,7 @@ package com.alekseytyan.logiweb.dto;
 
 import com.alekseytyan.logiweb.entity.enums.UserRole;
 import com.alekseytyan.logiweb.validation.api.PasswordMatches;
+import com.alekseytyan.logiweb.validation.api.ValidEmail;
 import com.alekseytyan.logiweb.validation.api.ValidPassword;
 import lombok.Data;
 
@@ -16,7 +17,7 @@ public class UserDTO implements Serializable {
 
     @NotNull
     @NotEmpty
-    @Email
+    @ValidEmail
     private String email;
 
     @ValidPassword

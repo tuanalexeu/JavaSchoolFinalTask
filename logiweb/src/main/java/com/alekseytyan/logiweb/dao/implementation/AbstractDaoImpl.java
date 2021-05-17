@@ -35,7 +35,7 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
    }
 
    @Override
-   public List<E> findPage(int size, int page) {
+   public List<E> findPage(Integer size, Integer page) {
       return criteriaPage(size, page);
    }
 
@@ -64,14 +64,14 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
       return entity;
    }
 
-   protected List<E> criteriaPage(int size, int page) {
+   protected List<E> criteriaPage(Integer size, Integer page) {
 
       CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
       CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
       countQuery.select(criteriaBuilder.count(countQuery.from(clazz)));
 
-      Long count = entityManager.createQuery(countQuery).getSingleResult();
+      Long count = entityManager.createQuery(countQuery).getSingleResult(); // Amount of rows
 
       CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(clazz);
       Root<E> from = criteriaQuery.from(clazz);
@@ -79,15 +79,17 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
 
       TypedQuery<E> typedQuery = entityManager.createQuery(select);
 
-      typedQuery.setFirstResult(page - 1);
-      typedQuery.setMaxResults(size);
+      typedQuery.setFirstResult(page == null ? 0 : page - 1);
+      typedQuery.setMaxResults(size == null ? 10 : size);
 
       return typedQuery.getResultList();
    }
 
-   protected List<E> queryPage(Query query, int size, int page) {
-      query.setFirstResult(page == 0 ? 0 : (page - 1) * page);
-      query.setMaxResults(size == 0 ? 10 : size);
+   protected List<E> queryPage(Query query, Integer size, Integer page) {
+
+      query.setFirstResult(page == null ? 0 : (page - 1) * page);
+      query.setMaxResults(size == null ? 10 : size);
+
 
       return query.getResultList();
    }

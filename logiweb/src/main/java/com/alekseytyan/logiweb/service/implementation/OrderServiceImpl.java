@@ -83,9 +83,30 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
-    public List<OrderDTO> findVerified(int size, int page) {
+    public List<OrderDTO> findVerified(Integer size, Integer page) {
 
         List<OrderDTO> orderDTOList = convertToDTO(getDao().findVerified(size, page));
+        List<Route> routes = calculateRoute(orderDTOList);
+
+        int route_index = 0;
+
+        Iterator<OrderDTO> iterator = orderDTOList.listIterator();
+
+        while (iterator.hasNext()) {
+            iterator.next();
+            if (!routes.get(route_index).isPossible()) {
+                iterator.remove();
+                route_index++;
+            }
+        }
+
+        return orderDTOList;
+    }
+
+    @Override
+    public List<OrderDTO> findVerified() {
+
+        List<OrderDTO> orderDTOList = convertToDTO(getDao().findVerified());
         List<Route> routes = calculateRoute(orderDTOList);
 
         int route_index = 0;

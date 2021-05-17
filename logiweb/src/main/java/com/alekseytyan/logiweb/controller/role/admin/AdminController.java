@@ -26,21 +26,27 @@ public class AdminController {
 
     @GetMapping(value = "/users")
     public String viewUsers(Model model,
-                            @RequestParam(required = false) int size,
-                            @RequestParam(required = false) int page) {
+                            @RequestParam(required = false) Integer size,
+                            @RequestParam(required = false) Integer page) {
 
         model.addAttribute("newUser", new UserDTO());
         model.addAttribute("users", userService.findPage(size, page));
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         return "role/admin/users";
     }
 
     @GetMapping(value = "/approve-users")
     public String approveUsers(Model model,
-                               @RequestParam(required = false) int size,
-                               @RequestParam(required = false) int page) {
+                               @RequestParam(required = false) Integer size,
+                               @RequestParam(required = false) Integer page) {
 
         model.addAttribute("newUsers", userService.findDisabledAndVerified(size, page));
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         return "role/admin/approve-users";
     }
@@ -57,11 +63,14 @@ public class AdminController {
 
     @GetMapping(value = "/approve-drivers")
     public String approveDrivers(Model model,
-                                 @RequestParam(required = false) int size,
-                                 @RequestParam(required = false) int page) {
+                                 @RequestParam(required = false) Integer size,
+                                 @RequestParam(required = false) Integer page) {
 
         model.addAttribute("newDrivers", driverService.findWithoutUser());
         model.addAttribute("newUsers", userService.findWithoutDriver(size, page));
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         return "role/admin/approve-drivers";
     }

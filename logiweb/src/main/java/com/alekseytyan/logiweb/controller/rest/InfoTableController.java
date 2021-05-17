@@ -24,9 +24,8 @@ public class InfoTableController {
     private final LorryService lorryService;
 
     @GetMapping(value = "/orders", produces = "application/json")
-    public List<OrderDTO> getOrders(@RequestParam(required = false) int size,
-                                    @RequestParam(required = false) int page) {
-        return orderService.findVerified(size, page);
+    public List<OrderDTO> getOrders() {
+        return orderService.findVerified();
     }
 
     @GetMapping(value = "/driver-stats", produces = "application/json")

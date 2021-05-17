@@ -15,19 +15,19 @@ public class UserDaoImpl extends AbstractDaoImpl<User, String> implements UserDa
     }
 
     @Override
-    public List<User> findDisabled(int size, int page) {
+    public List<User> findDisabled(Integer size, Integer page) {
         Query query = entityManager.createNamedQuery("User.findDisabled", User.class);
         return queryPage(query, size, page);
     }
 
     @Override
-    public List<User> findWithoutDriver(int size, int page) {
+    public List<User> findWithoutDriver(Integer size, Integer page) {
         Query query =  entityManager.createNamedQuery("User.findWithoutDriver", User.class);
         return queryPage(query, size, page);
     }
 
     @Override
-    public List<User> findDisabledAndVerified(int size, int page) {
+    public List<User> findDisabledAndVerified(Integer size, Integer page) {
         Query query = entityManager.createNamedQuery("User.findVerifiedAndDisabled", User.class);
         return queryPage(query, size, page);
     }

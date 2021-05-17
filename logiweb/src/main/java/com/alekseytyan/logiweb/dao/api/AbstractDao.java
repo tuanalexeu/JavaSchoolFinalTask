@@ -8,7 +8,7 @@ public interface AbstractDao<E, ID> {
 
     List<E> findAll();
 
-    List<E> findPage(int size, int page);
+    List<E> findPage(Integer size, Integer page);
 
     E save(E entity);
 

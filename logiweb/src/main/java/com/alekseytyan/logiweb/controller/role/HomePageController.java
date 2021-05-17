@@ -1,8 +1,6 @@
 package com.alekseytyan.logiweb.controller.role;
 
-import com.alekseytyan.logiweb.controller.role.exception.NoSuchRoleException;
-import com.alekseytyan.logiweb.service.api.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.alekseytyan.logiweb.exception.NoSuchRoleException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

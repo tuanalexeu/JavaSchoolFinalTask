@@ -46,7 +46,7 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E, ID>, DTO, 
     @Override
     @LogAnnotation
     @Transactional(readOnly = true)
-    public List<DTO> findPage(int size, int page) {
+    public List<DTO> findPage(Integer size, Integer page) {
         return convertToDTO(getDao().findPage(size, page));
     }
 

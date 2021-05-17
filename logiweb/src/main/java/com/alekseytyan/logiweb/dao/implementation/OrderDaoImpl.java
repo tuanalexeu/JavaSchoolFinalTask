@@ -14,8 +14,13 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
     }
 
     @Override
-    public List<Order> findVerified(int size, int page) {
+    public List<Order> findVerified(Integer size, Integer page) {
         Query query = entityManager.createNamedQuery("Order.findVerified", Order.class);
         return queryPage(query, size, page);
+    }
+
+    @Override
+    public List<Order> findVerified() {
+        return entityManager.createNamedQuery("Order.findVerified", Order.class).getResultList();
     }
 }

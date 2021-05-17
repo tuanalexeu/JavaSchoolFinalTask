@@ -40,33 +40,42 @@ public class EmployeeController {
 
     @GetMapping(path = "/orders")
     public String showOrders(Model model,
-                             @RequestParam(required = false) int size,
-                             @RequestParam(required = false) int page) {
+                             @RequestParam(required = false) Integer size,
+                             @RequestParam(required = false) Integer page) {
 
         model.addAttribute("orders", orderService.findVerified(size, page));
         model.addAttribute("routeList", orderService.calculateRoute(orderService.findVerified(size, page)));
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         return "role/employee/order/orders";
     }
 
     @GetMapping(path = "/lorries")
     public String showLorries(Model model,
-                              @RequestParam(required = false) int size,
-                              @RequestParam(required = false) int page) {
+                              @RequestParam(required = false) Integer size,
+                              @RequestParam(required = false) Integer page) {
 
         model.addAttribute("lorries", lorryService.findPage(size, page));
         model.addAttribute("newLorry", new Lorry());
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         return "role/employee/lorry/lorries";
     }
 
     @GetMapping(path = "/drivers")
     public String showDrivers(Model model,
-                              @RequestParam(required = false) int size,
-                              @RequestParam(required = false) int page) {
+                              @RequestParam(required = false) Integer size,
+                              @RequestParam(required = false) Integer page) {
 
         model.addAttribute("drivers", driverService.findPage(size, page));
         model.addAttribute("newDriver", new Driver());
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         return "role/employee/driver/drivers";
     }

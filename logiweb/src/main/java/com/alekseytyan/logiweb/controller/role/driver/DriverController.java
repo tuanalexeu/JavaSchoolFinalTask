@@ -43,8 +43,8 @@ public class DriverController {
 
     @GetMapping(value = "/info")
     public String getInfo(Model model,
-                          @RequestParam(required = false) int size,
-                          @RequestParam(required = false) int page) {
+                          @RequestParam(required = false) Integer size,
+                          @RequestParam(required = false) Integer page) {
 
         // Find driver's id
         DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");
@@ -52,6 +52,9 @@ public class DriverController {
         if(driverDTO == null) {
             return "role/driver/no-driver";
         }
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         if(driverDTO.getOrder() != null) {
             Long orderId = driverDTO.getOrder().getId();
