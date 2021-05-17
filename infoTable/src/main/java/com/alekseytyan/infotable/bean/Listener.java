@@ -5,6 +5,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +17,7 @@ import javax.faces.push.Push;
 import javax.faces.push.PushContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.io.IOException;
@@ -29,13 +31,12 @@ public class Listener implements ServletContextListener {
 
    private static final Logger logger = LoggerFactory.getLogger(Listener.class);
 
-//   @Inject
-//   @Push(channel = "websocket")
-//   private PushContext pushContext;
+   @Inject
+   private PushBean pushBean;
 
-   @PostConstruct
-   private void init() throws IOException, TimeoutException {
-
+   @SneakyThrows
+   @Override
+   public void contextInitialized(ServletContextEvent event) {
       ExecutorService service = Executors.newCachedThreadPool();
 
       logger.info("Startup");
@@ -56,9 +57,9 @@ public class Listener implements ServletContextListener {
                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
                logger.info(" [x] Received '" + message + "'");
-//               logger.info("Push bean: " + pushContext.toString());
+               logger.info("Push bean: " + pushBean.toString());
 
-//               pushContext.send(message);
+               pushBean.sendMessage(message);
 
                logger.info("Message [" + message + "] has been pushed to JSF page");
 
@@ -73,5 +74,4 @@ public class Listener implements ServletContextListener {
          }
       });
    }
-
 }
