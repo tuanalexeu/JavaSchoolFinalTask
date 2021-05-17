@@ -5,6 +5,7 @@ import com.alekseytyan.infotable.data.LorryStatsDTO;
 import com.alekseytyan.infotable.data.OrderDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.primefaces.model.chart.PieChartModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,24 +32,28 @@ public class RestReceiver extends Connector {
                 );
     }
 
-    public DriverStatsDTO getDriverStats() throws JsonProcessingException {
+    public PieChartModel getDriverStats() throws JsonProcessingException {
 
         logger.info("getDriverStats()");
 
-        return getObjectMapper().readValue(
+        DriverStatsDTO statsDTO = getObjectMapper().readValue(
                 getDriverTarget().request(MediaType.APPLICATION_JSON).get(String.class),
                 new TypeReference<DriverStatsDTO>(){}
         );
+
+        return ChartConverter.getDriverChart("Drivers", statsDTO);
     }
 
-    public LorryStatsDTO getLorryStats() throws JsonProcessingException {
+    public PieChartModel getLorryStats() throws JsonProcessingException {
 
         logger.info("getLorryStats()");
 
 
-        return getObjectMapper().readValue(
+        LorryStatsDTO statsDTO = getObjectMapper().readValue(
                 getLorryTarget().request(MediaType.APPLICATION_JSON).get(String.class),
                 new TypeReference<LorryStatsDTO>(){}
         );
+
+        return ChartConverter.getTruckChart("Trucks", statsDTO);
     }
 }
