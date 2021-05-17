@@ -4,6 +4,11 @@ import com.alekseytyan.logiweb.dao.api.AbstractDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
@@ -30,6 +35,11 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
    }
 
    @Override
+   public List<E> findPage(int size, int page) {
+      return criteriaPage(size, page);
+   }
+
+   @Override
    public E save(E entity) {
       entityManager.persist(entity);
       entityManager.flush();
@@ -53,4 +63,34 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
       delete(entity);
       return entity;
    }
+
+   protected List<E> criteriaPage(int size, int page) {
+
+      CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+      CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
+      countQuery.select(criteriaBuilder.count(countQuery.from(clazz)));
+
+      Long count = entityManager.createQuery(countQuery).getSingleResult();
+
+      CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(clazz);
+      Root<E> from = criteriaQuery.from(clazz);
+      CriteriaQuery<E> select = criteriaQuery.select(from);
+
+      TypedQuery<E> typedQuery = entityManager.createQuery(select);
+
+      typedQuery.setFirstResult(page - 1);
+      typedQuery.setMaxResults(size);
+
+      return typedQuery.getResultList();
+   }
+
+   protected List<E> queryPage(Query query, int size, int page) {
+      query.setFirstResult(page == 0 ? 0 : (page - 1) * page);
+      query.setMaxResults(size == 0 ? 10 : size);
+
+      return query.getResultList();
+   }
+
+
 }

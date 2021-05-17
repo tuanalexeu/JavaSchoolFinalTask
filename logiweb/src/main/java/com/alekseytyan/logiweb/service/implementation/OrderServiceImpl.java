@@ -83,9 +83,9 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
-    public List<OrderDTO> findVerified() {
+    public List<OrderDTO> findVerified(int size, int page) {
 
-        List<OrderDTO> orderDTOList = convertToDTO(getDao().findVerified());
+        List<OrderDTO> orderDTOList = convertToDTO(getDao().findVerified(size, page));
         List<Route> routes = calculateRoute(orderDTOList);
 
         int route_index = 0;

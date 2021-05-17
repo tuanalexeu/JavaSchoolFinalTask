@@ -25,18 +25,22 @@ public class AdminController {
     }
 
     @GetMapping(value = "/users")
-    public String viewUsers(Model model) {
+    public String viewUsers(Model model,
+                            @RequestParam(required = false) int size,
+                            @RequestParam(required = false) int page) {
 
         model.addAttribute("newUser", new UserDTO());
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.findPage(size, page));
 
         return "role/admin/users";
     }
 
     @GetMapping(value = "/approve-users")
-    public String approveUsers(Model model) {
+    public String approveUsers(Model model,
+                               @RequestParam(required = false) int size,
+                               @RequestParam(required = false) int page) {
 
-        model.addAttribute("newUsers", userService.findDisabledAndVerified());
+        model.addAttribute("newUsers", userService.findDisabledAndVerified(size, page));
 
         return "role/admin/approve-users";
     }
@@ -52,10 +56,12 @@ public class AdminController {
     }
 
     @GetMapping(value = "/approve-drivers")
-    public String approveDrivers(Model model) {
+    public String approveDrivers(Model model,
+                                 @RequestParam(required = false) int size,
+                                 @RequestParam(required = false) int page) {
 
         model.addAttribute("newDrivers", driverService.findWithoutUser());
-        model.addAttribute("newUsers", userService.findWithoutDriver());
+        model.addAttribute("newUsers", userService.findWithoutDriver(size, page));
 
         return "role/admin/approve-drivers";
     }

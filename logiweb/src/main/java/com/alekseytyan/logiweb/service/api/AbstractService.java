@@ -9,6 +9,8 @@ public interface AbstractService<E, DTO, ID> {
 
     List<DTO> findAll();
 
+    List<DTO> findPage(int size, int page);
+
     @CrudAnnotation(code = "update")
     DTO save(DTO dto);
 

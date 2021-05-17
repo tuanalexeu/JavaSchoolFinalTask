@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface OrderService extends AbstractService<Order, OrderDTO, Long> {
 
-    List<OrderDTO> findVerified();
+    List<OrderDTO> findVerified(int size, int page);
 
     Route calculateRoute(OrderDTO orderDTO);
 

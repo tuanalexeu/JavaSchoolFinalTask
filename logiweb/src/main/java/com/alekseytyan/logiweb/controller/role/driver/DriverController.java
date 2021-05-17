@@ -42,7 +42,9 @@ public class DriverController {
     }
 
     @GetMapping(value = "/info")
-    public String getInfo(Model model) {
+    public String getInfo(Model model,
+                          @RequestParam(required = false) int size,
+                          @RequestParam(required = false) int page) {
 
         // Find driver's id
         DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");

@@ -50,13 +50,13 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
 
 
     @Override
-    public List<UserDTO> findDisabled() {
-        return convertToDTO(getDao().findDisabled());
+    public List<UserDTO> findDisabled(int size, int page) {
+        return convertToDTO(getDao().findDisabled(size, page));
     }
 
     @Override
-    public List<UserDTO> findDisabledAndVerified() {
-        return convertToDTO(getDao().findDisabledAndVerified());
+    public List<UserDTO> findDisabledAndVerified(int size, int page) {
+        return convertToDTO(getDao().findDisabledAndVerified(size, page));
     }
 
     @Override
@@ -73,8 +73,8 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
     }
 
     @Override
-    public List<UserDTO> findWithoutDriver() {
-        return convertToDTO(getDao().findWithoutDriver());
+    public List<UserDTO> findWithoutDriver(int size, int page) {
+        return convertToDTO(getDao().findWithoutDriver(size, page));
     }
 
     @Override

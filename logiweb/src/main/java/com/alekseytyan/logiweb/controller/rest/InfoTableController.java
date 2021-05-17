@@ -9,6 +9,7 @@ import com.alekseytyan.logiweb.service.api.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,8 +24,9 @@ public class InfoTableController {
     private final LorryService lorryService;
 
     @GetMapping(value = "/orders", produces = "application/json")
-    public List<OrderDTO> getOrders() {
-        return orderService.findVerified();
+    public List<OrderDTO> getOrders(@RequestParam(required = false) int size,
+                                    @RequestParam(required = false) int page) {
+        return orderService.findVerified(size, page);
     }
 
     @GetMapping(value = "/driver-stats", produces = "application/json")
