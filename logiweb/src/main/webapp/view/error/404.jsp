@@ -19,7 +19,7 @@
 
 <body id="page-top">
     <div id="wrapper">
-        <div class="d-flex flex-column" id="content-wrapper" style="background: #ced8e6;">
+        <div class="d-flex flex-column" id="content-wrapper" style="background: #ffffff;">
             <div id="content" style="background: #ffffff;">
                 <div class="container-fluid">
                     <div class="text-center mt-5">

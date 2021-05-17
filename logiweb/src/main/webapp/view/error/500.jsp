@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html style="background: #ced8e6;">
+<html style="background: #ffffff;">
 
 <head>
     <meta charset="utf-8">
@@ -19,7 +19,7 @@
 
 <body id="page-top">
 <div id="wrapper">
-    <div class="d-flex flex-column" id="content-wrapper" style="background: #ced8e6;">
+    <div class="d-flex flex-column" id="content-wrapper" style="background: #ffffff;">
         <div id="content" style="background: #ffffff;">
             <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ffffff;">
                 <div class="container-fluid"><a href="#">Link</a><a href="#">Link</a></div>

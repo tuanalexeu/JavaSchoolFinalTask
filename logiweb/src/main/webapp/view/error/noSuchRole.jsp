@@ -24,10 +24,11 @@
             <div class="container-fluid">
                 <div class="text-center mt-5">
                     <div class="error mx-auto" data-text="403">
-                        <p class="m-0">403</p>
+                        <p class="m-0">No such role...</p>
                     </div>
-                    <p class="text-dark mb-5 lead">Bad request</p>
-                    <p class="text-black-50 mb-0">It looks like you don't know what to see</p><a href="/">Back to Dashboard</a>
+                    <p class="text-dark mb-5 lead">Oops...</p>
+                    <p class="text-black-50 mb-0">Looks like there's a mistake in registration</p>
+                    <a href="/">Back to Dashboard</a>
                 </div>
             </div>
         </div>
