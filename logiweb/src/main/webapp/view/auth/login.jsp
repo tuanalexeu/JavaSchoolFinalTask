@@ -30,7 +30,7 @@
             </div>
             <form class="user" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="form-group">
-                    <input class="form-control form-control-user" type="text" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="username">
+                    <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="username">
                 </div>
                 <div class="form-group">
                     <input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password">

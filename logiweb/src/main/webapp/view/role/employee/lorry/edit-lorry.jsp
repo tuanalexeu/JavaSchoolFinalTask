@@ -71,7 +71,7 @@
                                     <h3 style="margin: 10px;">Capacity</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="capacity" path="capacity" cssErrorClass="errorBox"/>
+                                    <form:input type="number" id="capacity" path="capacity" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="dropdown">
-                                        <form:select  path="city.name">
+                                        <form:select path="city.name">
                                             <c:forEach items="${cities}" var="city">
                                                 <form:option value="${city}">${city}</form:option>
                                             </c:forEach>

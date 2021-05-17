@@ -41,10 +41,10 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <form:input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" path="password" name="password"/>
+                            <form:input class="form-control form-control-user" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="examplePasswordInput" placeholder="Password" path="password" name="password"/>
                         </div>
                         <div class="col-sm-6">
-                            <form:input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" path="matchingPassword" name="password_repeat"/>
+                            <form:input class="form-control form-control-user" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="exampleRepeatPasswordInput" placeholder="Repeat Password" path="matchingPassword" name="password_repeat"/>
                         </div>
                     </div>
                     <div class="form-group row">

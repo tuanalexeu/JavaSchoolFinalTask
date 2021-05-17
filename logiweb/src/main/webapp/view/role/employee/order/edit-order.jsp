@@ -132,7 +132,7 @@
                                                                 <h3 style="margin: 10px;">Load weight</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="weight" path="weight" cssErrorClass="errorBox"/>
+                                                                <form:input type="number" id="weight" path="weight" cssErrorClass="errorBox"/>
                                                                 <form:hidden id="status" path="status" value="PREPARED" cssErrorClass="errorBox"/>
                                                                 <form:hidden path="order.id" value="${order.id}" cssErrorClass="errorBox"/>
                                                             </div>
