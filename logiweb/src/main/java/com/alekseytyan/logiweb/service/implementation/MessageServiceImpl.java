@@ -17,29 +17,29 @@ public class MessageServiceImpl implements MessageService {
 
     private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
 
-//    Connection connection;
-//    Channel channel;
+    Connection connection;
+    Channel channel;
 
     @PostConstruct
     public void init() throws IOException, TimeoutException {
-//        ConnectionFactory connectionFactory = new ConnectionFactory();
-//        connectionFactory.setHost("localhost");
-//
-//        connection = connectionFactory.newConnection();
-//        channel = connection.createChannel();
-//
-//        channel.queueDeclare("Logiweb", false, false, false, null);
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        connectionFactory.setHost("localhost");
+
+        connection = connectionFactory.newConnection();
+        channel = connection.createChannel();
+
+        channel.queueDeclare("Logiweb", false, false, false, null);
     }
 
 
     @Override
     public void send(String message) {
 
-//        try {
-//            channel.basicPublish("", "Logiweb", null, message.getBytes());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            channel.basicPublish("", "Logiweb", null, message.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         logger.info("Message [" + message + "] has been sent");
     }
