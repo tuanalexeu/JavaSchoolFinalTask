@@ -31,7 +31,11 @@ public class MainWebAppInitializer implements WebApplicationInitializer {
 
         ctx.setServletContext(sc);
 
-        var servlet = sc.addServlet("dispatcher", new DispatcherServlet(ctx));
+        DispatcherServlet dispatcherServlet = new DispatcherServlet(ctx);
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
+
+        var servlet = sc.addServlet("dispatcher", dispatcherServlet);
+
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
 

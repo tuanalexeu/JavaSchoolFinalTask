@@ -1,4 +1,4 @@
-package com.alekseytyan.logiweb.controller.role.exception;
+package com.alekseytyan.logiweb.exception;
 
 public class NoSuchRoleException extends RuntimeException {
     public NoSuchRoleException(String message) {
