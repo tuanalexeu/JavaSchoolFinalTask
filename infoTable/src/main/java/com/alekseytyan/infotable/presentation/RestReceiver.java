@@ -2,7 +2,7 @@ package com.alekseytyan.infotable.presentation;
 
 import com.alekseytyan.infotable.data.DriverStatsDTO;
 import com.alekseytyan.infotable.data.LorryStatsDTO;
-import com.alekseytyan.infotable.data.OrderDTO;
+import com.alekseytyan.infotable.data.OrderStatsDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.primefaces.model.chart.PieChartModel;
@@ -22,14 +22,14 @@ public class RestReceiver extends Connector {
 
     private static final Logger logger = LoggerFactory.getLogger(RestReceiver.class);
 
-    public List<OrderDTO> getOrders() throws JsonProcessingException {
+    public List<OrderStatsDTO> getOrders() throws JsonProcessingException {
 
         logger.info("getOrders()");
 
         return getObjectMapper().readValue(
-                        getOrderTarget().request(MediaType.APPLICATION_JSON).get(String.class),
-                        new TypeReference<List<OrderDTO>>(){}
-                );
+                getOrderTarget().request(MediaType.APPLICATION_JSON).get(String.class),
+                new TypeReference<List<OrderStatsDTO>>(){}
+        );
     }
 
     public PieChartModel getDriverStats() throws JsonProcessingException {

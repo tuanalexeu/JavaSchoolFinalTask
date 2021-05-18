@@ -112,6 +112,7 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     }
 
     @Override
+    @CrudAnnotation(code = "update")
     @Transactional
     public DriverDTO deleteById(Long entityId) {
 

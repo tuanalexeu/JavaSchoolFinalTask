@@ -2,6 +2,7 @@ package com.alekseytyan.logiweb.controller.role.driver;
 
 import com.alekseytyan.logiweb.dto.DriverDTO;
 import com.alekseytyan.logiweb.dto.LoadDTO;
+import com.alekseytyan.logiweb.dto.OrderDTO;
 import com.alekseytyan.logiweb.entity.enums.DriverState;
 import com.alekseytyan.logiweb.entity.enums.LoadStatus;
 import com.alekseytyan.logiweb.service.api.DriverService;

@@ -93,6 +93,7 @@ public class LorryServiceImpl extends AbstractServiceImpl<Lorry, LorryDao, Lorry
     }
 
     @Override
+    @CrudAnnotation(code = "update")
     @Transactional
     public LorryDTO deleteById(String entityId) {
 
