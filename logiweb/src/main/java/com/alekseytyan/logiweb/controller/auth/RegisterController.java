@@ -64,10 +64,6 @@ public class RegisterController {
                                             BindingResult result,
                                             HttpServletRequest request) {
 
-        if(result.hasErrors()) {
-
-        }
-
         if(!userDto.getPassword().equals(userDto.getMatchingPassword())) {
             ModelAndView mav = new ModelAndView("auth/register", "user", userDto);
             mav.addObject("message", "Passwords don't match");
@@ -87,7 +83,7 @@ public class RegisterController {
             mav.addObject("message", "An account for that username/email already exists.");
             return mav;
         } catch (RuntimeException ex) {
-            return new ModelAndView("auth/email-error", "user", userDto);
+            return new ModelAndView("error/defaultError", "user", userDto);
         }
 
         return new ModelAndView("auth/check-email", "user", userDto);

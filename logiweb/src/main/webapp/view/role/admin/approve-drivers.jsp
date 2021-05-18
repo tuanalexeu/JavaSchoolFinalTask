@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Logiweb</title>
+    <title>Approve drivers - Logiweb</title>
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -103,7 +104,7 @@
                                                             <form action="${pageContext.request.contextPath}/admin/approve-driver" method="post">
                                                                 <input type="hidden" name="driverId" value="${driver.id}">
                                                                 <input type="hidden" name="email" value="${user.email}">
-                                                                <button type="submit">${driver.firstName} ${driver.lastName}</button>
+                                                                <button type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">${driver.firstName} ${driver.lastName}</button>
                                                             </form>
                                                         </a>
                                                     </c:forEach>
@@ -118,29 +119,16 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 align-self-center">
-                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of ${newUsers.size()}</p>
+                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
                             </div>
                             <div class="col-md-6">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <form>
-
-                                            <c:choose>
-                                                <c:when test="${page eq 1}">
-                                                    <li class="page-item disabled">
-                                                        <a class="page-link" disabled="disabled" href="#" aria-label="Previous">
-                                                            <span aria-hidden="true">«</span>
-                                                        </a>
-                                                    </li>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Previous">
-                                                            <span aria-hidden="true">«</span>
-                                                        </a>
-                                                    </li>
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" disabled="disabled" href="#" aria-label="Previous">
+                                                    <span aria-hidden="true"><<</span>
+                                                </a>
+                                            </li>
                                             <li class="page-item active">
                                                 <a class="page-link" href="#">${page}</a>
                                             </li>
@@ -152,10 +140,9 @@
                                             </li>
                                             <li class="page-item">
                                                 <a class="page-link" href="#" aria-label="Next">
-                                                    <span aria-hidden="true">»</span>
+                                                    <span aria-hidden="true">>></span>
                                                 </a>
                                             </li>
-                                        </form>
                                     </ul>
                                 </nav>
                             </div>
@@ -166,7 +153,7 @@
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">
             <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Logiweb 2021</span></div>
+                <div class="text-center my-auto copyright"><span>Logiweb 2021</span></div>
             </div>
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -175,6 +162,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

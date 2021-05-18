@@ -1,6 +1,7 @@
 package com.alekseytyan.logiweb.config.security;
 
 import com.alekseytyan.logiweb.config.DataSourceConfig;
+import com.alekseytyan.logiweb.config.security.handler.CustomLogoutHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomLogoutSuccessHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +22,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.sql.DataSource;
@@ -72,14 +75,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-
                 .authorizeRequests()
                 .expressionHandler(webExpressionHandler())
-                .antMatchers("/info-table/**").permitAll()
                 .antMatchers("/driver/**").hasRole(ROLE_DRIVER)
                 .antMatchers("/employee/**").hasAnyRole(ROLE_EMPLOYEE, ROLE_ADMIN)
                 .antMatchers("/admin/**").hasRole(ROLE_ADMIN)
-                .antMatchers("/login*", "/register*", "/forgotPassword*", "/*", "/homePage*", "/welcome*", "/assets/**").permitAll()
+                .antMatchers(
+                        "/login*",
+                        "/register*",
+                        "/forgotPassword*",
+                        "/*",
+                        "/homePage*",
+                        "/welcome*",
+                        "/assets/**",
+                        "/info-table/orders*",
+                        "/info-table/driver-stats*",
+                        "/info-table/lorry-stats*").permitAll()
                 .antMatchers("/profile*").hasAnyRole(ROLE_DRIVER, ROLE_EMPLOYEE, ROLE_ADMIN)
                 .anyRequest().authenticated()
 
@@ -93,6 +104,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout()
+                .addLogoutHandler(logoutHandler())
                 .logoutUrl("/performLogOut")
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
@@ -113,6 +125,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler = new DefaultWebSecurityExpressionHandler();
         defaultWebSecurityExpressionHandler.setRoleHierarchy(roleHierarchy());
         return defaultWebSecurityExpressionHandler;
+    }
+
+    @Bean
+    public LogoutHandler logoutHandler() {
+        return new CustomLogoutHandler();
     }
 
     @Bean

@@ -71,12 +71,4 @@ public class AuthController {
         }
         return "auth/logout";
     }
-
-//    @GetMapping(value = "/performLogOut")
-//    public String performLogout() {
-//        if(!hasAnyRole())  {
-//            return "redirect:/welcome";
-//        }
-//        return "auth/logout";
-//    }
 }

@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Logiweb</title>
+    <title>Edit truck - Logiweb</title>
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -61,7 +62,7 @@
                                     <h3 style="margin: 10px;">Shift time</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input type="number" min="0" max="10000" id="shiftTime" required="required" path="shiftTime" cssErrorClass="errorBox"/>
+                                    <form:input type="number" min="0" max="10000" id="shiftTime" required="required" path="shiftTime" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +72,7 @@
                                     <h3 style="margin: 10px;">Capacity</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input type="number" min="1000" max="50000" id="capacity" required="required" path="capacity" cssErrorClass="errorBox"/>
+                                    <form:input type="number" min="1000" max="50000" id="capacity" required="required" path="capacity" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                 </div>
                             </div>
                         </div>
@@ -131,6 +132,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

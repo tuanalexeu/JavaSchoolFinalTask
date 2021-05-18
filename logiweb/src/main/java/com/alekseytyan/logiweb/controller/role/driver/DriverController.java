@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -75,8 +76,13 @@ public class DriverController {
     @PostMapping(value = "/save")
     public RedirectView saveStatus(Model model, @RequestParam String status) {
         DriverDTO driverDTO = (DriverDTO) model.getAttribute("driver");
-        driverDTO.setState(DriverState.valueOf(status));
-        driverService.update(driverDTO);
+
+        if(driverDTO.getOrder() == null && (DriverState.valueOf(status) != DriverState.RESTING)) {
+            model.addAttribute("message", "Driver without order cannot work!");
+        } else {
+            driverDTO.setState(DriverState.valueOf(status));
+            driverService.update(driverDTO);
+        }
 
         return new RedirectView("/driver/info");
     }

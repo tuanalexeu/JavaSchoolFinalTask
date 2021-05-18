@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.ejb.Startup;
 import javax.ejb.Stateless;
+import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @Named
 @Startup
 @Stateless
+@Dependent
 public class RestReceiver extends Connector {
 
     private static final Logger logger = LoggerFactory.getLogger(RestReceiver.class);

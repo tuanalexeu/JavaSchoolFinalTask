@@ -16,9 +16,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.ServletContext;
 
 public class MainWebAppInitializer implements WebApplicationInitializer {
-
-    private static final Logger logger = LoggerFactory.getLogger(MainWebAppInitializer.class);
-
     @Override
     public void onStartup(final ServletContext sc) {
 
@@ -48,8 +45,5 @@ public class MainWebAppInitializer implements WebApplicationInitializer {
         sc.addListener(new ContextLoaderListener(ctx));
         sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"))
                 .addMappingForUrlPatterns(null, false, "/*");
-
-        logger.info("Application initialized successfully");
-
     }
 }

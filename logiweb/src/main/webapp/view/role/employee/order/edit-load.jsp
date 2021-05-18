@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Logiweb</title>
+    <title>Edit load - Logiweb</title>
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -92,7 +93,7 @@
                                     <h3 style="margin: 10px;">Load description</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="loadDescription" required="required" path="name" cssErrorClass="errorBox"/>
+                                    <form:input id="loadDescription" required="required" path="name" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +103,7 @@
                                     <h3 style="margin: 10px;">Load weight</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input type="number" min="0" required="required" id="weight" path="weight" cssErrorClass="errorBox"/>
+                                    <form:input type="number" min="0" required="required" id="weight" path="weight" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                     <form:hidden path="status" value="${editLoad.status}" cssErrorClass="errorBox"/>
                                     <form:hidden path="order.id" value="${order.id}" cssErrorClass="errorBox"/>
                                     <form:hidden id="id" path="id" value="${editLoad.id}" cssErrorClass="errorBox"/>
@@ -124,7 +125,7 @@
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">
             <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Logiweb 2021</span></div>
+                <div class="text-center my-auto copyright"><span>Logiweb 2021</span></div>
             </div>
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -133,6 +134,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>
