@@ -60,9 +60,9 @@
                                         <tr>
                                             <td>#{order.id}</td>
                                             <td>#{order.finished ? "Finished" : "In process"}</td>
-                                            <td>#{order.lorry.regNum}</td>
-                                            <td>#{order.drivers[0]}</td>
-                                            <td>#{order.drivers[1]}</td>
+                                            <td>#{order.regNum}</td>
+                                            <td>#{order.driver1Name}</td>
+                                            <td>#{order.driver2Name}</td>
                                         </tr>
                                     </ui:repeat>
                                     </tbody>

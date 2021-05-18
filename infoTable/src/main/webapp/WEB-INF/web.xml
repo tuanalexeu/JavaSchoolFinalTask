@@ -8,7 +8,7 @@
     <display-name>Logiweb table info</display-name>
 
     <error-page>
-        <location>/error/general-error.xhtml</location>
+        <location>/WEB-INF/error/general-error.xhtml</location>
     </error-page>
 
     <welcome-file-list>
