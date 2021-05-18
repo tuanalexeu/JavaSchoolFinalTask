@@ -5,6 +5,8 @@ import com.alekseytyan.logiweb.config.AsynchronousSpringEventsConfig;
 import com.alekseytyan.logiweb.config.schedule.SchedulingConfig;
 import com.alekseytyan.logiweb.config.security.WebSecurityConfig;
 import lombok.var;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -14,6 +16,9 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.ServletContext;
 
 public class MainWebAppInitializer implements WebApplicationInitializer {
+
+    private static final Logger logger = LoggerFactory.getLogger(MainWebAppInitializer.class);
+
     @Override
     public void onStartup(final ServletContext sc) {
 
@@ -43,6 +48,8 @@ public class MainWebAppInitializer implements WebApplicationInitializer {
         sc.addListener(new ContextLoaderListener(ctx));
         sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"))
                 .addMappingForUrlPatterns(null, false, "/*");
+
+        logger.info("Application initialized successfully");
 
     }
 }

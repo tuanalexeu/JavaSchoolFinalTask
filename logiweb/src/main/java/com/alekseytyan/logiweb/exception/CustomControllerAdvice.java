@@ -14,35 +14,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
 public class CustomControllerAdvice {
-
-    @ExceptionHandler(AccessDeniedException.class)
-    @LogAnnotation
-    public ModelAndView accessDenied() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("error/403");
-        return mav;
-    }
-
-    @ExceptionHandler(NotFoundException.class)
-    @LogAnnotation
-    public ModelAndView notFound() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("error/404");
-        return mav;
-    }
-
-    @ExceptionHandler(InternalException.class)
-    @LogAnnotation
-    public ModelAndView internalError() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("error/500");
-        return mav;
-    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @LogAnnotation
@@ -81,9 +59,27 @@ public class CustomControllerAdvice {
 
     @ExceptionHandler(NoHandlerFoundException.class)
     @LogAnnotation
+    public ModelAndView noHandlerFound(HttpServletResponse response) {
+
+        ModelAndView mav = new ModelAndView();
+
+        switch (response.getStatus()) {
+            case 404: mav.setViewName("error/404"); break;
+            case 400: mav.setViewName("error/400"); break;
+            case 403: mav.setViewName("error/403"); break;
+            case 500: mav.setViewName("error/500"); break;
+            default: mav.setViewName("error/defaultError");
+        }
+
+        return mav;
+    }
+
+    @ExceptionHandler(Exception.class)
+    @LogAnnotation
     public ModelAndView anyException() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("error/defaultError");
+        mav.setViewName("/error/defaultError");
+
         return mav;
     }
 

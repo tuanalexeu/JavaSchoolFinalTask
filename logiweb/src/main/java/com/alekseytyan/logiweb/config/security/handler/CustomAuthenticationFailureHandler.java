@@ -2,6 +2,8 @@ package com.alekseytyan.logiweb.config.security.handler;
 
 import com.alekseytyan.logiweb.service.api.LoginAttemptService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.WebAttributes;
@@ -20,6 +22,8 @@ import java.io.IOException;
 @AllArgsConstructor
 public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationFailureHandler.class);
+
     private final LoginAttemptService loginAttemptService;
 
     @Override
@@ -34,6 +38,8 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
         loginAttemptService.loginFailed(getClientIP(request));
 
         String errorMessage = "Invalid password and/or login";
+
+        logger.error("User from [" + getClientIP(request) + "] just failed authentication");
 
         if (exception.getMessage().equalsIgnoreCase("User is disabled")) {
             errorMessage = "The user hasn't been activated yet";

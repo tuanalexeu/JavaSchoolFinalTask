@@ -5,6 +5,8 @@ import com.alekseytyan.logiweb.service.api.EmailService;
 import com.alekseytyan.logiweb.service.api.UserService;
 import com.alekseytyan.logiweb.service.api.VerificationService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,8 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
+
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationListener.class);
  
     private final VerificationService verificationService;
     private final UserService userService;
@@ -32,12 +36,14 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
         String recipientAddress = user.getEmail();
         String subject = "Registration Confirmation";
-        String confirmationUrl
-          = event.getAppUrl() + "/register-confirm?token=" + token;
+        String confirmationUrl = event.getAppUrl() + "/register-confirm?token=" + token;
+
         String message = messages.getMessage("message.regSucc", null, event.getLocale());
 
         String text = message + "\r\n" + "http://localhost:8080" + confirmationUrl;
 
         emailService.sendSimpleMessage(recipientAddress, subject, text);
+
+        logger.info("Email [" + subject + "] to " + recipientAddress + " was just sent");
     }
 }
