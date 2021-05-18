@@ -127,8 +127,8 @@
                                             </div>
                                             <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                 <ul>
-                                                    <c:forEach items="${coDrivers}" var="driver">
-                                                        <li>${driver.id} ${driver.firstName} ${driver.lastName}</li>
+                                                    <c:forEach items="${coDrivers}" var="user">
+                                                        <li>${user.id} ${user.firstName} ${user.lastName}</li>
                                                     </c:forEach>
                                                 </ul>
                                             </div>

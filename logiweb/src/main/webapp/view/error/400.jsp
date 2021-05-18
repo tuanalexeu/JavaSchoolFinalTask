@@ -23,8 +23,8 @@
         <div id="content" style="background: #ffffff;">
             <div class="container-fluid">
                 <div class="text-center mt-5">
-                    <div class="error mx-auto" data-text="403">
-                        <p class="m-0">403</p>
+                    <div class="error mx-auto" data-text="400">
+                        <p class="m-0">400</p>
                     </div>
                     <p class="text-dark mb-5 lead">Bad request</p>
                     <p class="text-black-50 mb-0">It looks like you don't know what to see</p><a href="/">Back to Dashboard</a>

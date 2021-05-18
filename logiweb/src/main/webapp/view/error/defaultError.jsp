@@ -23,8 +23,8 @@
         <div id="content" style="background: #ffffff;">
             <div class="container-fluid">
                 <div class="text-center mt-5">
-                    <div class="error mx-auto" data-text="403">
-                        <p class="m-0">Glitch in matrix</p>
+                    <div class="error mx-auto" data-text="You found glitch">
+                        <p class="m-0">You found glitch</p>
                     </div>
                     <p class="text-dark mb-5 lead">There's a error</p>
                     <p class="text-black-50 mb-0">Something bad just happened</p><a href="/">Back to Dashboard</a>

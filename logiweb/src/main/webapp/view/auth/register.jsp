@@ -30,26 +30,26 @@
                 <form:form action="/reg-process" method="post" modelAttribute="user">
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <form:input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="First Name"  path="firstName" name="first_name"/>
+                            <form:input class="form-control form-control-user" required="required" type="text" id="exampleFirstName" placeholder="First Name"  path="firstName" name="first_name"/>
                         </div>
                         <div class="col-sm-6">
-                            <form:input class="form-control form-control-user" type="text" id="exampleLastName" placeholder="Last Name" path="lastName" name="last_name"/>
+                            <form:input class="form-control form-control-user" required="required" type="text" id="exampleLastName" placeholder="Last Name" path="lastName" name="last_name"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <form:input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" path="email" name="email"/>
+                        <form:input class="form-control form-control-user" required="required" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" path="email" name="email"/>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <form:input class="form-control form-control-user" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="examplePasswordInput" placeholder="Password" path="password" name="password"/>
+                            <form:input class="form-control form-control-user" required="required" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" id="examplePasswordInput" placeholder="Password" path="password" name="password"/>
                         </div>
                         <div class="col-sm-6">
-                            <form:input class="form-control form-control-user" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="exampleRepeatPasswordInput" placeholder="Repeat Password" path="matchingPassword" name="password_repeat"/>
+                            <form:input class="form-control form-control-user" required="required" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" id="exampleRepeatPasswordInput" placeholder="Repeat Password" path="matchingPassword" name="password_repeat"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <form:select class="form-control form-control-user" placeholder="Role" path="role" name="role">
+                            <form:select class="form-control form-control-user" placeholder="Role" path="role" name="role"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                 <form:option value="ROLE_DRIVER">Driver</form:option>
                                 <form:option value="ROLE_EMPLOYEE">Employee</form:option>
                             </form:select>

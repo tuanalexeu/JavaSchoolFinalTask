@@ -61,7 +61,7 @@
                                     <h3 style="margin: 10px;">First name</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="firstName" path="firstName" cssErrorClass="errorBox"/>
+                                    <form:input id="firstName" path="firstName" required="required" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                                     <h3 style="margin: 10px;">Last name</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="lastName" path="lastName" cssErrorClass="errorBox"/>
+                                    <form:input id="lastName" path="lastName" required="required" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                     <h3 style="margin: 10px;">Hours worked</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input type="number" id="hoursWorked" path="hoursWorked" cssErrorClass="errorBox"/>
+                                    <form:input type="number" min="0" max="176" id="hoursWorked" required="required" path="hoursWorked" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="dropdown">
-                                        <form:select id="status" path="state" cssErrorClass="errorBox">
+                                        <form:select id="status" path="state" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                             <form:option value="DUTY">Duty</form:option>
                                             <form:option value="DRIVING">Driving</form:option>
                                             <form:option value="RESTING">Resting</form:option>
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="dropdown">
-                                        <form:select  path="city.name">
+                                        <form:select  path="city.name"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                             <c:forEach items="${cities}" var="city">
                                                 <form:option value="${city}">${city}</form:option>
                                             </c:forEach>

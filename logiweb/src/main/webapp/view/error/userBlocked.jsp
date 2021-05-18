@@ -23,7 +23,7 @@
         <div id="content" style="background: #ffffff;">
             <div class="container-fluid">
                 <div class="text-center mt-5">
-                    <div class="error mx-auto" data-text="403">
+                    <div class="error mx-auto" data-text="You've been blocked">
                         <p class="m-0">You've been blocked</p>
                     </div>
                     <p class="text-dark mb-5 lead">Oops...</p>

@@ -122,7 +122,7 @@
                                                                 <h3 style="margin: 10px;">Load description</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="loadDescription" path="name" cssErrorClass="errorBox"/>
+                                                                <form:input id="loadDescription" required="required" path="name" cssErrorClass="errorBox"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -132,7 +132,7 @@
                                                                 <h3 style="margin: 10px;">Load weight</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input type="number" id="weight" path="weight" cssErrorClass="errorBox"/>
+                                                                <form:input type="number" required="required" id="weight" min="0" path="weight" cssErrorClass="errorBox"/>
                                                                 <form:hidden id="status" path="status" value="PREPARED" cssErrorClass="errorBox"/>
                                                                 <form:hidden path="order.id" value="${order.id}" cssErrorClass="errorBox"/>
                                                             </div>
@@ -249,11 +249,13 @@
                                                     <c:otherwise>
                                                             <div class="dropdown">
 
-                                                                <select name="driver1Id">
-                                                                    <c:forEach items="${suitableDrivers}" var="driver">
-                                                                        <option value="${driver.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${driver.id}] ${driver.firstName} ${driver.lastName}</option>
-                                                                    </c:forEach>
-                                                                </select>
+                                                                <label>
+                                                                    <select name="driver1Id"  style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                        <c:forEach items="${suitableDrivers}" var="user">
+                                                                            <option value="${user.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${user.id}] ${user.firstName} ${user.lastName}</option>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </label>
                                                             </div>
                                                     </c:otherwise>
                                                 </c:choose>
@@ -271,9 +273,9 @@
                                                     <c:otherwise>
                                                         <div class="dropdown">
 
-                                                            <select name="driver2Id">
-                                                                <c:forEach items="${suitableDrivers}" var="driver">
-                                                                    <option value="${driver.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${driver.id}] ${driver.firstName} ${driver.lastName}</option>
+                                                            <select name="driver2Id" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                <c:forEach items="${suitableDrivers}" var="user">
+                                                                    <option value="${user.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${user.id}] ${user.firstName} ${user.lastName}</option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>

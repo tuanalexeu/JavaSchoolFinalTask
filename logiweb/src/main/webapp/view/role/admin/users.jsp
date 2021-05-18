@@ -87,7 +87,7 @@
                                                                 <h3 style="margin: 10px;">First name</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="firstName" path="firstName" cssErrorClass="errorBox"/>
+                                                                <form:input id="firstName" required="required" path="firstName" cssErrorClass="errorBox"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -97,7 +97,7 @@
                                                                 <h3 style="margin: 10px;">Last name</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="lastName" path="lastName" cssErrorClass="errorBox"/>
+                                                                <form:input id="lastName" required="required" path="lastName" cssErrorClass="errorBox"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -107,7 +107,7 @@
                                                                 <h3 style="margin: 10px;">Email</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="email" path="email" cssErrorClass="errorBox"/>
+                                                                <form:input id="email" required="required" path="email" cssErrorClass="errorBox"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -117,7 +117,7 @@
                                                                 <h3 style="margin: 10px;">Password</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="password" path="password" cssErrorClass="errorBox"/>
+                                                                <form:input id="password" required="required" path="password" cssErrorClass="errorBox"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -127,7 +127,7 @@
                                                                 <h3 style="margin: 10px;">Role</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:select id="status" path="role" cssErrorClass="errorBox">
+                                                                <form:select id="status" path="role" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                                                     <form:option value="ROLE_DRIVER">Driver</form:option>
                                                                     <form:option value="ROLE_EMPLOYEE">Employee</form:option>
                                                                 </form:select>
@@ -140,7 +140,7 @@
                                                                 <h3 style="margin: 10px;">Enabled</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:select id="status" path="enabled" cssErrorClass="errorBox">
+                                                                <form:select id="status" path="enabled" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                                                     <form:option value="true">True</form:option>
                                                                     <form:option value="false">False</form:option>
                                                                 </form:select>
@@ -169,18 +169,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${users}" var="driver">
+                                <c:forEach items="${users}" var="user">
                                     <tr>
                                         <td>
                                             <form action="${pageContext.request.contextPath}/admin/edit-user" method="post">
-                                                <input type="hidden" name="email" value="${driver.email}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${driver.firstName} ${driver.lastName}</button>
+                                                <input type="hidden" name="email" value="${user.email}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${user.firstName} ${user.lastName}</button>
                                             </form>
 
                                         </td>
-                                        <td>${driver.email}</td>
-                                        <td>${driver.role}</td>
-                                        <td>${driver.enabled}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.role}</td>
+                                        <td>${user.enabled}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

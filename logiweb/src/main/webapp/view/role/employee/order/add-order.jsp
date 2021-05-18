@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="<c:url value ="/assets/css/untitled-2-acc.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/css/untitled-3-acc.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/css/untitled-acc.css"/>">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="<c:url value="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>">
 </head>
 
 <body id="page-top">
@@ -113,7 +113,7 @@
                                                                 <h3 style="margin: 10px;">Load description</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="loadDescription" path="name" cssErrorClass="errorBox"/>
+                                                                <form:input id="loadDescription" required="required" path="name" cssErrorClass="errorBox"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -123,7 +123,7 @@
                                                                 <h3 style="margin: 10px;">Load weight</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input type="number" id="weight" path="weight" cssErrorClass="errorBox"/>
+                                                                <form:input type="number" id="weight" required="required" min="0" path="weight" cssErrorClass="errorBox"/>
                                                                 <form:hidden id="status" path="status" value="PREPARED" cssErrorClass="errorBox"/>
                                                                 <form:hidden path="order.id" value="${order.id}" cssErrorClass="errorBox"/>
                                                             </div>

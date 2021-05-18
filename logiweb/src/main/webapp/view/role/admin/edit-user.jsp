@@ -65,7 +65,7 @@
                                     <h3 style="margin: 10px;">First name</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="firstName" path="firstName" cssErrorClass="errorBox"/>
+                                    <form:input id="firstName" required="required" path="firstName" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                                     <h3 style="margin: 10px;">Last name</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="lastName" path="lastName" cssErrorClass="errorBox"/>
+                                    <form:input id="lastName" required="required" path="lastName" cssErrorClass="errorBox"/>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                     <h3 style="margin: 10px;">Role</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:select id="status" path="role" cssErrorClass="errorBox">
+                                    <form:select id="status" path="role" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                         <form:option value="ROLE_DRIVER">Driver</form:option>
                                         <form:option value="ROLE_EMPLOYEE">Employee</form:option>
                                     </form:select>
@@ -98,7 +98,7 @@
                                     <h3 style="margin: 10px;">Enabled</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:select id="status" path="enabled" cssErrorClass="errorBox">
+                                    <form:select id="status" path="enabled" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                         <form:option value="true">True</form:option>
                                         <form:option value="false">False</form:option>
                                     </form:select>

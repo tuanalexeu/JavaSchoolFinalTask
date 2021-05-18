@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="<c:url value ="/assets/css/untitled-logout.css"/>">
 </head>
 
-<body class="bg-gradient-primary" style="background: #f8f9fc;">
+<body class="bg-gradient-primary" style="background: #ffffff;">
     <div class="container" id="logincontainer">
         <div class="card shadow-lg o-hidden border-0 my-5">
             <div class="p-5" style="background: rgb(255,103,173);border-radius: 20px;">
@@ -27,11 +27,11 @@
                 </div>
                 <div class="row" id="my-row">
                     <form action="${pageContext.request.contextPath}/performLogOut">
-                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Yes</button></div>
+                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ffffff;">Yes</button></div>
                     </form>
 
                     <form action="${pageContext.request.contextPath}/homePage">
-                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">No</button></div>
+                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ffffff;">No</button></div>
                     </form>
                 </div>
                 <div class="text-center"></div>
