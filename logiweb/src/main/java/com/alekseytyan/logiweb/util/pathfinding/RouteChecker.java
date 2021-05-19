@@ -21,6 +21,9 @@ public class RouteChecker {
 
     private static final Logger logger = LoggerFactory.getLogger(RouteChecker.class);
 
+    /**
+     * Method calculates final route
+     */
     public static Route calculateRoute(List<DistanceMap> distances, List<Load> loads) {
 
         // Convert city set to node set
@@ -46,6 +49,9 @@ public class RouteChecker {
         return route;
     }
 
+    /**
+     * Converts list of DistanceMap to node set
+     */
     public static Set<Node> convertToNodeList(List<DistanceMap> distances) {
 
         Set<Node> nodes = new HashSet<>();

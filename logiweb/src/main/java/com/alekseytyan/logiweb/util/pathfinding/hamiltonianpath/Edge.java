@@ -5,7 +5,9 @@ import lombok.*;
 
 import java.util.Formatter;
 
-// A class to store a graph edge
+/**
+ * A class to store a graph edge
+ */
 @AllArgsConstructor
 @EqualsAndHashCode
 @Getter @Setter

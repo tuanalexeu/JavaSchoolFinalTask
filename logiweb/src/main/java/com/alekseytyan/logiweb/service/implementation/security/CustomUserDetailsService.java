@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.*;
 
+/**
+ * User details server is used to override default authentication logic
+ */
 @Service("userDetailService")
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {

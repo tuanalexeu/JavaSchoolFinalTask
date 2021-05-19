@@ -20,6 +20,7 @@ public class WelcomeController {
             return "redirect:/homePage";
         }
 
+        // Home page is only accessible to unauthorized users
         return "welcome/index";
     }
 }

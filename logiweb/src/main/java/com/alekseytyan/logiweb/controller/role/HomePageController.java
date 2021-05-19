@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+/**
+ * Home page support
+ */
 @Controller
 public class HomePageController {
 
@@ -22,6 +25,7 @@ public class HomePageController {
             logger.info("User [" + auth.getName() + "] " + "has just logged in");
         }
 
+        // Check user role in order to redirect them to corresponding page
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_EMPLOYEE"))) {
             return new RedirectView("/employee/orders");
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DRIVER"))) {

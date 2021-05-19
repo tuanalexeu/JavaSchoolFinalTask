@@ -12,12 +12,21 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.Formatter;
 
+/**
+ * Aspect is used to log method executions
+ */
 @Aspect
 @Component
 public class LogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
+    /**
+     * Method calculates method execution time and print the result of the method.
+     * @param joinPoint - join point to execute.
+     * @return - result of invokation
+     * @throws Throwable - in case of any exception
+     */
     @Around("@annotation(LogAnnotation)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
@@ -39,6 +48,11 @@ public class LogAspect {
         return proceed;
     }
 
+    /**
+     * Method get called after any exception is thrown
+     * @param joinPoint - join point to execute
+     * @param error - error message
+     */
     @AfterThrowing(
             pointcut = "execution(* com.alekseytyan.logiweb.service..*.*(..)) " +
                     "|| execution(* com.alekseytyan.logiweb.controller..*.*(..))",

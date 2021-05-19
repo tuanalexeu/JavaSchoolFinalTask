@@ -13,6 +13,9 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Formatter;
 
+/**
+ * Aspect is used to send messages to the 2nd application
+ */
 @Aspect
 @Component
 public class CrudAspect {
@@ -26,6 +29,12 @@ public class CrudAspect {
         this.publisher = publisher;
     }
 
+    /**
+     * Method get called after particular CRUD operations are committed and send message to 2nd app
+     * @param joinPoint - join point to execute
+     * @return - result of invokation
+     * @throws Throwable - in case of any exception
+     */
     @Around("@annotation(CrudAnnotation)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
 

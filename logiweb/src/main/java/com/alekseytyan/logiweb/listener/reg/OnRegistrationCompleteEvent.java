@@ -7,6 +7,9 @@ import org.springframework.context.ApplicationEvent;
 
 import java.util.Locale;
 
+/**
+ * Registration event is used to keep metadata of registered user
+ */
 @Getter @Setter
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
 

@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.*;
 
+/**
+ * Node, containing city, distance from source node and adjacent nodes
+ */
 @Getter @Setter
 public class Node {
 

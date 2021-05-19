@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
+/**
+ * Custom auth provider is used to provide a third party auth logic
+ */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 

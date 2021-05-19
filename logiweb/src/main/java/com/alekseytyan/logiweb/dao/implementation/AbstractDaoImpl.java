@@ -64,6 +64,12 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
       return entity;
    }
 
+   /**
+    * Create paginated queries using Criteria API
+    * @param size - needed size of page
+    * @param page - needed page number
+    * @return - paginated list of entities
+    */
    protected List<E> criteriaPage(Integer size, Integer page) {
 
       CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -85,6 +91,13 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
       return typedQuery.getResultList();
    }
 
+   /**
+    * Creates native paginated query
+    * @param query - prepared query
+    * @param size - size of list
+    * @param page - number of page
+    * @return - paginated result list
+    */
    protected List<E> queryPage(Query query, Integer size, Integer page) {
 
 //      query.setFirstResult(page == null ? 0 : (page - 1) * page);

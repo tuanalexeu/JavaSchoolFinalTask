@@ -8,6 +8,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class HamiltonianPath {
+
+    /**
+     * Hamiltonian path algorithm. Calculates optimal route with given nodes
+     * @param g - edge graph
+     * @param v - starting node
+     * @param visited - visited nodes
+     * @param path - result path
+     * @param N - number of nodes
+     * @return - list of number, each of witch represents number of node
+     */
     public static List<Integer> getHamiltonianPath(EdgeGraph g,
                                                    int v,
                                                    boolean[] visited,
@@ -42,7 +52,14 @@ public class HamiltonianPath {
         }
         return null;
     }
- 
+
+    /**
+     * Method calls hamiltonian path and builds result Route object
+     * @param neededCities - cities to visit
+     * @param allCities - all cities and distances between them
+     * @param cityStart - Starting city
+     * @return - result route object
+     */
     public static Route calculateRoute(Set<Node> neededCities, Set<Node> allCities, Node cityStart) {
  
         // build a graph from the given edges
@@ -123,6 +140,13 @@ public class HamiltonianPath {
     }
 
 
+    /**
+     * Method converts node graph to edge graph
+     * @param neededCities - cities to visit
+     * @param allCities - all cities and distances between them
+     * @param cityStart - starting city
+     * @return - resulting edge graph
+     */
     private static EdgeGraph convertToEdgeGraph(Set<Node> neededCities, Set<Node> allCities, Node cityStart) {
 
         Map<Node, Integer> map = new HashMap<>();

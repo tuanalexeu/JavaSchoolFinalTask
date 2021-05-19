@@ -22,12 +22,15 @@ public class MessageServiceImpl implements MessageService {
 
     @PostConstruct
     public void init() throws IOException, TimeoutException {
+
+        // Establish connection with host localhost
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("localhost");
 
         connection = connectionFactory.newConnection();
         channel = connection.createChannel();
 
+        // Declare new queue named Logiweb
         channel.queueDeclare("Logiweb", false, false, false, null);
     }
 
@@ -36,6 +39,7 @@ public class MessageServiceImpl implements MessageService {
     public void send(String message) {
 
         try {
+            // Publish basic text message
             channel.basicPublish("", "Logiweb", null, message.getBytes());
         } catch (IOException e) {
             e.printStackTrace();

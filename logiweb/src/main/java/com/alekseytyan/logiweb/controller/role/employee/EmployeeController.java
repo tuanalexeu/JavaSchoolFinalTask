@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Main employee controller is used to display list of drivers, trucks and orders
+ */
 @Controller
 @RequestMapping(value = "/employee")
 public class EmployeeController {
@@ -33,6 +36,7 @@ public class EmployeeController {
         this.cityService = cityService;
     }
 
+    // Each operation requires list of city names
     @ModelAttribute("cities")
     public List<String> cityNames() {
         return cityService.findAllNames();

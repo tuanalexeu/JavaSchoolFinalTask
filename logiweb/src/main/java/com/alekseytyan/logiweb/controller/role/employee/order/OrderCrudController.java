@@ -20,6 +20,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
+/**
+ * Controller is used to support CRUD operations with orders
+ */
 @Controller
 @RequestMapping("/employee")
 public class OrderCrudController {
@@ -40,6 +43,7 @@ public class OrderCrudController {
         this.lorryService = lorryService;
     }
 
+    // Each operation requires list of cities
     @ModelAttribute("cityNames")
     public List<String> cityNames() {
         return cityService.findAllNames();
@@ -74,6 +78,7 @@ public class OrderCrudController {
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderDTO);
 
+        // Check if chosen route is possible, alert user if not, so that they can change it
         if(!orderService.calculateRoute(orderDTO).isPossible()) {
             model.addAttribute("routePossibility",
                     "This order isn't optimal (or possible) due to the route. Please, delete the last load.");

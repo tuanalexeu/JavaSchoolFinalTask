@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.*;
 
+/**
+ * Graph, contains nodes (cities)
+ */
 @Getter @Setter
 @AllArgsConstructor
 public class Graph {
@@ -16,6 +19,12 @@ public class Graph {
         nodes.add(nodeA);
     }
 
+    /**
+     * Dijkstra's algorithm. Calculates best path from given node to every other
+     * @param graph - graph, containing nodes
+     * @param source - starting node
+     * @return - Graph with calculated path
+     */
     public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
         source.setDistance(0);
 

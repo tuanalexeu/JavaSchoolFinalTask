@@ -64,6 +64,7 @@ public class DriverServiceImpl extends AbstractServiceImpl<Driver, DriverDao, Dr
     public List<DriverDTO> findSuitableDrivers(OrderDTO orderDTO, Route route, LorryDTO lorryDTO) {
         String cityName = lorryDTO.getCity().getName();
 
+        // Checks whether a driver hasn't reached hours limit in the current month
         DateChecker dateChecker;
         if(route.isPossible()) {
             dateChecker = DateChecker.calculateHoursInMonth(route.getTime());

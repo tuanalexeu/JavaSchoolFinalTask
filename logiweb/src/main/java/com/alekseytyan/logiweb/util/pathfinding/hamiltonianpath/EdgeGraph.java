@@ -5,7 +5,9 @@ import com.alekseytyan.logiweb.util.pathfinding.dijkstra.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-// A class to represent a graph object
+/**
+ * A class to represent a graph object
+ */
 public class EdgeGraph {
 
     // A list of lists to represent an adjacency list

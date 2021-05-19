@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+/**
+ * Main Admin controller is used to display list of users
+ */
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {

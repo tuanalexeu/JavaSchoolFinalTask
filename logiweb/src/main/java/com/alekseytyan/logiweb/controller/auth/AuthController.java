@@ -12,12 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Controller is used to support authentication and registration operations
+ */
 @Controller
 @AllArgsConstructor
 public class AuthController {
 
     private final LoginAttemptService loginAttemptService;
 
+    /**
+     * Checks if user that just logged in has any role within Spring security
+     * @return - true, if they have
+     */
     private boolean hasAnyRole() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth != null
@@ -36,6 +43,7 @@ public class AuthController {
             return "redirect:/homePage";
         }
 
+        // checks whether a user exceed the number of login attempts
         if(error && loginAttemptService.isBlocked(getClientIP(request))) {
             throw new UserBlockedException();
         }
@@ -47,6 +55,10 @@ public class AuthController {
         return "auth/login";
     }
 
+    /**
+     * Checks user's IP
+     * @return - IP as a string
+     */
     private String getClientIP(HttpServletRequest request) {
         String xfHeader = request.getHeader("X-Forwarded-For");
         if (xfHeader == null) {

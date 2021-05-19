@@ -9,6 +9,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+/**
+ * Scheduling component
+ */
 @Component
 public class DataSourceScheduler {
     private static final Logger logger = LoggerFactory.getLogger(SchedulingConfig.class);
@@ -20,6 +23,10 @@ public class DataSourceScheduler {
         this.verificationService = verificationService;
     }
 
+    /**
+     * Task that is executed every MONDAY & FRIDAY at 11 P.M.
+     * Cleans verification token table
+     */
     @Async
     @Scheduled(cron = "0 0 23 * * MON,FRI")
     public void scheduledTask() {

@@ -28,6 +28,9 @@ import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * Controller for registration process
+ */
 @Controller
 @AllArgsConstructor
 public class RegisterController {
@@ -38,6 +41,10 @@ public class RegisterController {
     private final ApplicationEventPublisher eventPublisher;
     private final ThreadPoolTaskScheduler registerScheduler;
 
+    /**
+     * Check if authorized user has any role in Spring security
+     * @return - true, if they have
+     */
     private boolean hasAnyRole() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth != null
@@ -58,7 +65,6 @@ public class RegisterController {
         return "auth/register";
     }
 
-    // Removed @Valid at UserDTO param
     @PostMapping("/reg-process")
     public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDTO userDto,
                                             BindingResult result,
@@ -73,8 +79,10 @@ public class RegisterController {
         try {
             UserDTO registered = userService.registerNewUserAccount(userDto);
 
+            // Publish delayed task. After 3 days from now unconfirmed user will be deleted
             registerScheduler.scheduleWithFixedDelay(() -> userService.deleteIfUnconfirmed(userDto.getEmail()), 259200000);
 
+            // Publish registration event in order to send email to confirm account
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(userService.convertToEntity(registered),
                     request.getLocale(), ""));
 
@@ -96,6 +104,7 @@ public class RegisterController {
 
         Locale locale = request.getLocale();
 
+        // Check if received token is correct, redirect to main registration page if not
         VerificationTokenDTO verificationToken = verificationService.getVerificationToken(token);
         if (verificationToken == null) {
             String message = messages.getMessage("auth.message.invalidToken", null, locale);
@@ -103,14 +112,18 @@ public class RegisterController {
             return "redirect:/register";
         }
 
+        // If token is correct, check if it's not overdue
         UserDTO user = verificationToken.getUser();
         Calendar cal = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+
+            // If 1 day has passed, the token isn't working anymore
             String messageValue = messages.getMessage("auth.message.expired", null, locale);
             model.addAttribute("message", messageValue);
             return "redirect:/register";
         }
 
+        // If token is correct and not expired, we need to delete it and confirm user
         verificationService.delete(verificationToken);
 
         user.setEmailConfirmed(true);

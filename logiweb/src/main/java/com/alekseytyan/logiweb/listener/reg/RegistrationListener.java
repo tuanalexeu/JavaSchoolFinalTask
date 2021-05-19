@@ -30,10 +30,15 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     }
 
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
+
+        // Get new user
         User user = event.getUser();
+
+        // Create new token using UUID
         String token = UUID.randomUUID().toString();
         verificationService.createVerificationToken(userService.convertToDTO(user), token);
 
+        // Get user email and send confirmation message
         String recipientAddress = user.getEmail();
         String subject = "Registration Confirmation";
         String confirmationUrl = event.getAppUrl() + "/register-confirm?token=" + token;
