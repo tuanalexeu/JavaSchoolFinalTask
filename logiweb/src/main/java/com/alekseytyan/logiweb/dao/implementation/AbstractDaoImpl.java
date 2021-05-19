@@ -79,16 +79,16 @@ public abstract class AbstractDaoImpl<E, ID> implements AbstractDao<E, ID> {
 
       TypedQuery<E> typedQuery = entityManager.createQuery(select);
 
-      typedQuery.setFirstResult(page == null ? 0 : page - 1);
-      typedQuery.setMaxResults(size == null ? 10 : size);
+//      typedQuery.setFirstResult(page == null ? 0 : page - 1);
+//      typedQuery.setMaxResults(size == null ? 10 : size);
 
       return typedQuery.getResultList();
    }
 
    protected List<E> queryPage(Query query, Integer size, Integer page) {
 
-      query.setFirstResult(page == null ? 0 : (page - 1) * page);
-      query.setMaxResults(size == null ? 10 : size);
+//      query.setFirstResult(page == null ? 0 : (page - 1) * page);
+//      query.setMaxResults(size == null ? 10 : size);
 
 
       return query.getResultList();

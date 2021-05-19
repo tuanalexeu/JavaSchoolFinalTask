@@ -24,7 +24,9 @@ import java.util.Collection;
         @NamedQuery(name = "User.findVerifiedAndDisabled",
                 query = "select u from User u where u.enabled = FALSE and u.emailConfirmed = TRUE"),
         @NamedQuery(name = "User.deleteIfUnconfirmed",
-                query =  "delete from User u where u.email = :email and u.emailConfirmed = FALSE")
+                query =  "delete from User u where u.email = :email and u.emailConfirmed = FALSE"),
+        @NamedQuery(name = "User.approveAll",
+                query = "update User u set u.enabled = TRUE where u.emailConfirmed = TRUE")
 })
 public class User {
 

@@ -74,6 +74,7 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
+    @CrudAnnotation(code = "update")
     @Transactional
     public OrderDTO deleteById(Long entityId) {
 

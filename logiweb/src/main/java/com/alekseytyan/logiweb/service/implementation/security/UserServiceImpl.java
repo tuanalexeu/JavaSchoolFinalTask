@@ -26,6 +26,23 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
     private final PasswordEncoder passwordEncoder;
     private final DriverService driverService;
 
+
+    @Override
+    public UserDTO update(UserDTO userDTO) {
+        DriverDTO driverDTO = driverService.findDriverByUser(userDTO.getEmail());
+
+        if(driverDTO != null) {
+            driverDTO.setUser(null);
+            driverService.update(driverDTO);
+        }
+
+        if(userDTO.getDriver() != null) {
+            userDTO.getDriver().setUser(null);
+        }
+
+        return super.update(userDTO);
+    }
+
     @Autowired
     public UserServiceImpl(UserDao dao,
                            ModelMapper mapper,

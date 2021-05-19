@@ -37,13 +37,14 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
     @Transactional
     public LoadDTO update(LoadDTO loadDTO) {
 
+        loadDTO = super.update(loadDTO);
         OrderDTO orderDTO = loadDTO.getOrder();
 
         boolean isOrderFinished = orderDTO.getLoads().stream().allMatch(l -> l.getStatus() == LoadStatus.DELIVERED);
         orderDTO.setFinished(isOrderFinished);
         orderService.update(orderDTO);
 
-        return super.update(loadDTO);
+        return loadDTO;
     }
 
     @Override
