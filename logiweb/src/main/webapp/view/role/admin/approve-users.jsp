@@ -72,9 +72,9 @@
                                     <option value="100">100</option>
                                 </select>&nbsp;</label></div>
                             </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-primary btn-block btn-user" id="loginbutton2" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Approve all</button>
-                            </div>
+<%--                            <div class="col-md-6">--%>
+<%--                                <button class="btn btn-primary btn-block btn-user" id="loginbutton2" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Approve all</button>--%>
+<%--                            </div>--%>
                         </div>
                         <div class="table-responsive table mt-2" id="dataTable2" role="grid" aria-describedby="dataTable_info">
                             <table class="table my-0" id="dataTable2">
