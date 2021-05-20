@@ -2,6 +2,9 @@ package com.alekseytyan.logiweb.util.error;
 
 import com.alekseytyan.logiweb.exception.NoSuchErrorException;
 
+/**
+ * Enum contain messages for different error codes
+ */
 public enum ErrorChecker {
 
     LORRY_ERROR("It seems you didn't choose any truck"),

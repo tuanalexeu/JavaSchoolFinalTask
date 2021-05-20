@@ -9,10 +9,12 @@ import com.alekseytyan.logiweb.service.api.VerificationService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,9 +24,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * Controller for registration process
+ */
 @Controller
 @AllArgsConstructor
 public class RegisterController {
@@ -33,7 +39,12 @@ public class RegisterController {
     private final VerificationService verificationService;
     private final MessageSource messages;
     private final ApplicationEventPublisher eventPublisher;
+    private final ThreadPoolTaskScheduler registerScheduler;
 
+    /**
+     * Check if authorized user has any role in Spring security
+     * @return - true, if they have
+     */
     private boolean hasAnyRole() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth != null
@@ -54,11 +65,10 @@ public class RegisterController {
         return "auth/register";
     }
 
-    // Removed @Valid at UserDTO param
     @PostMapping("/reg-process")
-    public ModelAndView registerUserAccount(@ModelAttribute("user") UserDTO userDto,
-                                            HttpServletRequest request,
-                                            Errors errors) {
+    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDTO userDto,
+                                            BindingResult result,
+                                            HttpServletRequest request) {
 
         if(!userDto.getPassword().equals(userDto.getMatchingPassword())) {
             ModelAndView mav = new ModelAndView("auth/register", "user", userDto);
@@ -69,7 +79,10 @@ public class RegisterController {
         try {
             UserDTO registered = userService.registerNewUserAccount(userDto);
 
-//            String appUrl = request.getContextPath();
+            // Publish delayed task. After 3 days from now unconfirmed user will be deleted
+            registerScheduler.scheduleWithFixedDelay(() -> userService.deleteIfUnconfirmed(userDto.getEmail()), 259200000);
+
+            // Publish registration event in order to send email to confirm account
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(userService.convertToEntity(registered),
                     request.getLocale(), ""));
 
@@ -78,7 +91,7 @@ public class RegisterController {
             mav.addObject("message", "An account for that username/email already exists.");
             return mav;
         } catch (RuntimeException ex) {
-            return new ModelAndView("auth/email-error", "user", userDto);
+            return new ModelAndView("error/defaultError", "user", userDto);
         }
 
         return new ModelAndView("auth/check-email", "user", userDto);
@@ -91,6 +104,7 @@ public class RegisterController {
 
         Locale locale = request.getLocale();
 
+        // Check if received token is correct, redirect to main registration page if not
         VerificationTokenDTO verificationToken = verificationService.getVerificationToken(token);
         if (verificationToken == null) {
             String message = messages.getMessage("auth.message.invalidToken", null, locale);
@@ -98,14 +112,18 @@ public class RegisterController {
             return "redirect:/register";
         }
 
+        // If token is correct, check if it's not overdue
         UserDTO user = verificationToken.getUser();
         Calendar cal = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+
+            // If 1 day has passed, the token isn't working anymore
             String messageValue = messages.getMessage("auth.message.expired", null, locale);
             model.addAttribute("message", messageValue);
             return "redirect:/register";
         }
 
+        // If token is correct and not expired, we need to delete it and confirm user
         verificationService.delete(verificationToken);
 
         user.setEmailConfirmed(true);

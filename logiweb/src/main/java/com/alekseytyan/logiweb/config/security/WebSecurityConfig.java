@@ -1,6 +1,7 @@
 package com.alekseytyan.logiweb.config.security;
 
 import com.alekseytyan.logiweb.config.DataSourceConfig;
+import com.alekseytyan.logiweb.config.security.handler.CustomLogoutHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomLogoutSuccessHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,12 @@ import org.springframework.context.annotation.*;
 import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
@@ -22,6 +22,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.sql.DataSource;
@@ -36,23 +37,14 @@ import javax.sql.DataSource;
 })
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsService userDetailsService;
-    private AuthenticationProvider authenticationProvider;
+    private static final String ROLE_ADMIN = "ADMIN";
+    private static final String ROLE_EMPLOYEE = "EMPLOYEE";
+    private static final String ROLE_DRIVER = "DRIVER";
 
     private AuthenticationSuccessHandler successHandler;
     private AuthenticationFailureHandler failureHandler;
 
     private DataSource dataSource;
-
-    @Autowired
-    public void setUserDetailsService(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
-    @Autowired
-    public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
-        this.authenticationProvider = authenticationProvider;
-    }
 
     @Autowired
     public void setSuccessHandler(AuthenticationSuccessHandler successHandler) {
@@ -77,22 +69,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select EMAIL, ROLE "
                         + "from USER_LOGIWEB where EMAIL = ?")
                 .passwordEncoder(passwordEncoder());
-
-//        auth.userDetailsService(userDetailsService);
-//        auth.authenticationProvider(authenticationProvider);
     }
 
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
                 .expressionHandler(webExpressionHandler())
-                .antMatchers("/info-table/**").permitAll()
-                .antMatchers("/driver/**").hasRole("DRIVER")
-                .antMatchers("/employee/**").hasAnyRole("EMPLOYEE", "ADMIN")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/login*", "/register*", "/forgotPassword*", "/*", "/homePage*", "/welcome*", "/assets/**").permitAll()
-                .antMatchers("/profile*").hasAnyRole("DRIVER", "EMPLOYEE", "ADMIN")
+                .antMatchers("/driver/**").hasRole(ROLE_DRIVER)
+                .antMatchers("/employee/**").hasAnyRole(ROLE_EMPLOYEE, ROLE_ADMIN)
+                .antMatchers("/admin/**").hasRole(ROLE_ADMIN)
+                .antMatchers(
+                        "/login*",
+                        "/register*",
+                        "/forgotPassword*",
+                        "/*",
+                        "/homePage*",
+                        "/welcome*",
+                        "/assets/**",
+                        "/info-table/orders*",
+                        "/info-table/driver-stats*",
+                        "/info-table/lorry-stats*").permitAll()
+                .antMatchers("/profile*").hasAnyRole(ROLE_DRIVER, ROLE_EMPLOYEE, ROLE_ADMIN)
                 .anyRequest().authenticated()
 
                 .and()
@@ -102,13 +101,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(successHandler)
                 .failureHandler(failureHandler)
                 .defaultSuccessUrl("/homePage", true)
+
                 .and()
                 .logout()
+                .addLogoutHandler(logoutHandler())
                 .logoutUrl("/performLogOut")
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(logoutSuccessHandler())
-                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 
     @Bean
@@ -122,6 +125,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler = new DefaultWebSecurityExpressionHandler();
         defaultWebSecurityExpressionHandler.setRoleHierarchy(roleHierarchy());
         return defaultWebSecurityExpressionHandler;
+    }
+
+    @Bean
+    public LogoutHandler logoutHandler() {
+        return new CustomLogoutHandler();
     }
 
     @Bean

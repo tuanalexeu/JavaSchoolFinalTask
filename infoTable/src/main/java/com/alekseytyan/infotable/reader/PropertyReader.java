@@ -6,19 +6,19 @@ import java.util.Properties;
 
 public class PropertyReader {
 
-	public static final String propFileName = "config.properties";
+	public static final String propertyFileName = "config.properties";
 
 	public static String getPropValue(String key) {
 
 		String result = "";
 
-		try(InputStream inputStream = PropertyReader.class.getClassLoader().getResourceAsStream(propFileName);) {
+		try(InputStream inputStream = PropertyReader.class.getClassLoader().getResourceAsStream(propertyFileName);) {
 			Properties prop = new Properties();
 
 			if (inputStream != null) {
 				prop.load(inputStream);
 			} else {
-				throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+				throw new FileNotFoundException("property file '" + propertyFileName + "' not found in the classpath");
 			}
 
 			return prop.getProperty(key);

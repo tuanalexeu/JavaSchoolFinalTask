@@ -5,7 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Logout</title>
+    <title>Logout - Logiweb</title>
+
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
@@ -17,7 +20,7 @@
     <link rel="stylesheet" href="<c:url value ="/assets/css/untitled-logout.css"/>">
 </head>
 
-<body class="bg-gradient-primary" style="background: #f8f9fc;">
+<body class="bg-gradient-primary" style="background: #ffffff;">
     <div class="container" id="logincontainer">
         <div class="card shadow-lg o-hidden border-0 my-5">
             <div class="p-5" style="background: rgb(255,103,173);border-radius: 20px;">
@@ -27,11 +30,11 @@
                 </div>
                 <div class="row" id="my-row">
                     <form action="${pageContext.request.contextPath}/performLogOut">
-                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Yes</button></div>
+                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ffffff;">Yes</button></div>
                     </form>
 
                     <form action="${pageContext.request.contextPath}/homePage">
-                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">No</button></div>
+                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ffffff;">No</button></div>
                     </form>
                 </div>
                 <div class="text-center"></div>
@@ -43,6 +46,8 @@
     <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
     <script src="<c:out value="/assets/js/theme.js"/>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+    <script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

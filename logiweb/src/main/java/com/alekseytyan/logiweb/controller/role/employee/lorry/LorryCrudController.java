@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+/**
+ * Controller is used to support CRUD operations with Trucks
+ */
 @Controller
 @RequestMapping(value = "/employee")
 public class LorryCrudController {

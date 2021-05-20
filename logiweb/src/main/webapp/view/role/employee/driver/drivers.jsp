@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Logiweb</title>
+    <title>Drivers - Logiweb</title>
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -82,7 +83,7 @@
                                                                 <h3 style="margin: 10px;">First name</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="firstName" path="firstName" cssErrorClass="errorBox"/>
+                                                                <form:input id="firstName" path="firstName" required="required" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -92,7 +93,7 @@
                                                                 <h3 style="margin: 10px;">Last name</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="lastName" path="lastName" cssErrorClass="errorBox"/>
+                                                                <form:input id="lastName" required="required" path="lastName" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -102,27 +103,28 @@
                                                                 <h3 style="margin: 10px;">Hours worked</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="hoursWorked" path="hoursWorked" cssErrorClass="errorBox"/>
+                                                                <form:input id="hoursWorked" type="number" required="required" min="0" max="176" path="hoursWorked" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <h3 style="margin: 10px;">Status</h3>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="dropdown">
-                                                                    <form:select id="status" path="state" cssErrorClass="errorBox">
-                                                                        <form:option value="DUTY">Duty</form:option>
-                                                                        <form:option value="DRIVING">Driving</form:option>
-                                                                        <form:option value="RESTING">Resting</form:option>
-                                                                        <form:option value="UNLOADING">Unloading</form:option>
-                                                                    </form:select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <form:hidden path="state" value="RESTING" cssErrorClass="errorBox"/>
+<%--                                                    <div class="container">--%>
+<%--                                                        <div class="row">--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <h3 style="margin: 10px;">Status</h3>--%>
+<%--                                                            </div>--%>
+<%--                                                            <div class="col-md-6">--%>
+<%--                                                                <div class="dropdown">--%>
+<%--                                                                    <form:select id="status" path="state" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">--%>
+<%--                                                                        <form:option value="RESTING">Resting</form:option>--%>
+<%--                                                                        <form:option value="DUTY">Duty</form:option>--%>
+<%--                                                                        <form:option value="DRIVING">Driving</form:option>--%>
+<%--                                                                        <form:option value="UNLOADING">Unloading</form:option>--%>
+<%--                                                                    </form:select>--%>
+<%--                                                                </div>--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-md-6">
@@ -130,7 +132,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="dropdown">
-                                                                    <form:select  path="city.name">
+                                                                    <form:select  path="city.name"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                                                         <c:forEach items="${cities}" var="city">
                                                                             <form:option value="${city}">${city}</form:option>
                                                                         </c:forEach>
@@ -164,20 +166,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${drivers}" var="driver">
+                                <c:forEach items="${drivers}" var="user">
                                     <tr>
 <%--                                        <td>${driver.id}</td>--%>
                                         <td>
-                                            <form action="/employee/edit-driver/${driver.id}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${driver.firstName} ${driver.lastName}</button>
+                                            <form action="/employee/edit-driver/${user.id}">
+                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${user.firstName} ${user.lastName}</button>
                                             </form>
 
                                         </td>
-                                        <td>${driver.hoursWorked}</td>
-                                        <td>${driver.state}</td>
-                                        <td>${driver.city.name}</td>
-                                        <td>${driver.lorry.regNum}</td>
-                                        <td>${driver.order.id}</td>
+                                        <td>${user.hoursWorked}</td>
+                                        <td>${user.state}</td>
+                                        <td>${user.city.name}</td>
+                                        <td>${user.lorry.regNum}</td>
+                                        <td>${user.order.id}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -190,11 +192,11 @@
                             <div class="col-md-6">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><<</span></a></li>
                                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">>></span></a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -214,6 +216,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

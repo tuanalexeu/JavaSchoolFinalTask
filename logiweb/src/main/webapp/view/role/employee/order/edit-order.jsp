@@ -8,7 +8,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Logiweb</title>
+    <title>Edit order - Logiweb</title>
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -122,7 +123,7 @@
                                                                 <h3 style="margin: 10px;">Load description</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="loadDescription" path="name" cssErrorClass="errorBox"/>
+                                                                <form:input id="loadDescription" required="required" path="name" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -132,7 +133,7 @@
                                                                 <h3 style="margin: 10px;">Load weight</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="weight" path="weight" cssErrorClass="errorBox"/>
+                                                                <form:input type="number" required="required" id="weight" min="0" path="weight" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                                                 <form:hidden id="status" path="status" value="PREPARED" cssErrorClass="errorBox"/>
                                                                 <form:hidden path="order.id" value="${order.id}" cssErrorClass="errorBox"/>
                                                             </div>
@@ -214,7 +215,7 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownLorryButton">
                                                 <c:forEach items="${suitableLorries}" var="lorry">
-                                                    <button type="submit" name="regNum" value="${lorry.regNum}">${lorry.regNum}</button>
+                                                    <button type="submit" name="regNum" value="${lorry.regNum}" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">${lorry.regNum}</button>
                                                 </c:forEach>
                                             </div>
                                         </div>
@@ -249,11 +250,13 @@
                                                     <c:otherwise>
                                                             <div class="dropdown">
 
-                                                                <select name="driver1Id">
-                                                                    <c:forEach items="${suitableDrivers}" var="driver">
-                                                                        <option value="${driver.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${driver.id}] ${driver.firstName} ${driver.lastName}</option>
-                                                                    </c:forEach>
-                                                                </select>
+                                                                <label>
+                                                                    <select name="driver1Id"  style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                        <c:forEach items="${suitableDrivers}" var="user">
+                                                                            <option value="${user.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${user.id}] ${user.firstName} ${user.lastName}</option>
+                                                                        </c:forEach>
+                                                                    </select>
+                                                                </label>
                                                             </div>
                                                     </c:otherwise>
                                                 </c:choose>
@@ -271,9 +274,9 @@
                                                     <c:otherwise>
                                                         <div class="dropdown">
 
-                                                            <select name="driver2Id">
-                                                                <c:forEach items="${suitableDrivers}" var="driver">
-                                                                    <option value="${driver.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${driver.id}] ${driver.firstName} ${driver.lastName}</option>
+                                                            <select name="driver2Id" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                <c:forEach items="${suitableDrivers}" var="user">
+                                                                    <option value="${user.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${user.id}] ${user.firstName} ${user.lastName}</option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
@@ -308,7 +311,7 @@
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">
             <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Logiweb 2021</span></div>
+                <div class="text-center my-auto copyright"><span>Logiweb 2021</span></div>
             </div>
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -317,6 +320,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

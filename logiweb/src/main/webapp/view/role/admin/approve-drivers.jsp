@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Logiweb</title>
+    <title>Approve drivers - Logiweb</title>
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -64,12 +65,19 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 text-nowrap">
-                                <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label>Show&nbsp;<select class="form-control form-control-sm custom-select custom-select-sm">
-                                    <option value="10" selected="">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>&nbsp;</label></div>
+                                <form action="${pageContext.request.contextPath}/admin/approve-users">
+                                    <input type="hidden" name="page" value="${page}">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                        <label>Show&nbsp;
+                                            <select class="form-control form-control-sm custom-select custom-select-sm" name="size">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;
+                                        </label>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -82,11 +90,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${newUsers}" var="driver">
-                                    <c:if test="${driver.driver.id eq null}">
+                                <c:forEach items="${newUsers}" var="user">
+                                    <c:if test="${user.driver.id eq null}">
                                         <tr>
-                                        <td>${driver.email}</td>
-                                        <td>${driver.firstName} ${driver.lastName}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.firstName} ${user.lastName}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Choose</button>
@@ -95,8 +103,8 @@
                                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                                             <form action="${pageContext.request.contextPath}/admin/approve-driver" method="post">
                                                                 <input type="hidden" name="driverId" value="${driver.id}">
-                                                                <input type="hidden" name="email" value="${driver.email}">
-                                                                <button type="submit">${driver.firstName} ${driver.lastName}</button>
+                                                                <input type="hidden" name="email" value="${user.email}">
+                                                                <button type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">${driver.firstName} ${driver.lastName}</button>
                                                             </form>
                                                         </a>
                                                     </c:forEach>
@@ -116,11 +124,25 @@
                             <div class="col-md-6">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" disabled="disabled" href="#" aria-label="Previous">
+                                                    <span aria-hidden="true"><<</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active">
+                                                <a class="page-link" href="#">${page}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">${page + 1}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">${page + 2}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next">
+                                                    <span aria-hidden="true">>></span>
+                                                </a>
+                                            </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -131,7 +153,7 @@
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">
             <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Logiweb 2021</span></div>
+                <div class="text-center my-auto copyright"><span>Logiweb 2021</span></div>
             </div>
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -140,6 +162,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

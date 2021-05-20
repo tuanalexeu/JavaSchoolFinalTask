@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,13 @@ public abstract class AbstractServiceImpl<E, D extends AbstractDao<E, ID>, DTO, 
     @Transactional(readOnly = true)
     public List<DTO> findAll() {
         return convertToDTO(dao.findAll());
+    }
+
+    @Override
+    @LogAnnotation
+    @Transactional(readOnly = true)
+    public List<DTO> findPage(Integer size, Integer page) {
+        return convertToDTO(getDao().findPage(size, page));
     }
 
     @Override

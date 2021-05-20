@@ -19,6 +19,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Listener is used to listen for app initialization in order to handle ROLES & PRIVILEGES
+ */
 @Component
 public class SetupDataLoader implements
         ApplicationListener<ContextRefreshedEvent> {

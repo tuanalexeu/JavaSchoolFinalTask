@@ -74,12 +74,34 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao, Order
     }
 
     @Override
+    @CrudAnnotation(code = "update")
     @Transactional
     public OrderDTO deleteById(Long entityId) {
 
         OrderDTO orderDTO = findById(entityId);
 
         return delete(orderDTO);
+    }
+
+    @Override
+    public List<OrderDTO> findVerified(Integer size, Integer page) {
+
+        List<OrderDTO> orderDTOList = convertToDTO(getDao().findVerified(size, page));
+        List<Route> routes = calculateRoute(orderDTOList);
+
+        int route_index = 0;
+
+        Iterator<OrderDTO> iterator = orderDTOList.listIterator();
+
+        while (iterator.hasNext()) {
+            iterator.next();
+            if (!routes.get(route_index).isPossible()) {
+                iterator.remove();
+                route_index++;
+            }
+        }
+
+        return orderDTOList;
     }
 
     @Override

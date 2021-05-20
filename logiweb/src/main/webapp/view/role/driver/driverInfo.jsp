@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Blank Page - Logiweb</title>
+    <title>Driver info - Logiweb</title>
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -27,7 +28,12 @@
         </a>
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/driver/info"><i class="fas fa-window-maximize"></i><span>My info</span></a></li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/driver/info">
+                        <i class="fas fa-window-maximize"></i>
+                        <span>My info</span>
+                    </a>
+                </li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
@@ -50,6 +56,9 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-1" style="padding: 5px;">My driver info</h3>
+                <c:if test="${not empty message}">
+                    <p class="text-dark mb-1" style="color:#ca2819; adding: 5px;">${message}</p>
+                </c:if>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -75,22 +84,22 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="${pageContext.request.contextPath}/driver/save" method="post">
-                                                <button type="submit" value="DUTY" name="status">Duty</button>
+                                                <button type="submit" value="RESTING" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Resting</button>
                                             </form>
                                         </a>
                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="${pageContext.request.contextPath}/driver/save" method="post">
-                                                <button type="submit" value="DRIVING" name="status">Driving</button>
+                                                <button type="submit" value="DUTY" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Duty</button>
                                             </form>
                                         </a>
                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="${pageContext.request.contextPath}/driver/save" method="post">
-                                                <button type="submit" value="RESTING" name="status">Resting</button>
+                                                <button type="submit" value="DRIVING" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Driving</button>
                                             </form>
                                         </a>
                                         <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                             <form action="${pageContext.request.contextPath}/driver/save" method="post">
-                                                <button type="submit" value="UNLOADING" name="status">Unloading</button>
+                                                <button type="submit" value="UNLOADING" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Unloading</button>
                                             </form>
                                         </a>
                                     </div>
@@ -127,8 +136,8 @@
                                             </div>
                                             <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
                                                 <ul>
-                                                    <c:forEach items="${coDrivers}" var="driver">
-                                                        <li>${driver.id} ${driver.firstName} ${driver.lastName}</li>
+                                                    <c:forEach items="${coDrivers}" var="user">
+                                                        <li>${user.id} ${user.firstName} ${user.lastName}</li>
                                                     </c:forEach>
                                                 </ul>
                                             </div>
@@ -217,19 +226,19 @@
                                                 <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                                     <form action="${pageContext.request.contextPath}/driver/save-load">
                                                         <input type="hidden" name="loadId" value="${load.id}">
-                                                        <button type="submit" value="PREPARED" name="status">Prepared</button>
+                                                        <button type="submit" value="PREPARED" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Prepared</button>
                                                     </form>
                                                 </a>
                                                 <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                                     <form action="${pageContext.request.contextPath}/driver/save-load">
                                                         <input type="hidden" name="loadId" value="${load.id}">
-                                                        <button type="submit" value="SENT" name="status">Sent</button>
+                                                        <button type="submit" value="SENT" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Sent</button>
                                                     </form>
                                                 </a>
                                                 <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
                                                     <form action="${pageContext.request.contextPath}/driver/save-load">
                                                         <input type="hidden" name="loadId" value="${load.id}">
-                                                        <button type="submit" value="DELIVERED" name="status">Delivered</button>
+                                                        <button type="submit" value="DELIVERED" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Delivered</button>
                                                     </form>
                                                 </a>
                                             </div>
@@ -272,6 +281,8 @@
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
 <%--<script src="<c:out value="/assets/js/dragAndDrop.js"/>"></script>--%>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

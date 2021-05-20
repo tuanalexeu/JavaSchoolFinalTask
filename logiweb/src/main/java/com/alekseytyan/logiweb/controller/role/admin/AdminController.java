@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+/**
+ * Main Admin controller is used to display list of users
+ */
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -25,18 +28,28 @@ public class AdminController {
     }
 
     @GetMapping(value = "/users")
-    public String viewUsers(Model model) {
+    public String viewUsers(Model model,
+                            @RequestParam(required = false) Integer size,
+                            @RequestParam(required = false) Integer page) {
 
         model.addAttribute("newUser", new UserDTO());
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.findPage(size, page));
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         return "role/admin/users";
     }
 
     @GetMapping(value = "/approve-users")
-    public String approveUsers(Model model) {
+    public String approveUsers(Model model,
+                               @RequestParam(required = false) Integer size,
+                               @RequestParam(required = false) Integer page) {
 
-        model.addAttribute("newUsers", userService.findDisabledAndVerified());
+        model.addAttribute("newUsers", userService.findDisabledAndVerified(size, page));
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         return "role/admin/approve-users";
     }
@@ -52,10 +65,15 @@ public class AdminController {
     }
 
     @GetMapping(value = "/approve-drivers")
-    public String approveDrivers(Model model) {
+    public String approveDrivers(Model model,
+                                 @RequestParam(required = false) Integer size,
+                                 @RequestParam(required = false) Integer page) {
 
         model.addAttribute("newDrivers", driverService.findWithoutUser());
-        model.addAttribute("newUsers", userService.findWithoutDriver());
+        model.addAttribute("newUsers", userService.findWithoutDriver(size, page));
+
+        model.addAttribute("size", size == null ? 10 : size);
+        model.addAttribute("page", page == null ? 1 : page);
 
         return "role/admin/approve-drivers";
     }
@@ -69,7 +87,4 @@ public class AdminController {
 
         return new RedirectView("/admin/approve-drivers");
     }
-
-
-
 }

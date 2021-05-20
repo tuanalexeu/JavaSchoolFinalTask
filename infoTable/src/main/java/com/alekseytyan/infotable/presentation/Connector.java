@@ -12,7 +12,7 @@ import javax.ws.rs.client.WebTarget;
 @Getter @Setter
 public abstract class Connector {
 
-    private static String HOST_NAME = PropertyReader.getPropValue("hostname");
+    private static String HOST_NAME = PropertyReader.getPropValue("host");
 
     private Client orderClient;
     private Client driverClient;
@@ -24,15 +24,15 @@ public abstract class Connector {
 
     private ObjectMapper objectMapper;
 
-    public Connector() {
+    protected Connector() {
         orderClient = ClientBuilder.newClient();
-        orderTarget = orderClient.target("http://" + HOST_NAME + "/info-table/orders");
+        orderTarget = orderClient.target(HOST_NAME + "/info-table/orders");
 
         driverClient = ClientBuilder.newClient();
-        driverTarget = driverClient.target("http://" + HOST_NAME + "/info-table/driver-stats");
+        driverTarget = driverClient.target(HOST_NAME + "/info-table/driver-stats");
 
         lorryClient = ClientBuilder.newClient();
-        lorryTarget = lorryClient.target("http://" + HOST_NAME + "/info-table/lorry-stats");
+        lorryTarget = lorryClient.target(HOST_NAME + "/info-table/lorry-stats");
 
         objectMapper = new ObjectMapper();
     }

@@ -4,6 +4,7 @@ import com.alekseytyan.logiweb.dto.DriverDTO;
 import com.alekseytyan.logiweb.dto.LoadDTO;
 import com.alekseytyan.logiweb.dto.LorryDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
+import com.alekseytyan.logiweb.entity.Driver;
 import com.alekseytyan.logiweb.service.api.CityService;
 import com.alekseytyan.logiweb.service.api.DriverService;
 import com.alekseytyan.logiweb.service.api.LorryService;
@@ -19,6 +20,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
+/**
+ * Controller is used to support CRUD operations with orders
+ */
 @Controller
 @RequestMapping("/employee")
 public class OrderCrudController {
@@ -39,6 +43,7 @@ public class OrderCrudController {
         this.lorryService = lorryService;
     }
 
+    // Each operation requires list of cities
     @ModelAttribute("cityNames")
     public List<String> cityNames() {
         return cityService.findAllNames();
@@ -73,6 +78,7 @@ public class OrderCrudController {
         model.addAttribute("newLoad", new LoadDTO());
         model.addAttribute("order", orderDTO);
 
+        // Check if chosen route is possible, alert user if not, so that they can change it
         if(!orderService.calculateRoute(orderDTO).isPossible()) {
             model.addAttribute("routePossibility",
                     "This order isn't optimal (or possible) due to the route. Please, delete the last load.");
@@ -134,6 +140,8 @@ public class OrderCrudController {
             attributes.addAttribute("errorCode", 1);
             return new RedirectView("/employee/edit-order");
         }
+        LorryDTO lorryDTO = lorryService.findById(regNum);
+
 
         Route route = orderService.calculateRoute(orderDTO);
         if(!route.isPossible()) {
@@ -141,32 +149,50 @@ public class OrderCrudController {
             return new RedirectView("/employee/edit-order");
         }
 
-        if(driver1Id == null || driver2Id == null) {
+        if(driver1Id == null && driver2Id == null) {
             attributes.addAttribute("errorCode", 3);
             return new RedirectView("/employee/edit-order");
         }
 
-        if(driver1Id.equals(driver2Id)) {
-            attributes.addAttribute("errorCode", 4);
-            return new RedirectView("/employee/edit-order");
+        if(driver1Id != null && driver2Id != null) {
+            DriverDTO driverDTO = driverService.findById(driver1Id);
+            if(driver1Id.equals(driver2Id)) {
+                driverDTO.setOrder(orderDTO);
+                orderDTO.getDrivers().add(driverDTO);
+                driverDTO.setLorry(lorryDTO);
+
+                orderDTO.setLorry(lorryDTO);
+
+                driverService.update(driverDTO);
+            } else {
+                DriverDTO driver2DTO = driverService.findById(driver2Id);
+
+                orderDTO.setLorry(lorryDTO);
+
+                orderDTO.getDrivers().add(driverDTO);
+                orderDTO.getDrivers().add(driver2DTO);
+
+                driverDTO.setOrder(orderDTO);
+                driver2DTO.setOrder(orderDTO);
+
+                driverDTO.setLorry(lorryDTO);
+                driver2DTO.setLorry(lorryDTO);
+
+                driverService.update(driver2DTO);
+            }
+        } else if(driver1Id == null) {
+            DriverDTO driverDTO = driverService.findById(driver2Id);
+            driverDTO.setOrder(orderDTO);
+            orderDTO.getDrivers().add(driverDTO);
+            driverDTO.setLorry(lorryDTO);
+            driverService.update(driverDTO);
+        } else {
+            DriverDTO driverDTO = driverService.findById(driver1Id);
+            driverDTO.setOrder(orderDTO);
+            orderDTO.getDrivers().add(driverDTO);
+            driverDTO.setLorry(lorryDTO);
+            driverService.update(driverDTO);
         }
-
-        LorryDTO lorryDTO = lorryService.findById(regNum);
-        DriverDTO driverDTO = driverService.findById(driver1Id);
-        DriverDTO driver2DTO = driverService.findById(driver2Id);
-
-        orderDTO.setLorry(lorryDTO);
-        orderDTO.getDrivers().add(driverDTO);
-        orderDTO.getDrivers().add(driver2DTO);
-
-        driverDTO.setOrder(orderDTO);
-        driver2DTO.setOrder(orderDTO);
-
-        driverDTO.setLorry(lorryDTO);
-        driver2DTO.setLorry(lorryDTO);
-
-        driverService.update(driverDTO);
-        driverService.update(driver2DTO);
 
         orderService.update(orderDTO);
 

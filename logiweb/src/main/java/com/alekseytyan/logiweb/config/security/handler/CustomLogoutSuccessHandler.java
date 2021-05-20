@@ -1,5 +1,7 @@
 package com.alekseytyan.logiweb.config.security.handler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
@@ -11,6 +13,8 @@ import java.io.IOException;
 
 public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(CustomLogoutSuccessHandler.class);
+
     public CustomLogoutSuccessHandler() {
         super();
     }
@@ -18,7 +22,8 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) throws IOException, ServletException {
         final String refererUrl = request.getHeader("Referer");
-        System.out.println(refererUrl);
+
+        logger.info("Referred url: " + refererUrl);
 
         super.onLogoutSuccess(request, response, authentication);
     }

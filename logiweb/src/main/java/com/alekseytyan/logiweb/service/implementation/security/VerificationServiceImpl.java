@@ -9,6 +9,7 @@ import com.alekseytyan.logiweb.service.api.VerificationService;
 import com.alekseytyan.logiweb.service.implementation.AbstractServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +21,9 @@ public class VerificationServiceImpl
     private final UserService userService;
 
     @Autowired
-    public VerificationServiceImpl(VerificationTokenDao dao, ModelMapper mapper, UserService userService) {
+    public VerificationServiceImpl(VerificationTokenDao dao,
+                                   ModelMapper mapper,
+                                   UserService userService) {
         super(dao, mapper, VerificationTokenDTO.class, VerificationToken.class);
 
         this.userService = userService;
@@ -36,5 +39,10 @@ public class VerificationServiceImpl
     @Transactional(readOnly = true)
     public VerificationTokenDTO getVerificationToken(String token) {
         return convertToDTO(getDao().getVerificationToken(token));
+    }
+
+    @Override
+    public void deleteAll() {
+        getDao().deleteAll();
     }
 }

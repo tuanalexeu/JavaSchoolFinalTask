@@ -17,6 +17,7 @@ public class DataSourceListener implements ApplicationListener<DataSourceEvent> 
 
     @Override
     public void onApplicationEvent(DataSourceEvent event) {
+        // Listener listens for the event and send message via message service
         messageService.send(event.getMessage());
     }
     

@@ -6,66 +6,106 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+
 <h:head>
     <title>Infotable</title>
-<!--    <h:outputStylesheet library="css" name="/assets/main.css" />&ndash;&gt;-->
-</h:head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>
 
-<h:body>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="fontawesome-all.min.css"/>
+    <h:outputStylesheet library="css" name="font-awesome.min.css"/>
+    <h:outputStylesheet library="css" name="fontawesome5-overrides.min.css"/>
+    <h:outputStylesheet library="css" name="untitled-1.css"/>
+    <h:outputStylesheet library="css" name="untitled-2.css"/>
+    <h:outputStylesheet library="css" name="untitled-3.css"/>
+    <h:outputStylesheet library="css" name="untitled-4.css"/>
+    <h:outputStylesheet library="css" name="untitled.css"/>
 
-    <div id="header" class="ui-g-12">
-        <h3>Welcome to the dashboard!</h3>
-    </div>
-
-    <div id="main" class="ui-g-12">
-        <div id="orders-table" class="ui-g-12 ui-md-12 ui-lg-8">
-            <h3>Latest orders</h3>
-            <p:dataTable var="order" reflow="true" value="#{restReceiver.orders}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{order.id}" />
-                </p:column>
-                <p:column headerText="Finished">
-                    <h:outputText value="#{order.finished}" />
-                </p:column>
-                <p:column headerText="Loads">
-                    <h:outputText value="#{order.loads}" />
-                </p:column>
-                <p:column headerText="Truck">
-                    <h:outputText value="#{order.lorry}" />
-                </p:column>
-                <p:column headerText="Drivers">
-                    <h:outputText value="#{order.drivers}" />
-                </p:column>
-            </p:dataTable>
-        </div>
-        <div class="ui-g-12 ui-md-12 ui-lg-4">
-            <div class="ui-g-12 ui-md-6 ui-lg-12">
-<!--                <p:chart type="pie" styleClass="side-chart" model="#{restReceiver.driverStats}"/>-->
-                <h2>#{restReceiver.driverStats.available}</h2>
-                <h2>#{restReceiver.driverStats.unavailable}</h2>
-            </div>
-            <div class="ui-g-12 ui-md-6 ui-lg-12">
-<!--                <p:chart type="pie" styleClass="side-chart" model="#{restReceiver.lorryStats}"  />-->
-                <h2>#{restReceiver.lorryStats.available}</h2>
-                <h2>#{restReceiver.lorryStats.unavailable}</h2>
-                <h2>#{restReceiver.lorryStats.broken}</h2>
-            </div>
-        </div>
-    </div>
-    <div id="footer" class="ui-g-12">
-        <h:outputText value="LogiWeb &copy; 2018" />
-    </div>
-
-    <f:websocket channel="websocket" onmessage="socketListener()"/>
-
-    <script type="text/javascript">
-        function socketListener(message, channel, event) {
-            console.log('websocket push message::' + message);
-
-            $(".ui-g-12 h3").html("your new header");
+    <h:outputScript>
+        function onMessage(message) {
             location.reload();
         }
-    </script>
+    </h:outputScript>
+</h:head>
+
+<h:body id="page-top">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand sticky-top mb-4 topbar static-top" style="background: rgb(255,103,173);">
+                    <div class="container-fluid">
+                        <h1 style="color: rgb(255,255,255);margin-left: 10px;margin-top: 2px;">Logiweb Dashboard</h1>
+                    </div>
+                </nav>
+                <div class="container-fluid" id="dashboard_container">
+                    <h3 class="text-dark mb-4">Dashboard info</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 font-weight-bold">Latest orders</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive table mt-2" id="dataTable_div">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Status</th>
+                                        <th>Lorry</th>
+                                        <th>Driver 1</th>
+                                        <th>Driver 2</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <ui:repeat value="#{restReceiver.orders}" var="order" varStatus="outer_loop">
+                                        <tr>
+                                            <td>#{order.id}</td>
+                                            <td>#{order.finished ? "Finished" : "In process"}</td>
+                                            <td>#{order.regNum}</td>
+                                            <td>#{order.driver1Name}</td>
+                                            <td>#{order.driver2Name}</td>
+                                        </tr>
+                                    </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 font-weight-bold">Availability info</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="ui-g-12 ui-md-12 ui-lg-4">
+                                <h3>Drivers:</h3>
+                                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                                    <p:chart type="pie" styleClass="side-chart" model="#{restReceiver.driverStats}"/>
+                                </div>
+                                <h3>Trucks:</h3>
+                                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                                    <p:chart type="pie" styleClass="side-chart" model="#{restReceiver.lorryStats}"  />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="footer" class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Logiweb 2021</span></div>
+                </div>
+            </div>
+        </div>
+
+        <a class="border rounded d-inline scroll-to-top" href="#page-top">
+            <i class="fas fa-angle-up">
+
+            </i>
+        </a>
+    </div>
+
+    <f:websocket channel="websocket" onmessage="onMessage"/>
 
 </h:body>
+
 </html>

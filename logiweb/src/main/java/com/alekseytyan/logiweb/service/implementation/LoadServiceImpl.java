@@ -4,6 +4,7 @@ import com.alekseytyan.logiweb.dto.LoadDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
 import com.alekseytyan.logiweb.dao.api.LoadDao;
 import com.alekseytyan.logiweb.entity.Load;
+import com.alekseytyan.logiweb.entity.enums.LoadStatus;
 import com.alekseytyan.logiweb.service.api.LoadService;
 import com.alekseytyan.logiweb.service.api.OrderService;
 import org.modelmapper.ModelMapper;
@@ -30,6 +31,20 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
     @Transactional(readOnly = true)
     public Long findOrderId(Long loadId) {
         return getDao().findById(loadId).getOrder().getId();
+    }
+
+    @Override
+    @Transactional
+    public LoadDTO update(LoadDTO loadDTO) {
+
+        loadDTO = super.update(loadDTO);
+        OrderDTO orderDTO = loadDTO.getOrder();
+
+        boolean isOrderFinished = orderDTO.getLoads().stream().allMatch(l -> l.getStatus() == LoadStatus.DELIVERED);
+        orderDTO.setFinished(isOrderFinished);
+        orderService.update(orderDTO);
+
+        return loadDTO;
     }
 
     @Override

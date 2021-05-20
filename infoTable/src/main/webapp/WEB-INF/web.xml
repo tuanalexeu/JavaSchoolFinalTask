@@ -7,6 +7,10 @@
 
     <display-name>Logiweb table info</display-name>
 
+    <error-page>
+        <location>/WEB-INF/error/general-error.xhtml</location>
+    </error-page>
+
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
@@ -37,10 +41,11 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
-    <context-param>
-        <param-name>javax.faces.ENABLE_CDI_RESOLVER_CHAIN</param-name>
-        <param-value>true</param-value>
-    </context-param>
+<!--    <context-param>-->
+<!--        <param-name>javax.faces.ENABLE_CDI_RESOLVER_CHAIN</param-name>-->
+<!--        <param-value>true</param-value>-->
+<!--    </context-param>-->
+
     <context-param>
         <param-name>javax.faces.ENABLE_WEBSOCKET_ENDPOINT</param-name>
         <param-value>true</param-value>

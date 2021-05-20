@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+/**
+ * Controller is used to support CRUD operations with loads
+ */
 @Controller
 @RequestMapping(value = "/employee")
 public class LoadCrudController {

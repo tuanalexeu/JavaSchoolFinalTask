@@ -7,6 +7,9 @@ import org.springframework.validation.ObjectError;
 
 import java.util.List;
 
+/**
+ * Generic response is used by Spring REST
+ */
 public class GenericResponse {
 
     private String message;

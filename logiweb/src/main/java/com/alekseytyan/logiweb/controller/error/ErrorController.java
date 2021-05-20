@@ -3,6 +3,9 @@ package com.alekseytyan.logiweb.controller.error;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Controller is used to display error pages
+ */
 @Controller
 public class ErrorController {
 

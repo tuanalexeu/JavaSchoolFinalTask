@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Logiweb</title>
+    <title>Approve users - Logiweb</title>
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -71,9 +72,9 @@
                                     <option value="100">100</option>
                                 </select>&nbsp;</label></div>
                             </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-primary btn-block btn-user" id="loginbutton2" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Approve all</button>
-                            </div>
+<%--                            <div class="col-md-6">--%>
+<%--                                <button class="btn btn-primary btn-block btn-user" id="loginbutton2" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Approve all</button>--%>
+<%--                            </div>--%>
                         </div>
                         <div class="table-responsive table mt-2" id="dataTable2" role="grid" aria-describedby="dataTable_info">
                             <table class="table my-0" id="dataTable2">
@@ -86,18 +87,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${newUsers}" var="driver">
+                                <c:forEach items="${newUsers}" var="user">
                                     <tr>
-                                        <td>${driver.firstName} ${driver.lastName}</td>
-                                        <td>${driver.email}</td>
-                                        <td>${driver.role}</td>
+                                        <td>${user.firstName} ${user.lastName}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.role}</td>
                                         <td>
                                             <form action="${pageContext.request.contextPath}/admin/approve-user" method="post">
-                                                <input type="hidden" name="email" value="${driver.email}">
+                                                <input type="hidden" name="email" value="${user.email}">
                                                 <button class="btn btn-primary btn-block btn-user" id="approveUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Approve</button>
                                             </form>
                                             <form action="${pageContext.request.contextPath}/admin/delete-user" method="post">
-                                                <input type="hidden" name="email" value="${driver.email}">
+                                                <input type="hidden" name="email" value="${user.email}">
                                                 <button class="btn btn-primary btn-block btn-user" id="deleteUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">x</button>
                                             </form>
                                         </td>
@@ -113,11 +114,11 @@
                             <div class="col-md-6">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><<</span></a></li>
                                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">>></span></a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -128,7 +129,9 @@
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">
             <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Logiweb 2021</span></div>
+                <div class="text-center my-auto copyright">
+                    <span>Logiweb 2021</span>
+                </div>
             </div>
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -137,6 +140,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

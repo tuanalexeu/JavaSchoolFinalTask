@@ -1,6 +1,9 @@
 package com.alekseytyan.logiweb.service.implementation.security;
 
 import com.alekseytyan.logiweb.dto.DriverDTO;
+import com.alekseytyan.logiweb.entity.Driver;
+import com.alekseytyan.logiweb.entity.enums.DriverState;
+import com.alekseytyan.logiweb.entity.enums.UserRole;
 import com.alekseytyan.logiweb.exception.UserAlreadyExistException;
 import com.alekseytyan.logiweb.dto.UserDTO;
 import com.alekseytyan.logiweb.dao.api.UserDao;
@@ -22,6 +25,23 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
 
     private final PasswordEncoder passwordEncoder;
     private final DriverService driverService;
+
+
+    @Override
+    public UserDTO update(UserDTO userDTO) {
+        DriverDTO driverDTO = driverService.findDriverByUser(userDTO.getEmail());
+
+        if(driverDTO != null) {
+            driverDTO.setUser(null);
+            driverService.update(driverDTO);
+        }
+
+        if(userDTO.getDriver() != null) {
+            userDTO.getDriver().setUser(null);
+        }
+
+        return super.update(userDTO);
+    }
 
     @Autowired
     public UserServiceImpl(UserDao dao,
@@ -50,13 +70,13 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
 
 
     @Override
-    public List<UserDTO> findDisabled() {
-        return convertToDTO(getDao().findDisabled());
+    public List<UserDTO> findDisabled(Integer size, Integer page) {
+        return convertToDTO(getDao().findDisabled(size, page));
     }
 
     @Override
-    public List<UserDTO> findDisabledAndVerified() {
-        return convertToDTO(getDao().findDisabledAndVerified());
+    public List<UserDTO> findDisabledAndVerified(Integer size, Integer page) {
+        return convertToDTO(getDao().findDisabledAndVerified(size, page));
     }
 
     @Override
@@ -73,8 +93,13 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao, UserDTO,
     }
 
     @Override
-    public List<UserDTO> findWithoutDriver() {
-        return convertToDTO(getDao().findWithoutDriver());
+    public List<UserDTO> findWithoutDriver(Integer size, Integer page) {
+        return convertToDTO(getDao().findWithoutDriver(size, page));
+    }
+
+    @Override
+    public void deleteIfUnconfirmed(String email) {
+        getDao().deleteIfUnconfirmed(email);
     }
 
     private boolean emailExists(String email) {

@@ -4,6 +4,7 @@ import com.alekseytyan.logiweb.dao.api.UserDao;
 import com.alekseytyan.logiweb.entity.security.User;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -14,17 +15,25 @@ public class UserDaoImpl extends AbstractDaoImpl<User, String> implements UserDa
     }
 
     @Override
-    public List<User> findDisabled() {
-        return entityManager.createNamedQuery("User.findDisabled", User.class).getResultList();
+    public List<User> findDisabled(Integer size, Integer page) {
+        Query query = entityManager.createNamedQuery("User.findDisabled", User.class);
+        return queryPage(query, size, page);
     }
 
     @Override
-    public List<User> findWithoutDriver() {
-        return entityManager.createNamedQuery("User.findWithoutDriver", User.class).getResultList();
+    public List<User> findWithoutDriver(Integer size, Integer page) {
+        Query query =  entityManager.createNamedQuery("User.findWithoutDriver", User.class);
+        return queryPage(query, size, page);
     }
 
     @Override
-    public List<User> findDisabledAndVerified() {
-        return entityManager.createNamedQuery("User.findVerifiedAndDisabled", User.class).getResultList();
+    public List<User> findDisabledAndVerified(Integer size, Integer page) {
+        Query query = entityManager.createNamedQuery("User.findVerifiedAndDisabled", User.class);
+        return queryPage(query, size, page);
+    }
+
+    @Override
+    public void deleteIfUnconfirmed(String email) {
+        entityManager.createNamedQuery("User.deleteIfUnconfirmed").setParameter("email", email);
     }
 }

@@ -5,6 +5,9 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+/**
+ * Util class is used to calculate expiry date
+ */
 public class ExpiryDate {
 
     private static final int EXPIRATION = 60 * 24;

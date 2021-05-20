@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Forgotten Password - Logiweb</title>
+
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
+
     <link rel="stylesheet" href="<c:url value="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/assets/fonts/font-awesome.min.css"/>">
@@ -25,12 +28,17 @@
                 <p class="text-white mb-4" style="color: rgb(0,0,0);">Please, enter your email below and we will send you a letter</p>
             </div>
             <form class="user">
-                <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div><button class="btn btn-primary btn-block text-white btn-user" id="loginbutton" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Reset Password</button>
+                <div class="form-group">
+                    <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email">
+                </div>
+                <button class="btn btn-primary btn-block text-white btn-user" id="loginbutton" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Reset Password</button>
             </form>
             <div class="text-center">
                 <hr><a class="small" href="${pageContext.request.contextPath}/register" style="color: rgb(244,247,255);">Create an Account!</a>
             </div>
-            <div class="text-center"><a class="small" href="${pageContext.request.contextPath}/login" style="color: rgb(255,255,255);">Already have an account?</a></div>
+            <div class="text-center">
+                <a class="small" href="${pageContext.request.contextPath}/login" style="color: rgb(255,255,255);">Already have an account?</a>
+            </div>
         </div>
     </div>
 </div>
@@ -38,6 +46,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.validation.api;
 
+
 import com.alekseytyan.logiweb.validation.implementation.EmailValidator;
 
 import javax.validation.Constraint;

@@ -1,11 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html style="background: #ced8e6;">
+<html style="background: #ffffff;">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Page Not Found - Logiweb</title>
+    <title>Internal - Logiweb</title>
+
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
+
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -19,7 +22,7 @@
 
 <body id="page-top">
 <div id="wrapper">
-    <div class="d-flex flex-column" id="content-wrapper" style="background: #ced8e6;">
+    <div class="d-flex flex-column" id="content-wrapper" style="background: #ffffff;">
         <div id="content" style="background: #ffffff;">
             <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ffffff;">
                 <div class="container-fluid"><a href="#">Link</a><a href="#">Link</a></div>
@@ -45,6 +48,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>

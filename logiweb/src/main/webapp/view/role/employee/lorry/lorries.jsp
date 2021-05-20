@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Logiweb</title>
+    <title>Trucks - Logiweb</title>
+    <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/font-awesome.min.css"/>">
@@ -83,7 +84,7 @@
                                                                     <h3 style="margin: 10px;">Reg number</h3>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <form:input id="regNum" path="regNum" cssErrorClass="errorBox"/>
+                                                                    <form:input id="regNum" pattern="[a-zA-Z]{2}\d{5}" required="required" path="regNum" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -93,7 +94,7 @@
                                                                     <h3 style="margin: 10px;">Shift time</h3>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <form:input id="shiftTime" path="shiftTime" cssErrorClass="errorBox"/>
+                                                                    <form:input id="shiftTime" type="number" min="0" max="10000" required="required" path="shiftTime" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -103,7 +104,7 @@
                                                                     <h3 style="margin: 10px;">Capacity</h3>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <form:input id="capactiy" path="capacity" cssErrorClass="errorBox"/>
+                                                                    <form:input id="capactiy" type="number" min="1000" max="50000" required="required" path="capacity" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -114,7 +115,7 @@
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="dropdown">
-                                                                        <form:select id="status" path="broken" cssErrorClass="errorBox">
+                                                                        <form:select id="status" path="broken" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                                                             <form:option value="true">Broken</form:option>
                                                                             <form:option value="false">Serviceable</form:option>
                                                                         </form:select>
@@ -129,7 +130,7 @@
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="dropdown">
-                                                                        <form:select  path="city.name">
+                                                                        <form:select  path="city.name"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
                                                                             <c:forEach items="${cities}" var="city">
                                                                                 <form:option value="${city}">${city}</form:option>
                                                                             </c:forEach>
@@ -187,11 +188,11 @@
                             <div class="col-md-6">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><<</span></a></li>
                                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">>></span></a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -211,6 +212,8 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="<c:out value="/assets/js/chart.min.js"/>"></script>
+<script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
 
 </html>
