@@ -9,12 +9,14 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
+    <name>logiweb-service</name>
 
     <artifactId>logiweb</artifactId>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <maven.tomcat.version>9.0.45</maven.tomcat.version>
     </properties>
 
     <packaging>war</packaging>
@@ -217,33 +219,12 @@
     </dependencies>
 
     <build>
-        <finalName>logiweb</finalName>
+        <finalName>logiweb-service</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <url>http://localhost:8080/manager/text</url>
-                    <server>tomcat</server>
-                    <username>admin1</username>
-                    <password>admin1</password>
-                    <path>/</path>
-                    <update>true</update>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 

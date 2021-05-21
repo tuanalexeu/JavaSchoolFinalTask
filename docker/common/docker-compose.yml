@@ -1,0 +1,6 @@
+version: '2'
+services:
+  simpleservice:
+    image: tuanalexeu/final-task:v1.0
+    ports:
+      - "8080:8080"
