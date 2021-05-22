@@ -1,6 +1,13 @@
 version: '2'
 services:
-  simpleservice:
-    image: tuanalexeu/final-task:v1.0
+
+  eurekaserver:
+    image: tuanalexeu/eureka-service:final-task
+    mem_limit: 1073741824
+    ports:
+      - "8761:8761"
+
+  auth-service:
+    image: tuanalexeu/auth-service:final-task
     ports:
       - "8080:8080"
