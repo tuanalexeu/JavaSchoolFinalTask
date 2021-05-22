@@ -21,7 +21,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 143179179
       MYSQL_DATABASE: logiweb
-      MYSQL_USER: root
+#      MYSQL_USER: root
       MYSQL_PASSWORD: 143179179
 
   auth-service:

@@ -20,6 +20,8 @@
         <module>auth-service</module>
         <module>eureka-service</module>
         <module>config-service</module>
+        <module>proxy-service</module>
+        <module>gateway-service</module>
     </modules>
     <name>JavaSchoolFinalTask</name>
     <packaging>pom</packaging>
