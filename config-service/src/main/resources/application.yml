@@ -1,11 +1,12 @@
 server:
   port: 8888
 spring:
-  application:
-    name: config-service
   cloud:
     config:
       server:
+        encrypt.enabled: false
         git:
-          uri: ${HOME}/Desktop/final-task/config-service/src/main/resources/config/
-          search-paths: '{application}'
+          uri: https://github.com/tuanalexeu/final-task/config-repo/
+          searchPaths: auth-service,logiweb-service
+          username: tuanalexeu
+          password: 143179179AAa

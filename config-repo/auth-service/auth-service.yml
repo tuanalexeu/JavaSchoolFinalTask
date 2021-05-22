@@ -1,1 +1,2 @@
 # Example centralized config file for authentication service
+example.property: "Something for auth-service"
