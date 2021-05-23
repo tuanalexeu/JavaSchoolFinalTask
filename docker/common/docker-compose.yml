@@ -35,13 +35,13 @@ services:
       DATABASESERVER_PORT: "3306"
       ENCRYPT_KEY: "IMSYMMETRIC"
 
-  logiweb-service:
-    image: tuanalexeu/logiweb-service:final-task
-    ports:
-      - "8088:8088"
-    environment:
-      PROFILE: "default"
-      CONFIGSERVER_URI: "http://config-service:8888"
-      CONFIGSERVER_PORT: "8888"
-      DATABASESERVER_PORT: "3306"
-      ENCRYPT_KEY: "IMSYMMETRIC"
+#  logiweb-service:
+#    image: tuanalexeu/logiweb-service:final-task
+#    ports:
+#      - "8088:8088"
+#    environment:
+#      PROFILE: "default"
+#      CONFIGSERVER_URI: "http://config-service:8888"
+#      CONFIGSERVER_PORT: "8888"
+#      DATABASESERVER_PORT: "3306"
+#      ENCRYPT_KEY: "IMSYMMETRIC"
