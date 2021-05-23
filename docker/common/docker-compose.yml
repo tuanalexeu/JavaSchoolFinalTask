@@ -7,11 +7,11 @@ services:
 #    ports:
 #      - "8761:8761"
 
-#  rabbitmq:
-#    image: rabbitmq:management
-#    ports:
-#      - "5672:5672"
-#      - "15672:15672"
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
   config-service:
     image: tuanalexeu/config-service:final-task
@@ -29,34 +29,34 @@ services:
       MYSQL_DATABASE: logiweb
       MYSQL_PASSWORD: 143179179
 
-  auth-service:
-    image: tuanalexeu/auth-service:final-task
-    ports:
-      - "8080:8080"
-    depends_on:
-      - database
-      - config-service
-    environment:
-      PROFILE: "default"
-      CONFIGSERVER_URI: "http://config-service:8888"
-      CONFIGSERVER_PORT: "8888"
-      DATABASESERVER_PORT: "3306"
-      ENCRYPT_KEY: "IMSYMMETRIC"
-
-#  logiweb-service:
-#    image: tuanalexeu/logiweb-service:final-task
+#  auth-service:
+#    image: tuanalexeu/auth-service:final-task
 #    ports:
 #      - "8080:8080"
 #    depends_on:
 #      - database
 #      - config-service
-#      - rabbitmq
 #    environment:
 #      PROFILE: "default"
 #      CONFIGSERVER_URI: "http://config-service:8888"
 #      CONFIGSERVER_PORT: "8888"
 #      DATABASESERVER_PORT: "3306"
 #      ENCRYPT_KEY: "IMSYMMETRIC"
+
+  logiweb-service:
+    image: tuanalexeu/logiweb-service:final-task
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+      - config-service
+      - rabbitmq
+    environment:
+      PROFILE: "default"
+      CONFIGSERVER_URI: "http://config-service:8888"
+      CONFIGSERVER_PORT: "8888"
+      DATABASESERVER_PORT: "3306"
+      ENCRYPT_KEY: "IMSYMMETRIC"
 
 networks:
   rabbitmq_go_net:
