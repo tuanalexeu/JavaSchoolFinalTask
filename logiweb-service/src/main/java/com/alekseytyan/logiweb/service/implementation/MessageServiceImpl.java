@@ -25,7 +25,7 @@ public class MessageServiceImpl implements MessageService {
 
         // Establish connection with host localhost
         ConnectionFactory connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost("localhost");
+        connectionFactory.setHost("rabbitmq");
 
         connection = connectionFactory.newConnection();
         channel = connection.createChannel();

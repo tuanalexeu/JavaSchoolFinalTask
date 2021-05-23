@@ -6,7 +6,7 @@ spring:
       server:
         encrypt.enabled: false
         git:
-          uri: https://github.com/tuanalexeu/final-task/tree/master-p2/config-repo
+          uri: https://github.com/tuanalexeu/config-repo
           searchPaths: auth-service,logiweb-service
           username: tuanalexeu
           password: 143179179AAa

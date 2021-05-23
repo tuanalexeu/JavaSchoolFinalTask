@@ -1,19 +1,20 @@
 package com.alekseytyan.auth.controller;
 
-import com.alekseytyan.auth.config.RemoteServerConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RefreshScope
 public class ExampleController {
 
-    @Autowired
-    private RemoteServerConfig config;
+    @Value("${example.property}")
+    private String exampleProperty;
 
     @GetMapping(value = "/example")
     public String exampleEndpoint() {
-        return String.format(config.getExampleProperty());
+        return String.format(exampleProperty);
     }
 
 }
