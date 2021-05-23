@@ -11,6 +11,8 @@
     <modelVersion>4.0.0</modelVersion>
     <name>logiweb-service</name>
 
+    <packaging>war</packaging>
+
     <artifactId>logiweb</artifactId>
 
     <properties>
@@ -250,7 +252,7 @@
                         <resource>
                             <targetPath>/</targetPath>
                             <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
+                            <include>${project.build.finalName}.war</include>
                         </resource>
                     </resources>
                 </configuration>
