@@ -6,6 +6,9 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -13,9 +16,13 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @Service
+@PropertySource("classpath:messaging.properties")
 public class MessageServiceImpl implements MessageService {
 
     private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
+
+    @Autowired
+    private Environment environment;
 
     Connection connection;
     Channel channel;
@@ -25,7 +32,7 @@ public class MessageServiceImpl implements MessageService {
 
         // Establish connection with host localhost
         ConnectionFactory connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost("rabbitmq");
+        connectionFactory.setHost(environment.getProperty("rabbitmq.host"));
 
         connection = connectionFactory.newConnection();
         channel = connection.createChannel();
