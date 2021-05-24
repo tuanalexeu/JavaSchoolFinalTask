@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ExampleController {
 
-    @Value("${example.property}")
+    @Value("${example.property:default}")
     private String exampleProperty;
 
     @GetMapping(value = "/example")
