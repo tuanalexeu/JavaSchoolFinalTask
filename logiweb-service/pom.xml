@@ -17,7 +17,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <maven.tomcat.version>9.0.45</maven.tomcat.version>
-        <start-class>com.alekseytyan.logiweb.LogiwebServer</start-class>
+        <start-class>com.alekseytyan.logiweb.LogiwebService</start-class>
         <docker.image.name>tuanalexeu/logiweb-service</docker.image.name>
         <docker.image.tag>final-task</docker.image.tag>
     </properties>
@@ -27,7 +27,22 @@
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.passay/passay -->

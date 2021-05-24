@@ -3,10 +3,20 @@ server:
 spring:
   cloud:
     config:
+      discovery:
+        enabled: true
       server:
-        encrypt.enabled: false
         git:
           uri: https://github.com/tuanalexeu/config-repo
           searchPaths: auth-service,logiweb-service,eureka-service
-          username: tuanalexeu
-          password: 143179179AAa
+
+## enable all actuator endpoints for testing (review this for real deployments)
+#management.endpoints.web:
+#  include: '*'
+
+#Setting logging levels
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG

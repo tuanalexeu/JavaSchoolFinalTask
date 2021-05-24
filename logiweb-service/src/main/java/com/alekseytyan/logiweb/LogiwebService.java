@@ -2,10 +2,11 @@ package com.alekseytyan.logiweb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-public class LogiwebServer {
+public class LogiwebService {
     public static void main(String[] args) {
-        SpringApplication.run(LogiwebServer.class, args);
+        SpringApplication.run(LogiwebService.class, args);
     }
 }
