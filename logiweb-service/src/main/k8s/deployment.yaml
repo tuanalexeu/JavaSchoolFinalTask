@@ -1,0 +1,21 @@
+apiVersion: final-task/v1
+kind: Deployment
+metadata:
+  name: logiweb-service
+  labels:
+    app: logiweb-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: logiweb-service
+  template:
+    metadata:
+      labels:
+        app: logiweb-service
+    spec:
+      containers:
+        - name: logiweb-service
+          image: tuanalexeu/logiweb-service:final-task
+          ports:
+            - containerPort: 8080

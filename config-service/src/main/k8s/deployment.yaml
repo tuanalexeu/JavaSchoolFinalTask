@@ -1,0 +1,21 @@
+apiVersion: final-task/v1
+kind: Deployment
+metadata:
+  name: config-service
+  labels:
+    app: config-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: config-service
+  template:
+    metadata:
+      labels:
+        app: config-service
+    spec:
+      containers:
+        - name: config-service
+          image: tuanalexeu/config-service:final-task
+          ports:
+            - containerPort: 8888
