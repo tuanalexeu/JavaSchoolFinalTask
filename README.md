@@ -247,3 +247,5 @@ Angular/React (например, админка для табло), Docker, Micr
 
 [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/GitLab_logo.svg/1280px-GitLab_logo.svg.png" alt="drawing" width="100">](https://gitlab.com/tuanalexeu/final-task/)
 
+[<img src="https://upload.wikimedia.org/wikipedia/commons/5/54/GitHub_Logo.png" alt="drawing" width="100">](https://github.com/tuanalexeu/logiweb-microservices)
+
