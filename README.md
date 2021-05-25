@@ -242,3 +242,8 @@ Angular/React (например, админка для табло), Docker, Micr
 наличие «killer features».
     
 </details>
+
+[<img src="https://www.docker.com/sites/default/files/d8/2019-07/Moby-logo.png">](https://hub.docker.com/u/tuanalexeu/)
+
+[<img src="https://theme.zdassets.com/theme_assets/410268/7f943f2114dd9c5131d6ab56ab8a43f4e062e185.png">](https://gitlab.com/tuanalexeu/final-task/)
+
