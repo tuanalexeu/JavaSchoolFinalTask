@@ -3,20 +3,18 @@ server:
 spring:
   cloud:
     config:
-      discovery:
-        enabled: true
       server:
         git:
           uri: https://github.com/tuanalexeu/config-repo
           searchPaths: auth-service,logiweb-service,eureka-service
 
-## enable all actuator endpoints for testing (review this for real deployments)
-#management.endpoints.web:
-#  include: '*'
+# enable all actuator endpoints for testing (review this for real deployments)
+management.endpoints.web:
+  include: '*'
 
-#Setting logging levels
-logging:
-  level:
-    com.netflix: WARN
-    org.springframework.web: WARN
-    com.thoughtmechanix: DEBUG
+##Setting logging levels
+#logging:
+#  level:
+#    com.netflix: WARN
+#    org.springframework.web: WARN
+#    com.thoughtmechanix: DEBUG

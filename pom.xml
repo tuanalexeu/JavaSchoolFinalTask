@@ -18,7 +18,6 @@
     <modules>
         <module>logiweb-service</module>
         <module>auth-service</module>
-        <module>eureka-service</module>
         <module>config-service</module>
     </modules>
 

@@ -1,12 +1,6 @@
 version: '2'
 services:
 
-  eureka-service:
-    image: tuanalexeu/eureka-service:final-task
-    mem_limit: 1073741824
-    ports:
-      - "8761:8761"
-
   rabbitmq:
     image: rabbitmq:management
     ports:
@@ -26,11 +20,6 @@ services:
     image: tuanalexeu/config-service:final-task
     ports:
       - "8888:8888"
-    depends_on:
-      - eureka-service
-    environment:
-      EUREKASERVER_URI: "http://eureka-service:8761/eureka/"
-      EUREKASERVER_PORT: "8761"
 
   auth-service:
     image: tuanalexeu/auth-service:final-task
@@ -39,15 +28,12 @@ services:
     depends_on:
       - database
       - config-service
-      - eureka-service
     environment:
       PROFILE: "default"
       SERVER_PORT: "8088"
-      CONFIGSERVER_URI: "http://config-service:8888"
+      CONFIGSERVER_URI: "https://config-service:8888"
       CONFIGSERVER_PORT: "8888"
       DATABASESERVER_PORT: "3306"
-      EUREKASERVER_URI: "http://eureka-service:8761/eureka/"
-      EUREKASERVER_PORT: "8761"
 
   logiweb-service:
     image: tuanalexeu/logiweb-service:final-task
@@ -57,15 +43,12 @@ services:
       - database
       - config-service
       - rabbitmq
-      - eureka-service
     environment:
       PROFILE: "default"
       SERVER_PORT: "8080"
-      CONFIGSERVER_URI: "http://config-service:8888"
+      CONFIGSERVER_URI: "https://config-service:8888"
       CONFIGSERVER_PORT: "8888"
       DATABASESERVER_PORT: "3306"
-      EUREKASERVER_URI: "http://eureka-service:8761/eureka/"
-      EUREKASERVER_PORT: "8761"
 
 #networks:
 #  rabbitmq_go_net:
