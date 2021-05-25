@@ -243,7 +243,7 @@ Angular/React (например, админка для табло), Docker, Micr
     
 </details>
 
-[<img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" style="width: 100px">](https://hub.docker.com/u/tuanalexeu/)
+[<img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" style="width: 50px">](https://hub.docker.com/u/tuanalexeu/)
 
-[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/GitLab_logo.svg/1280px-GitLab_logo.svg.png" style="width: 100px">](https://gitlab.com/tuanalexeu/final-task/)
+[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/GitLab_logo.svg/1280px-GitLab_logo.svg.png" style="width: 50px">](https://gitlab.com/tuanalexeu/final-task/)
 
