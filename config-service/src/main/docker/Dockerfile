@@ -9,5 +9,8 @@ RUN echo $JAVA_HOME
 #    yes |cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/lib/jvm/java-1.8-openjdk/jre/lib/security/
 ADD  @project.build.finalName@.jar /usr/local/config-service/
 ADD run.sh run.sh
+
+EXPOSE 8888
+
 RUN chmod +x run.sh
 CMD ./run.sh
