@@ -1,11 +1,11 @@
-apiVersion: final-task/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: config-service
   labels:
     app: config-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: config-service
