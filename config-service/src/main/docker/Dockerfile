@@ -1,16 +1,8 @@
-FROM openjdk:8-jdk-alpine
-RUN  apk update && apk upgrade && apk add netcat-openbsd && apk add curl
-RUN mkdir -p /usr/local/config-service
-RUN echo $JAVA_HOME
-#RUN cd /tmp/ && \
-#    curl -k -LO "http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip" -H 'Cookie: oraclelicense=accept-securebackup-cookie' && \
-#    unzip jce_policy-8.zip && \
-#    rm jce_policy-8.zip && \
-#    yes |cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/lib/jvm/java-1.8-openjdk/jre/lib/security/
-ADD  @project.build.finalName@.jar /usr/local/config-service/
-ADD run.sh run.sh
-
+FROM openjdk:8-jre-alpine
+ENV APP_FILE @project.build.finalName@.jar
+ENV APP_HOME /usr/apps
 EXPOSE 8888
-
-RUN chmod +x run.sh
-CMD ./run.sh
+COPY $APP_FILE $APP_HOME/
+WORKDIR $APP_HOME
+ENTRYPOINT ["sh", "-c"]
+CMD ["exec java -jar $APP_FILE"]

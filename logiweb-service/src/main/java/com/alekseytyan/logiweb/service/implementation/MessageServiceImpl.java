@@ -4,6 +4,7 @@ import com.alekseytyan.logiweb.service.api.MessageService;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeoutException;
 
 @Service
@@ -27,12 +30,16 @@ public class MessageServiceImpl implements MessageService {
     Connection connection;
     Channel channel;
 
+    @SneakyThrows
     @PostConstruct
-    public void init() throws IOException, TimeoutException {
+    public void init() throws IOException, TimeoutException, NoSuchAlgorithmException, KeyManagementException {
 
         // Establish connection with host localhost
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setHost(environment.getProperty("rabbitmq.host"));
+        connectionFactory.setUsername(environment.getProperty("rabbitmq.user"));
+        connectionFactory.setPassword(environment.getProperty("rabbitmq.password"));
+        connectionFactory.useSslProtocol();
 
         connection = connectionFactory.newConnection();
         channel = connection.createChannel();

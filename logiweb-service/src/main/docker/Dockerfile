@@ -1,10 +1,8 @@
-FROM openjdk:8-jdk-alpine
-RUN  apk update && apk upgrade && apk add netcat-openbsd
-RUN mkdir -p /usr/local/logiweb-service
-ADD @project.build.finalName@.war /usr/local/logiweb-service/
-
+FROM openjdk:8-jre-alpine
+ENV APP_FILE @project.build.finalName@.war
+ENV APP_HOME /usr/apps
 EXPOSE 8080
-
-ADD run.sh run.sh
-RUN chmod +x run.sh
-CMD ./run.sh
+COPY $APP_FILE $APP_HOME/
+WORKDIR $APP_HOME
+ENTRYPOINT ["sh", "-c"]
+CMD ["exec java -jar $APP_FILE"]
