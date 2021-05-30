@@ -1,6 +1,6 @@
 spring:
   application:
-    name: logiweb-service
+    name: dashboard-service
   profiles:
     active:
       default
@@ -9,4 +9,4 @@ spring:
       uri: http://34.88.228.142/
 
 server:
-  port: 8080
+  port: 8088

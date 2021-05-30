@@ -1,0 +1,35 @@
+database: mysql
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    initialization-mode: always
+    url: jdbc:mysql://34.88.248.12:3306/logiweb?useUnicode=yes&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 143179179
+    username: root
+#    name: dashboard
+#  cloud:
+#    gcp:
+#      sql:
+#        database-name: dashboard
+#        instance-connection-name: logiweb-315016:europe-north1:logiweb
+#        enabled: true
+  mvc:
+    view:
+      prefix: /view/
+      suffix: .jsp
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          github:
+#            clientId: bde7f3c08d33ac51563e
+#            clientSecret: 9f5566c02a906f5ca934e451ca2841ba709c502f
+

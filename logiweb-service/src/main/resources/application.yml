@@ -1,6 +1,22 @@
-##Setting logging levels
-#logging:
-#  level:
-#    com.netflix: WARN
-#    org.springframework.web: WARN
-#    com.thoughtmechanix: DEBUG
+database: mysql
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  datasource:
+    initialization-mode: always
+    url: jdbc:mysql://34.88.248.12:3306/logiweb?useUnicode=yes&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 143179179
+    username: root
+
+  mvc:
+    view:
+      prefix: /view/
+      suffix: .jsp
+    static-path-pattern: /assets/**
+
+  resources:
+    static-locations: /assets/

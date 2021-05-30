@@ -11,10 +11,3 @@ spring:
 # enable all actuator endpoints for testing (review this for real deployments)
 management.endpoints.web:
   include: '*'
-
-##Setting logging levels
-#logging:
-#  level:
-#    com.netflix: WARN
-#    org.springframework.web: WARN
-#    com.thoughtmechanix: DEBUG
