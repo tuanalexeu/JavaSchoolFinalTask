@@ -1,6 +1,5 @@
 package com.alekseytyan.logiweb.config.security;
 
-import com.alekseytyan.logiweb.config.DataSourceConfig;
 import com.alekseytyan.logiweb.config.security.handler.CustomLogoutHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomLogoutSuccessHandler;
 import com.alekseytyan.logiweb.config.security.handler.CustomAccessDeniedHandler;
@@ -12,7 +11,6 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,9 +30,6 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableAspectJAutoProxy
 @ComponentScan(value = {"com.alekseytyan.logiweb"})
-@Import(value = {
-        DataSourceConfig.class
-})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String ROLE_ADMIN = "ADMIN";
@@ -64,10 +59,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select EMAIL, PASSWORD, ENABLED"
-                        + " from USER_LOGIWEB where EMAIL = ?")
-                .authoritiesByUsernameQuery("select EMAIL, ROLE "
-                        + "from USER_LOGIWEB where EMAIL = ?")
+                .usersByUsernameQuery("select email, password, enabled"
+                        + " from user_logiweb where email = ?")
+                .authoritiesByUsernameQuery("select email, role "
+                        + "from user_logiweb where email = ?")
                 .passwordEncoder(passwordEncoder());
     }
 

@@ -23,9 +23,9 @@ public class MainWebAppInitializer implements WebApplicationInitializer {
 
         ctx.register(AsynchronousSpringEventsConfig.class);
         ctx.register(DataMappingConfig.class);
-        ctx.register(DataSourceConfig.class);
+//        ctx.register(DataSourceConfig.class);
         ctx.register(EmailConfig.class);
-        ctx.register(WebConfig.class);
+//        ctx.register(WebConfig.class);
         ctx.register(WebSecurityConfig.class);
         ctx.register(SchedulingConfig.class);
 

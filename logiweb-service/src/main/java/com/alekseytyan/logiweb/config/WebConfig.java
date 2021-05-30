@@ -10,35 +10,35 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@EnableWebMvc
-@Configuration
-@ComponentScan(basePackages = { "com.alekseytyan.logiweb.controller" })
-public class WebConfig implements WebMvcConfigurer {
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/assets/**")
-                .addResourceLocations("/assets/");
-    }
-
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver bean = new InternalResourceViewResolver();
-
-        bean.setViewClass(JstlView.class);
-        bean.setPrefix("/view/");
-        bean.setSuffix(".jsp");
-
-        return bean;
-    }
-
-    @Bean
-    public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/messages/messages");
-        return messageSource;
-    }
-
-
-}
+//@EnableWebMvc
+//@Configuration
+//@ComponentScan(basePackages = { "com.alekseytyan.logiweb.controller" })
+//public class WebConfig implements WebMvcConfigurer {
+//
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry
+//                .addResourceHandler("/assets/**")
+//                .addResourceLocations("/assets/");
+//    }
+//
+//    @Bean
+//    public ViewResolver viewResolver() {
+//        InternalResourceViewResolver bean = new InternalResourceViewResolver();
+//
+//        bean.setViewClass(JstlView.class);
+//        bean.setPrefix("/view/");
+//        bean.setSuffix(".jsp");
+//
+//        return bean;
+//    }
+//
+//    @Bean
+//    public MessageSource messageSource() {
+//        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+//        messageSource.setBasename("/messages/messages");
+//        return messageSource;
+//    }
+//
+//
+//}
