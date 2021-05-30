@@ -39,7 +39,7 @@ public class MessageServiceImpl implements MessageService {
         connectionFactory.setHost(environment.getProperty("rabbitmq.host"));
         connectionFactory.setUsername(environment.getProperty("rabbitmq.user"));
         connectionFactory.setPassword(environment.getProperty("rabbitmq.password"));
-        connectionFactory.useSslProtocol();
+//        connectionFactory.useSslProtocol();
 
         connection = connectionFactory.newConnection();
         channel = connection.createChannel();
