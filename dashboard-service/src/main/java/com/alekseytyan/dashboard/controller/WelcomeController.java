@@ -1,19 +1,30 @@
 package com.alekseytyan.dashboard.controller;
 
-import com.alekseytyan.dashboard.dao.api.CityDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class WelcomeController {
 
-    @Autowired
-    private CityDao cityDao;
+    /**
+     * Check if authorized user has any role in Spring security
+     * @return - true, if they have
+     */
+    private boolean isAuthenticated() {
+        return SecurityContextHolder.getContext().getAuthentication() != null &&
+                SecurityContextHolder.getContext().getAuthentication().isAuthenticated() &&
+                //when Anonymous Authentication is enabled
+                !(SecurityContextHolder.getContext().getAuthentication()
+                        instanceof AnonymousAuthenticationToken);
+    }
 
     @GetMapping(value = "/")
     public String welcomePage() {
-        cityDao.findAll();
-        return "index";
+        if(isAuthenticated()) {
+            return "dashboard-extended";
+        }
+        return "dashboard";
     }
 }
