@@ -33,32 +33,32 @@ public class MessageServiceImpl implements MessageService {
     @SneakyThrows
     @PostConstruct
     public void init() throws IOException, TimeoutException, NoSuchAlgorithmException, KeyManagementException {
-
-        // Establish connection with host localhost
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost(environment.getProperty("rabbitmq.host"));
-        connectionFactory.setUsername(environment.getProperty("rabbitmq.user"));
-        connectionFactory.setPassword(environment.getProperty("rabbitmq.password"));
-//        connectionFactory.useSslProtocol();
-
-        connection = connectionFactory.newConnection();
-        channel = connection.createChannel();
-
-        // Declare new queue named Logiweb
-        channel.queueDeclare("Logiweb", false, false, false, null);
+//
+//        // Establish connection with host localhost
+//        ConnectionFactory connectionFactory = new ConnectionFactory();
+//        connectionFactory.setHost(environment.getProperty("rabbitmq.host"));
+//        connectionFactory.setUsername(environment.getProperty("rabbitmq.user"));
+//        connectionFactory.setPassword(environment.getProperty("rabbitmq.password"));
+////        connectionFactory.useSslProtocol();
+//
+//        connection = connectionFactory.newConnection();
+//        channel = connection.createChannel();
+//
+//        // Declare new queue named Logiweb
+//        channel.queueDeclare("Logiweb", false, false, false, null);
     }
 
 
     @Override
     public void send(String message) {
-
-        try {
-            // Publish basic text message
-            channel.basicPublish("", "Logiweb", null, message.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        logger.info("Message [" + message + "] has been sent");
+//
+//        try {
+//            // Publish basic text message
+//            channel.basicPublish("", "Logiweb", null, message.getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        logger.info("Message [" + message + "] has been sent");
     }
 }
