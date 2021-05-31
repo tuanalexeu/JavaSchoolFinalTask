@@ -7,7 +7,7 @@ spring:
 
   datasource:
     initialization-mode: always
-    url: jdbc:mysql://34.88.248.12:3306/logiweb?useUnicode=yes&characterEncoding=UTF-8
+    url: jdbc:mysql://34.88.87.111:3306/logiweb?useUnicode=yes&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 143179179
     username: root
