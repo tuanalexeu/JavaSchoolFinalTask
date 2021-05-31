@@ -3,8 +3,6 @@
 # Compiled class file
 *.class
 
-security.properties
-
 # Log file
 *.log
 

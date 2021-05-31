@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/tuanalexeu/config-repo
+          uri: ${GIT_CONFIG_URI}
           searchPaths: auth-service,logiweb-service,eureka-service
 
 # enable all actuator endpoints for testing (review this for real deployments)
