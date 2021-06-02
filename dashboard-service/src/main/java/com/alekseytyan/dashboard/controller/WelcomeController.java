@@ -22,10 +22,10 @@ public class WelcomeController {
     }
 
     @GetMapping(value = "/")
-    public RedirectView welcomePage() {
+    public String welcomePage() {
         if(isAuthenticated()) {
-            return new RedirectView("/profile");
+            return "redirect:/profile";
         }
-        return new RedirectView("/");
+        return "dashboard";
     }
 }
