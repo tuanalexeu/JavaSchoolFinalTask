@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Welcome - Logiweb</title>
+    <title>Logiweb</title>
     <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>">
     <link rel="stylesheet" href="<c:url value="/assets/bootstrap/css/bootstrap.min.css"/>">
@@ -24,13 +24,16 @@
         <div id="content">
             <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" id="top-navbar" style="background: #e20074;">
                 <div class="container">
+                    <h1 style="color: rgb(255,255,255); margin-top: 2px">Logiweb</h1>
                     <ul class="navbar-nav ml-auto flex-nowrap">
                         <li class="nav-item" style="padding: 5px">
-                            <div class="container authenticated" style="display:none">
-                                Logged in as: <span id="user"></span>
+                            <div class="container authenticated" style="display:none; color: #ffffff">
+                                <span id="user" style="margin-top: 8px"></span>
                             </div>
+                        </li>
+                        <li class="nav-item" style="padding: 5px">
                             <form action="/logout">
-                                <button type="submit" onclick="logout()" class="btn btn-primary" style="color: #ffffff; background: #e20074;border-color: #ffffff;">Logout</button>
+                                <button type="submit" class="btn btn-primary" style="color: #ffffff; background: #e20074;border-color: #ffffff;">Logout</button>
                             </form>
                         </li>
                     </ul>
@@ -39,10 +42,22 @@
             <div class="container" style="height: 800px;">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1>Logiweb website</h1>
-<%--                        <p>Welcome to our page.<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br></p>--%>
+                        <h1>Check order status:</h1>
+                        <input type="text" style="width: 400px;height: 40px;border-radius: 10px;" />
+                        <button class="btn btn-primary" type="button" style="margin-left: 10px; color: #e20074; background: #ffffff;border-color: #e20074;">Find</button>
+                        <div>
+                            <h1 style="margin-top: 20px;">No order selected</h1>
+                        </div>
                     </div>
-                    <div class="col-md-6"><img src="<c:url value="/assets/img/dogs/image1.jpeg"/>" style="width: 300px;"></div>
+                    <div class="col-md-6">
+                        <h1>My orders</h1>
+                        <ul>
+                            <li>Item 1</li>
+                            <li>Item 2</li>
+                            <li>Item 3</li>
+                            <li>Item 4</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,6 +74,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
 <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
 <script type="text/javascript">
+
     $.ajaxSetup({
         beforeSend : function(xhr, settings) {
             if (settings.type == 'POST' || settings.type == 'PUT'
@@ -72,9 +88,12 @@
             }
         }
     });
+
     $.get("/user", function(data) {
         $("#user").html(data.name);
+        $(".authenticated").show();
     });
+
     $.get("/error", function(data) {
         if (data) {
             $(".error").html(data);
@@ -82,12 +101,6 @@
             $(".error").html('');
         }
     });
-    var logout = function() {
-        $.post("/logout", function() {
-            $("#user").html('');
-        });
-        return true;
-    }
 </script>
 </body>
 
