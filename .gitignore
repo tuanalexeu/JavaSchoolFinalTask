@@ -108,3 +108,6 @@ fabric.properties
 */target/**
 
 *.env
+
+
+*.json
