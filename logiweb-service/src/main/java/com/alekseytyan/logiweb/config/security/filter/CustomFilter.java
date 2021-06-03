@@ -18,7 +18,6 @@ public class CustomFilter implements Filter {
                          ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        LOGGER.info("Request Info : " + req);
         chain.doFilter(request, response);
     }
 }

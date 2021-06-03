@@ -6,7 +6,7 @@ spring:
       default
   cloud:
     config:
-      uri: http://${CONFIG_SERVER_HOST}/
+      uri: ${CONFIG_SERVER_HOST}
 
 server:
   port: 8080
