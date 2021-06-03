@@ -1,64 +1,65 @@
 package com.alekseytyan.logiweb.service.implementation;
 
 import com.alekseytyan.logiweb.service.api.MessageService;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import lombok.SneakyThrows;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.pubsub.v1.Publisher;
+import com.google.protobuf.ByteString;
+import com.google.pubsub.v1.PubsubMessage;
+import com.google.pubsub.v1.TopicName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 @Service
-@PropertySource("classpath:messaging.properties")
+@PropertySource("classpath:messaging.yml")
 public class MessageServiceImpl implements MessageService {
+
+    @Value("${PUBSUB_TOPIC}")
+    private String topicId;
+
+    @Value("${PROJECT_ID_ENV}")
+    private String projectId;
 
     private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
 
-    @Autowired
-    private Environment environment;
-
-    Connection connection;
-    Channel channel;
-
-    @SneakyThrows
-    @PostConstruct
-    public void init() throws IOException, TimeoutException, NoSuchAlgorithmException, KeyManagementException {
-//
-//        // Establish connection with host localhost
-//        ConnectionFactory connectionFactory = new ConnectionFactory();
-//        connectionFactory.setHost(environment.getProperty("rabbitmq.host"));
-//        connectionFactory.setUsername(environment.getProperty("rabbitmq.user"));
-//        connectionFactory.setPassword(environment.getProperty("rabbitmq.password"));
-////        connectionFactory.useSslProtocol();
-//
-//        connection = connectionFactory.newConnection();
-//        channel = connection.createChannel();
-//
-//        // Declare new queue named Logiweb
-//        channel.queueDeclare("Logiweb", false, false, false, null);
-    }
-
-
     @Override
     public void send(String message) {
-//
-//        try {
-//            // Publish basic text message
-//            channel.basicPublish("", "Logiweb", null, message.getBytes());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        logger.info("Message [" + message + "] has been sent");
+
+        try {
+            publishMessage(projectId, topicId, message);
+        } catch (IOException | ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void publishMessage(String projectId, String topicId, String message)
+            throws IOException, ExecutionException, InterruptedException {
+        TopicName topicName = TopicName.of(projectId, topicId);
+
+        Publisher publisher = null;
+        try {
+            // Create a publisher instance with default settings bound to the topic
+            publisher = Publisher.newBuilder(topicName).build();
+
+            ByteString data = ByteString.copyFromUtf8(message);
+            PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(data).build();
+
+            // Once published, returns a server-assigned message id (unique within the topic)
+            ApiFuture<String> messageIdFuture = publisher.publish(pubsubMessage);
+            String messageId = messageIdFuture.get();
+            logger.info("Published message ID: " + messageId);
+        } finally {
+            if (publisher != null) {
+                // When finished with the publisher, shutdown to free up resources.
+                publisher.shutdown();
+                publisher.awaitTermination(1, TimeUnit.MINUTES);
+            }
+        }
     }
 }
