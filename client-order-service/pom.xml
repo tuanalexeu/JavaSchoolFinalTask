@@ -17,8 +17,8 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <start-class>com.alekseytyan.dashboard.DashboardServer</start-class>
-        <docker.image.name>tuanalexeu/dashboard-service</docker.image.name>
+        <start-class>com.alekseytyan.dashboard.ClientOrderService</start-class>
+        <docker.image.name>tuanalexeu/client-order-service</docker.image.name>
         <docker.image.tag>final-task</docker.image.tag>
     </properties>
 
@@ -104,7 +104,7 @@
     </dependencies>
 
     <build>
-        <finalName>dashboard-service</finalName>
+        <finalName>client-order-service</finalName>
         <plugins>
             <!-- We use the Resources plugin to filer Dockerfile and run.sh, it inserts actual JAR filename -->
             <!-- The final Dockerfile will be created in target/dockerfile/Dockerfile -->

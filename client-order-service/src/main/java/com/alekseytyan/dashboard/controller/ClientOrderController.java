@@ -2,12 +2,12 @@ package com.alekseytyan.dashboard.controller;
 
 import com.alekseytyan.dashboard.dto.ClientLoadDTO;
 import com.alekseytyan.dashboard.dto.StatusDTO;
-import com.alekseytyan.dashboard.repository.UserRepository;
 import com.alekseytyan.dashboard.service.api.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -28,16 +28,11 @@ import java.util.UUID;
 @Controller
 @AllArgsConstructor
 @PropertySource("classpath:general.properties")
-public class ProfileController {
+public class ClientOrderController {
 
     private final Environment env;
 
     private final UserService userService;
-
-    @GetMapping(value = "/profile")
-    public String profile() {
-        return "dashboard-extended";
-    }
 
     @GetMapping(value = "/make-order")
     public String makeOrder(Model model, @RequestParam ClientLoadDTO clientLoadDTO) {
@@ -72,6 +67,30 @@ public class ProfileController {
             } else {
                 model.addAttribute("message", "Something went wrong with your order");
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "dashboard-extended";
+    }
+
+    @GetMapping(value = "/find-order")
+    public String findOrder(Model model, @RequestParam String orderToken) {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+
+            HttpGet request = new HttpGet(env.getProperty("logiweb-host") + "/find-client-order?orderToken=" + orderToken);
+
+            ClientLoadDTO response = client.execute(request, httpResponse ->
+                    mapper.readValue(httpResponse.getEntity().getContent(), ClientLoadDTO.class));
+
+
+            if(response != null) {
+                model.addAttribute("order", response);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

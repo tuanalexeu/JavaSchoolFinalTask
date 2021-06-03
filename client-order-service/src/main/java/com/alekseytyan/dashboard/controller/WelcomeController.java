@@ -28,4 +28,9 @@ public class WelcomeController {
         }
         return "dashboard";
     }
+
+    @GetMapping(value = "/profile")
+    public String profile() {
+        return "dashboard-extended";
+    }
 }

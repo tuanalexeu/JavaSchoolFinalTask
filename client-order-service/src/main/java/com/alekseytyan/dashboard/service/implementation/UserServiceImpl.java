@@ -4,6 +4,8 @@ import com.alekseytyan.dashboard.entity.User;
 import com.alekseytyan.dashboard.repository.UserRepository;
 import com.alekseytyan.dashboard.service.api.UserService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
+
+    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
 
@@ -27,10 +31,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerNewUser(OAuth2User principal) {
-        if(userRepository.findById(principal.getName()).isPresent()) {
+        if(!userRepository.findById(principal.getName()).isPresent()) {
             userRepository.save(
                     new User(principal.getName(), principal.getAttribute("name"))
             );
+
+            logger.info("User [" + principal.getAttribute("name") + "] was successfully registered");
+
         }
     }
 

@@ -31,6 +31,8 @@ public class AuthController {
 
 
         userService.registerNewUser(principal);
+
+
         return Collections.singletonMap("name", principal.getAttribute("name"));
     }
 }
