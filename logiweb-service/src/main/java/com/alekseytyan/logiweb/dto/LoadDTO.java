@@ -3,7 +3,6 @@ package com.alekseytyan.logiweb.dto;
 import com.alekseytyan.logiweb.entity.enums.LoadStatus;
 import lombok.Data;
 import lombok.ToString;
-
 import java.io.Serializable;
 
 @Data
@@ -23,4 +22,8 @@ public class LoadDTO implements Serializable {
 
     @ToString.Exclude
     private OrderDTO order;
+
+    private String clientId;
+
+    private String token;
 }

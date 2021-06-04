@@ -11,6 +11,12 @@ import javax.validation.constraints.Min;
  */
 @Entity
 @Table(name = "LOAD_LOGIWEB")
+@NamedQueries({
+        @NamedQuery(name = "Load.findByToken",
+                query = "select l from Load l where l.token = :token"),
+        @NamedQuery(name = "Load.findAllByClientId",
+                query = "select l from Load l where l.clientId = :clientId")
+})
 @Getter @Setter @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -30,7 +36,7 @@ public class Load {
     private City cityUnload;
 
     @ManyToOne
-    @JoinColumn(name = "ORDER_ID", nullable = false)
+    @JoinColumn(name = "ORDER_ID")
     private Order order;
 
     @Column(name = "NAME")
@@ -43,5 +49,11 @@ public class Load {
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)
     private LoadStatus status;
+
+    @Column(name = "CLIENT_ID")
+    private String clientId;
+
+    @Column(name = "LOAD_TOKEN")
+    private String token;
 
 }

@@ -1,8 +1,11 @@
 package com.alekseytyan.logiweb.service.implementation;
 
+import com.alekseytyan.logiweb.dto.CityDTO;
+import com.alekseytyan.logiweb.dto.ClientLoadDTO;
 import com.alekseytyan.logiweb.dto.LoadDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
 import com.alekseytyan.logiweb.dao.api.LoadDao;
+import com.alekseytyan.logiweb.entity.City;
 import com.alekseytyan.logiweb.entity.Load;
 import com.alekseytyan.logiweb.entity.enums.LoadStatus;
 import com.alekseytyan.logiweb.service.api.LoadService;
@@ -11,6 +14,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO, Long> implements LoadService {
@@ -31,6 +36,31 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
     @Transactional(readOnly = true)
     public Long findOrderId(Long loadId) {
         return getDao().findById(loadId).getOrder().getId();
+    }
+
+    @Override
+    public LoadDTO findByToken(String token) {
+        return convertToDTO(getDao().findByToken(token));
+    }
+
+    @Override
+    public List<LoadDTO> findAllByClientId(String clientId) {
+        return convertToDTO(getDao().findAllByClientId(clientId));
+    }
+
+    @Override
+    public LoadDTO saveClientLoad(ClientLoadDTO clientLoadDTO) {
+
+        Load load = new Load();
+        load.setClientId(clientLoadDTO.getClientId());
+        load.setCityLoad(new City(clientLoadDTO.getCityLoad()));
+        load.setCityUnload(new City(clientLoadDTO.getCityUnload()));
+        load.setStatus(clientLoadDTO.getStatus());
+        load.setName(clientLoadDTO.getName());
+        load.setWeight(clientLoadDTO.getWeight());
+        load.setToken(clientLoadDTO.getToken());
+
+        return convertToDTO(getDao().save(load));
     }
 
     @Override
