@@ -43,11 +43,33 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h1>Check order status:</h1>
-                        <input type="text" style="width: 400px;height: 40px;border-radius: 10px;" />
-                        <button class="btn btn-primary" type="button" style="margin-left: 10px; color: #e20074; background: #ffffff;border-color: #e20074;">Find</button>
-                        <div>
-                            <h1 style="margin-top: 20px;">No order selected</h1>
-                        </div>
+
+                        <form action="${pageContext.request.contextPath}/find-order">
+                            <input type="text" name="orderToken" style="width: 400px;height: 40px;border-radius: 10px;" />
+                            <button class="btn btn-primary" type="submit" style="margin-left: 10px; color: #e20074; background: #ffffff;border-color: #e20074;">Find</button>
+                        </form>
+
+                        <c:choose>
+                            <c:when test="${order ne null}">
+                                <div>
+                                    <h1 style="margin-top: 20px;">Some order status</h1>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${not empty error}">
+                                        <div>
+                                            <h1 style="margin-top: 20px;">${error}r</h1>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div>
+                                            <h1 style="margin-top: 20px;">No order selectedr</h1>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="col-md-6">
                         <h1>My orders</h1>
