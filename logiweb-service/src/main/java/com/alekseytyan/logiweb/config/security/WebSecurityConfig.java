@@ -85,7 +85,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/assets/**",
                         "/info-table/orders*",
                         "/info-table/driver-stats*",
-                        "/info-table/lorry-stats*").permitAll()
+                        "/info-table/lorry-stats*",
+                        "/find-client-orders",
+                        "/find-client-order",
+                        "/get-cities").permitAll()
                 .antMatchers("/profile*").hasAnyRole(ROLE_DRIVER, ROLE_EMPLOYEE, ROLE_ADMIN)
                 .anyRequest().authenticated()
 

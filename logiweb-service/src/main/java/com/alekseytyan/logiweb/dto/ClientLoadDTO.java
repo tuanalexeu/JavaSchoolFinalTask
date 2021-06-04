@@ -1,5 +1,6 @@
 package com.alekseytyan.logiweb.dto;
 
+import com.alekseytyan.logiweb.entity.enums.LoadStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,19 @@ public class ClientLoadDTO implements Serializable {
     private String name;
     private int weight;
 
-    private String orderToken;
+    private LoadStatus status;
 
+    private String token;
+
+    public static ClientLoadDTO convert(LoadDTO loadDTO) {
+        return new ClientLoadDTO(
+                loadDTO.getClientId(),
+                loadDTO.getCityLoad().getName(),
+                loadDTO.getCityUnload().getName(),
+                loadDTO.getName(),
+                loadDTO.getWeight(),
+                loadDTO.getStatus(),
+                loadDTO.getToken()
+        );
+    }
 }

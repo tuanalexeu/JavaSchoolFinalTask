@@ -2,9 +2,10 @@ package com.alekseytyan.dashboard.controller;
 
 import com.alekseytyan.dashboard.dto.ClientLoadDTO;
 import com.alekseytyan.dashboard.dto.StatusDTO;
-import com.alekseytyan.dashboard.service.api.UserService;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -12,8 +13,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,31 +24,59 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.PostConstruct;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
 @Controller
-@AllArgsConstructor
 @PropertySource("classpath:general.properties")
 public class ClientOrderController {
 
-    private final Environment env;
+    private Client clientFindOrder;
 
-    private final UserService userService;
+    private WebTarget targetSaveOrder;
+    private WebTarget targetFindOrder;
+
+    @Autowired
+    private Environment env;
+
+    @PostConstruct
+    public void init() {
+        Client clientSaveOrder = ClientBuilder.newClient();
+        targetSaveOrder = clientSaveOrder.target("http://" + env.getProperty("logiweb-host") + "/save-client-order");
+
+        clientFindOrder = ClientBuilder.newClient();
+    }
+
+    /**
+     * Check if authorized user has any role in Spring security
+     * @return - true, if they have
+     */
+    private boolean isAuthenticated() {
+        return SecurityContextHolder.getContext().getAuthentication() != null &&
+                SecurityContextHolder.getContext().getAuthentication().isAuthenticated() &&
+                //when Anonymous Authentication is enabled
+                !(SecurityContextHolder.getContext().getAuthentication()
+                        instanceof AnonymousAuthenticationToken);
+    }
 
     @GetMapping(value = "/make-order")
     public String makeOrder(Model model, @RequestParam ClientLoadDTO clientLoadDTO) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        String orderToken = UUID.randomUUID().toString();
+        String token = UUID.randomUUID().toString();
 
         ObjectMapper mapper = new ObjectMapper();
 
         try (CloseableHttpClient client = HttpClients.createDefault()) {
 
-            HttpPost request = new HttpPost(env.getProperty("logiweb-host") + "/save-client-order");
+            HttpPost request = new HttpPost("http://" + env.getProperty("logiweb-host") + "/save-client-order");
 
             ArrayList<NameValuePair> postParameters = new ArrayList<>();
             postParameters.add(new BasicNameValuePair("clientId",auth.getName()));
@@ -53,8 +84,8 @@ public class ClientOrderController {
             postParameters.add(new BasicNameValuePair("cityUnload", clientLoadDTO.getCityUnload()));
             postParameters.add(new BasicNameValuePair("name", clientLoadDTO.getName()));
             postParameters.add(new BasicNameValuePair("weight", String.valueOf(clientLoadDTO.getWeight())));
-
-            postParameters.add(new BasicNameValuePair("orderToken", orderToken));
+            postParameters.add(new BasicNameValuePair("status", clientLoadDTO.getStatus().toString()));
+            postParameters.add(new BasicNameValuePair("token", token));
 
             request.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
 
@@ -64,6 +95,7 @@ public class ClientOrderController {
 
             if(response.isSuccess()) {
                 model.addAttribute("message", "Your order has been successfully created");
+                model.addAttribute("token", token);
             } else {
                 model.addAttribute("message", "Something went wrong with your order");
             }
@@ -74,28 +106,30 @@ public class ClientOrderController {
         return "dashboard-extended";
     }
 
+    @SneakyThrows
     @GetMapping(value = "/find-order")
     public String findOrder(Model model, @RequestParam String orderToken) {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-
-            HttpGet request = new HttpGet(env.getProperty("logiweb-host") + "/find-client-order?orderToken=" + orderToken);
-
-            ClientLoadDTO response = client.execute(request, httpResponse ->
-                    mapper.readValue(httpResponse.getEntity().getContent(), ClientLoadDTO.class));
+        targetFindOrder = clientFindOrder.target("http://" + env.getProperty("logiweb-host") + "/find-client-order&orderToken=" + orderToken);
 
 
-            if(response != null) {
-                model.addAttribute("order", response);
-            }
+        ClientLoadDTO response = mapper.readValue(
+                targetFindOrder.request(MediaType.APPLICATION_JSON).get(String.class),
+                new TypeReference<ClientLoadDTO>(){}
+        );
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(response != null) {
+            model.addAttribute("order", response);
+        } else {
+            model.addAttribute("error", "No such order");
         }
 
-        return "dashboard-extended";
+        if(isAuthenticated()) {
+            return "dashboard-extended";
+        }
+        return "home-non-auth";
     }
 
 }

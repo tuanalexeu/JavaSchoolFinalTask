@@ -1,5 +1,6 @@
 package com.alekseytyan.dashboard.dto;
 
+import com.alekseytyan.dashboard.dto.enums.LoadStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,8 @@ public class ClientLoadDTO implements Serializable {
     private String name;
     private int weight;
 
-    private String orderToken;
+    private LoadStatus status;
+
+    private String token;
 
 }
