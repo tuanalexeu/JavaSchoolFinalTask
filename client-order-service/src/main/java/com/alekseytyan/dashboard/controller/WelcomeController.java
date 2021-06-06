@@ -4,11 +4,7 @@ import com.alekseytyan.dashboard.dto.CityDTO;
 import com.alekseytyan.dashboard.dto.ClientLoadDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -77,25 +73,22 @@ public class WelcomeController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        model.addAttribute("newOrder", new ClientLoadDTO());
+        model.addAttribute("newLoad", new ClientLoadDTO());
 
         ObjectMapper cityMapper = new ObjectMapper();
+        List<CityDTO> cityResponse = cityMapper.readValue(
+                cityTarget.request(MediaType.APPLICATION_JSON).get(String.class),
+                new TypeReference<List<CityDTO>>(){}
+        );
+        model.addAttribute("cities", cityResponse);
+
         ObjectMapper orderMapper = new ObjectMapper();
-
-        WebTarget loadTarget = loadClient.target("http://" + env.getProperty("logiweb-host") + "/find-client-orders&clientId=" + auth.getName());
-
-            List<CityDTO> cityResponse = cityMapper.readValue(
-                    cityTarget.request(MediaType.APPLICATION_JSON).get(String.class),
-                    new TypeReference<List<CityDTO>>(){}
-            );
-
-            List<ClientLoadDTO> orderResponse = orderMapper.readValue(
-                    loadTarget.request(MediaType.APPLICATION_JSON).get(String.class),
-                    new TypeReference<List<ClientLoadDTO>>(){}
-            );
-
-            model.addAttribute("cities", cityResponse);
-            model.addAttribute("orders", orderResponse);
+        WebTarget loadTarget = loadClient.target("http://" + env.getProperty("logiweb-host") + "/find-client-orders?clientId=" + auth.getName());
+        List<ClientLoadDTO> orderResponse = orderMapper.readValue(
+                loadTarget.request(MediaType.APPLICATION_JSON).get(String.class),
+                new TypeReference<List<ClientLoadDTO>>(){}
+        );
+        model.addAttribute("orders", orderResponse);
 
         return "my-orders";
     }

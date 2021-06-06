@@ -1,6 +1,7 @@
 package com.alekseytyan.dashboard.controller;
 
 import com.alekseytyan.dashboard.dto.ClientLoadDTO;
+import com.alekseytyan.dashboard.dto.GenericResponse;
 import com.alekseytyan.dashboard.dto.StatusDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,6 +21,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
@@ -37,16 +40,13 @@ public class ClientOrderController {
 
     private Client clientFindOrder;
 
-    private WebTarget targetSaveOrder;
-    private WebTarget targetFindOrder;
-
     @Autowired
     private Environment env;
 
     @PostConstruct
     public void init() {
         Client clientSaveOrder = ClientBuilder.newClient();
-        targetSaveOrder = clientSaveOrder.target("http://" + env.getProperty("logiweb-host") + "/save-client-order");
+//        targetSaveOrder = clientSaveOrder.target("http://" + env.getProperty("logiweb-host") + "/save-client-order");
 
         clientFindOrder = ClientBuilder.newClient();
     }
@@ -63,8 +63,8 @@ public class ClientOrderController {
                         instanceof AnonymousAuthenticationToken);
     }
 
-    @GetMapping(value = "/make-order")
-    public String makeOrder(Model model, @RequestParam ClientLoadDTO clientLoadDTO) {
+    @PostMapping(value = "/make-order")
+    public String makeOrder(Model model, @ModelAttribute ClientLoadDTO clientLoadDTO) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -83,7 +83,7 @@ public class ClientOrderController {
             postParameters.add(new BasicNameValuePair("name", clientLoadDTO.getName()));
             postParameters.add(new BasicNameValuePair("weight", String.valueOf(clientLoadDTO.getWeight())));
             postParameters.add(new BasicNameValuePair("status", clientLoadDTO.getStatus().toString()));
-            postParameters.add(new BasicNameValuePair("token", token));
+            postParameters.add(new BasicNameValuePair("orderToken", token));
 
             request.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
 
@@ -101,7 +101,7 @@ public class ClientOrderController {
             e.printStackTrace();
         }
 
-        return "dashboard-extended";
+        return "home";
     }
 
     @SneakyThrows
@@ -110,23 +110,27 @@ public class ClientOrderController {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        targetFindOrder = clientFindOrder.target("http://" + env.getProperty("logiweb-host") + "/find-client-order&orderToken=" + orderToken);
-
-
-        ClientLoadDTO response = mapper.readValue(
-                targetFindOrder.request(MediaType.APPLICATION_JSON).get(String.class),
-                new TypeReference<ClientLoadDTO>(){}
+        //    private WebTarget targetSaveOrder;
+        WebTarget targetFindOrder = clientFindOrder.target(
+                "http://" + env.getProperty("logiweb-host") + "/find-client-order?orderToken=" + orderToken
         );
 
-        if(response != null) {
-            model.addAttribute("order", response);
+
+        GenericResponse<ClientLoadDTO> response = mapper.readValue(
+                targetFindOrder.request(MediaType.APPLICATION_JSON).get(String.class),
+                new TypeReference<GenericResponse<ClientLoadDTO>>(){}
+        );
+
+        if(response.getAttachedObj() != null) {
+            model.addAttribute("order", response.getAttachedObj());
         } else {
             model.addAttribute("error", "No such order");
         }
 
         if(isAuthenticated()) {
-            return "dashboard-extended";
+            return "home";
         }
+
         return "home-non-auth";
     }
 
