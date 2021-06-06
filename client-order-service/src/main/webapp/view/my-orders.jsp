@@ -67,14 +67,14 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newDriver-modal">New driver</button>
-                                <div class="modal fade" id="newOrder-modal" role="dialog" tabindex="-1" aria-hidden="true">
+                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#makeOrder-modal">Make order</button>
+                                <div class="modal fade" id="makeOrder-modal" role="dialog" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Make order</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <form:form action="/make-order" method="post" modelAttribute="newOrder">
+                                            <form:form action="/make-order" method="post" modelAttribute="newLoad">
                                                 <div class="modal-body">
                                                     <div class="container">
                                                         <div class="row">
@@ -117,7 +117,7 @@
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <h3 style="margin: 10px;">City</h3>
+                                                                <h3 style="margin: 10px;">Weight</h3>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <form:input id="weight" path="weight" type="number" min="0" max="10000" required="required" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
@@ -127,7 +127,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
-                                                    <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                                                    <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(226,0,116);color: rgb(226,0,116);">Save</button>
                                                 </div>
                                                 <form:hidden path="status" value="PREPARED" cssErrorClass="errorBox"/>
                                             </form:form>

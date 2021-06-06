@@ -69,12 +69,12 @@
                             <c:choose>
                                 <c:when test="${not empty error}">
                                     <div>
-                                        <h1 style="margin-top: 20px;">${error}r</h1>
+                                        <h1 style="margin-top: 20px;">${error}</h1>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
                                     <div>
-                                        <h1 style="margin-top: 20px;">No order selectedr</h1>
+                                        <h1 style="margin-top: 20px;">No order selected</h1>
                                     </div>
                                 </c:otherwise>
                             </c:choose>
