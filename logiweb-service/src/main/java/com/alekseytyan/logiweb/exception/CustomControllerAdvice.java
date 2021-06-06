@@ -74,13 +74,13 @@ public class CustomControllerAdvice {
         return mav;
     }
 
-    @ExceptionHandler(Exception.class)
-    @LogAnnotation
-    public ModelAndView anyException() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("/error/defaultError");
-
-        return mav;
-    }
+//    @ExceptionHandler(Exception.class)
+//    @LogAnnotation
+//    public ModelAndView anyException() {
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("/error/defaultError");
+//
+//        return mav;
+//    }
 
 }
