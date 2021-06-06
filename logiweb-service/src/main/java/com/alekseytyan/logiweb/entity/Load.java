@@ -35,8 +35,8 @@ public class Load {
     @JoinColumn(name = "CITY_UNLOAD", nullable = false)
     private City cityUnload;
 
-    @ManyToOne
-    @JoinColumn(name = "ORDER_ID")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "ORDER_ID", nullable = true)
     private Order order;
 
     @Column(name = "NAME")

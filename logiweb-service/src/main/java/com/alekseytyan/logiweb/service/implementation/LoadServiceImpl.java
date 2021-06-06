@@ -1,6 +1,5 @@
 package com.alekseytyan.logiweb.service.implementation;
 
-import com.alekseytyan.logiweb.dto.CityDTO;
 import com.alekseytyan.logiweb.dto.ClientLoadDTO;
 import com.alekseytyan.logiweb.dto.LoadDTO;
 import com.alekseytyan.logiweb.dto.OrderDTO;
@@ -39,16 +38,19 @@ public class LoadServiceImpl extends AbstractServiceImpl<Load, LoadDao, LoadDTO,
     }
 
     @Override
+    @Transactional(readOnly = true)
     public LoadDTO findByToken(String token) {
         return convertToDTO(getDao().findByToken(token));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<LoadDTO> findAllByClientId(String clientId) {
         return convertToDTO(getDao().findAllByClientId(clientId));
     }
 
     @Override
+    @Transactional
     public LoadDTO saveClientLoad(ClientLoadDTO clientLoadDTO) {
 
         Load load = new Load();

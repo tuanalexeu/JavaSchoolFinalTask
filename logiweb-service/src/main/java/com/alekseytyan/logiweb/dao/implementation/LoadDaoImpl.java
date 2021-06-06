@@ -17,7 +17,7 @@ public class LoadDaoImpl extends AbstractDaoImpl<Load, Long> implements LoadDao 
     public Load findByToken(String token) {
         return entityManager.createNamedQuery("Load.findByToken", Load.class)
                 .setParameter("token", token)
-                .getSingleResult();
+                .getResultList().stream().findFirst().orElse(null);
     }
 
     @Override

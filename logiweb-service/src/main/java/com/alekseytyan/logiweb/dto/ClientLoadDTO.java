@@ -24,6 +24,11 @@ public class ClientLoadDTO implements Serializable {
     private String token;
 
     public static ClientLoadDTO convert(LoadDTO loadDTO) {
+
+        if(loadDTO == null) {
+            return null;
+        }
+
         return new ClientLoadDTO(
                 loadDTO.getClientId(),
                 loadDTO.getCityLoad().getName(),
