@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: chat-service
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_HOST}
+
+server:
+  port: 8090
