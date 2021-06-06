@@ -15,7 +15,8 @@ public class ClientOrderService extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests(a -> a
-                        .antMatchers("/", "/error", "/webjars/**", "/assets/**").permitAll()
+                        .antMatchers("/", "/error", "/webjars/**", "/assets/**", "/find-order").permitAll()
+                        .antMatchers("/make-order").hasAnyRole()
                         .anyRequest().authenticated())
                 .exceptionHandling(e -> e
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
