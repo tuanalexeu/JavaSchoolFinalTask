@@ -24,16 +24,16 @@
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #ff67ad;">
+                <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: #e20074;">
                     <ul class="navbar-nav ml-auto flex-nowrap">
                         <li class="nav-item" style="padding: 5px">
                             <form action="${pageContext.request.contextPath}/homePage">
-                                <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Home</button>
+                                <button class="btn btn-primary" type="submit" style="background: #e20074;border-color: #ced8e6;">Home</button>
                             </form>
                         </li>
                         <li class="nav-item" style="padding: 5px">
                             <form action="${pageContext.request.contextPath}/logout">
-                                <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Log out</button>
+                                <button class="btn btn-primary" type="submit" style="background: #e20074;border-color: #ced8e6;">Log out</button>
                             </form>
                         </li>
                     </ul>

@@ -22,16 +22,16 @@
 <body class="bg-gradient-primary" style="background: #f8f9fc; min-width: max-content">
 <div class="container" id="logincontainer">
     <div class="card shadow-lg o-hidden border-0 my-5" style="border-radius: 20px">
-        <div class="p-5" style="background: rgb(255,103,173);border-radius: 20px;">
+        <div class="p-5" style="background: rgb(226,0,116);border-radius: 20px;">
             <div class="text-center">
                 <h4 class="text-white mb-2" style="color: rgb(255,255,255);width: 300px;"><strong>Forgot Your Password?</strong></h4>
-                <p class="text-white mb-4" style="color: rgb(0,0,0);">Please, enter your email below and we will send you a letter</p>
+                <p class="text-white mb-4" style="color: rgb(255,255,255);">Please, enter your email below and we will send you a letter</p>
             </div>
             <form class="user">
                 <div class="form-group">
                     <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email">
                 </div>
-                <button class="btn btn-primary btn-block text-white btn-user" id="loginbutton" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Reset Password</button>
+                <button class="btn btn-primary btn-block text-white btn-user" id="loginbutton" type="submit" style="background: rgb(226,0,116);border-color: #ced8e6;">Reset Password</button>
             </form>
             <div class="text-center">
                 <hr><a class="small" href="${pageContext.request.contextPath}/register" style="color: rgb(244,247,255);">Create an Account!</a>

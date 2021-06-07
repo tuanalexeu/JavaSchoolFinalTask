@@ -20,7 +20,7 @@
 
 <body id="page-top">
 <div id="wrapper">
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(226,0,116);">
         <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
@@ -40,12 +40,12 @@
                 <ul class="navbar-nav ml-auto flex-nowrap">
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/profile">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Profile</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/logout">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Log out</button>
                         </form>
                     </li>
                 </ul>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-md-6">
                                 <form action="/employee/add-order">
-                                    <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">New order</button>
+                                    <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">New order</button>
                                 </form>
                             </div>
                         </div>
@@ -88,13 +88,13 @@
                                     <tr>
                                         <td>
                                             <form action="/employee/view-order/${order.id}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${order.id}</button>
+                                                <button class="btn btn-primary btn-block btn-user" id="editDriver" type="submit" style="background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">${order.id}</button>
                                             </form>
                                         </td>
                                         <td>${order.finished ? "Finished" : "In process"}</td>
                                         <td>${order.lorry.regNum}</td>
                                         <td>
-                                            <a href="#route-modal${order.id}" data-toggle="modal" data-target="#route-modal${order.id}" style="color: #DC58B8">Route</a>
+                                            <a href="#route-modal${order.id}" data-toggle="modal" data-target="#route-modal${order.id}" style="color: #e20074">Route</a>
                                             <div class="modal fade" role="dialog" tabindex="-1" id="route-modal${order.id}">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -102,7 +102,7 @@
                                                             <h4 class="modal-title" style="color: rgb(133, 135, 150);">Drivers</h4>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                                         </div>
-                                                        <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
+                                                        <div class="modal-body" style="color: #858796;border-color: #e20074;">
                                                             <ul>
                                                                 <c:forEach items="${routeList[outer_loop.index].cityList}" var="city" varStatus="loop">
                                                                     <li>[${loop.index}] ${city.name}</li>
@@ -112,13 +112,13 @@
                                                             <h4>Time: ${routeList[outer_loop.index].time}h</h4>
                                                             <h4>Needed capacity: ${routeList[outer_loop.index].maxWeight}kg</h4>
                                                         </div>
-                                                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
+                                                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #e20074;color: #e20074;">OK</button></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="#drivers-modal${order.id}" data-toggle="modal" data-target="#drivers-modal${order.id}" style="color: #DC58B8">Drivers</a>
+                                            <a href="#drivers-modal${order.id}" data-toggle="modal" data-target="#drivers-modal${order.id}" style="color: #e20074">Drivers</a>
                                             <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal${order.id}">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -126,14 +126,14 @@
                                                             <h4 class="modal-title" style="color: rgb(133, 135, 150);">Drivers</h4>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                                         </div>
-                                                        <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
+                                                        <div class="modal-body" style="color: #858796;border-color: #e20074;">
                                                             <ul>
                                                                 <c:forEach items="${order.drivers}" var="user">
                                                                     <li>${user.firstName} ${user.lastName}</li>
                                                                 </c:forEach>
                                                             </ul>
                                                         </div>
-                                                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button></div>
+                                                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #e20074;color: #e20074;">OK</button></div>
                                                     </div>
                                                 </div>
                                             </div>

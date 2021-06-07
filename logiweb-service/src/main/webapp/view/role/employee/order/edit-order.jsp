@@ -23,7 +23,7 @@
 
 <body id="page-top">
 <div id="wrapper">
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(226,0,116);">
         <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
@@ -43,12 +43,12 @@
                 <ul class="navbar-nav ml-auto flex-nowrap">
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/profile">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Profile</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/logout">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Log out</button>
                         </form>
                     </li>
                 </ul>
@@ -79,7 +79,7 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newPoint-modal">New route point</button>
+                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);" data-toggle="modal" data-target="#newPoint-modal">New route point</button>
                                 <div class="modal fade" id="newPoint-modal" role="dialog" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -95,7 +95,7 @@
                                                                 <h3 style="margin: 10px;">City (Loading)</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:select  path="cityLoad.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                <form:select  path="cityLoad.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">
                                                                     <c:forEach items="${cityNames}" var="name">
                                                                         <form:option value="${name}">${name}</form:option>
                                                                     </c:forEach>
@@ -109,7 +109,7 @@
                                                                 <h3 style="margin: 10px;">City (Unloading)</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:select  path="cityUnload.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                <form:select  path="cityUnload.name" cssClass="dropdown" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">
                                                                     <c:forEach items="${cityNames}" var="name">
                                                                         <form:option value="${name}">${name}</form:option>
                                                                     </c:forEach>
@@ -123,7 +123,7 @@
                                                                 <h3 style="margin: 10px;">Load description</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="loadDescription" required="required" path="name" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
+                                                                <form:input id="loadDescription" required="required" path="name" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -133,7 +133,7 @@
                                                                 <h3 style="margin: 10px;">Load weight</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input type="number" required="required" id="weight" min="0" path="weight" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
+                                                                <form:input type="number" required="required" id="weight" min="0" path="weight" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
                                                                 <form:hidden id="status" path="status" value="PREPARED" cssErrorClass="errorBox"/>
                                                                 <form:hidden path="order.id" value="${order.id}" cssErrorClass="errorBox"/>
                                                             </div>
@@ -141,8 +141,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
-                                                    <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                                                    <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(226,0,116);background: rgb(255,255,255);border-color: rgb(226,0,116);">Close</button>
+                                                    <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(226,0,116);color: rgb(226,0,116);">Save</button>
                                                 </div>
                                             </form:form>
                                         </div>
@@ -167,7 +167,7 @@
                                     <tr>
                                         <td>
                                             <form action="/employee/edit-load/${load.id}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editPoint" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${load.id}</button>
+                                                <button class="btn btn-primary btn-block btn-user" id="editPoint" type="submit" style="background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">${load.id}</button>
                                             </form>
                                         </td>
                                         <td>${load.name}</td>
@@ -215,7 +215,7 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownLorryButton">
                                                 <c:forEach items="${suitableLorries}" var="lorry">
-                                                    <button type="submit" name="regNum" value="${lorry.regNum}" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">${lorry.regNum}</button>
+                                                    <button type="submit" name="regNum" value="${lorry.regNum}" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">${lorry.regNum}</button>
                                                 </c:forEach>
                                             </div>
                                         </div>
@@ -251,9 +251,9 @@
                                                             <div class="dropdown">
 
                                                                 <label>
-                                                                    <select name="driver1Id"  style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                    <select name="driver1Id"  style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">
                                                                         <c:forEach items="${suitableDrivers}" var="user">
-                                                                            <option value="${user.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${user.id}] ${user.firstName} ${user.lastName}</option>
+                                                                            <option value="${user.id}" style="background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">[${user.id}] ${user.firstName} ${user.lastName}</option>
                                                                         </c:forEach>
                                                                     </select>
                                                                 </label>
@@ -274,9 +274,9 @@
                                                     <c:otherwise>
                                                         <div class="dropdown">
 
-                                                            <select name="driver2Id" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                            <select name="driver2Id" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">
                                                                 <c:forEach items="${suitableDrivers}" var="user">
-                                                                    <option value="${user.id}" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">[${user.id}] ${user.firstName} ${user.lastName}</option>
+                                                                    <option value="${user.id}" style="background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">[${user.id}] ${user.firstName} ${user.lastName}</option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
@@ -294,18 +294,18 @@
 
                 <div class="container" style="text-align: center;">
                     <form action="/employee/orders">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Back</button>
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Back</button>
                     </form>
                 </div>
 
                 <div class="container" style="text-align: center;">
                     <form action="/employee/delete-order/${order.id}">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Delete</button>
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Delete</button>
                     </form>
                 </div>
 
                 <div class="container" style="text-align: center;">
-                    <button form="drivers_form" class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">Save</button>
+                    <button form="drivers_form" class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Save</button>
                 </div>
             </div>
         </div>

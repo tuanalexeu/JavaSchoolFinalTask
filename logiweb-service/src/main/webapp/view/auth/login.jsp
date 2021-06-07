@@ -20,15 +20,15 @@
 <body class="bg-gradient-primary" style="background: #f8f9fc;">
 <div class="container">
     <div class="card shadow-lg o-hidden border-0 my-5" style="border-radius: 20px">
-        <div class="p-5" style="background: rgb(255,103,173);max-width: 400px;margin: initial;border-radius: 20px;">
+        <div class="p-5" style="background: rgb(226,0,116);max-width: 400px;margin: initial;border-radius: 20px;">
             <div class="text-center">
                 <h3 class="mb-4" style="color: rgb(255,255,255);">Welcome Back!</h3>
                 <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-                    <h5 class="mb-5" style="color: #ea4335">${SPRING_SECURITY_LAST_EXCEPTION}</h5>
+                    <h5 class="mb-5" style="color: #ffffff">${SPRING_SECURITY_LAST_EXCEPTION}</h5>
                 </c:if>
 
                 <c:if test="${not empty message}">
-                    <h5 class="mb-5" style="color: #ea4335">${message}</h5>
+                    <h5 class="mb-5" style="color: #f8f9fc">${message}</h5>
                 </c:if>
             </div>
             <form class="user" method="post" action="${pageContext.request.contextPath}/login">
@@ -38,12 +38,14 @@
                 <div class="form-group">
                     <input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password">
                 </div>
-                <button class="btn btn-primary btn-block text-white btn-user" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Login</button>
+                <button class="btn btn-primary btn-block text-white btn-user" type="submit" style="background: rgb(226,0,116);border-color: #ced8e6;">Login</button>
                 <hr>
                 <hr>
             </form>
             <div class="text-center"><a class="small" href="${pageContext.request.contextPath}/forgotPassword" style="color: rgb(255,255,255);">Forgot Password?</a></div>
-            <div class="text-center" style="color: rgb(255,255,255);"><a class="small" href="${pageContext.request.contextPath}/register" style="color: rgb(255,255,255);">Create an Account!</a></div>
+            <div class="text-center" style="color: rgb(255,255,255);">
+                <a class="small" href="${pageContext.request.contextPath}/register" style="color: rgb(255,255,255);">Create an Account!</a>
+            </div>
         </div>
     </div>
 </div>

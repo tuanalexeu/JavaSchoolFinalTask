@@ -21,7 +21,7 @@
 
 <body id="page-top">
 <div id="wrapper">
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(226,0,116);">
         <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
@@ -41,17 +41,17 @@
                 <ul class="navbar-nav ml-auto flex-nowrap">
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/employee/orders">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Change to manager</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Change to manager</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/profile">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Profile</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/logout">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Log out</button>
                         </form>
                     </li>
                 </ul>
@@ -73,7 +73,7 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#newDriver-modal">New user</button>
+                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);" data-toggle="modal" data-target="#newDriver-modal">New user</button>
                                 <div class="modal fade" id="newDriver-modal" role="dialog" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -88,7 +88,7 @@
                                                                 <h3 style="margin: 10px;">First name</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="firstName" required="required" path="firstName" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
+                                                                <form:input id="firstName" required="required" path="firstName" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -98,7 +98,7 @@
                                                                 <h3 style="margin: 10px;">Last name</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="lastName" required="required" path="lastName" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
+                                                                <form:input id="lastName" required="required" path="lastName" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -108,7 +108,7 @@
                                                                 <h3 style="margin: 10px;">Email</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="email" required="required" path="email" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
+                                                                <form:input id="email" required="required" path="email" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -118,7 +118,7 @@
                                                                 <h3 style="margin: 10px;">Password</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:input id="password" required="required" path="password" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
+                                                                <form:input id="password" required="required" path="password" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -128,7 +128,7 @@
                                                                 <h3 style="margin: 10px;">Role</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:select id="status" path="role" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                <form:select id="status" path="role" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">
                                                                     <form:option value="ROLE_DRIVER">Driver</form:option>
                                                                     <form:option value="ROLE_EMPLOYEE">Employee</form:option>
                                                                 </form:select>
@@ -141,7 +141,7 @@
                                                                 <h3 style="margin: 10px;">Enabled</h3>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form:select id="status" path="enabled" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                                                <form:select id="status" path="enabled" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">
                                                                     <form:option value="true">True</form:option>
                                                                     <form:option value="false">False</form:option>
                                                                 </form:select>
@@ -150,8 +150,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
-                                                    <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                                                    <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(226,0,116);background: rgb(255,255,255);border-color: rgb(226,0,116);">Close</button>
+                                                    <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(226,0,116);color: rgb(226,0,116);">Save</button>
                                                 </div>
                                             </form:form>
                                         </div>
@@ -175,7 +175,7 @@
                                         <td>
                                             <form action="${pageContext.request.contextPath}/admin/edit-user" method="post">
                                                 <input type="hidden" name="email" value="${user.email}">
-                                                <button class="btn btn-primary btn-block btn-user" id="editUser" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);">${user.firstName} ${user.lastName}</button>
+                                                <button class="btn btn-primary btn-block btn-user" id="editUser" type="submit" style="background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">${user.firstName} ${user.lastName}</button>
                                             </form>
 
                                         </td>

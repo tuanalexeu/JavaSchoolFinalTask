@@ -21,7 +21,7 @@
 
 <body id="page-top">
 <div id="wrapper">
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(226,0,116);">
         <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
@@ -41,17 +41,17 @@
                 <ul class="navbar-nav ml-auto flex-nowrap">
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/employee/orders">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Change to manager</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Change to manager</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/profile">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Profile</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/logout">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Log out</button>
                         </form>
                     </li>
                 </ul>
@@ -97,14 +97,14 @@
                                         <td>${user.firstName} ${user.lastName}</td>
                                         <td>
                                             <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Choose</button>
+                                                <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(226,0,116);background: rgb(255,255,255);border-color: rgb(226,0,116);">Choose</button>
                                                 <div class="dropdown-menu">
                                                     <c:forEach items="${newDrivers}" var="driver">
-                                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
+                                                        <a class="dropdown-item" style="background: #ffffff; color: #e20074; border-color: #e20074;">
                                                             <form action="${pageContext.request.contextPath}/admin/approve-driver" method="post">
                                                                 <input type="hidden" name="driverId" value="${driver.id}">
                                                                 <input type="hidden" name="email" value="${user.email}">
-                                                                <button type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">${driver.firstName} ${driver.lastName}</button>
+                                                                <button type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">${driver.firstName} ${driver.lastName}</button>
                                                             </form>
                                                         </a>
                                                     </c:forEach>

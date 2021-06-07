@@ -19,15 +19,15 @@
     <link rel="stylesheet" href="<c:url value="/assets/css/untitled.css"/>">
 </head>
 
-<body class="bg-gradient-primary" style="background: #f8f9fc;border-color: rgb(255,103,173);">
+<body class="bg-gradient-primary" style="background: #f8f9fc;border-color: rgb(226,0,116);">
     <div class="container" style="background: #f8f9fc; border-radius: 20px">
         <div class="card shadow-lg o-hidden border-0 my-5" style="border-radius: 20px">
             <div class="card-body p-0" style="border-radius: 20px"></div>
-            <div class="p-5" style="border-color: rgb(255,255,255);margin: initial;background: rgb(255,103,173);border-radius: 20px;">
+            <div class="p-5" style="border-color: rgb(255,255,255);margin: initial;background: rgb(226,0,116);border-radius: 20px;">
                 <div class="text-center">
                     <h4 class="mb-4" style="color: rgb(255,255,255);">Create an Account!</h4>
                     <c:if test="${not empty message}">
-                        <h5 class="mb-5" style="color: rgb(152,59,59);">${message}</h5>
+                        <h5 class="mb-5" style="color: rgb(255,255,255);">${message}</h5>
                     </c:if>
                 </div>
                 <form:form action="/reg-process" method="post" modelAttribute="user">
@@ -52,13 +52,13 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <form:select class="form-control form-control-user" placeholder="Role" path="role" name="role"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                            <form:select class="form-control form-control-user" placeholder="Role" path="role" name="role"  cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">
                                 <form:option value="ROLE_DRIVER">Driver</form:option>
                                 <form:option value="ROLE_EMPLOYEE">Employee</form:option>
                             </form:select>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-block text-white btn-user" id="register_button" type="submit" style="background: rgb(220,88,184);border-color: #ced8e6;">Register Account</button>
+                    <button class="btn btn-primary btn-block text-white btn-user" id="register_button" type="submit" style="background: rgb(226,0,116);border-color: #ced8e6;">Register Account</button>
                     <hr>
                     <hr>
                 </form:form>

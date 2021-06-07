@@ -21,7 +21,7 @@
 
 <body id="page-top">
 <div id="wrapper">
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(226,0,116);">
         <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
@@ -41,12 +41,12 @@
                 <ul class="navbar-nav ml-auto flex-nowrap">
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/profile">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Profile</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/logout">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Log out</button>
                         </form>
                     </li>
                 </ul>
@@ -62,7 +62,7 @@
                                     <h3 style="margin: 10px;">First name</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="firstName" path="firstName" required="required" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
+                                    <form:input id="firstName" path="firstName" required="required" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     <h3 style="margin: 10px;">Last name</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input id="lastName" path="lastName" required="required" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
+                                    <form:input id="lastName" path="lastName" required="required" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                     <h3 style="margin: 10px;">Hours worked</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <form:input type="number" min="0" max="176" id="hoursWorked" required="required" path="hoursWorked" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px"/>
+                                    <form:input type="number" min="0" max="176" id="hoursWorked" required="required" path="hoursWorked" cssErrorClass="errorBox" cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px"/>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="dropdown">
-                                        <form:select id="status" path="state" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                        <form:select id="status" path="state" cssErrorClass="errorBox"  cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">
                                             <form:option value="DUTY">Duty</form:option>
                                             <form:option value="DRIVING">Driving</form:option>
                                             <form:option value="RESTING">Resting</form:option>
@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="dropdown">
-                                        <form:select  path="city.name"  cssStyle="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">
+                                        <form:select  path="city.name"  cssStyle="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">
                                             <c:forEach items="${cities}" var="city">
                                                 <form:option value="${city}">${city}</form:option>
                                             </c:forEach>
@@ -137,12 +137,12 @@
                 </form:form>
                 <div class="modal-footer">
                     <form action="${pageContext.request.contextPath}/employee/drivers">
-                        <button class="btn btn-light" href="/employee/drivers" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Back</button>
+                        <button class="btn btn-light" href="/employee/drivers" style="color: rgb(226,0,116);background: rgb(255,255,255);border-color: rgb(226,0,116);">Back</button>
                     </form>
                     <form action="${pageContext.request.contextPath}/employee/delete-driver/${editDriver.id}">
-                        <button class="btn btn-light" type="submit" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Delete</button>
+                        <button class="btn btn-light" type="submit" style="color: rgb(226,0,116);background: rgb(255,255,255);border-color: rgb(226,0,116);">Delete</button>
                     </form>
-                    <button form="editDriverForm" class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(255,103,173);color: rgb(255,103,173);">Save</button>
+                    <button form="editDriverForm" class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(226,0,116);color: rgb(226,0,116);">Save</button>
                 </div>
             </div>
         </div>

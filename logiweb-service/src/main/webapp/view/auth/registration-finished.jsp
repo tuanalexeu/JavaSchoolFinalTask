@@ -24,17 +24,17 @@
 <div id="wrapper">
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content">
-            <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" id="top-navbar" style="background: #FF67AD;">
+            <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" id="top-navbar" style="background: #e20074;">
                 <div class="container">
                     <ul class="navbar-nav ml-auto flex-nowrap">
                         <li class="nav-item" style="padding: 5px">
                             <form action="${pageContext.request.contextPath}/login">
-                                <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Sign in</button>
+                                <button class="btn btn-primary" type="submit" style="background: #e20074;border-color: #ced8e6;">Sign in</button>
                             </form>
                         </li>
                         <li class="nav-item" style="padding: 5px">
                             <form action="${pageContext.request.contextPath}/register">
-                                <button class="btn btn-primary" type="submit" style="background: #dc58b8;border-color: #ced8e6;">Sign up</button>
+                                <button class="btn btn-primary" type="submit" style="background: #e20074;border-color: #ced8e6;">Sign up</button>
                             </form>
                         </li>
                     </ul>

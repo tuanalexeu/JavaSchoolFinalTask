@@ -21,8 +21,8 @@
 
 <body id="page-top">
 <div id="wrapper">
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(255,103,173);">
-        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(226,0,116);">
+        <div class="container-fluid d-flex fE20074FFlex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
             <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
             <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
         </a>
@@ -44,12 +44,12 @@
                 <ul class="navbar-nav ml-auto flex-nowrap">
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/profile">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Profile</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Profile</button>
                         </form>
                     </li>
                     <li class="nav-item" style="padding: 5px">
                         <form action="${pageContext.request.contextPath}/logout">
-                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">Log out</button>
+                            <button class="btn btn-primary" type="submit" style="background: #ffffff; color: #e20074; border-color: #e20074;">Log out</button>
                         </form>
                     </li>
                 </ul>
@@ -79,27 +79,27 @@
                         <tr>
                             <td>My status</td>
                             <td>
-                                <div class="dropdown" style="border-color: rgb(255,103,173);color: rgb(255,103,173);">
-                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${driver.state} </button>
+                                <div class="dropdown" style="border-color: rgb(226,0,116);color: rgb(226,0,116);">
+                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(226,0,116);background: rgb(255,255,255);border-color: rgb(226,0,116);">${driver.state} </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #e20074; border-color: #e20074;">
                                             <form action="${pageContext.request.contextPath}/driver/save" method="post">
-                                                <button type="submit" value="RESTING" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Resting</button>
+                                                <button type="submit" value="RESTING" name="status" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">Resting</button>
                                             </form>
                                         </a>
-                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #e20074; border-color: #e20074;">
                                             <form action="${pageContext.request.contextPath}/driver/save" method="post">
-                                                <button type="submit" value="DUTY" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Duty</button>
+                                                <button type="submit" value="DUTY" name="status" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">Duty</button>
                                             </form>
                                         </a>
-                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #e20074; border-color: #e20074;">
                                             <form action="${pageContext.request.contextPath}/driver/save" method="post">
-                                                <button type="submit" value="DRIVING" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Driving</button>
+                                                <button type="submit" value="DRIVING" name="status" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">Driving</button>
                                             </form>
                                         </a>
-                                        <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
+                                        <a class="dropdown-item" style="background: #ffffff; color: #e20074; border-color: #e20074;">
                                             <form action="${pageContext.request.contextPath}/driver/save" method="post">
-                                                <button type="submit" value="UNLOADING" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Unloading</button>
+                                                <button type="submit" value="UNLOADING" name="status" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">Unloading</button>
                                             </form>
                                         </a>
                                     </div>
@@ -125,7 +125,7 @@
                                     <p>No order assigned</p>
                                 </c:if>
                                 <c:if test="${not empty driver.order}">
-                                    <a href="#codrivers-modal" data-toggle="modal" data-target="#codrivers-modal" style="color: #DC58B8">View</a>
+                                    <a href="#codrivers-modal" data-toggle="modal" data-target="#codrivers-modal" style="color: #e20074">View</a>
                                 </c:if>
                                 <div class="modal fade" role="dialog" tabindex="-1" id="codrivers-modal">
                                     <div class="modal-dialog" role="document">
@@ -134,14 +134,14 @@
                                                 <h4 class="modal-title" style="color: rgb(133, 135, 150);">Drivers</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
+                                            <div class="modal-body" style="color: #858796;border-color: #e20074;">
                                                 <ul>
                                                     <c:forEach items="${coDrivers}" var="user">
                                                         <li>${user.id} ${user.firstName} ${user.lastName}</li>
                                                     </c:forEach>
                                                 </ul>
                                             </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">Ok</button></div>
+                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #e20074;color: #e20074;">Ok</button></div>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                                     <p>No order assigned</p>
                                 </c:if>
                                 <c:if test="${not empty driver.order}">
-                                    <a href="#routepoints-modal" data-toggle="modal" data-target="#routepoints-modal" style="color: #DC58B8">View</a>
+                                    <a href="#routepoints-modal" data-toggle="modal" data-target="#routepoints-modal" style="color: #e20074">View</a>
                                 </c:if>
                                 <div class="modal fade" role="dialog" tabindex="-1" id="routepoints-modal">
                                     <div class="modal-dialog" role="document">
@@ -163,7 +163,7 @@
                                                 <h4 class="modal-title" style="color: rgb(133, 135, 150);">Route points</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                             </div>
-                                            <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
+                                            <div class="modal-body" style="color: #858796;border-color: #e20074;">
                                                 <ul>
                                                     <c:forEach items="${route.cityList}" var="city" varStatus="loop">
                                                         <li>[${loop.index}] ${city.name}</li>
@@ -171,7 +171,7 @@
                                                 </ul>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">Ok</button>
+                                                <button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #e20074;color: #e20074;">Ok</button>
                                             </div>
                                         </div>
                                     </div>
@@ -221,24 +221,24 @@
                                         <td>${load.cityUnload.name}</td>
                                         <td>${load.weight}</td>
                                         <td>
-                                            <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">${load.status} </button>
+                                            <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="color: rgb(226,0,116);background: rgb(255,255,255);border-color: rgb(226,0,116);">${load.status} </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
+                                                <a class="dropdown-item" style="background: #ffffff; color: #e20074; border-color: #e20074;">
                                                     <form action="${pageContext.request.contextPath}/driver/save-load">
                                                         <input type="hidden" name="loadId" value="${load.id}">
-                                                        <button type="submit" value="PREPARED" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Prepared</button>
+                                                        <button type="submit" value="PREPARED" name="status" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">Prepared</button>
                                                     </form>
                                                 </a>
-                                                <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
+                                                <a class="dropdown-item" style="background: #ffffff; color: #e20074; border-color: #e20074;">
                                                     <form action="${pageContext.request.contextPath}/driver/save-load">
                                                         <input type="hidden" name="loadId" value="${load.id}">
-                                                        <button type="submit" value="SENT" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Sent</button>
+                                                        <button type="submit" value="SENT" name="status" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">Sent</button>
                                                     </form>
                                                 </a>
-                                                <a class="dropdown-item" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8;">
+                                                <a class="dropdown-item" style="background: #ffffff; color: #e20074; border-color: #e20074;">
                                                     <form action="${pageContext.request.contextPath}/driver/save-load">
                                                         <input type="hidden" name="loadId" value="${load.id}">
-                                                        <button type="submit" value="DELIVERED" name="status" style="background: #ffffff; color: #dc58b8; border-color: #dc58b8; border-radius: 5px; margin: 8px">Delivered</button>
+                                                        <button type="submit" value="DELIVERED" name="status" style="background: #ffffff; color: #e20074; border-color: #e20074; border-radius: 5px; margin: 8px">Delivered</button>
                                                     </form>
                                                 </a>
                                             </div>

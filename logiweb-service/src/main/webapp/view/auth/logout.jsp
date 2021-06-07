@@ -23,18 +23,18 @@
 <body class="bg-gradient-primary" style="background: #ffffff;">
     <div class="container" id="logincontainer">
         <div class="card shadow-lg o-hidden border-0 my-5">
-            <div class="p-5" style="background: rgb(255,103,173);border-radius: 20px;">
+            <div class="p-5" style="background: rgb(226,0,116);border-radius: 20px;">
                 <div class="text-center">
                     <h4 class="text-white mb-2" style="color: rgb(255,255,255);width: 300px;"><strong>Are you sure you want to log out?</strong></h4>
                     <p class="text-white mb-4" style="color: rgb(0,0,0);">Please, confirm your action</p>
                 </div>
                 <div class="row" id="my-row">
                     <form action="${pageContext.request.contextPath}/performLogOut">
-                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ffffff;">Yes</button></div>
+                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(226,0,116);border-color: #ffffff;">Yes</button></div>
                     </form>
 
                     <form action="${pageContext.request.contextPath}/homePage">
-                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(220,88,184);border-color: #ffffff;">No</button></div>
+                        <div class="col"><button class="btn btn-primary btn-block text-white btn-user" id="yes-button" type="submit" style="background: rgb(226,0,116);border-color: #ffffff;">No</button></div>
                     </form>
                 </div>
                 <div class="text-center"></div>
