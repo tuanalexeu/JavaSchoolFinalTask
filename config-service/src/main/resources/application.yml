@@ -3,11 +3,20 @@ server:
 spring:
   cloud:
     config:
+      discovery:
+        enabled: true
       server:
         git:
           uri: ${GIT_CONFIG_URI}
-          searchPaths: auth-service,logiweb-service,eureka-service
+          searchPaths: chat-service,eureka-service,logiweb-service,client-order-service
+          username: ${GITHUB_USERNAME}
+          password: ${GITHUB_PASSWORD}
 
 # enable all actuator endpoints for testing (review this for real deployments)
 management.endpoints.web:
   include: '*'
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://34.88.16.195/eureka/

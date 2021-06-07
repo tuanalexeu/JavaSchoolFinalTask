@@ -8,5 +8,10 @@ spring:
     config:
       uri: ${CONFIG_SERVER_HOST}
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://34.88.16.195/eureka/
+
 server:
   port: 8090
