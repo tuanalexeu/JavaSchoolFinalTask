@@ -1,6 +1,6 @@
 spring:
   application:
-    name: dashboard-service
+    name: client-order-service
   profiles:
     active:
       default

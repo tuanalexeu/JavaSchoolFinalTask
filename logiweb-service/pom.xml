@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <name>logiweb-service</name>
     <packaging>war</packaging>
-    <artifactId>logiweb</artifactId>
+    <artifactId>logiweb-service</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
