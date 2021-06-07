@@ -17,7 +17,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 @Service
-@PropertySource("classpath:messaging.yml")
 public class MessageServiceImpl implements MessageService {
 
     @Value("${PUBSUB_TOPIC}")

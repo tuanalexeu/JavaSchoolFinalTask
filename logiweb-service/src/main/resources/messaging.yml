@@ -1,8 +1,0 @@
-rabbitmq.host: ${RABBITMQ_HOST}
-rabbitmq.user: ${RABBITMQ_USER}
-rabbitmq.password: ${RABBITMQ_PASSWORD}
-
-PUBSUB_TOPIC: logiweb-topic
-# This token is used to verify that requests originate from your
-# application. It can be any sufficiently random string.
-PROJECT_ID_ENV: ${PROJECT_ID}

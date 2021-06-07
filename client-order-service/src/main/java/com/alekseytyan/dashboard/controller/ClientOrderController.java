@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 @Controller
-@PropertySource("classpath:general.properties")
 public class ClientOrderController {
 
     private Client clientFindOrder;
