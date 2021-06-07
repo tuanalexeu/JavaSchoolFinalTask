@@ -18,10 +18,9 @@ import java.util.UUID;
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
 
     private static final Logger logger = LoggerFactory.getLogger(RegistrationListener.class);
- 
+
     private final VerificationService verificationService;
     private final UserService userService;
-    private final MessageSource messages;
     private final EmailService emailService;
 
     @Override
@@ -43,7 +42,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         String subject = "Registration Confirmation";
         String confirmationUrl = event.getAppUrl() + "/register-confirm?token=" + token;
 
-        String message = messages.getMessage("message.regSucc", null, event.getLocale());
+        String message = "Registration went well";
 
         String text = message + "\r\n" + "http://localhost:8080" + confirmationUrl;
 
