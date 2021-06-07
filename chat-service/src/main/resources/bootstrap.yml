@@ -6,7 +6,7 @@ spring:
       default
   cloud:
     config:
-      uri: ${CONFIG_SERVER_HOST}
+      uri: http://34.88.170.12/
 
 eureka:
   client:
