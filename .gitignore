@@ -107,6 +107,8 @@ fabric.properties
 
 */target/**
 
+config-service/src/main/resources/application.yml
+
 *.env
 
 
