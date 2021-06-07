@@ -6,12 +6,7 @@ spring:
       default
   cloud:
     config:
-      uri: http://34.88.170.12/
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://34.88.16.195/eureka/
+      uri: http://34.88.228.142/
 
 server:
   port: 8090
