@@ -9,35 +9,27 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>config-service</artifactId>
-    <name>config-service</name>
+    <artifactId>eureka-service</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <start-class>com.alekseytyan.config.ConfigService</start-class>
-        <docker.image.name>tuanalexeu/config-service</docker.image.name>
-        <docker.image.tag>final-task3</docker.image.tag>
+        <start-class>com.alekseytyan.eureka.EurekaService</start-class>
+        <docker.image.name>tuanalexeu/eureka-service</docker.image.name>
+        <docker.image.tag>final-task</docker.image.tag>
     </properties>
 
+
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>config-service</finalName>
+        <finalName>eureka-service</finalName>
         <plugins>
-            <!-- We use the Resources plugin to filer Dockerfile and run.sh, it inserts actual JAR filename -->
-            <!-- The final Dockerfile will be created in target/dockerfile/Dockerfile -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
@@ -71,7 +63,7 @@
                         <resource>
                             <targetPath>/</targetPath>
                             <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
+                            <include>${project.build.finalName}.war</include>
                         </resource>
                     </resources>
                 </configuration>
@@ -82,6 +74,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
