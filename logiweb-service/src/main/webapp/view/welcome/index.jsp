@@ -26,6 +26,7 @@
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" id="top-navbar" style="background: #e20074;">
                     <div class="container">
+                        <h1 style="color: rgb(255,255,255); margin-top: 2px">Logiweb Microservices</h1>
                         <ul class="navbar-nav ml-auto flex-nowrap">
                             <li class="nav-item" style="padding: 5px">
                                 <form action="${pageContext.request.contextPath}/login">
@@ -43,8 +44,10 @@
                 <div class="container" style="height: 800px;">
                     <div class="row">
                         <div class="col-md-6">
-                            <h1>Logiweb website</h1>
-                            <p>Welcome to our page.<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br>Bla-bla-bla<br></p>
+                            <h1>Welcome to our website.</h1>
+                            <p>Logiweb Microservices is a big project with microservice architecture.
+                                This is a REST-ful application deployed to Google Cloud Platform.
+                                It consists of 5 services: Logiweb, Dashboard, Client Order Service, Centralized Config Server and Chat Service</p>
                         </div>
                         <div class="col-md-6"><img src="<c:url value="/assets/img/dogs/image1.jpeg"/>" style="width: 300px;"></div>
                     </div>
