@@ -7,12 +7,11 @@ import lombok.Setter
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 class ChatMessage {
 
     var type: MessageType? = null
-    private val content: String? = null
+    var content: String? = null
     var sender: String? = null
 
     enum class MessageType {
