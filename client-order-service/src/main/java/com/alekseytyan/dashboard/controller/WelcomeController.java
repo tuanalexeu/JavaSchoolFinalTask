@@ -23,7 +23,6 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Controller
-@PropertySource("classpath:general.properties")
 public class WelcomeController {
 
     private Client loadClient;
