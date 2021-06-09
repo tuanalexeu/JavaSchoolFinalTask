@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: chat-service
-          image: tuanalexeu/chat-service:final-task2
+          image: tuanalexeu/chat-service:final-task3
           ports:
             - containerPort: 8090
