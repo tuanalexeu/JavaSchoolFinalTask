@@ -30,7 +30,6 @@ public class HamiltonianPath {
         // if all the vertices are visited, then the Hamiltonian path exists
         if (path.size() == N) {
             // the Hamiltonian path
-            logger.info("Hamiltonian path: " + path);
             return new ArrayList<>(path);
         }
 
@@ -97,9 +96,18 @@ public class HamiltonianPath {
             neededCitiesOrder.add(g.findNodeByIndex(i));
         }
 
-        logger.info("Cities order: " + neededCitiesOrder);
+        logger.info("Needed cities order: " + neededCitiesOrder);
 
+        return calculateCitiesBetween(neededCitiesOrder, allCities);
+    }
 
+    /**
+     * Calculates route between needed cities, after their order is calculated
+     * @param neededCitiesOrder - order of initial cities
+     * @param allCities - all existing ciites
+     * @return - object representing route information
+     */
+    private static Route calculateCitiesBetween(List<Node> neededCitiesOrder, Set<Node> allCities) {
         List<Node> finalCities = new ArrayList<>();
         int distance = 0;
 
@@ -173,7 +181,6 @@ public class HamiltonianPath {
         }
 
         List<Edge> edges = new ArrayList<>();
-
         for (Node n: allCities) {
             if(n.equals(cityStart)) {
                 cityStart = n;
