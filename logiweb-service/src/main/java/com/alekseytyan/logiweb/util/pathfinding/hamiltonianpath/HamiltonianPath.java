@@ -3,11 +3,15 @@ package com.alekseytyan.logiweb.util.pathfinding.hamiltonianpath;
 import com.alekseytyan.logiweb.util.pathfinding.Route;
 import com.alekseytyan.logiweb.util.pathfinding.dijkstra.Graph;
 import com.alekseytyan.logiweb.util.pathfinding.dijkstra.Node;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class HamiltonianPath {
+
+    private static final Logger logger = LoggerFactory.getLogger(HamiltonianPath.class);
 
     /**
      * Hamiltonian path algorithm. Calculates optimal route with given nodes
@@ -19,16 +23,19 @@ public class HamiltonianPath {
      * @return - list of number, each of witch represents number of node
      */
     public static List<Integer> getHamiltonianPath(EdgeGraph g,
-                                                   int v,
-                                                   boolean[] visited,
-                                                   List<Integer> path,
-                                                   int N) {
+                                          int v,
+                                          boolean[] visited,
+                                          List<Integer> path,
+                                          int N) {
         // if all the vertices are visited, then the Hamiltonian path exists
         if (path.size() == N) {
             // the Hamiltonian path
-            return path;
+            logger.info("Hamiltonian path: " + path);
+            return new ArrayList<>(path);
         }
- 
+
+        List<Integer> result = new ArrayList<>();
+
         // Check if every edge starting from vertex `v` leads
         // to a solution or not
         for (int w: g.adjList.get(v)) {
@@ -37,20 +44,17 @@ public class HamiltonianPath {
             if (!visited[w]) {
                 visited[w] = true;
                 path.add(w);
- 
+
                 // check if adding vertex `w` to the path leads
                 // to the solution or not
-                List<Integer> list = getHamiltonianPath(g, w, visited, path, N);
-                if(list != null) {
-                    return list;
-                }
- 
+                result = getHamiltonianPath(g, w, visited, path, N);
+
                 // backtrack
                 visited[w] = false;
                 path.remove(path.size() - 1);
             }
         }
-        return null;
+        return result;
     }
 
     /**
@@ -61,35 +65,39 @@ public class HamiltonianPath {
      * @return - result route object
      */
     public static Route calculateRoute(Set<Node> neededCities, Set<Node> allCities, Node cityStart) {
- 
+
         // build a graph from the given edges
         EdgeGraph g = convertToEdgeGraph(neededCities, allCities, cityStart);
- 
+
         // starting node
         int start = 0;
- 
+
         // add starting node to the path
         List<Integer> path = new ArrayList<>();
         path.add(start);
- 
+
         // mark the start node as visited
         boolean[] visited = new boolean[neededCities.size()];
         visited[start] = true;
- 
-        List<Integer> list = getHamiltonianPath(g, start, visited, path, neededCities.size());
+
+        List<Integer> result = getHamiltonianPath(g, start, visited, path, neededCities.size());
 
         List<Node> neededCitiesOrder = new ArrayList<>();
 
-        if(list == null) {
+        logger.info("Result: " + result);
+
+        if(result == null || result.isEmpty()) {
             Route route = new Route();
             route.setPossible(false);
 
             return route;
         }
 
-        for (Integer i: list) {
+        for (Integer i: result) {
             neededCitiesOrder.add(g.findNodeByIndex(i));
         }
+
+        logger.info("Cities order: " + neededCitiesOrder);
 
 
         List<Node> finalCities = new ArrayList<>();
@@ -129,6 +137,8 @@ public class HamiltonianPath {
                 }
             }
         }
+
+        logger.info("Distance: " + distance);
 
         Route route = new Route();
         route.setPossible(distance < Integer.MAX_VALUE);
