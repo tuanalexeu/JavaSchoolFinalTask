@@ -42,7 +42,7 @@
 
                             <form action="${pageContext.request.contextPath}/find-order">
                                 <input type="text" name="orderToken" style="width: 400px;height: 40px;border-radius: 10px;" />
-                                <button class="btn btn-primary" type="submit" style="margin-left: 10px; color: #e20074; background: #ffffff;border-color: #e20074;">Find</button>
+                                <button class="btn btn-primary" type="submit" style="margin-left: 10px; color: #e20074; background: #ffffff;border-color: #e20074; margin: 10px">Find</button>
                             </form>
 
                             <c:choose>

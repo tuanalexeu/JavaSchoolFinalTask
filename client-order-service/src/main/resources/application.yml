@@ -1,0 +1,9 @@
+spring:
+  mvc:
+    view:
+      prefix: /view/
+      suffix: .jsp
+    static-path-pattern: /assets/**
+
+  resources:
+    static-locations: /assets/
