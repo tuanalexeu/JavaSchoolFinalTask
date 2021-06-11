@@ -1,6 +1,3 @@
-<details>
-  <summary>Task description</summary>
-  
   В задании требуется написать приложение, моделирующее работу
 информационной системы некоторой компании, осуществляющей перевозку
 грузов. Ниже более подробно описаны предметная область и технические
@@ -240,12 +237,3 @@ Angular/React (например, админка для табло), Docker, Micr
 использования доступного cloud для развертывания приложения (например,
 <https://cloud.yandex.ru/> - 1 месяц бесплатного использования) и/или
 наличие «killer features».
-    
-</details>
-
-[<img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="drawing" width="100">](https://hub.docker.com/u/tuanalexeu/)
-
-[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/GitLab_logo.svg/1280px-GitLab_logo.svg.png" alt="drawing" width="100">](https://gitlab.com/tuanalexeu/logiweb-microservices)
-
-[<img src="https://upload.wikimedia.org/wikipedia/commons/5/54/GitHub_Logo.png" alt="drawing" width="100">](https://github.com/tuanalexeu/logiweb-microservices)
-
