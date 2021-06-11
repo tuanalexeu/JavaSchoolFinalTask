@@ -1,4 +1,4 @@
-package com.alekseytyan;
+package com.alekseytyan.controller;
 
 import com.alekseytyan.logiweb.LogiwebService;
 import com.alekseytyan.logiweb.controller.WelcomeController;

@@ -1,4 +1,4 @@
-package com.alekseytyan;
+package com.alekseytyan.controller;
 
 import com.alekseytyan.logiweb.LogiwebService;
 import com.alekseytyan.logiweb.controller.authRest.RestAuthController;
@@ -16,9 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RestControllerTest {
 
     @Autowired
-    private RestAuthController restAuthController;
-
-    @Autowired
     private CityRestController cityRestController;
 
     @Autowired
@@ -29,10 +26,11 @@ public class RestControllerTest {
 
     @Test
     public void contextLoads() throws Exception {
-        assertThat(restAuthController).isNotNull();
         assertThat(cityRestController).isNotNull();
         assertThat(infoTableController).isNotNull();
         assertThat(orderRestController).isNotNull();
     }
+
+
 
 }

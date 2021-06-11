@@ -30,7 +30,15 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <sonar.projectKey>tuanalexeu_logiweb-microservices</sonar.projectKey>
         <sonar.moduleKey>${artifactId}</sonar.moduleKey>
-        <sonar.cpd.exclusions>**/*.jsp, **/*.js, **/*.css</sonar.cpd.exclusions>
+        <sonar.cpd.exclusions>
+            **/*.jsp, **/*.js, **/*.css,
+            **/entity/**
+            **/dto/**
+            **/dao/**
+            **/exception/**
+            **/config/**
+            **/repository/**
+        </sonar.cpd.exclusions>
         <sonar.organization>tuanalexeu</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
