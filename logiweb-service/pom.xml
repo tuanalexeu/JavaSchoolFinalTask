@@ -19,7 +19,7 @@
         <maven.tomcat.version>9.0.45</maven.tomcat.version>
         <start-class>com.alekseytyan.logiweb.LogiwebService</start-class>
         <docker.image.name>tuanalexeu/logiweb-service</docker.image.name>
-        <docker.image.tag>final-task20</docker.image.tag>
+        <docker.image.tag>final-task22</docker.image.tag>
     </properties>
 
 <!--    <dependencyManagement>-->

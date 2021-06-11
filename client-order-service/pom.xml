@@ -19,7 +19,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <start-class>com.alekseytyan.dashboard.ClientOrderService</start-class>
         <docker.image.name>tuanalexeu/client-service</docker.image.name>
-        <docker.image.tag>final-task3</docker.image.tag>
+        <docker.image.tag>final-task4</docker.image.tag>
     </properties>
 
     <dependencies>
@@ -62,11 +62,6 @@
             <artifactId>bootstrap</artifactId>
             <version>4.3.1</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.webjars</groupId>-->
-<!--            <artifactId>webjars-locator-core</artifactId>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -124,9 +119,6 @@
             <artifactId>javax.ws.rs-api</artifactId>
             <version>2.1.1</version>
         </dependency>
-
-
-
 
     </dependencies>
 
