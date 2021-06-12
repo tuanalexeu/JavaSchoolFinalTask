@@ -39,7 +39,7 @@
             **/config/**
             **/repository/**
         </sonar.cpd.exclusions>
-        <sonar.organization>tuanalexeu</sonar.organization>
+        <sonar.organization>tuanalexeu-1</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
