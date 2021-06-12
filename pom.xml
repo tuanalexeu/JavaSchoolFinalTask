@@ -38,6 +38,10 @@
             **/exception/**
             **/config/**
             **/repository/**
+            **/aspect/**
+            **/validation/**
+            **/security/**
+            **/schedule/**
         </sonar.cpd.exclusions>
         <sonar.organization>tuanalexeu-1</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
