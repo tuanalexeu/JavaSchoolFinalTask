@@ -1,4 +1,4 @@
-package com.alekseytyan.test;
+package com.alekseytyan.test.service;
 
 import com.alekseytyan.client.entity.User;
 import com.alekseytyan.client.repository.UserRepository;
