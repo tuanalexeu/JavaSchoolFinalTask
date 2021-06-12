@@ -11,5 +11,4 @@ WORKDIR $APP_HOME
 COPY service-account.json $APP_HOME
 
 ENTRYPOINT ["sh", "-c"]
-CMD ["exec java -jar $APP_FILE"]
-#CMD ["exec docker login; docker push tuanalexeu/logiweb-service:final-task"]
+CMD ["exec java -jar -Dspring.profiles.active=default $APP_FILE"]

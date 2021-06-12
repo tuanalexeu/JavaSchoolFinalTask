@@ -5,4 +5,4 @@ EXPOSE 8090
 COPY $APP_FILE $APP_HOME/
 WORKDIR $APP_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["exec java -jar $APP_FILE"]
+CMD ["exec java -jar -Dspring.profiles.active=default $APP_FILE"]
