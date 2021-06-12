@@ -17,7 +17,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <start-class>com.alekseytyan.dashboard.ClientOrderService</start-class>
+        <start-class>com.alekseytyan.client.ClientOrderService</start-class>
         <docker.image.name>tuanalexeu/client-service</docker.image.name>
         <docker.image.tag>final-task4</docker.image.tag>
     </properties>
