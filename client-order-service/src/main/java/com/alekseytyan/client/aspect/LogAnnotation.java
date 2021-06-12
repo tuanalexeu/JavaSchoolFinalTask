@@ -1,4 +1,4 @@
-package com.alekseytyan.dashboard.aspect;
+package com.alekseytyan.client.aspect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

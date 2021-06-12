@@ -1,4 +1,4 @@
-package com.alekseytyan.dashboard.dto;
+package com.alekseytyan.client.dto;
 
 import lombok.Data;
 

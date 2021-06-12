@@ -1,8 +1,8 @@
-package com.alekseytyan.dashboard.service.implementation;
+package com.alekseytyan.client.service.implementation;
 
-import com.alekseytyan.dashboard.entity.User;
-import com.alekseytyan.dashboard.repository.UserRepository;
-import com.alekseytyan.dashboard.service.api.UserService;
+import com.alekseytyan.client.entity.User;
+import com.alekseytyan.client.repository.UserRepository;
+import com.alekseytyan.client.service.api.UserService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

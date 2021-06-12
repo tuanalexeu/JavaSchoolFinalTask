@@ -1,6 +1,6 @@
-package com.alekseytyan.dashboard.controller;
+package com.alekseytyan.client.controller;
 
-import com.alekseytyan.dashboard.service.api.UserService;
+import com.alekseytyan.client.service.api.UserService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

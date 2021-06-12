@@ -1,6 +1,6 @@
-package com.alekseytyan.dashboard.dto;
+package com.alekseytyan.client.dto;
 
-import com.alekseytyan.dashboard.dto.enums.LoadStatus;
+import com.alekseytyan.client.dto.enums.LoadStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

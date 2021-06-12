@@ -1,4 +1,4 @@
-package com.alekseytyan.dashboard.aspect;
+package com.alekseytyan.client.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -54,8 +54,8 @@ public class LogAspect {
      * @param error - error message
      */
     @AfterThrowing(
-            pointcut = "execution(* com.alekseytyan.dashboard.service..*.*(..)) " +
-                    "|| execution(* com.alekseytyan.dashboard.controller..*.*(..))",
+            pointcut = "execution(* com.alekseytyan.client.service..*.*(..)) " +
+                    "|| execution(* com.alekseytyan.client.controller..*.*(..))",
             throwing = "error")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable error) {
         if (logger.isErrorEnabled()) {

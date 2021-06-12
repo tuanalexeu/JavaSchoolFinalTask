@@ -1,6 +1,6 @@
-package com.alekseytyan.dashboard.repository;
+package com.alekseytyan.client.repository;
 
-import com.alekseytyan.dashboard.entity.User;
+import com.alekseytyan.client.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

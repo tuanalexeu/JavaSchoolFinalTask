@@ -1,8 +1,8 @@
-package com.alekseytyan.dashboard.controller;
+package com.alekseytyan.client.controller;
 
-import com.alekseytyan.dashboard.dto.ClientLoadDTO;
-import com.alekseytyan.dashboard.dto.GenericResponse;
-import com.alekseytyan.dashboard.dto.StatusDTO;
+import com.alekseytyan.client.dto.ClientLoadDTO;
+import com.alekseytyan.client.dto.GenericResponse;
+import com.alekseytyan.client.dto.StatusDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -13,7 +13,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;

@@ -1,6 +1,6 @@
-package com.alekseytyan.dashboard.service.api;
+package com.alekseytyan.client.service.api;
 
-import com.alekseytyan.dashboard.entity.User;
+import com.alekseytyan.client.entity.User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.List;

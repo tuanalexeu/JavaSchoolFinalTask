@@ -1,4 +1,4 @@
-package com.alekseytyan.dashboard.entity;
+package com.alekseytyan.client.entity;
 
 import lombok.*;
 import javax.persistence.*;
