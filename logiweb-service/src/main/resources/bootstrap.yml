@@ -3,7 +3,7 @@ spring:
     name: logiweb-service
   profiles:
     active:
-      default
+      default,dev
   cloud:
     config:
       uri: http://www.config.logiweb.site/
