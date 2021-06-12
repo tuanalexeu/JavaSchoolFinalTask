@@ -1,6 +1,6 @@
-package com.alekseytyan.logiweb.exception;
+package com.alekseytyan.client.exception;
 
-import com.alekseytyan.logiweb.aspect.LogAnnotation;
+import com.alekseytyan.client.aspect.LogAnnotation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.FieldError;
@@ -37,23 +37,6 @@ public class CustomControllerAdvice {
     }
 
 
-    @ExceptionHandler(UserBlockedException.class)
-    @LogAnnotation
-    public ModelAndView userBlocked() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("error/userBlocked");
-        return mav;
-    }
-
-    @ExceptionHandler(NoSuchRoleException.class)
-    @LogAnnotation
-    public ModelAndView noSuchRole() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("error/noSuchRole");
-        return mav;
-    }
-
-
     @ExceptionHandler(NoHandlerFoundException.class)
     @LogAnnotation
     public ModelAndView noHandlerFound(HttpServletResponse response) {
@@ -73,3 +56,4 @@ public class CustomControllerAdvice {
         return mav;
     }
 }
+
