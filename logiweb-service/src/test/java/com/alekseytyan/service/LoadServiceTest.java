@@ -40,6 +40,13 @@ public class LoadServiceTest {
     }
 
     @Test
+    public void saveTest() {
+        service.save(null);
+
+        verify(dao, times(1)).save(null);
+    }
+
+    @Test
     public void findAllTest() {
         List<Load> list = new ArrayList<>();
 

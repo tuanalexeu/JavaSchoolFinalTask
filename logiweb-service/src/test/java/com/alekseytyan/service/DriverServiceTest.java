@@ -39,6 +39,20 @@ public class DriverServiceTest {
     }
 
     @Test
+    public void saveTest() {
+        service.save(null);
+
+        verify(dao, times(1)).save(null);
+    }
+
+    @Test
+    public void updateTest() {
+        service.update(null);
+
+        verify(dao, times(1)).update(null);
+    }
+
+    @Test
     public void findAllTest() {
         List<Driver> list = new ArrayList<>();
 

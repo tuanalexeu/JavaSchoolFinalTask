@@ -62,4 +62,13 @@ public class CityServiceTest {
 
         assertEquals("Angarsk", city.getName());
     }
+
+    @Test
+    public void findAllNamesTest() {
+        when(dao.findAllNames()).thenReturn(new ArrayList<>());
+
+        List<String> result = service.findAllNames();
+
+        assertEquals(0, result.size());
+    }
 }

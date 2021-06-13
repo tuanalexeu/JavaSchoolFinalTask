@@ -1,6 +1,7 @@
 package com.alekseytyan.service;
 
 import com.alekseytyan.logiweb.dao.implementation.OrderDaoImpl;
+import com.alekseytyan.logiweb.dto.OrderDTO;
 import com.alekseytyan.logiweb.entity.Order;
 import com.alekseytyan.logiweb.service.implementation.OrderServiceImpl;
 import org.junit.Before;
@@ -38,6 +39,20 @@ public class OrderServiceTest {
     }
 
     @Test
+    public void saveTest() {
+        service.save(null);
+
+        verify(dao, times(1)).save(null);
+    }
+
+    @Test
+    public void updateTest() {
+        service.update(null);
+
+        verify(dao, times(1)).update(null);
+    }
+
+    @Test
     public void findAllTest() {
         List<Order> list = new ArrayList<>();
 
@@ -65,4 +80,5 @@ public class OrderServiceTest {
         assertFalse(order.isFinished());
         assertTrue(order.isVerified());
     }
+
 }
