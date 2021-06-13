@@ -33,6 +33,7 @@
         <sonar.cpd.exclusions>
             **/*.jsp, **/*.js, **/*.css,
             **/*Application.java,
+            **/*Application.kt,
             **/entity/**,
             **/dto/**,
             **/dao/**,
