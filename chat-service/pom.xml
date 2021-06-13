@@ -14,7 +14,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <start-class>com.alekseytyan.chat.ChatService</start-class>
+        <start-class>com.alekseytyan.chat.ChatApplication</start-class>
         <docker.image.name>tuanalexeu/chat-service</docker.image.name>
         <docker.image.tag>final-task3</docker.image.tag>
     </properties>

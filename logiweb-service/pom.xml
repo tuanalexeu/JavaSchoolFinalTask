@@ -17,7 +17,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <maven.tomcat.version>9.0.45</maven.tomcat.version>
-        <start-class>com.alekseytyan.logiweb.LogiwebService</start-class>
+        <start-class>com.alekseytyan.logiweb.LogiwebApplication</start-class>
         <docker.image.name>tuanalexeu/logiweb-service</docker.image.name>
         <docker.image.tag>final-task23</docker.image.tag>
     </properties>

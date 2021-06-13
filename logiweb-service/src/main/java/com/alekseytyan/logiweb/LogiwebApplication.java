@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LogiwebService {
+public class LogiwebApplication {
     public static void main(String[] args) {
-        SpringApplication.run(LogiwebService.class, args);
+        SpringApplication.run(LogiwebApplication.class, args);
     }
 }

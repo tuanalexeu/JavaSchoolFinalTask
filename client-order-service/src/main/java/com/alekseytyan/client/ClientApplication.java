@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 @SpringBootApplication
-public class ClientOrderService extends WebSecurityConfigurerAdapter {
+public class ClientApplication extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -27,6 +27,6 @@ public class ClientOrderService extends WebSecurityConfigurerAdapter {
                 .oauth2Login();
     }
     public static void main(String[] args) {
-        SpringApplication.run(ClientOrderService.class, args);
+        SpringApplication.run(ClientApplication.class, args);
     }
 }

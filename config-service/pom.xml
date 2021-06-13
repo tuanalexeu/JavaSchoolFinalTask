@@ -15,7 +15,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <start-class>com.alekseytyan.config.ConfigService</start-class>
+        <start-class>com.alekseytyan.config.ConfigApplication</start-class>
         <docker.image.name>tuanalexeu/config-service</docker.image.name>
         <docker.image.tag>final-task22</docker.image.tag>
     </properties>
