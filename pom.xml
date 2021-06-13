@@ -32,17 +32,17 @@
         <sonar.moduleKey>${artifactId}</sonar.moduleKey>
         <sonar.cpd.exclusions>
             **/*.jsp, **/*.js, **/*.css,
-            **/*Application.java
-            **/entity/**
-            **/dto/**
-            **/dao/**
-            **/exception/**
-            **/config/**
-            **/repository/**
-            **/aspect/**
-            **/validation/**
-            **/security/**
-            **/schedule/**
+            **/*Application.java,
+            **/entity/**,
+            **/dto/**,
+            **/dao/**,
+            **/exception/**,
+            **/config/**,
+            **/repository/**,
+            **/aspect/**,
+            **/validation/**,
+            **/security/**,
+            **/schedule/**,
             **/controller/**
         </sonar.cpd.exclusions>
         <sonar.organization>tuanalexeu-1</sonar.organization>
