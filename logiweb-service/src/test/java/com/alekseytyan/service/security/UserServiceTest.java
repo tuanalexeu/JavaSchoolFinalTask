@@ -1,4 +1,4 @@
-package com.alekseytyan.service;
+package com.alekseytyan.service.security;
 
 import com.alekseytyan.logiweb.dao.implementation.UserDaoImpl;
 import com.alekseytyan.logiweb.entity.enums.UserRole;
