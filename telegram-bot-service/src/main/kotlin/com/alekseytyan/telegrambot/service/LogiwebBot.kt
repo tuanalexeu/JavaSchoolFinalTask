@@ -27,9 +27,9 @@ class LogiwebBot : TelegramLongPollingBot() {
             val chatId = message.chatId
             val responseText = if (message.hasText()) {
                 when (message.text) {
-                    "/start" -> "Welcome to Logiweb chat service!"
-                    "Connect to chat" -> "You connected to chat"
-                    "Disconnect from chat" -> "You disconnected from chat"
+                    "/start" -> "Welcome to Logiweb Client Service!"
+                    "Check order status" -> "Some order status"
+                    "Make new order" -> "Adding new order logic"
                     "Go to Logiweb" -> "You're being redirected"
                     "About us" -> "Info"
                     else -> "Invalid command"
@@ -46,8 +46,8 @@ class LogiwebBot : TelegramLongPollingBot() {
         responseMessage.setParseMode("Markdown")
         responseMessage.replyMarkup = getReplyMarkup(
                 listOf(
-                        listOf("Connect to chat", "Disconnect from chat"),
-                        listOf("Go to Logiweb", "About us")
+                        listOf("Check order status", "Make new order"),
+                        listOf("Go to website", "About us")
                 )
         )
         execute(responseMessage)
