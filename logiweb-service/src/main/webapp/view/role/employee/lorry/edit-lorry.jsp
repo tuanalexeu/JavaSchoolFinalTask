@@ -52,7 +52,7 @@
                 </ul>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Edit driver</h3>
+                <h3 class="text-dark mb-4">Edit truck</h3>
                 <form:form action="/employee/edit-lorry" method="post" modelAttribute="editLorry" id="editLorryForm">
                     <form:hidden path="regNum" value="${editLorry.regNum}"/>
                     <div class="modal-body">
@@ -123,7 +123,7 @@
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">
             <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Logiweb 2021</span></div>
+                <div class="text-center my-auto copyright"><span>Logiweb 2021</span></div>
             </div>
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

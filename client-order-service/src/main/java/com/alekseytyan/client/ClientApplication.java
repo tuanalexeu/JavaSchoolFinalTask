@@ -15,8 +15,7 @@ public class ClientApplication extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests(a -> a
-                        .antMatchers("/", "/error", "/webjars/**", "/assets/**", "/find-order").permitAll()
-                        .antMatchers("/make-order").hasAnyRole()
+                        .antMatchers("/", "/error", "/webjars/**", "/assets/**", "/find-order", "/make-order").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(e -> e
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
