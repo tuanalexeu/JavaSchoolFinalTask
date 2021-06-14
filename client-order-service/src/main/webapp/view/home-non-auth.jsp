@@ -47,8 +47,39 @@
 
                             <c:choose>
                                 <c:when test="${order ne null}">
-                                    <div>
-                                        <h1 style="margin-top: 20px;">Some order status</h1>
+                                    <div class="container-fluid">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Client ID</th>
+                                                    <th>${order.clientId}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>City load</td>
+                                                    <td>${order.cityLoad}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>City unload</td>
+                                                    <td>${order.cityUnload}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>${order.name}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Weight</td>
+                                                    <td>${order.weight}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Status</td>
+                                                    <td>${order.status}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
