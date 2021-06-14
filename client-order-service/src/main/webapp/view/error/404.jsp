@@ -34,11 +34,6 @@
                     </div>
                 </div>
             </div>
-            <footer class="bg-white sticky-footer" style="background: #043880;">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Logiweb 2021</span></div>
-                </div>
-            </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <script src="<c:out value="/assets/js/jquery.min.js"/>"></script>
