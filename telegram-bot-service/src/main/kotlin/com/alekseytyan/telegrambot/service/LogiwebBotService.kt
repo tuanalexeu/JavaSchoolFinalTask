@@ -36,9 +36,13 @@ class LogiwebBotService : TelegramLongPollingBot() {
             val chatId = message.chatId
 
             if (message.hasText()) {
-                when (message.text) {
-                    "/start" -> sendNotification(chatId,"Welcome to Logiweb Client Service!")
-                    "Go to website" -> {
+                when {
+                    message.text.startsWith("/check") -> {
+                        val order = clientService?.findOrder(message.text.split(" ")[1])
+                        val result: String = order?.toString() ?: "Order not found"
+                        sendNotification(chatId, result);
+                    }
+                    message.text.startsWith("Go to website") -> {
                         execute(SendMessage()
                             .setChatId(message.chatId)
                             .setText("Go to")
@@ -51,13 +55,16 @@ class LogiwebBotService : TelegramLongPollingBot() {
                             })
                         )
                     }
-                    "Check order status" -> sendNotification(chatId,"Please, enter /check <YOUR-TOKEN>")
-                    "Make new order" -> sendNotification(chatId,"Adding new order logic")
-                    "About us" -> sendNotification(chatId,"Info")
-                    else -> sendNotification(chatId,"Invalid command")
+                    else -> {
+                        when (message.text) {
+                            "/start" -> sendNotification(chatId,"Welcome to Logiweb Client Service!")
+                            "Check order status" -> sendNotification(chatId,"Please, enter \'/check <YOUR-TOKEN>\'")
+                            "Make new order" -> sendNotification(chatId,"Adding new order logic")
+                            "About us" -> sendNotification(chatId,"Info")
+                            else -> sendNotification(chatId,"Invalid command")
+                        }
+                    }
                 }
-            } else if(message.text.startsWith("/check") && message.hasText()) {
-                sendNotification(chatId, clientService?.findOrder(message.text.split(" ").get(1)).toString())
             } else {
                 sendNotification(chatId,"Sorry, I can't understand you!")
             }
