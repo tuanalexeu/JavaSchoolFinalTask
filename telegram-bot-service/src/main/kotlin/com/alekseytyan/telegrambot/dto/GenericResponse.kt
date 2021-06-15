@@ -10,4 +10,8 @@ import lombok.Setter
 @Getter @Setter
 class GenericResponse<T> {
     val attachedObj: T? = null
+
+    override fun toString(): String {
+        return attachedObj.toString()
+    }
 }

@@ -1,29 +1,26 @@
 package com.alekseytyan.telegrambot.dto
 
 import com.alekseytyan.telegrambot.dto.enums.LoadStatus
-import lombok.AllArgsConstructor
-import lombok.Data
-import lombok.NoArgsConstructor
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import lombok.*
 import java.io.Serializable
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@Getter @Setter
 class ClientLoadDTO : Serializable {
-    private val clientId: String? = null
-    private val cityLoad: String? = null
-    private val cityUnload: String? = null
-    private val name: String? = null
-    private val weight = 0
-    private val status: LoadStatus? = null
-    private val token: String? = null
-
+    val clientId: String? = null
+    val cityLoad: String? = null
+    val cityUnload: String? = null
+    val name: String? = null
+    val weight = 0
+    val status: LoadStatus? = null
+    val token: String? = null
 
     override fun toString(): String {
-        return "Name: %s\n" +
-                "City load: %s\n" +
-                "City unload: %s\n" +
-                "Weight: %d\n" +
-                "Status: %s\n".format(name, cityLoad, cityUnload, weight, status)
+        return "Name: $name\n" +
+                "City load: $cityLoad\n" +
+                "City unload: $cityUnload\n" +
+                "Weight: $weight\n" +
+                "Status: $status\n"
     }
 }
