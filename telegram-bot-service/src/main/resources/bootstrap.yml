@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: telegram-bot-service
+  profiles:
+    active:
+      default,dev
+  cloud:
+    config:
+      uri: http://www.config.logiweb.site/
+
+server:
+  port: 8070
+  error:
+    whitelabel:
+      enabled: false

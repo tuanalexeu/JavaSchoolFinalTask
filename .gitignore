@@ -109,8 +109,6 @@ fabric.properties
 
 config-service/src/main/resources/application.yml
 
-telegram-bot-service/src/main/resources/application.yml
-
 *.env
 
 

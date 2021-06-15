@@ -18,4 +18,4 @@ spec:
         - name: telegram-bot
           image: tuanalexeu/telegram-bot-service:final-task
           ports:
-            - containerPort: 8080
+            - containerPort: 8070
