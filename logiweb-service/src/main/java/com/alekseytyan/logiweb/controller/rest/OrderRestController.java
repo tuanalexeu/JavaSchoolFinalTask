@@ -51,7 +51,11 @@ public class OrderRestController {
 
         logger.info("External request to find client order. Order token:" + orderToken);
 
-        return new GenericResponse<>(ClientLoadDTO.convert(loadService.findByToken(orderToken)));
+        GenericResponse<ClientLoadDTO> result = new GenericResponse<>(ClientLoadDTO.convert(loadService.findByToken(orderToken)));
+
+        logger.info("Client order: " + result.getAttachedObj());
+
+        return result;
     }
 
     @GetMapping(value = "/find-client-orders", produces = "application/json")
@@ -59,10 +63,14 @@ public class OrderRestController {
 
         logger.info("External request to find all client orders. Client ID:" + clientId);
 
-        return loadService.findAllByClientId(clientId)
+        List<ClientLoadDTO> result = loadService.findAllByClientId(clientId)
                 .stream()
                 .map(ClientLoadDTO::convert)
                 .collect(Collectors.toList());
+
+        logger.info("All client orders: " + result);
+
+        return result;
     }
 
 }
