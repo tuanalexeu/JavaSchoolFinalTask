@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: config
-          image: tuanalexeu/config-service:final-task23
+          image: tuanalexeu/config-service:final-task24
           ports:
             - containerPort: 8888
