@@ -17,4 +17,13 @@ class ClientLoadDTO : Serializable {
     private val weight = 0
     private val status: LoadStatus? = null
     private val token: String? = null
+
+
+    override fun toString(): String {
+        return "Name: %s\n" +
+                "City load: %s\n" +
+                "City unload: %s\n" +
+                "Weight: %d\n" +
+                "Status: %s\n".format(name, cityLoad, cityUnload, weight, status)
+    }
 }

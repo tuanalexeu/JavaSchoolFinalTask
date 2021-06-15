@@ -35,37 +35,32 @@ class LogiwebBotService : TelegramLongPollingBot() {
             val message = update.message
             val chatId = message.chatId
 
-            val responseText = if (message.hasText()) {
+            if (message.hasText()) {
                 when (message.text) {
-                    "/start" -> "Welcome to Logiweb Client Service!"
-                    "Check order status" -> "Please, enter /check <YOUR-TOKEN>"
-                    "Make new order" -> "Adding new order logic"
-                    "About us" -> "Info"
-                    else -> "Invalid command"
+                    "/start" -> sendNotification(chatId,"Welcome to Logiweb Client Service!")
+                    "Go to website" -> {
+                        execute(SendMessage()
+                            .setChatId(message.chatId)
+                            .setText("Go to")
+                            .setReplyMarkup(InlineKeyboardMarkup().apply {
+                                keyboard = listOf(
+                                    listOf(InlineKeyboardButton("Our website").apply {
+                                        url = logiwebUrl
+                                    })
+                                )
+                            })
+                        )
+                    }
+                    "Check order status" -> sendNotification(chatId,"Please, enter /check <YOUR-TOKEN>")
+                    "Make new order" -> sendNotification(chatId,"Adding new order logic")
+                    "About us" -> sendNotification(chatId,"Info")
+                    else -> sendNotification(chatId,"Invalid command")
                 }
+            } else if(message.text.startsWith("/check") && message.hasText()) {
+                sendNotification(chatId, clientService?.findOrder(message.text.split(" ").get(1)).toString())
             } else {
-                "Sorry, I can't understand you!"
+                sendNotification(chatId,"Sorry, I can't understand you!")
             }
-
-            when (message.text) {
-                "Go to website" -> {
-                    execute(SendMessage()
-                        .setChatId(message.chatId)
-                        .setText("Go to")
-                        .setReplyMarkup(InlineKeyboardMarkup().apply {
-                            keyboard = listOf(
-                                listOf(InlineKeyboardButton("Our website").apply {
-                                    url = logiwebUrl
-                                })
-                            )
-                        })
-                    )
-                }
-                else -> {
-                    sendNotification(chatId, responseText)
-                }
-            }
-
         }
     }
 
