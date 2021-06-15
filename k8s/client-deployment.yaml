@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-service
+  name: client
   labels:
-    app: client-service
+    app: client
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: client-service
+      app: client
   template:
     metadata:
       labels:
-        app: client-service
+        app: client
     spec:
       containers:
-        - name: client-service
+        - name: client
           image: tuanalexeu/client-service:final-task4
           ports:
             - containerPort: 8088

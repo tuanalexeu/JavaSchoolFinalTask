@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chat-service
+  name: chat
   labels:
-    app: chat-service
+    app: chat
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chat-service
+      app: chat
   template:
     metadata:
       labels:
-        app: chat-service
+        app: chat
     spec:
       containers:
-        - name: chat-service
+        - name: chat
           image: tuanalexeu/chat-service:final-task3
           ports:
             - containerPort: 8090

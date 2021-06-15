@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: logiweb
+  name: telegram-bot
   labels:
-    app: logiweb
+    app: telegram-bot
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: logiweb
+      app: telegram-bot
   template:
     metadata:
       labels:
-        app: logiweb
+        app: telegram-bot
     spec:
       containers:
-        - name: logiweb
-          image: tuanalexeu/logiweb-service:final-task23
+        - name: telegram-bot
+          image: tuanalexeu/telegram-bot-service:final-task
           ports:
             - containerPort: 8080

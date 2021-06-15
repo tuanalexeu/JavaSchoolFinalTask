@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: config-service
+  name: config
   labels:
-    app: config-service
+    app: config
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: config-service
+      app: config
   template:
     metadata:
       labels:
-        app: config-service
+        app: config
     spec:
       containers:
-        - name: config-service
+        - name: config
           image: tuanalexeu/config-service:final-task23
           ports:
             - containerPort: 8888
