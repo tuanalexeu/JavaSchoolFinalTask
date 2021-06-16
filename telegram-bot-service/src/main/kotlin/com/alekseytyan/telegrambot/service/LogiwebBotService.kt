@@ -23,6 +23,9 @@ class LogiwebBotService : TelegramLongPollingBot() {
     @Value("\${logiweb.url}")
     private val logiwebUrl: String = ""
 
+    @Value("\${tsd.url}")
+    private val tsdUrl: String = ""
+
     @Autowired
     private val clientService: ClientLoadService? = null
 
@@ -38,9 +41,12 @@ class LogiwebBotService : TelegramLongPollingBot() {
             if (message.hasText()) {
                 when {
                     message.text.startsWith("/check") -> {
-                        val order = clientService?.findOrder(message.text.split(" ")[1])
-                        val result: String = order?.toString() ?: "Order not found"
-                        sendNotification(chatId, result);
+                        try {
+                            val order = clientService?.findOrder(message.text.split(" ")[1])
+                            sendNotification(chatId, order?.toString() ?: "Order not found")
+                        } catch (e: Exception) {
+                            sendNotification(chatId, "Token needed")
+                        }
                     }
                     message.text.startsWith("Go to website") -> {
                         execute(SendMessage()
@@ -55,12 +61,24 @@ class LogiwebBotService : TelegramLongPollingBot() {
                             })
                         )
                     }
+                    message.text.startsWith("About us") -> {
+                        execute(SendMessage()
+                            .setChatId(message.chatId)
+                            .setText("Read")
+                            .setReplyMarkup(InlineKeyboardMarkup().apply {
+                                keyboard = listOf(
+                                    listOf(InlineKeyboardButton("About us").apply {
+                                        url = tsdUrl
+                                    })
+                                )
+                            })
+                        )
+                    }
                     else -> {
                         when (message.text) {
                             "/start" -> sendNotification(chatId,"Welcome to Logiweb Client Service!")
                             "Check order status" -> sendNotification(chatId,"Please, enter \'/check <YOUR-TOKEN>\'")
                             "Make new order" -> sendNotification(chatId,"Adding new order logic")
-                            "About us" -> sendNotification(chatId,"Info")
                             else -> sendNotification(chatId,"Invalid command")
                         }
                     }
