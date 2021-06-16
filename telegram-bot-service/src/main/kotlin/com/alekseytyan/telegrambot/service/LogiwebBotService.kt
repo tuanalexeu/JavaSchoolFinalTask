@@ -1,5 +1,6 @@
 package com.alekseytyan.telegrambot.service
 
+import com.vdurmont.emoji.EmojiParser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -26,6 +27,11 @@ class LogiwebBotService : TelegramLongPollingBot() {
     @Value("\${tsd.url}")
     private val tsdUrl: String = ""
 
+    private val greeting: String = EmojiParser.parseToUnicode(
+        ":wave: Hi, my name is Logiweb.\n" +
+                ":smiley: I will help you to find your order.\n" +
+                ":bee: If you want to find one,\n please, type \'/check <YOUR-ORDER-TOKEN>\'")
+
     @Autowired
     private val clientService: ClientLoadService? = null
 
@@ -51,10 +57,10 @@ class LogiwebBotService : TelegramLongPollingBot() {
                     message.text.startsWith("Go to website") -> {
                         execute(SendMessage()
                             .setChatId(message.chatId)
-                            .setText("Go to")
+                            .setText(EmojiParser.parseToUnicode("Go to our website :arrow_down:"))
                             .setReplyMarkup(InlineKeyboardMarkup().apply {
                                 keyboard = listOf(
-                                    listOf(InlineKeyboardButton("Our website").apply {
+                                    listOf(InlineKeyboardButton("logiweb.site").apply {
                                         url = logiwebUrl
                                     })
                                 )
@@ -64,10 +70,10 @@ class LogiwebBotService : TelegramLongPollingBot() {
                     message.text.startsWith("About us") -> {
                         execute(SendMessage()
                             .setChatId(message.chatId)
-                            .setText("Read")
+                            .setText(EmojiParser.parseToUnicode("Read about us :arrow_down:"))
                             .setReplyMarkup(InlineKeyboardMarkup().apply {
                                 keyboard = listOf(
-                                    listOf(InlineKeyboardButton("About us").apply {
+                                    listOf(InlineKeyboardButton("tsd.logiweb.site").apply {
                                         url = tsdUrl
                                     })
                                 )
@@ -76,7 +82,7 @@ class LogiwebBotService : TelegramLongPollingBot() {
                     }
                     else -> {
                         when (message.text) {
-                            "/start" -> sendNotification(chatId,"Welcome to Logiweb Client Service!")
+                            "/start" -> sendNotification(chatId,greeting)
                             "Check order status" -> sendNotification(chatId,"Please, enter \'/check <YOUR-TOKEN>\'")
                             "Make new order" -> sendNotification(chatId,"Adding new order logic")
                             else -> sendNotification(chatId,"Invalid command")
