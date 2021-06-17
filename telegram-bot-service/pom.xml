@@ -16,7 +16,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <start-class>com.alekseytyan.telegrambot.TelegramBotApplication</start-class>
         <docker.image.name>tuanalexeu/telegram-bot-service</docker.image.name>
-        <docker.image.tag>production</docker.image.tag>
+        <docker.image.tag>production2</docker.image.tag>
     </properties>
 
     <dependencies>

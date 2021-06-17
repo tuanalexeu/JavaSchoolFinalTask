@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html style="background: #ffffff;">
+<html style="background: #f8f9fc;">
 
 <head>
     <meta charset="utf-8">
@@ -24,20 +24,20 @@
     <div class="card shadow-lg o-hidden border-0 my-5" style="border-radius: 20px">
         <div class="p-5" style="background: rgb(226,0,116);border-radius: 20px;">
             <div class="text-center">
-                <h4 class="text-white mb-2" style="color: rgb(255,255,255);width: 300px;"><strong>Forgot Your Password?</strong></h4>
-                <p class="text-white mb-4" style="color: rgb(255,255,255);">Please, enter your email below and we will send you a letter</p>
+                <h4 class="text-white mb-2" style="color: rgb(248,249,252);"><strong>Forgot Your Password?</strong></h4>
+                <p class="text-white mb-4" style="color: rgb(248,249,252);">Please, enter your email below and we will send you a letter</p>
             </div>
             <form class="user">
                 <div class="form-group">
                     <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email">
                 </div>
-                <button class="btn btn-primary btn-block text-white btn-user" id="loginbutton" type="submit" style="background: rgb(226,0,116);border-color: #ced8e6;">Reset Password</button>
+                <button class="btn btn-primary btn-block text-white btn-user" id="loginbutton" type="submit" style="background: rgb(226,0,116);border-color: #f8f9fc;">Reset Password</button>
             </form>
             <div class="text-center">
-                <hr><a class="small" href="${pageContext.request.contextPath}/register" style="color: rgb(244,247,255);">Create an Account!</a>
+                <hr><a class="small" href="${pageContext.request.contextPath}/register" style="color: rgb(248,249,252);">Create an Account!</a>
             </div>
             <div class="text-center">
-                <a class="small" href="${pageContext.request.contextPath}/login" style="color: rgb(255,255,255);">Already have an account?</a>
+                <a class="small" href="${pageContext.request.contextPath}/login" style="color: rgb(248,249,252);">Already have an account?</a>
             </div>
         </div>
     </div>

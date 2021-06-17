@@ -201,12 +201,12 @@
 
                 <div class="container" style="text-align: center;">
                     <form action="${pageContext.request.contextPath}/employee/orders">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Back</button>
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116); width: 100px">Back</button>
                     </form>
                 </div>
                 <div class="container" style="text-align: center;">
                     <form action="/employee/delete-order/${order.id}">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Delete</button>
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116); width: 100px">Delete</button>
                     </form>
                 </div>
             </div>

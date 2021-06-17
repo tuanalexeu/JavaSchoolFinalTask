@@ -54,7 +54,7 @@
                 </ul>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Edit order</h3>
+                <h3 class="text-dark mb-4">Order info</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">Loads</p>
@@ -106,11 +106,11 @@
                             <div class="col-md-6">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><<</span></a></li>
                                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">>></span></a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -123,7 +123,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 text-nowrap">
-                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Chosen truck:</p>
+                                    <p class="text-primary m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Chosen truck:</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">${order.lorry.regNum}</p>
@@ -133,7 +133,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 text-nowrap">
-                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Chosen drivers:</p>
+                                    <p class="text-primary m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Chosen drivers:</p>
                                 </div>
                                 <div class="col-md-6">
                                     <div></div>
@@ -160,19 +160,19 @@
                 </div>
                 <div class="container" style="text-align: center;">
                     <form action="${pageContext.request.contextPath}/employee/delete-order/${order.id}">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Delete</button>
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116); width: 100px">Delete</button>
                     </form>
                 </div>
                 <div class="container" style="text-align: center;">
                     <form action="${pageContext.request.contextPath}/employee/orders">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Back</button>
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116); width: 100px">Back</button>
                     </form>
                 </div>
             </div>
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">
             <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Logiweb 2021</span></div>
+                <div class="text-center my-auto copyright"><span>Logiweb 2021</span></div>
             </div>
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

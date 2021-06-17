@@ -187,11 +187,11 @@
                             <div class="col-md-6">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><<</span></a></li>
                                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">>></span></a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -204,7 +204,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 text-nowrap">
-                                    <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>
+                                    <p class="text-primary m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available truck:</p>
                                 </div>
                                 <div class="col-md-6">
                                     <form action="${pageContext.request.contextPath}/employee/apply-truck" method="post">
@@ -234,7 +234,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 text-nowrap">
-                                        <p class="m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>
+                                        <p class="text-primary m-0 font-weight-bold" style="padding: 10px;color: rgb(90,92,105);">Choose available drivers:</p>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="row">
@@ -294,18 +294,18 @@
 
                 <div class="container" style="text-align: center;">
                     <form action="/employee/orders">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Back</button>
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116); width: 100px">Back</button>
                     </form>
                 </div>
 
                 <div class="container" style="text-align: center;">
                     <form action="/employee/delete-order/${order.id}">
-                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Delete</button>
+                        <button class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116); width: 100px">Delete</button>
                     </form>
                 </div>
 
                 <div class="container" style="text-align: center;">
-                    <button form="drivers_form" class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);">Save</button>
+                    <button form="drivers_form" class="btn btn-primary" type="submit" style="margin-bottom: 10px; background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116); width: 100px">Save</button>
                 </div>
             </div>
         </div>

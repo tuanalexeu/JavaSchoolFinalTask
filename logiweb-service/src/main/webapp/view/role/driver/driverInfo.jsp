@@ -22,18 +22,14 @@
 <body id="page-top">
 <div id="wrapper">
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(226,0,116);">
-        <div class="container-fluid d-flex fE20074FFlex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
-            <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
-            <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
-        </a>
+        <div class="container-fluid d-flex flex-column p-0">
+            <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/homePage">
+                <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                <div class="sidebar-brand-text mx-3"><span>Logiweb</span></div>
+            </a>
             <hr class="sidebar-divider my-0">
             <ul class="navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/driver/info">
-                        <i class="fas fa-window-maximize"></i>
-                        <span>My info</span>
-                    </a>
-                </li>
+                <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/driver/info"><i class="fas fa-table"></i><span>My info</span></a></li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
@@ -182,7 +178,7 @@
                     </table>
                 </div>
 
-                <div class="card shadow">
+                <div class="card shadow" style="margin-bottom: 10px">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">Loads</p>
                     </div>
@@ -255,11 +251,11 @@
                             <div class="col-md-6">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><<</span></a></li>
                                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">>></span></a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -271,7 +267,7 @@
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">
             <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Logiweb 2021</span></div>
+                <div class="text-center my-auto copyright"><span>Logiweb 2021</span></div>
             </div>
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -280,7 +276,6 @@
 <script src="<c:out value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 <script src="<c:out value="/assets/js/theme.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-<%--<script src="<c:out value="/assets/js/dragAndDrop.js"/>"></script>--%>
 <script src="<c:out value="/assets/js/chart.min.js"/>"></script>
 <script src="<c:out value="/assets/js/bs-init.js"/>"></script>
 </body>
