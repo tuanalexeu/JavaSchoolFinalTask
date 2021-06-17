@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: telegram-bot
-          image: tuanalexeu/telegram-bot-service:production
+          image: tuanalexeu/telegram-bot-service:production2
           ports:
             - containerPort: 8070
