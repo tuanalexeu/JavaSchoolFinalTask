@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.client.Client;
@@ -61,7 +62,13 @@ public class WelcomeController {
     }
 
     @GetMapping(value = "/profile")
-    public String profile() {
+    public String profile(Model model,
+                          @RequestParam(required = false) Boolean success,
+                          @RequestParam(required = false) String token) {
+
+        model.addAttribute("success", success);
+        model.addAttribute("token", token);
+
         return "home";
     }
 

@@ -19,10 +19,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.client.Client;
@@ -62,13 +66,15 @@ public class ClientOrderController {
     }
 
     @PostMapping(value = "/make-order")
-    public String makeOrder(Model model, @ModelAttribute ClientLoadDTO clientLoadDTO) {
+    public String makeOrder(@ModelAttribute ClientLoadDTO clientLoadDTO) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         String token = UUID.randomUUID().toString();
 
         ObjectMapper mapper = new ObjectMapper();
+
+        String result = "redirect:/profile?success=";
 
         try (CloseableHttpClient client = HttpClients.createDefault()) {
 
@@ -88,18 +94,16 @@ public class ClientOrderController {
             StatusDTO response = client.execute(request, httpResponse ->
                     mapper.readValue(httpResponse.getEntity().getContent(), StatusDTO.class));
 
-
             if(response.isSuccess()) {
-                model.addAttribute("message", "Your order has been successfully created");
-                model.addAttribute("token", token);
+                result += "true&token=" + token;
             } else {
-                model.addAttribute("message", "Something went wrong with your order");
+                result += "false&token" + token;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "home";
+        return result;
     }
 
     @SneakyThrows

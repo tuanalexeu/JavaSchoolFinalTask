@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>No driver - Logiweb</title>
+    <title>Home</title>
     <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
@@ -50,68 +50,88 @@
                     </li>
                 </ul>
             </nav>
-            <div class="container-fluid">
-                <div class="col-md-6">
-                    <h1>Check order status:</h1>
+            <div class="container" style="alignment: center; height: 800px">
 
-                    <form action="${pageContext.request.contextPath}/find-order">
-                        <input type="text" name="orderToken" style="width: 400px;height: 40px;border-radius: 10px;" />
-                        <button class="btn btn-primary" type="submit" style="margin-left: 10px; color: #e20074; background: #ffffff;border-color: #e20074;">Find</button>
-                    </form>
 
+                <c:if test="${success ne null}">
                     <c:choose>
-                        <c:when test="${order ne null}">
-                            <div class="container-fluid">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>Client ID</th>
-                                            <th>${order.clientId}</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>City load</td>
-                                            <td>${order.cityLoad}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>City unload</td>
-                                            <td>${order.cityUnload}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td>${order.name}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Weight</td>
-                                            <td>${order.weight}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Status</td>
-                                            <td>${order.status}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                        <c:when test="${success eq true}">
+                            <div style="border-color: #e20074">
+                                <h4 align="center">Your order was successfully created!</h4>
+                                <h4 align="center" style="size: 20px">Here's your token: </h4>
+                                <h4 class="text-primary m-0 font-weight-bold" align="center" style="size: 20px">${token}</h4>
+                                <h4 align="center">Please, copy & save it</h4>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <c:choose>
-                                <c:when test="${not empty error}">
-                                    <div>
-                                        <h1 style="margin-top: 20px;">${error}</h1>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div>
-                                        <h1 style="margin-top: 20px;">No order selected</h1>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
+                            <div style="border-color: #e20074">
+                                <h4 align="center">Something went wrong with your order</h4>
+                            </div>
                         </c:otherwise>
                     </c:choose>
+                </c:if>
+
+                <h1 align="center">Check order status:</h1>
+
+                <div class="container" align="center">
+                    <form action="${pageContext.request.contextPath}/find-order">
+                        <input required="required" type="text" name="orderToken" style="width: 400px;height: 40px;border-radius: 10px; border-color: #e20074" />
+                        <button class="btn btn-primary" type="submit" style="margin-left: 10px; color: #e20074; background: #ffffff;border-color: #e20074;">Find</button>
+                    </form>
                 </div>
+
+                <c:choose>
+                    <c:when test="${order ne null}">
+                        <div class="container-fluid" style="margin-top: 30px">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Client ID</th>
+                                        <th>${order.clientId}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>City load</td>
+                                        <td>${order.cityLoad}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>City unload</td>
+                                        <td>${order.cityUnload}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>${order.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weight</td>
+                                        <td>${order.weight}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>${order.status}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${not empty error}">
+                                <div align="center">
+                                    <h1 style="margin-top: 20px;">${error}</h1>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div align="center">
+                                    <h1 style="margin-top: 20px;">No order selected</h1>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>No driver - Logiweb</title>
+    <title>My orders</title>
     <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value ="/assets/fonts/fontawesome-all.min.css"/>">
@@ -67,7 +67,7 @@
                                 </select>&nbsp;</label></div>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(220,88,184);border-color: rgb(220,88,184);" data-toggle="modal" data-target="#makeOrder-modal">Make order</button>
+                                <button class="btn btn-primary btn-block btn-user" id="loginbutton" type="submit" style="background: rgb(255,255,255);color: rgb(226,0,116);border-color: rgb(226,0,116);" data-toggle="modal" data-target="#makeOrder-modal">Make order</button>
                                 <div class="modal fade" id="makeOrder-modal" role="dialog" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -126,7 +126,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(255,103,173);background: rgb(255,255,255);border-color: rgb(255,103,173);">Close</button>
+                                                    <button class="btn btn-light" type="button" data-dismiss="modal" style="color: rgb(226,0,116);background: rgb(255,255,255);border-color: rgb(226,0,116);">Close</button>
                                                     <button class="btn btn-primary" type="submit" style="background: rgb(255,255,255);border-color: rgb(226,0,116);color: rgb(226,0,116);">Save</button>
                                                 </div>
                                                 <form:hidden path="status" value="PREPARED" cssErrorClass="errorBox"/>
@@ -157,7 +157,7 @@
                                         <td>${order.status}</td>
                                         <td>${order.weight}</td>
                                         <td>
-                                            <a href="#drivers-modal${order.token}" data-toggle="modal" data-target="#drivers-modal${order.token}" style="color: #DC58B8">See token</a>
+                                            <a href="#drivers-modal${order.token}" data-toggle="modal" data-target="#drivers-modal${order.token}" style="color: #e20074">See token</a>
                                             <div class="modal fade" role="dialog" tabindex="-1" id="drivers-modal${order.token}">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -165,11 +165,11 @@
                                                             <h4 class="modal-title" style="color: rgb(133, 135, 150);">Token</h4>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                                                         </div>
-                                                        <div class="modal-body" style="color: #858796;border-color: #dc58b8;">
+                                                        <div class="modal-body" style="color: #858796;border-color: #e20074;">
                                                             <p>${order.token}</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #dc58b8;color: #dc58b8;">OK</button>
+                                                            <button class="btn btn-light" type="button" data-dismiss="modal" style="border-color: #e20074;color: #e20074;">OK</button>
                                                         </div>
                                                     </div>
                                                 </div>

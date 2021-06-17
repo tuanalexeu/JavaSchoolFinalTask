@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Logiweb</title>
+    <title>Client Service</title>
     <link rel="icon" href="<c:url value="/assets/img/icons/route.png"/>">
     <link rel="stylesheet" href="<c:url value="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>">
     <link rel="stylesheet" href="<c:url value="/assets/bootstrap/css/bootstrap.min.css"/>">
@@ -24,7 +24,7 @@
         <div id="content">
             <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" id="top-navbar" style="background: #e20074;">
                 <div class="container">
-                    <h1 style="color: rgb(255,255,255); margin-top: 2px">Logiweb</h1>
+                    <h1 style="color: rgb(255,255,255); margin-top: 2px">Client Service</h1>
                     <ul class="navbar-nav ml-auto flex-nowrap">
                         <li class="nav-item" style="padding: 5px">
                             <form action="${pageContext.request.contextPath}/oauth2/authorization/github">
@@ -34,73 +34,68 @@
                     </ul>
                 </div>
             </nav>
-            <div class="container" style="height: 800px;">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="col-md-6">
-                            <h1>Check order status:</h1>
+            <div class="container" style="alignment: center; height: 800px">
+                <h1 align="center">Check order status:</h1>
 
-                            <form action="${pageContext.request.contextPath}/find-order">
-                                <input type="text" name="orderToken" style="width: 400px;height: 40px;border-radius: 10px;" />
-                                <button class="btn btn-primary" type="submit" style="margin-left: 10px; color: #e20074; background: #ffffff;border-color: #e20074; margin: 10px">Find</button>
-                            </form>
-
-                            <c:choose>
-                                <c:when test="${order ne null}">
-                                    <div class="container-fluid">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th>Client ID</th>
-                                                    <th>${order.clientId}</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>City load</td>
-                                                    <td>${order.cityLoad}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>City unload</td>
-                                                    <td>${order.cityUnload}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Name</td>
-                                                    <td>${order.name}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Weight</td>
-                                                    <td>${order.weight}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Status</td>
-                                                    <td>${order.status}</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:choose>
-                                        <c:when test="${not empty error}">
-                                            <div>
-                                                <h1 style="margin-top: 20px;">${error}</h1>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div>
-                                                <h1 style="margin-top: 20px;">No order selected</h1>
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:otherwise>
-                            </c:choose>
-                        </div>
-                    </div>
-                    <div class="col-md-6"><img src="<c:url value="/assets/img/dogs/image1.jpeg"/>" style="width: 300px; border-radius: 30px"></div>
+                <div class="container" align="center">
+                    <form action="${pageContext.request.contextPath}/find-order">
+                        <input required="required" type="text" name="orderToken" style="width: 400px;height: 40px;border-radius: 10px; border-color: #e20074" />
+                        <button class="btn btn-primary" type="submit" style="margin-left: 10px; color: #e20074; background: #ffffff;border-color: #e20074;">Find</button>
+                    </form>
                 </div>
+
+                <c:choose>
+                    <c:when test="${order ne null}">
+                        <div class="container-fluid" style="margin-top: 30px">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Client ID</th>
+                                        <th>${order.clientId}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>City load</td>
+                                        <td>${order.cityLoad}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>City unload</td>
+                                        <td>${order.cityUnload}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>${order.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weight</td>
+                                        <td>${order.weight}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>${order.status}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${not empty error}">
+                                <div align="center">
+                                    <h1 style="margin-top: 20px;">${error}</h1>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div align="center">
+                                    <h1 style="margin-top: 20px;">No order selected</h1>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
         <footer class="bg-white sticky-footer" style="background: #043880;">
