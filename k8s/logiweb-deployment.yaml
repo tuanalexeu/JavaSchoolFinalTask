@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: logiweb
-          image: tuanalexeu/logiweb-service:final-task23
+          image: tuanalexeu/logiweb-service:production
           ports:
             - containerPort: 8080

@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: client
-          image: tuanalexeu/client-service:final-task4
+          image: tuanalexeu/client-service:production
           ports:
             - containerPort: 8088
