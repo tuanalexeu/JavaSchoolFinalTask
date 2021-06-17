@@ -8,14 +8,11 @@ import com.alekseytyan.logiweb.service.api.UserService;
 import com.alekseytyan.logiweb.service.api.VerificationService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.MessageSource;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +34,6 @@ public class RegisterController {
 
     private final UserService userService;
     private final VerificationService verificationService;
-    private final MessageSource messages;
     private final ApplicationEventPublisher eventPublisher;
     private final ThreadPoolTaskScheduler registerScheduler;
 
@@ -67,7 +63,6 @@ public class RegisterController {
 
     @PostMapping("/reg-process")
     public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDTO userDto,
-                                            BindingResult result,
                                             HttpServletRequest request) {
 
         if(!userDto.getPassword().equals(userDto.getMatchingPassword())) {
@@ -102,12 +97,10 @@ public class RegisterController {
                                       WebRequest request,
                                       @RequestParam("token") String token) {
 
-        Locale locale = request.getLocale();
-
         // Check if received token is correct, redirect to main registration page if not
         VerificationTokenDTO verificationToken = verificationService.getVerificationToken(token);
         if (verificationToken == null) {
-            String message = messages.getMessage("auth.message.invalidToken", null, locale);
+            String message = "Invalid token";
             model.addAttribute("message", message);
             return "redirect:/register";
         }
@@ -118,7 +111,7 @@ public class RegisterController {
         if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
 
             // If 1 day has passed, the token isn't working anymore
-            String messageValue = messages.getMessage("auth.message.expired", null, locale);
+            String messageValue = "Token expired";
             model.addAttribute("message", messageValue);
             return "redirect:/register";
         }
