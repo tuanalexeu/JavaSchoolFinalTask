@@ -38,7 +38,6 @@ class ClientLoadService {
 
             response.attachedObj
         } catch (e: Exception) {
-            e.printStackTrace()
             null
         }
     }
