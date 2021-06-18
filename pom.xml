@@ -32,22 +32,11 @@
         <sonar.projectKey>tuanalexeu_logiweb-microservices</sonar.projectKey>
         <sonar.moduleKey>${artifactId}</sonar.moduleKey>
         <sonar.cpd.exclusions>
-            **/*.jsp, **/*.js, **/*.css,
-            **/*Application.java,
-            **/*Application.kt,
-            **/LogiwebBotService.kt
-            **/entity/**,
-            **/dto/**,
-            **/dao/**,
-            **/exception/**,
-            **/config/**,
-            **/repository/**,
-            **/aspect/**,
-            **/validation/**,
-            **/schedule/**,
-            **/controller/**,
-            **/config/security/**,
-            **/util/**
+            **/*.jsp, **/*.js, **/*.css, **/*Application.java,
+            **/*Application.kt, **/LogiwebBotService.kt, **/ClientLoadService.kt
+            **/entity/**, **/dto/**, **/dao/**, **/exception/**, **/config/**,
+            **/repository/**, **/aspect/**, **/validation/**, **/schedule/**,
+            **/controller/**, **/config/security/**, **/util/**
         </sonar.cpd.exclusions>
         <sonar.organization>tuanalexeu-1</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
