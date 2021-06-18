@@ -20,20 +20,27 @@ public class HamiltonianPath {
      * @param visited - visited nodes
      * @param path - result path
      * @param N - number of nodes
-     * @return - list of number, each of witch represents number of node
      */
-    public static List<Integer> getHamiltonianPath(EdgeGraph g,
+    public static void getHamiltonianPath(EdgeGraph g,
                                           int v,
                                           boolean[] visited,
                                           List<Integer> path,
-                                          int N) {
+                                          int N,
+                                          Route result,
+                                          Set<Node> allCities) {
         // if all the vertices are visited, then the Hamiltonian path exists
         if (path.size() == N) {
-            // the Hamiltonian path
-            return new ArrayList<>(path);
-        }
 
-        List<Integer> result = new ArrayList<>();
+            // the Hamiltonian path
+            logger.info("Path: " + path);
+
+            Route pathRoute = calculateCitiesBetween(convertToCityList(path, g), allCities);
+
+            if(pathRoute.isPossible() && pathRoute.getDistance() < result.getDistance()) {
+                result.copyRoute(pathRoute);
+            }
+
+        }
 
         // Check if every edge starting from vertex `v` leads
         // to a solution or not
@@ -46,14 +53,13 @@ public class HamiltonianPath {
 
                 // check if adding vertex `w` to the path leads
                 // to the solution or not
-                result = getHamiltonianPath(g, w, visited, path, N);
+                getHamiltonianPath(g, w, visited, path, N, result, allCities);
 
                 // backtrack
                 visited[w] = false;
                 path.remove(path.size() - 1);
             }
         }
-        return result;
     }
 
     /**
@@ -79,35 +85,31 @@ public class HamiltonianPath {
         boolean[] visited = new boolean[neededCities.size()];
         visited[start] = true;
 
-        List<Integer> result = getHamiltonianPath(g, start, visited, path, neededCities.size());
-
-        List<Node> neededCitiesOrder = new ArrayList<>();
+        Route result = new Route(false, null, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
+        getHamiltonianPath(g, start, visited, path, neededCities.size(), result, allCities);
 
         logger.info("Result: " + result);
 
-        if(result == null || result.isEmpty()) {
+        if(!result.isPossible()) {
             Route route = new Route();
             route.setPossible(false);
 
             return route;
         }
 
-        for (Integer i: result) {
-            neededCitiesOrder.add(g.findNodeByIndex(i));
-        }
-
-        logger.info("Needed cities order: " + neededCitiesOrder);
-
-        return calculateCitiesBetween(neededCitiesOrder, allCities);
+        return result;
     }
 
     /**
      * Calculates route between needed cities, after their order is calculated
      * @param neededCitiesOrder - order of initial cities
-     * @param allCities - all existing ciites
+     * @param allCities - all existing cities
      * @return - object representing route information
      */
     private static Route calculateCitiesBetween(List<Node> neededCitiesOrder, Set<Node> allCities) {
+
+        logger.info("Needed cities order:" + neededCitiesOrder);
+
         List<Node> finalCities = new ArrayList<>();
         int distance = 0;
 
@@ -146,15 +148,32 @@ public class HamiltonianPath {
             }
         }
 
-        logger.info("Distance: " + distance);
-
         Route route = new Route();
         route.setPossible(distance < Integer.MAX_VALUE);
         route.setTime(distance / 96);
         route.setDistance(distance);
         route.setCityList(finalCities.stream().map(Node::getCity).collect(Collectors.toList()));
 
+        logger.info("calculateCitiesBetween(): " + route);
+
         return route;
+    }
+
+    /**
+     * Converts list of indices to actual city list
+     * @param path - list with city indices
+     * @param g - edge graph with cities and distances between
+     * @return - list of cities in right order
+     */
+    private static List<Node> convertToCityList(List<Integer> path, EdgeGraph g) {
+
+        List<Node> neededCitiesOrder = new ArrayList<>();
+
+        for (Integer i: path) {
+            neededCitiesOrder.add(g.findNodeByIndex(i));
+        }
+
+        return neededCitiesOrder;
     }
 
 
@@ -168,12 +187,10 @@ public class HamiltonianPath {
     private static EdgeGraph convertToEdgeGraph(Set<Node> neededCities, Set<Node> allCities, Node cityStart) {
 
         Map<Node, Integer> map = new HashMap<>();
-
         Node cityStartInitial = cityStart;
 
         int index = 0;
         map.put(cityStart, index++);
-
         for (Node n: neededCities) {
             if(!n.equals(cityStart)) {
                 map.put(n, index++);
@@ -188,46 +205,34 @@ public class HamiltonianPath {
         }
 
         Graph graph = Graph.calculateShortestPathFromSource(new Graph(allCities), cityStart);
-
         for (Node n: graph.getNodes()) {
-            if(!n.equals(cityStart)
-                    && neededCities.contains(n)
-                    && n.getDistance() < Integer.MAX_VALUE) {
+            if(!n.equals(cityStart) && neededCities.contains(n) && n.getDistance() < Integer.MAX_VALUE) {
                 edges.add(new Edge(map.get(cityStart), map.get(n), n.getDistance(), cityStart, n));
             }
         }
 
 
         for (Node n: neededCities) {
-
             if(!n.equals(cityStart) && !n.equals(cityStartInitial)) {
-
                 for (Node n2: allCities) {
                     if(n2.equals(n)) {
                         cityStart = n2;
                     }
                 }
 
-                allCities = allCities
-                        .stream()
-                        .peek(n2 -> {
+                allCities = allCities.stream().peek(n2 -> {
                             n2.setDistance(Integer.MAX_VALUE);
                             n2.setShortestPath(new ArrayList<>());
-                        })
-                        .collect(Collectors.toSet());
-
+                        }).collect(Collectors.toSet());
                 graph = Graph.calculateShortestPathFromSource(new Graph(allCities), cityStart);
 
                 for (Node n2: graph.getNodes()) {
-                    if(!n2.equals(cityStart)
-                            && neededCities.contains(n2)
-                            && n2.getDistance() < Integer.MAX_VALUE) {
+                    if(!n2.equals(cityStart) && neededCities.contains(n2) && n2.getDistance() < Integer.MAX_VALUE) {
                         edges.add(new Edge(map.get(cityStart), map.get(n2), n2.getDistance(), cityStart, n2));
                     }
                 }
             }
         }
-
 
         return new EdgeGraph(edges, neededCities.size());
     }

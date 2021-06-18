@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Objects;
@@ -16,9 +17,7 @@ import java.util.Objects;
 public class Route {
 
     private boolean isPossible;
-
     private List<City> cityList;
-
     private int distance;
     private int time;
     private int maxWeight;
@@ -47,5 +46,17 @@ public class Route {
     @Override
     public int hashCode() {
         return Objects.hash(isPossible, cityList);
+    }
+
+    /**
+     * Copies all fields from pathRoute to this
+     * @param pathRoute - source object
+     */
+    public void copyRoute(Route pathRoute) {
+        this.isPossible = pathRoute.isPossible;
+        this.cityList = new ArrayList<>(pathRoute.cityList);
+        this.distance = pathRoute.distance;
+        this.time = pathRoute.time;
+        this.maxWeight = pathRoute.maxWeight;
     }
 }
