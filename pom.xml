@@ -35,6 +35,7 @@
             **/*.jsp, **/*.js, **/*.css,
             **/*Application.java,
             **/*Application.kt,
+            **/LogiwebBotService.kt
             **/entity/**,
             **/dto/**,
             **/dao/**,
