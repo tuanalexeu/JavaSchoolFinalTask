@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.MessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -22,6 +22,8 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     private final VerificationService verificationService;
     private final UserService userService;
     private final EmailService emailService;
+
+    private final Environment environment;
 
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent event) {
@@ -44,7 +46,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
         String message = "Registration went well";
 
-        String text = message + "\r\n" + "http://localhost:8080" + confirmationUrl;
+        String text = message + "\r\n" + environment.getProperty("self-host") + confirmationUrl;
 
         emailService.sendSimpleMessage(recipientAddress, subject, text);
 
