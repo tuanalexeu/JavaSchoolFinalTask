@@ -1,23 +1,21 @@
 package com.alekseytyan.service;
 
+import com.alekseytyan.logiweb.dao.implementation.MapDaoImpl;
 import com.alekseytyan.logiweb.dao.implementation.OrderDaoImpl;
-import com.alekseytyan.logiweb.dto.OrderDTO;
-import com.alekseytyan.logiweb.entity.City;
-import com.alekseytyan.logiweb.entity.DistanceMap;
-import com.alekseytyan.logiweb.entity.Load;
-import com.alekseytyan.logiweb.entity.Order;
-import com.alekseytyan.logiweb.entity.enums.LoadStatus;
+import com.alekseytyan.logiweb.dto.*;
+import com.alekseytyan.logiweb.entity.*;
 import com.alekseytyan.logiweb.service.implementation.MapServiceImpl;
 import com.alekseytyan.logiweb.service.implementation.OrderServiceImpl;
-import com.alekseytyan.logiweb.util.pathfinding.Route;
-import com.alekseytyan.logiweb.util.pathfinding.RouteChecker;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.MockitoRule;
 import org.modelmapper.ModelMapper;
 
 import java.util.*;
@@ -26,8 +24,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class OrderServiceTest {
+
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule().silent();
 
     @InjectMocks
     OrderServiceImpl service;
@@ -37,6 +38,9 @@ public class OrderServiceTest {
 
     @Mock
     MapServiceImpl mapService;
+
+    @Mock
+    MapDaoImpl mapDao;
 
     @Mock
     ModelMapper mapper;
@@ -98,8 +102,36 @@ public class OrderServiceTest {
     }
 
     @Test
+    public void deleteTest2() {
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setDrivers(new ArrayList<>());
+        orderDTO.setLorry(new LorryDTO());
+
+        assertDoesNotThrow(() -> {
+            service.delete(orderDTO);
+        });
+    }
+
+    @Test
     public void deleteByIdTest() {
-        assertThrows(NullPointerException.class, () -> service.deleteById(-1L));
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setId(1L);
+        orderDTO.setDrivers(new ArrayList<>());
+        orderDTO.setLorry(new LorryDTO());
+
+        Order order = new Order();
+        order.setId(1L);
+        order.setDrivers(new ArrayList<>());
+        order.setLorry(new Lorry());
+
+        when(mapper.map(order, OrderDTO.class)).thenReturn(orderDTO);
+        when(mapper.map(orderDTO, Order.class)).thenReturn(order);
+
+        when(dao.findById(1L)).thenReturn(order);
+
+        assertDoesNotThrow(() -> {
+            service.deleteById(1L);
+        });
     }
 
     @Test
@@ -120,21 +152,37 @@ public class OrderServiceTest {
 
     @Test
     public void calculateRouteTest() {
-        List<DistanceMap> distanceMaps = new ArrayList<>(Collections.singletonList(
-                new DistanceMap(1L, new City("Angarsk"), new City("Irkutsk"), 100)
-        ));
 
-        Route route = RouteChecker.calculateRoute(distanceMaps, new ArrayList<>(Collections.singletonList(
-                new Load(1L, new City("Angarsk"), new City("Irkutsk"),
-                        null, "exampleName", 0, LoadStatus.PREPARED, null, null)
-        )));
+        DistanceMap distanceMap = new DistanceMap();
+        List<DistanceMap> distanceMaps = new ArrayList<>(Collections.singletonList(distanceMap));
 
-        assertTrue(route.isPossible());
-        assertEquals(new ArrayList<>(Arrays.asList(new City("Angarsk"), new City("Irkutsk"))), route.getCityList());
-        assertEquals(100, route.getDistance());
-        assertEquals(0, route.getMaxWeight());
-        assertEquals(1, route.getTime());
+        MapDTO mapDTO = new MapDTO();
+        List<MapDTO> dtoList = new ArrayList<>(Collections.singletonList(mapDTO));
 
+        when(mapper.map(mapDTO, DistanceMap.class)).thenReturn(distanceMap);
+        when(mapper.map(distanceMap, MapDTO.class)).thenReturn(mapDTO);
+
+        Order order = new Order();
+        Load load = new Load();
+        load.setCityLoad(new City("Angarsk"));
+        load.setCityUnload(new City("Irkutsk"));
+        order.setLoads(new ArrayList<>(Collections.singletonList(load)));
+
+        OrderDTO orderDTO = new OrderDTO();
+        LoadDTO loadDTO = new LoadDTO();
+        CityDTO cityDTO = new CityDTO();
+        cityDTO.setName("Angarsk");
+        loadDTO.setCityLoad(cityDTO);
+        orderDTO.setLoads(new ArrayList<>(Collections.singletonList(loadDTO)));
+
+        when(mapper.map(order, OrderDTO.class)).thenReturn(orderDTO);
+        when(mapper.map(orderDTO, Order.class)).thenReturn(order);
+
+        when(mapDao.findAll()).thenReturn(distanceMaps);
+
+        assertDoesNotThrow(() -> {
+            service.calculateRoute(orderDTO);
+        });
 
     }
 
@@ -147,7 +195,10 @@ public class OrderServiceTest {
 
     @Test
     public void calculateWeightTest() {
-        assertEquals(0, RouteChecker.calculateMaxWeight(new ArrayList<>()));
+        Order order = new Order();
+        order.setLoads(new ArrayList<>());
+
+        assertEquals(0, service.calculateWeight(order));
     }
 
 }
