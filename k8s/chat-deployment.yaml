@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: chat
-          image: tuanalexeu/chat-service:production-v1
+          image: tuanalexeu/chat-service:production-v2
           ports:
             - containerPort: 8090
