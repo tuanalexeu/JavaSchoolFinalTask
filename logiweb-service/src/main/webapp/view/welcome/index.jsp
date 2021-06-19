@@ -47,15 +47,15 @@
                             <p>Logiweb Microservices is a big project with microservice architecture.
                                 This is a REST-ful application deployed to Google Cloud Platform.
                                 It consists of 7 services: Logiweb, Dashboard, Client Service, Chat, Telegram Bot & Spring Cloud Config Service</p>
-                            <button onclick="location.href='http://www.dashboard.logiweb.site'" class="btn btn-primary" type="submit" style="color: #e20074; background: #ffffff;border-color: #e20074; margin-bottom: 5px; width: 200px">Dashboard</button>
+                            <button onclick="location.href='http://dashboard.logiweb.site'" class="btn btn-primary" type="submit" style="color: #e20074; background: #ffffff;border-color: #e20074; margin-bottom: 5px; width: 200px">Dashboard</button>
                             <br>
-                            <button onclick="location.href='http://www.client.logiweb.site'" class="btn btn-primary" type="submit" style="color: #e20074; background: #ffffff;border-color: #e20074; margin-bottom: 5px; width: 200px">Client Service</button>
+                            <button onclick="location.href='http://client.logiweb.site'" class="btn btn-primary" type="submit" style="color: #e20074; background: #ffffff;border-color: #e20074; margin-bottom: 5px; width: 200px">Client Service</button>
                             <br>
-                            <button onclick="location.href='http://www.chat.logiweb.site'" class="btn btn-primary" type="submit" style="color: #e20074; background: #ffffff;border-color: #e20074; margin-bottom: 5px; width: 200px">Chat</button>
+                            <button onclick="location.href='http://chat.logiweb.site'" class="btn btn-primary" type="submit" style="color: #e20074; background: #ffffff;border-color: #e20074; margin-bottom: 5px; width: 200px">Chat</button>
                             <br>
                             <button onclick="location.href='https://telegram.me/LogiwebBot'" class="btn btn-primary" type="submit" style="color: #e20074; background: #ffffff;border-color: #e20074; margin-bottom: 5px; width: 200px">Telegram bot</button>
                             <br>
-                            <button onclick="location.href='http://www.tsd.logiweb.site'" class="btn btn-primary" type="submit" style="color: #e20074; background: #ffffff;border-color: #e20074; margin-bottom: 5px; width: 200px">Technical Solution Description</button>
+                            <button onclick="location.href='http://tsd.logiweb.site'" class="btn btn-primary" type="submit" style="color: #e20074; background: #ffffff;border-color: #e20074; margin-bottom: 5px; width: 200px">Technical Solution Description</button>
                         </div>
                         <div class="col-md-6"><img src="<c:url value="/assets/img/dogs/image1.jpeg"/>" style="width: 300px; border-radius: 30px"></div>
                     </div>
