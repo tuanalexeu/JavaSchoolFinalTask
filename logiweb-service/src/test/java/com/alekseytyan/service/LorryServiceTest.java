@@ -1,6 +1,5 @@
 package com.alekseytyan.service;
 
-import com.alekseytyan.logiweb.dao.api.LorryDao;
 import com.alekseytyan.logiweb.dao.implementation.LorryDaoImpl;
 import com.alekseytyan.logiweb.entity.Lorry;
 import com.alekseytyan.logiweb.service.implementation.LorryServiceImpl;
@@ -36,6 +35,14 @@ public class LorryServiceTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void findSuitableLorriesTest() {
+    }
+
+    @Test
+    public void getStatisticsTest() {
     }
 
     @Test
@@ -81,5 +88,13 @@ public class LorryServiceTest {
         assertEquals(1, lorry.getShiftTime());
         assertEquals(1, lorry.getCapacity());
         assertTrue(lorry.isBroken());
+    }
+
+    @Test
+    public void deleteTest() {
+    }
+
+    @Test
+    public void deleteByIdTest() {
     }
 }
