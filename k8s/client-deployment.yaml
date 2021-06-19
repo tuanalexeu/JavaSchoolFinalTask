@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: client
-          image: tuanalexeu/client-service:production
+          image: tuanalexeu/client-service:production-v1
           ports:
             - containerPort: 8088
