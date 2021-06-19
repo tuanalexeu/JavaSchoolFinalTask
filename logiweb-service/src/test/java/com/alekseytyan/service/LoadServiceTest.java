@@ -1,7 +1,10 @@
 package com.alekseytyan.service;
 
 import com.alekseytyan.logiweb.dao.implementation.LoadDaoImpl;
+import com.alekseytyan.logiweb.dao.implementation.OrderDaoImpl;
+import com.alekseytyan.logiweb.dto.ClientLoadDTO;
 import com.alekseytyan.logiweb.dto.LoadDTO;
+import com.alekseytyan.logiweb.dto.OrderDTO;
 import com.alekseytyan.logiweb.entity.City;
 import com.alekseytyan.logiweb.entity.Load;
 import com.alekseytyan.logiweb.entity.Order;
@@ -9,23 +12,30 @@ import com.alekseytyan.logiweb.entity.enums.LoadStatus;
 import com.alekseytyan.logiweb.service.implementation.LoadServiceImpl;
 import com.alekseytyan.logiweb.service.implementation.OrderServiceImpl;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.MockitoRule;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class LoadServiceTest {
+
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule().silent();
 
     @InjectMocks
     LoadServiceImpl service;
@@ -35,6 +45,9 @@ public class LoadServiceTest {
 
     @Mock
     OrderServiceImpl orderService;
+
+    @Mock
+    OrderDaoImpl orderDao;
 
     @Mock
     ModelMapper mapper;
@@ -116,23 +129,88 @@ public class LoadServiceTest {
 
     @Test
     public void saveClientLoadTest() {
-        assertDoesNotThrow(() -> {
-            service.save(new LoadDTO());
-        });
+        ClientLoadDTO clientLoadDTO = new ClientLoadDTO(
+                "id", "Angarsk", "Irkutsk", "Name", 1, LoadStatus.PREPARED, "token"
+        );
+        service.saveClientLoad(clientLoadDTO);
+        verify(dao, times(1)).save(any());
     }
 
     @Test
     public void updateTest() {
-        assertThrows(NullPointerException.class, () -> {
-            service.update(null);
-        });
+        LoadDTO loadDTO = new LoadDTO();
+        loadDTO.setStatus(LoadStatus.DELIVERED);
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setLoads(new ArrayList<>(Collections.singletonList(loadDTO)));
+        loadDTO.setOrder(orderDTO);
+
+        Load load = new Load();
+        load.setStatus(loadDTO.getStatus());
+        Order order = new Order();
+        order.setLoads(new ArrayList<>(Collections.singletonList(load)));
+        load.setOrder(order);
+
+        when(mapper.map(load, LoadDTO.class)).thenReturn(loadDTO);
+        when(mapper.map(loadDTO, Load.class)).thenReturn(load);
+
+
+        doReturn(load).when(dao).update(any());
+
+        service.update(loadDTO);
+        verify(dao, times(1)).update(any());
+    }
+
+    @Test
+    public void updateTest2() {
+        LoadDTO loadDTO = new LoadDTO();
+        loadDTO.setStatus(LoadStatus.PREPARED);
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setLoads(new ArrayList<>(Collections.singletonList(loadDTO)));
+        loadDTO.setOrder(orderDTO);
+
+        Load load = new Load();
+        load.setStatus(loadDTO.getStatus());
+        Order order = new Order();
+        order.setLoads(new ArrayList<>(Collections.singletonList(load)));
+        load.setOrder(order);
+
+        when(mapper.map(load, LoadDTO.class)).thenReturn(loadDTO);
+        when(mapper.map(loadDTO, Load.class)).thenReturn(load);
+
+
+        doReturn(load).when(dao).update(any());
+
+        service.update(loadDTO);
+        verify(dao, times(1)).update(any());
     }
 
     @Test
     public void deleteTest() {
-        assertThrows(NullPointerException.class, () -> {
-            service.delete(null);
-        });
+        LoadDTO loadDTO = new LoadDTO();
+        loadDTO.setStatus(LoadStatus.PREPARED);
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setLoads(new ArrayList<>(Collections.singletonList(loadDTO)));
+        loadDTO.setOrder(orderDTO);
+
+        Load load = new Load();
+        load.setStatus(loadDTO.getStatus());
+        Order order = new Order();
+        order.setLoads(new ArrayList<>(Collections.singletonList(load)));
+        load.setOrder(order);
+
+        when(mapper.map(load, LoadDTO.class)).thenReturn(loadDTO);
+        when(mapper.map(loadDTO, Load.class)).thenReturn(load);
+        when(mapper.map(order, OrderDTO.class)).thenReturn(orderDTO);
+        when(mapper.map(orderDTO, Order.class)).thenReturn(order);
+
+        doReturn(load).when(dao).update(any());
+        doReturn(load).when(dao).delete(any());
+        doReturn(order).when(orderDao).update(any());
+        doReturn(order).when(orderDao).delete(any());
+
+
+        assertThrows(NullPointerException.class, () -> service.delete(loadDTO));
+
     }
 
     @Test
@@ -140,6 +218,18 @@ public class LoadServiceTest {
         assertThrows(NullPointerException.class, () -> {
             service.deleteById(-1L);
         });
+    }
+
+    @Test
+    public void deleteByIdTest2() {
+        Load load = new Load();
+        Order order = new Order();
+        order.setLoads(new ArrayList<>());
+        load.setOrder(order);
+
+        when(dao.findById(1L)).thenReturn(load);
+
+        assertThrows(NullPointerException.class, () -> service.deleteById(-1L));
     }
 
 }
