@@ -6,7 +6,7 @@ spring:
       default,dev
   cloud:
     config:
-      uri: http://www.config.logiweb.site/
+      uri: http://config.logiweb.site/
 
 server:
   port: 8090
