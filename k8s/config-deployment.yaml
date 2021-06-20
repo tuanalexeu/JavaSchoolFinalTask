@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: config
-          image: tuanalexeu/config-service:production-v2
+          image: tuanalexeu/config-service:production-v3
           ports:
             - containerPort: 8888
